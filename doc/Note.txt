@@ -99,7 +99,7 @@ La liste de toute les instructions qu'un processeur peut exécuter s'appelle son
 			Suivie de 4 octets qui représente le numéro du joueur. Cette instruction indique que ce joueur est en vie.
 			Pas d’octet de codage des paramètres.
 ------------
--0x02 lp 	Prend un paramètre quelconque et un registre. Charge la valeur du premier paramètre dans le registre et il
+-0x02 ld 	Prend un paramètre quelconque et un registre. Charge la valeur du premier paramètre dans le registre et il
 			changera le carry
 			---
 			Cette instruction prend 2 paramètres, le deuxième est forcément un registre (pas le PC). Elle load la valeur
