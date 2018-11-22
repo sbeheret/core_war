@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   strjoinappend.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:08:42 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/22 10:51:20 by esouza           ###   ########.fr       */
+/*   Updated: 2018/11/22 14:33:29 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
 static char	*ft_getresult(char *s1, char *s2, char *array)
 {

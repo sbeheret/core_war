@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/11/07 20:12:13 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/11/22 14:35:32 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -89,7 +89,7 @@ SRC_NUMBER =		ft_itoa.c \
 					ft_lgnbr.c \
 					ft_abs.c \
 
-SRC__PRINT =		ft_putchar.c\
+SRC_PRINT =			ft_putchar.c\
 					ft_putchar_fd.c\
 					ft_putendl_fd.c\
 					ft_putendl.c\

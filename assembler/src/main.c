@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:01:16 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/22 09:16:47 by esouza           ###   ########.fr       */
+/*   Updated: 2018/11/22 14:33:14 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
-#include "../includes/op.h"
+#include "asm.h"
+#include "op.h"
 
 static void		check_args(int argc, char **argv)
 {
