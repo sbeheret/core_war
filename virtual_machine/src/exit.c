@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:14:57 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/22 15:30:42 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/22 18:30:38 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,24 @@ void	ft_exit_malloc(void)
 void	ft_exit_nofile(char *file)
 {
 	// use perror and errno
-	ft_printf("Error : Couldn't open file %s", file);
+	ft_printf("Error : Couldn't open file \"%s\"", file);
 	exit(1);
+}
+
+void	ft_exit_toosmall(char *file)
+{
+	ft_printf("Error : File \"%s\" is too small to be a champion", file);
+	exit(1);
+}
+
+void	ft_exit_usage(void)
+{
+	ft_printf("Usage : [..]");
+	exit(0);
+}
+
+void	ft_exit_toomanychamp(void)
+{
+	ft_printf("Error : Too many champions");
+	exit(0);
 }

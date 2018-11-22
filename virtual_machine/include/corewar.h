@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/22 17:27:04 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/22 18:28:30 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,8 @@ void				ft_print_memory(unsigned char *str, size_t size);
 */
 void				ft_exit_malloc(void);
 void				ft_exit_nofile(char *file);
+void				ft_exit_toosmall(char *file);
+void				ft_exit_usage(void);
+void				ft_exit_toomanychamp(void);
 
 #endif
