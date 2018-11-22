@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
+/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:01:16 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/22 14:33:14 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/21 12:52:59 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
-#include "op.h"
+#include "../includes/asm.h"
+#include "../includes/op.h"
 
 static void		check_args(int argc, char **argv)
 {
@@ -45,17 +45,11 @@ static void		stocor(char name[], char **argv)
 	i = 0;
 	j = 0;
 	p = ".cor";
-	if (ft_strlen(argv[1]) > (FILE_NAME_LENGTH - 5))
-	{
-		ft_putstr("File name too long\n");
-		exit(EXIT_FAILURE);
-	}
-	while (argv[1][i] != '\0' && i < (FILE_NAME_LENGTH - 5))
+	while (argv[1][i] != '.' && i < PROG_NAME_LENGTH)
 	{
 		name[i] = argv[1][i];
 		i++;
 	}
-	i -= 2;
 	while (p[j])
 	{
 		name[i] = p[j];

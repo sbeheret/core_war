@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
+/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/22 14:32:55 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/21 12:52:02 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 static void			free_data(char **tab, char *data)
 {
@@ -29,22 +29,15 @@ static void			free_data(char **tab, char *data)
 		tab = NULL;
 }
 
-static void			free_trim(char *line, char *trim)
-{
-	free(line);
-	free(trim);
-	line = NULL;
-	trim = NULL;
-}
-
 void			get_data(int fd)
 {
 	char		*data;
 	char		*line;
-	char		**tab;
 	char		*trim;
 	int			i;
+	t_data		*d;
 
+	d = ft_memalloc(sizeof(t_data));
 	data = ft_strnew(0);
 	line = NULL;
 	trim = NULL;
@@ -52,15 +45,21 @@ void			get_data(int fd)
 	while (get_next_line(fd, &line))
 	{
 		trim = ft_strtrim((char const *)line);
-		if (trim[0] !=  COMMENT_CHAR)
-			data = strjoinappend(data, trim);
-		free_trim(line, trim);
+		data = strjoinappend(data, trim);
+		free(line);
+		free(trim);
+		trim = NULL;
+		line = NULL;
 	}
-	tab = ft_strsplit(data, '$');
-	while (tab[i])
+	d->tab = ft_strsplit(data, '$');
+	while (d->tab[i])
 	{
-		printf("%s\n", tab[i]);
+		printf("%s\n", d->tab[i]);
 		i++;
 	}
-	free_data(tab, data);
+	get_labels(d);
+	add_bytes(d);
+	show_labels(d->first_label);
+	free_data(d->tab, data);
+	free_labels(d);
 }

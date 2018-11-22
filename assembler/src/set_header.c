@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   set_header.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
+/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/22 14:33:24 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/20 13:56:33 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
-#include "op.h"
+#include "../includes/asm.h"
+#include "../includes/op.h"
 
 void			set_header(t_header *header)
 {
 	int	i;
-
+	
 	i = 0;
 	ft_bzero(header->prog_name, PROG_NAME_LENGTH + 1);
 	ft_bzero(header->comment, COMMENT_LENGTH + 1);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   strjoinappend.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
+/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:08:42 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/22 14:33:29 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/20 13:50:40 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 static char	*ft_getresult(char *s1, char *s2, char *array)
 {
@@ -19,14 +19,12 @@ static char	*ft_getresult(char *s1, char *s2, char *array)
 
 	i = 0;
 	k = 0;
-	//while (s1[i] != '\0')
-	while (s1[i] != '\0' && s1[i] != COMMENT_CHAR)
+	while (s1[i] != '\0')
 	{
 		array[i] = s1[i];
 		i++;
 	}
-	//while (s2[k] != '\0')
-	while (s2[k] != '\0' && s2[k] != COMMENT_CHAR)
+	while (s2[k] != '\0')
 	{
 		array[i] = s2[k];
 		i++;

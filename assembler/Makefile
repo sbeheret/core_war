@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME_PATH = ../
+NAME_PATH = ./
 NAME = asm
 
 LIBFT = ../lib/libft
@@ -23,10 +23,13 @@ CC = gcc
 FLAGS = -Wall -Werror -Wextra
 
 SRCS =	main.c \
+		op.c	\
 		set_header.c \
 		strjoinappend.c \
 		hexatob.c \
 		get_data.c \
+		labels.c \
+		size.c
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 

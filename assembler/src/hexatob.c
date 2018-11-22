@@ -1,4 +1,4 @@
-#include "asm.h"
+#include "../includes/asm.h"
 
 unsigned int hexatob(const char *ptr)
 {
@@ -10,7 +10,7 @@ unsigned int hexatob(const char *ptr)
 
 	while (ch == ' ' || ch == '\t')
 		ch = *(++ptr);
-	while (*ptr)
+	while (*ptr) 
 	{
 		if (ch >= '0' && ch <= '9')
 			value = (value << 4) + (ch - '0');

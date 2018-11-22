@@ -71,4 +71,16 @@ typedef struct		s_header
 	char				comment[COMMENT_LENGTH + 1];
 }					t_header;
 
+typedef struct		s_op
+{
+	char	name[5];
+	int		params_nb;
+	char	params_types[3];
+	int		id;
+	int		cycles;
+	char	description[50];
+	int		encoding_byte;
+	int		bytes;
+}					t_op;
+
 #endif
