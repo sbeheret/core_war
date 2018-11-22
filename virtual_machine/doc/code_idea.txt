@@ -1,0 +1,21 @@
+1) Initialisation VM :
+	- create memory and register
+
+2) Load champion in memory
+	- load champ and processus
+
+3) Boucle on cycle:  Execute processus in the good sequence.
+ 	-do instructions
+	-check proof of live
+	-change cycle
+
+
+
+	Programme instruction : tableau de fonctions
+	registres : tableau de int reg[REG_NUMBER];
+	fonction fetch : recherche du prochain mot et augmente (PC)
+	fonction decode : decode a word
+	focntion execute : 
+
+
+4) Declare winner / Exit

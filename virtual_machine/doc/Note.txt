@@ -1,0 +1,335 @@
+Se battre a l'aide de processus
+	Les processus s'execute sequentiellement dans le meme espace memoire
+Game end when all process are dead.
+Winner is the last process to be reported alive.
+
+
+Assembleur -> Traduction du language en bytecode.
+
+En informatique, le bytecode (mot en anglais signifiant « code octal », en référence à l'octet informatique)
+est un code intermédiaire entre les instructions machines et le code source, qui n'est pas directement exécutable.
+Le bytecode peut être créé à la volée et résider en mémoire (compilation à la volée, JIT en anglais) ou bien résider
+dans un fichier, généralement binaire qui représente le programme, tout comme un fichier de code objet produit
+par un compilateur.
+
+Un programme à base de bytecode est exécuté par un interpréteur appelé machine virtuelle, car elle exécute le code
+tout comme un microprocesseur. L'avantage est la portabilité : le même bytecode peut être exécuté sur diverses
+plates-formes ou architectures pour lesquelles un interpréteur existe. Un programme sous forme de bytecode peut
+donc être transmis d'une machine à une autre, et être interprété puis exécuté sans modification de celui-ci par
+différents types d'architectures matérielles
+
+
+Machine virutelle -> "arene" ou les champions vont s'executer. Offre de nombreuse fonctionnalites. Permet l'execution
+de processus en simultane.
+Machine multi-programme
+
+Les processus auront a leur disposition :
+	REG_NUMBER (16) registres qui font chacun une taille de REG_SIZE (4) octets
+	Registre est une petite "case" memoire qui ne contient qu'une seule valeur.
+
+
+	https://fr.wikipedia.org/wiki/Registre_de_processeur
+
+	La plupart des architectures modernes sont qualifiées de load-store : les programmes transfèrent d'abord
+	des données de la mémoire centrale vers des registres, puis effectuent des opérations sur ces registres,
+	et enfin transfèrent le résultat en mémoire centrale.
+
+	https://fr.wikipedia.org/wiki/Jeu_d%27instructions
+
+
+	Les registres speciaux
+	Un registre PC("ProgramCounter") = adresse dans la memoire de la prochaine instruction a executer.
+
+	Un flag carry : 1 si la derniere operation a renvoyer zero / reussi (seules certaines operations vont modifier le carry).
+
+
+	Code operation et code operand
+
+	https://fr.wikibooks.org/wiki/Fonctionnement_d%27un_ordinateur/Langage_machine_et_assembleur
+
+
+
+Numero du joueur est genere par la machine ou specifie au lancement - Fournit au champion via le registre
+r1 de leur premier processus au demarrage.
+	tous les autres registres sont mis a 0 sauf le PC.
+
+
+Champion chargee en memoire de facon a espacer equitablement leurs points d'entree.
+
+la VM :
+	- Cree un espace memoire virtuelle
+	- Charge les champions et les processus associe
+	- les executes les processus sequentiellememt jusqu'a fin de la partie / mort.
+
+
+Tous les CYCLE_TO_DIE (1536) ls VM check que chaque processus a execute au moins un live depuis la derniere verification.
+	Sinon le processus est mis a mort.
+
+
+Si pendant les verifications il y a au moins NBR_LIVE (21) execution de live depuis la deriere verification.
+	On decremente CYCLE_TO_DIE de CYCLE_DELTA (50) unites.
+
+Quand il n'y a plus de processus: fin de la partie
+
+Winner = dernier rapporte en vie.
+On afficher : "le joueur x(nom_champion) a gagne", où x est le numéro du joueur et nom_champion le nom de son champion.
+Exemple : "le joueur 2(rainbowdash) a gagne"
+
+La memoire est circulaire et fait MEM_SIZE (4*1024) octectso
+
+
+La machine virtuelle est supposee emuler une machine parallele
+Pour des raisons d'implementatio, on supposera que chaque instruction s'execute entierement a la fin de son dernier
+cycle et attend durant tout sa dureee. les instructions qui se terminent a un meme cycle s'executent dans l'ordre
+decroissant des numeros des processus.
+
+
+
+========================================== LES INSTRUCTIONCS =========================================
+
+Nombre d'instruction a gerer = 16
+
+La liste de toute les instructions qu'un processeur peut exécuter s'appelle son jeu d'instructions
+
+------------
+-0x01 live 	L’instruction qui permet à un processus de rester vivant. A également pour effet de rapporter que le joueur
+			dont le numéro est en paramètre est en vie. Pas d’octet de codage des paramètres, opcode 0x01. Oh, et son
+			seul paramètre est sur 4 octets.
+			---
+			Suivie de 4 octets qui représente le numéro du joueur. Cette instruction indique que ce joueur est en vie.
+			Pas d’octet de codage des paramètres.
+------------
+-0x02 ld 	Prend un paramètre quelconque et un registre. Charge la valeur du premier paramètre dans le registre et il
+			changera le carry
+			---
+			Cette instruction prend 2 paramètres, le deuxième est forcément un registre (pas le PC). Elle load la valeur
+			du premier paramètre dans le registre. Cette opération modifie le carry.
+			ld 34,r3 charge les REG_SIZE octets à partir de l’adresse (PC + (34 % IDX_MOD)) dans le registre r3.
+------------
+-0x03 st 	Prend un registre et un registre ou un indirect, et stocke la valeur du registre vers le second paramètre.
+			Par exemple, st r1, 42 stocke la valeur de r1 à l’adresse (PC + (42 % IDX_MOD))
+			---
+			Cette instruction prend 2 paramètres. Elle store (REG_SIZE OCTET)la valeur du premier argument
+			(toujours un registre) dans le second.
+			st r4,34 store la valeur de r4 à l’adresse ( PC + (34 % IDX_MOD))
+			st r3,r8 copie r3 dans r8
+------------
+-0x04 add 	Prend trois registres, additionne les 2 premiers, et met le résultat dans le troisième, juste avant
+			de modifier le carry.
+			---
+			Cette instruction prend 3 registres en paramètre, additionne le contenu des 2 premiers et met le résultat
+			dans le troisième. Cette opération modifie le carry.
+			add r2,r3,r5 additionne r2 et r3 et met le résultat dans r5
+------------
+-0x05 su 	Pareil que add, et utilise une soustraction.
+			---
+			même que add mais soustrait
+------------
+-0x06 and 	Applique un & (ET bit-à-bit) sur les deux premiers paramètres, et stocke le résultat dans le registre qui est
+			le 3ème paramètre. Modifie le carry.
+			---
+			p1 & p2 -> p3. Le paramètre 3 est toujours un registre. Cette opération modifie le carry.
+			and r2, %0,r3 met r2 & 0 dans r3
+------------
+-0x07 or 	Cette opération est un OU bit-à-bit, suivant le même principe que and.
+			---
+			même que and mais avec le ou ( | du c).
+------------
+-0x08 xor 	Fait comme and avec un OU exclusif.
+			---
+			même que and mais avec le ou exclusif (dˆu c).
+------------
+-0x09 zjmp 	 Il n’y a jamais eu, n’y a pas, et n’y aura jamais d’octet de codage des paramètres derrière cette opération.
+			Elle prendra un index, et fait un saut à cette adresse si le carry est à 1.
+			---
+			Cette instruction n’est pas suivie d’octet pour décrire les paramètres. Elle prend toujours un index (
+			IND_SIZE) et fait un saut à cet index si le carry est à un. Si le carry est nul, zjmp ne fait rien mais
+			consomme le même temps.
+			zjmp %23 met, si carry == 1, (PC + (23 % IDX_MOD)) dans le PC.
+------------
+-0x0a ldi 	ldi, prend 2 index et 1 registre, additionne les 2 premiers, traite ca comme
+			une adresse, y lit une valeur de la taille d’un registre et la met dans le 3eme
+			---
+			Cette instruction prend 2 paramètres, le deuxième est forcément un registre (pas le PC). Elle load la valeur
+			du premier paramètre dans le registre. Cette opération modifie le carry.
+			ld 34,r3 charge les REG_SIZE octets à partir de l’adresse (PC + (34 % IDX_MOD)) dans le registre r3
+------------
+-0x0b sti 	Prend un registre, et deux index (potentiellement des registres). Additionne les deux derniers,
+			utilise cette somme comme une adresse ou sera copiée la valeur du premier paramètre.
+			---
+			sti r2,%4,%5 sti copie REG_SIZE octet de r2 a l’adresse (4 + 5) Les paramètres 2 et 3 sont des index. Si les
+			paramètres 2 ou 3 sont des registres, on utilisera leur contenu comme un index.
+------------
+-0x0c fork 	Pas d’octet de codage des paramètres, prend un index. Crée un nouveau processus, qui hérite des
+			différents états de son père, à part son PC, qui est mis à (PC + (1er paramètre % IDX_MOD))
+			---
+			Cette instruction n’est pas suivie d’octet pour décrire les paramètres. Elle prend toujours un index et
+			crée un nouveau programme qui s’exécute à partir de l’adresse : (PC + (premier paramètre % IDX_MOD)).
+			Fork %34 crée un nouveau programme. Le nouveau programme hérite des différents états du père.
+------------
+-0x0d lld 	Signifie long-load. C’est la même chose que ld, mais sans % IDX_MOD.
+			Modifie le carry.
+			---
+			Comme ld sans le %IDX_MOD Cette opération modifie le carry
+------------
+-0x0e lldi 	Pareil que ldi, mais n’applique aucun modulo aux adresses. Modifiera, par contre, le carry.
+			---
+			Comme ldi sans le %IDX_MOD Cette opération modifie le carry.
+------------
+-0x0f lfork Ca signifie long-fork. Pareil qu’un fork sans modulo à l'adresse
+			---
+			Comme fork sans le %IDX_MOD Cette opération modifie le carry.
+------------
+-0x10 aff 	Il y a un octet de codage des paramètres, même si c’est un peu bête car il
+			n’y a qu’un paramètre, qui est un registre, dont le contenu est interprété comme la valeur ASCII d’un
+			caractère à afficher sur la sortie standard. Ce code est modulo 256.
+			---
+			Cette instruction est suivie d’un octet de paramétrage pour décrire les paramètres. Elle prend en paramètre
+			un registre et a che le caractère dont le code ascii est présent dans ce registre (base 10). (un modulo 256
+			est appliqué au code ascii, le caractère est a ché sur la sortie standard) Ex : ld %42,r3 a  r3 a che ’*’ sur
+			la sortie standard
+------------
+
+
+
+
+========================================== LANGAGE MACHINE ET ASSEMBLEUR =================================
+
+Instruction d'acces memoire :
+
+Permette de copier ou d'echanger des donnes entre le processeur et la ram:
+	- On peut copier le contenu d'un registre en memoire
+	- Charge des donnees de la RAM dans un registre
+	- Initialiser un registre a une valeur precise.
+
+	Les plus connus : LOAD / STORE / MOV
+
+	LOAD : instruction de lecture - copie le contenu d'un ou plusieurs mots memoire consecutifs dans un registre.
+	Le contenu du registre est remplace par le contenu des mots memoire de la RAM.
+	STORE : Inverse, copie le contenu d'un registre dans un ou plusieurs mots memoire consecutif en memoire RAM.
+	MOV :
+
+	cf : Image_instruction_memoire
+
+
+Instruction de calcul :
+
+	Differente instruction suivant le type (signe, flottant etc..).
+		differente maniere de traiter cela : par des instructions differentes ou avec des tags (tagged architecture)
+	pas d'importance dans notre cas : taille des registre de 4 octets
+
+
+	Instruction arithmetiques :
+		- Addition
+		- Soustraction
+
+Instructions logiques :
+
+	- and 	0101 AND 0011 = 0001
+	- or 	0101 OR  0011 = 0111
+	- xor 	0101 XOR 0011 = 0110
+
+
+
+Voir pour la gestion des piles d'appel.
+
+Voir pour les branchements
+
+
+
+=========================================== ENCODAGE DES INSTRUCTIONS ======================================
+
+Les instructions sont stockées dans la mémoire sous la forme de suites de bits, tout comme les données. Cette suite
+de bits n'est pas organisée n'importe comment. Quelques bits de l’instruction indiquent quelle est l'opération à
+effectuer : est-ce une instruction d'addition, de soustraction, un branchement inconditionnel, un appel de fonction,
+une lecture en mémoire, etc. Cette portion de mémoire s'appelle l'opcode
+
+l arrive que certaines instructions soient composées d'un opcode, sans rien d'autre : elles ont alors une représentation
+en binaire qui est unique. Mais certaines instructions ajoutent une partie variable, pour préciser la localisation des
+données à manipuler. Une instruction peut alors fournir au processeur ce qu'on appelle une référence, à savoir quelque
+chose qui permet de localiser une donnée dans la mémoire
+Cette référence pourra ainsi préciser plus ou moins explicitement dans quel registre, à quelle adresse mémoire, à quel
+endroit sur le disque dur, se situe la donnée à manipuler
+
+
+Reste à savoir quelle est la nature de la référence : après tout, c'est une simple suite de bits qui peut représenter
+une adresse, un nombre, un nom de registre, etc. Chaque manière d’interpréter la partie variable s'appellent un mode
+d'adressage. Pour résumer, un mode d'adressage indique au processeur que telle référence est une adresse, un registre,
+autre chose. Il est possible qu'une instruction précise plusieurs références, qui sont chacune soit une adresse,
+soit une donnée, soit un registre
+
+Il existe deux méthodes pour préciser le mode d'adressage utilisé par l'instruction. Dans le premier cas, l'instruction
+ne gère qu'un mode d'adressage par opérande. Par exemple, toutes les instructions arithmétiques ne peuvent manipuler
+que des registres. Dans un cas pareil, pas besoin de préciser le mode d'adressage, qui est déduit automatiquement via
+l'opcode: on parle de mode d'adressage implicite. Dans certains cas, il se peut que plusieurs instructions existent
+pour faire la même chose, mais avec des modes d'adressages différents. Dans le second cas, les instructions gèrent
+plusieurs modes d'adressage par opérande. Par exemple, une instruction d'addition peut additionner soit deux registres,
+soit un registre et une adresse, soit un registre et une constante. Dans un cas pareil, l'instruction doit préciser
+le mode d'adressage utilisé, au moyen de quelques bits intercalés entre l'opcode et les opérandes. On parle de mode
+d'adressage explicite. Sur certains processeurs, chaque instruction peut utiliser tous les modes d'adressage supportés
+par le processeur : on dit que le processeur est orthogonal.
+
+exemple ADD # 45
+ADD # : OPCODE / 45 OPERAND
+ADD : OPCODE / # ADDRESSING MODE
+
+https://fr.wikibooks.org/wiki/Fonctionnement_d%27un_ordinateur/L%27encodage_des_instructions
+
+
+=========================================== LES JEUX D'INSTRUCTIONS ======================================
+
+les architectures à registres. Celles-ci possèdent des registres qui permettent de conserver temporairement
+une opérande destinée à être utilisée souvent, ou des résultats de calculs temporaires. Il en existe plusieurs
+sous-types, qui se distinguent par leur nombre de registres pour les opérandes et par leurs modes d'adressages.
+
+
+
+=========================================== ALIGNEMENT / BIG ENDIAN ======================================
+
+Alignement memoire a prendre en compte ?
+
+
+On peut introduire cet extrait par une analogie avec les langues humaines : certaines s’écrivent de gauche à
+droite et d'autres de droite à gauche. Dans un ordinateur, c'est pareil avec les octets des mots mémoire : on
+peut les écrire soit de gauche à droite, soit de droite à gauche. Quand on veut parler de cet ordre d'écriture,
+on parle de boutisme (endianness).
+
+https://fr.wikibooks.org/wiki/Fonctionnement_d%27un_ordinateur/Le_mod%C3%A8le_m%C3%A9moire_:_alignement_et_boutisme
+
+
+=========================================== LES REGISTRES PROCESSEUR ======================================
+
+
+Pour rappel, un processeur doit effectuer une suite d'instructions dans un ordre bien précis. Dans ces conditions,
+il est évident que notre processeur doit se souvenir où il est dans le programme, quelle est la prochaine instruction
+à exécuter : notre processeur doit donc contenir une mémoire qui stocke cette information. C'est le rôle du registre
+d'adresse d'instruction. Ce registre stocke l'adresse de la prochaine instruction à exécuter. Cette adresse permet de
+localiser l'instruction suivante en mémoire. Cette adresse ne sort pas de nulle part : on peut la déduire de l'adresse
+de l'instruction en cours d’exécution par divers moyens plus ou moins simples qu'on verra dans la suite de ce tutoriel.
+Cela peut aller d'une simple addition à quelque chose d'un tout petit peu plus complexe. Quoiqu'il en soit, elle est
+calculée par un petit circuit combinatoire couplé à notre registre d'adresse d'instruction, qu'on appelle le compteur
+ordinal. Ce registre d'adresse d'instruction est souvent appelé le Program Counter. Retenez bien ce terme, et ne
+l'oubliez pas si vous voulez lire des documentations en anglais.
+
+
+ voir le Fenêtrage de registres
+
+
+=========================================== COMPOSANT DU CPU ======================================
+
+
+ Le cycle d'exécution d'une instruction
+Pour exécuter une instruction, le processeur va effectuer trois étapes :
+
+l'unité de chargement va charger l'instruction depuis la mémoire : c'est l'étape de chargement (ou fetch) ;
+le séquenceur va ensuite « étudier » la suite de bits de l'instruction et en déduire comment configurer les circuits
+du processeur pour exécuter l'instruction voulue : c'est l'étape de décodage ;
+enfin, le séquenceur configure le chemin de données pour exécuter l'instruction : c'est l'étape d’exécution.
+
+
+DIAGRAMME IMPORTANT
+
+https://fr.wikibooks.org/wiki/Fonctionnement_d%27un_ordinateur/Les_composants_d%27un_processeur
+
+
+https://en.wikibooks.org/wiki/Creating_a_Virtual_Machine/Register_VM_in_C
