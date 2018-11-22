@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/22 11:17:00 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/22 17:27:04 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef	struct		s_vm
 */
 void				check_parameters(int argc, char **argv);
 void				ft_check_champion(char *file);
+unsigned char		*read_champion(char *file, int *binary_len);
 
 /*
 ** --------- INITIALIZATION
@@ -66,10 +67,12 @@ void				initialize_vm(int argc, char **argv, t_vm *vm);
 ** --------- TOOLS
 */
 void				print_ram(unsigned char *ram);
+void				ft_print_memory(unsigned char *str, size_t size);
 
 /*
 ** --------- EXIT
 */
 void				ft_exit_malloc(void);
+void				ft_exit_nofile(char *file);
 
 #endif
