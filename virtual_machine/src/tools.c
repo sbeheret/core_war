@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/22 16:54:32 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/23 13:12:23 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_ram(unsigned char *ram)
 	}
 }
 
-void	ft_print_memory(unsigned char *str, size_t size)
+void	print_memory(unsigned char *str, size_t size)
 {
 	size_t start;
 	size_t i;
@@ -69,4 +69,30 @@ void	ft_print_memory(unsigned char *str, size_t size)
 		start += 16;
 	}
 	ft_printf("\n============= END FT_PRINT_MEMORY =============\n");
+}
+
+void	print_struct_vm(t_vm vm)
+{
+	t_processus *tmp;
+
+	tmp = vm.processus;
+	ft_printf("\n=============== STRUCT VM ===============\n");
+	ft_printf("flag_dump = %d\n", vm.flag_dump);
+	ft_printf("dump_cycle = %d\n", vm.dump_cycle);
+	ft_printf("----------PROCESSUS LIST-----------\n");
+
+	while (tmp)
+	{
+		ft_printf("-----------\n");
+		ft_printf("name = %s\n",tmp->name);
+		ft_printf("comment = %s\n",tmp->comment);
+		ft_printf("file = %s\n",tmp->file);
+		ft_printf("p_number = %d\n",tmp->p_number);
+		ft_printf("weight = %s\n",tmp->weight);
+		ft_printf("-----------\n");
+		tmp = tmp->next;
+	}
+	ft_printf("------END PROCESSUS LIST-----------\n");
+	ft_printf("\n============= END STRUC VM  =============\n");
+
 }

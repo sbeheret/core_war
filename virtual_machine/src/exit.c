@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:14:57 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/22 18:30:38 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/23 10:39:44 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_exit_toosmall(char *file)
 
 void	ft_exit_usage(void)
 {
-	ft_printf("Usage : [..]");
+	ft_printf("Usage : ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ");
 	exit(0);
 }
 
