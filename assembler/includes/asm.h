@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/23 12:57:35 by dshults          ###   ########.fr       */
+/*   Updated: 2018/11/23 15:33:12 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ void        show_labels(t_labels *l);
 void    	add_bytes(t_data *d);
 t_op		*get_op_tab(void);
 int			find_op_nb(char *s);
+
+int    calc_bytes_till_label(t_labels *first_label, t_labels *current_l, int a);
 
 #endif

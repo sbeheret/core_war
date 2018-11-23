@@ -6,7 +6,7 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/11/23 12:44:49 by dshults          ###   ########.fr        #
+#    Updated: 2018/11/23 15:37:00 by dshults          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS =	main.c \
 		get_data.c \
 		labels/labels.c \
 		labels/size.c \
-		labels/trim.c
+		labels/trim.c \
+		labels/calc.c
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 

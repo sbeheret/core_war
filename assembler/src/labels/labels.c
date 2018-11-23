@@ -81,7 +81,8 @@ void		get_labels(t_data *d)
 		y++;
 	}
 	add_bytes(d);
-	show_labels(d->first_label); //tmp
+	printf("\nuntil label (in hex): %x\n", calc_bytes_till_label(d->first_label, d->first_label->next->next, 2));
+	//show_labels(d->first_label); //tmp
 }
 
 void show_labels(t_labels *l) //tmp
