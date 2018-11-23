@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/21 12:52:02 by esouza           ###   ########.fr       */
+/*   Updated: 2018/11/23 12:52:37 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+static void			free_labels(t_data *d)
+{
+	t_labels	*label;
+
+	while (d->first_label)
+	{
+		label = d->first_label;
+		d->first_label = d->first_label->next;
+        free(label->name);
+		free(label);
+	}
+}
 
 static void			free_data(char **tab, char *data)
 {
@@ -58,8 +71,6 @@ void			get_data(int fd)
 		i++;
 	}
 	get_labels(d);
-	add_bytes(d);
-	show_labels(d->first_label);
 	free_data(d->tab, data);
 	free_labels(d);
 }

@@ -1,5 +1,5 @@
-#include "../includes/asm.h"
-#include "../includes/op.h"
+#include "../../includes/asm.h"
+#include "../../includes/op.h"
 
 static void		add_to_label_list_end(t_data *d, t_labels *label)
 {
@@ -12,51 +12,6 @@ static void		add_to_label_list_end(t_data *d, t_labels *label)
 	{
 		d->last_label->next = label;
 		d->last_label = d->last_label->next;
-	}
-}
-
-void trim_spaces_commas_comments(char **tab)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (tab[y])
-	{
-		tab[y] = ft_strtrim(tab[y]);
-		y++;
-	}
-	y = 0;
-	while (tab[y])
-	{
-		x = 0;
-		while (tab[y][x])
-		{
-			if (tab[y][x] == SEPARATOR_CHAR)
-			{
-				tab[y][x] = '\0';
-				break;
-			}
-			x++;
-		}
-		y++;
-	}
-	y = 0;
-	while (tab[y])
-	{
-		if (tab[y][0] == COMMENT_CHAR)
-		{
-			free(tab[y]);
-			tab[y] = NULL;
-			y++;
-			while (tab[y])
-			{
-				free(tab[y]);
-				y++;
-			}
-		}
-		else
-			y++;
 	}
 }
 
@@ -125,22 +80,11 @@ void		get_labels(t_data *d)
 			add_to_label_list_end(d, make_label(d->tab + y, 0, y - skip, 0));
 		y++;
 	}
+	add_bytes(d);
+	show_labels(d->first_label); //tmp
 }
 
-void	free_labels(t_data *d)
-{
-	t_labels	*label;
-
-	while (d->first_label)
-	{
-		label = d->first_label;
-		d->first_label = d->first_label->next;
-        free(label->name);
-		free(label);
-	}
-}
-
-void show_labels(t_labels *l)
+void show_labels(t_labels *l) //tmp
 {
     t_labels *tmp;
 	int		i;

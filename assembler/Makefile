@@ -6,7 +6,7 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/11/22 14:51:03 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/11/23 12:44:49 by dshults          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,9 @@ SRCS =	main.c \
 		strjoinappend.c \
 		hexatob.c \
 		get_data.c \
-		labels.c \
-		size.c
+		labels/labels.c \
+		labels/size.c \
+		labels/trim.c
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
