@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/23 12:45:45 by dshults          ###   ########.fr       */
+/*   Updated: 2018/11/23 12:57:35 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # include "libft.h"
 # include "op.h"
 
-# define YES printf("yes\n");
+# define YES printf("yes\n"); //tmp
 
 /*
 **	args[0] is op_code
@@ -74,7 +74,6 @@ void			get_data(int fd);
 void		get_labels(t_data *d);
 void 		trim_spaces_commas_comments(char **tab);
 void        show_labels(t_labels *l);
-void		free_labels(t_data *d);
 
 void    	add_bytes(t_data *d);
 t_op		*get_op_tab(void);

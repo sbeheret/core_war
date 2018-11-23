@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:41:21 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/16 09:51:49 by esouza           ###   ########.fr       */
+/*   Updated: 2018/11/23 13:18:11 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct		s_op
 	int		id;
 	int		cycles;
 	char	description[50];
-	int		encoding_byte;
-	int		bytes;
+	int		encoded_byte;
+	int		instructions_byte;
 }					t_op;
 
 #endif

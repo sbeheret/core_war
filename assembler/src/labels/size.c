@@ -87,7 +87,8 @@ void    add_bytes(t_data *d)
     l = d->first_label;
     while (l)
     {
-        l->bytes = d->op[l->op_nb].bytes;
+        l->bytes = d->op[l->op_nb].encoded_byte;
+        l->bytes += d->op[l->op_nb].instructions_byte;
         if ((l->op_nb >= LIVE && l->op_nb <= SUB) ||
             l->op_nb == ZJMP || l->op_nb == FORK || l->op_nb == LFORK)
             live_ld_st_add_sub_zjmp_fork_lfork(l);
