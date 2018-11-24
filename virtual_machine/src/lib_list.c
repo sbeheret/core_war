@@ -6,25 +6,25 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 13:19:03 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/23 13:36:08 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/24 16:13:16 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_processus	*create_processus(void)
+t_champion	*new_champion(void)
 {
-	t_processus	*new_elem;
+	t_champion	*new_elem;
 
-	if (!(new_elem = (t_processus *)malloc(sizeof(t_processus))))
+	if (!(new_elem = (t_champion *)malloc(sizeof(t_champion))))
 		ft_exit_malloc();
-	initialize_processus(&new_elem);
+	initialize_champion(&new_elem);
 	return(new_elem);
 }
 
-void	ft_push_back(t_processus **begin, t_processus *to_add)
+void	ft_push_back_chmp(t_champion **begin, t_champion *to_add)
 {
-	t_processus *tmp;
+	t_champion *tmp;
 
 	tmp = *begin;
 	if (*begin == NULL)

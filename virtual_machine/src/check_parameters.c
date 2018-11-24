@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/23 13:38:28 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/24 16:21:31 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	ft_read_argument(char **argv, t_vm *vm)
 			(*vm).flag_dump = 1;
 			if (!(*argv))
 				ft_exit_usage();
-			// Voir si besoin de plus de verification (exemple argv[i] doit etre un entier positif < au nombre de cycle max etc)
+			// Voir si besoin de plus de verification
 			(*vm).dump_cycle = ft_atoi(*argv);
 			argv += 1;
 		}
 		ft_printf("before create champ *argv = %s\n", *argv);
-		create_champion(&argv, (*vm).processus);
+		create_champion(&argv, (*vm).champion);
 		ft_printf("after create champ *argv = %s\n", *argv);
 	}
 }
@@ -74,19 +74,18 @@ void	ft_read_argument(char **argv, t_vm *vm)
 ** Si fichier valide, ecire les informations Name / Commentaires
 */
 
-void	create_champion(char ***argv, t_processus *processus)
+void	create_champion(char ***argv, t_champion *champion)
 {
-	t_processus	*new_elem;
+	t_champion	*new_elem;
 
-	new_elem = create_processus();
+	new_elem = new_champion();
 	if (!(ft_strcmp(**argv, "-n")))
 	{
 		ft_printf("- N **argv = %s\n", *argv);
 		*argv += 1;
 		if (!(**argv))
 			ft_exit_usage();
-		// Voir si besoin de plus de verification (exemple argv[i] doit etre un entier positif < au nombre de cycle max etc)
-		processus->p_number = ft_atoi(**argv);
+		new_elem->p_number = ft_atoi(**argv);
 		argv += 1;
 	}
 	ft_printf("**argv = %s\n", **argv);
@@ -94,10 +93,9 @@ void	create_champion(char ***argv, t_processus *processus)
 		ft_exit_usage();
 	new_elem->file = **argv;
 	*argv += 1;
-	new_elem->binary_len = 0;
 	new_elem->binary = ft_read_champion(new_elem->file, &new_elem->binary_len);
 	check_binary(new_elem);
-	ft_push_back(&processus, new_elem);
+ 	ft_push_back_chmp(&champion, new_elem);
 }
 
 unsigned char	*ft_read_champion(char *file, size_t *binary_len)
@@ -123,7 +121,7 @@ unsigned char	*ft_read_champion(char *file, size_t *binary_len)
 	return (binary);
 }
 
-void	check_binary(t_processus *processus)
+void	check_binary(t_champion *champion)
 {
 	(void)processus;
 	ft_printf("======= check_binary =========\n");
