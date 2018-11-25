@@ -5,34 +5,52 @@ static int    count(int pos, t_labels *l)
     int    i;
     int    bytes;
 
-    bytes = 0;
+    bytes = 1;
     i = 0;
     while (i < pos)
     {
         bytes += l->bytes;
-        if (i + 1 < pos)
-            bytes++;
         i++;
+        if (i < pos)
+            bytes++;
         l = l->next;
     }
     return (bytes);
 }
-//add support negative numbers when l->position < current_l->position
+
+static int    rew_count(t_labels *f, int cp, int lp)
+{
+    int    bytes;
+
+    bytes = -1;
+    while (f && f->position <= lp)
+        f = f->next;
+    while (f && f->position <= cp)
+    {
+        bytes -= f->bytes;
+        f = f->next;
+        if (f && f->position <= cp)
+            bytes--;
+    }
+    return (bytes);
+}
+
 int    calc_bytes_till_label(t_labels *first_label, t_labels *current_l, int a)
 {
     t_labels *l;
     int    i;
 
     l = first_label;
-    i = 1;
+    i = 0;
     while (l)
     {
         if (ft_strequ(l->name, current_l->args[a] + 2))
         {
             if (l->position > current_l->position)
-            {
                 i += count(l->position - current_l->position, current_l);
-            }
+            else
+                i += (unsigned int)rew_count(first_label,
+                    current_l->position, l->position);
         }
         l = l->next;
     }
