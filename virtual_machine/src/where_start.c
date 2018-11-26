@@ -6,7 +6,7 @@
 /*   By: sbeheret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 11:06:17 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/26 12:13:45 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/26 12:48:33 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,13 @@ void	start_champions(t_champion **champion, int nb_champs)
 
 int		give_start(t_champion *champ, int nb_champs)
 {
-	static int	order = 1;
+	static int	order = 0;
 
 	if (champ->start >= 0)
 		return (0);
-	if (order == 1)
+	if (order == 0)
 		champ->start = (0);
-	else if (nb_champs == 2)
-		champ->start = 2048;
-	else if (nb_champs == 3)
-		start_3_players(champ, order);
-	else if (nb_champs == 4)
-		start_4_players(champ, order);
-//	else
-//		ERROR_NB_CHAMPS;
+	else
+		champ->start = (MEM_SIZE / nb_champs) * order;
 	return (1);
-}
-
-void	start_3_players(t_champion *champ, int order)
-{
-	if (order == 2)
-		champ->start = 1365;
-	else
-		champ->start = 2730;
-}
-
-void	start_4_players(t_champion *champ, int order)
-{
-	if (order == 2)
-		champ->start = 1024;
-	if (order == 3)
-		champ->start = 2048;
-	else
-		champ->start = 3072;
 }
