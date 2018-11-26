@@ -1,5 +1,5 @@
-#include "../../includes/asm.h"
-#include "../../includes/op.h"
+#include "../includes/asm.h"
+#include "../includes/op.h"
 
 static void    spaces(char **tab)
 {

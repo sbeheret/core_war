@@ -73,7 +73,7 @@ void			get_data(int fd);
 
 void		get_labels(t_data *d);
 void 		trim_spaces_commas_comments(char **tab);
-void        show_labels(t_labels *l);
+void        show_labels(t_data *d);
 
 void    	add_bytes(t_data *d);
 t_op		*get_op_tab(void);

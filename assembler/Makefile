@@ -28,10 +28,10 @@ SRCS =	main.c \
 		strjoinappend.c \
 		hexatob.c \
 		get_data.c \
-		labels/labels.c \
-		labels/size.c \
-		labels/trim.c \
-		labels/calc.c
+		l_labels.c \
+		l_size.c \
+		l_trim.c \
+		l_calc.c
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 

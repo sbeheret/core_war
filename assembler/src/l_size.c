@@ -1,10 +1,11 @@
-#include "../../includes/asm.h"
+#include "../includes/asm.h"
 
 static void    live_ld_st_add_sub_zjmp_fork_lfork(t_labels *l)
 {
-    if (l->op_nb == LIVE || l->op_nb == ZJMP ||
-        l->op_nb == FORK || l->op_nb == LFORK)
+    if (l->op_nb == LIVE)
         l->bytes += DIR_SIZE; //T_DIR
+    else if (l->op_nb == ZJMP || l->op_nb == FORK || l->op_nb == LFORK) //exceptions
+        l->bytes += IND_SIZE; //T_DIR
     else if (l->op_nb == LD)
     {//T_IND | T_DIR, T_REG
         if (l->args[1][0] == DIRECT_CHAR)
@@ -43,7 +44,7 @@ static void    and_or_xor_lld_aff(t_labels *l)
     }
     else if (l->op_nb == LLD)
     {//T_DIR | T_IND, T_REG
-        if (l->args[2][0] == DIRECT_CHAR)
+        if (l->args[1][0] == DIRECT_CHAR)
             l->bytes += DIR_SIZE + 1;
         else
             l->bytes += IND_SIZE + 1;
@@ -87,8 +88,8 @@ void    add_bytes(t_data *d)
     l = d->first_label;
     while (l)
     {
-        l->bytes = d->op[l->op_nb].encoded_byte;
-        l->bytes += d->op[l->op_nb].instructions_byte;//dir or ind makes a diff?
+        l->bytes += d->op[l->op_nb - 1].encoded_byte;
+        //l->bytes += d->op[l->op_nb].instructions_byte;
         if ((l->op_nb >= LIVE && l->op_nb <= SUB) ||
             l->op_nb == ZJMP || l->op_nb == FORK || l->op_nb == LFORK)
             live_ld_st_add_sub_zjmp_fork_lfork(l);

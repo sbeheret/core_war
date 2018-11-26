@@ -1,18 +1,16 @@
-#include "../../includes/asm.h"
+#include "../includes/asm.h"
 
 static int    count(int pos, t_labels *l)
 {
     int    i;
     int    bytes;
 
-    bytes = 1;
+    bytes = 0;
     i = 0;
     while (i < pos)
     {
         bytes += l->bytes;
         i++;
-        if (i < pos)
-            bytes++;
         l = l->next;
     }
     return (bytes);
@@ -22,15 +20,13 @@ static int    rew_count(t_labels *f, int cp, int lp)
 {
     int    bytes;
 
-    bytes = -1;
-    while (f && f->position <= lp)
+    bytes = 0;
+    while (f && f->position < lp)
         f = f->next;
-    while (f && f->position <= cp)
+    while (f && f->position < cp)
     {
         bytes -= f->bytes;
         f = f->next;
-        if (f && f->position <= cp)
-            bytes--;
     }
     return (bytes);
 }

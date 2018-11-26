@@ -1,5 +1,5 @@
-#include "../../includes/asm.h"
-#include "../../includes/op.h"
+#include "../includes/asm.h"
+#include "../includes/op.h"
 
 static void		add_to_label_list_end(t_data *d, t_labels *label)
 {
@@ -32,6 +32,7 @@ static t_labels	*make_label(char **line, int len, int y, int l)
 	label->op_nb = find_op_nb(label->args[0]);
 	label->args_start_line = l;
 	label->position = y;
+	label->bytes = 1;
 	return (label);
 }
 
@@ -81,16 +82,17 @@ void		get_labels(t_data *d)
 		y++;
 	}
 	add_bytes(d);
-	printf("\nuntil label (in hex): %x\n", calc_bytes_till_label(d->first_label, d->first_label->next->next, 2));
-	//show_labels(d->first_label); //tmp
+	printf("\nuntil label (in hex): %x\n",\
+	calc_bytes_till_label(d->first_label, d->first_label, 1));
+	show_labels(d); //tmp
 }
 
-void show_labels(t_labels *l) //tmp
+void show_labels(t_data *d) //tmp
 {
     t_labels *tmp;
 	int		i;
 
-    tmp = l;
+    tmp = d->first_label;
 	ft_putstr("\n\tLABELS\n\n");
     while (tmp)
     {
@@ -106,9 +108,9 @@ void show_labels(t_labels *l) //tmp
 			i++;
 		}
         printf("position:\t%i\
-		\nargs_line:\t%i\
+		\nencoded_byte:\t%i\
 		\nbytes:\t\t%i\n\n\n",\
-		tmp->position, tmp->args_start_line, tmp->bytes);
+		tmp->position, d->op[tmp->op_nb - 1].encoded_byte, tmp->bytes);
 		tmp = tmp->next;
     }
 }
