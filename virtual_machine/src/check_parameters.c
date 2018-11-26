@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 18:47:37 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 19:16:16 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ unsigned char	*ft_read_champion(char *file, size_t *binary_len)
 void	check_binary(t_champion *champion)
 {
 	int magic_number;
+	// utiliser un char temp pour ne pas perdre l'adresse de champion->binary
 
 	//verifier que les .h sont des int ??
 	if (champion->binary_len < BEGIN_BINARY)
