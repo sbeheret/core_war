@@ -42,6 +42,14 @@ static void			free_data(char **tab, char *data)
 		tab = NULL;
 }
 
+static void			free_trim(char *line, char *trim)
+{
+	free(line);
+	free(trim);
+	line = NULL;
+	trim = NULL;
+}
+
 void			get_data(int fd)
 {
 	char		*data;
@@ -58,11 +66,9 @@ void			get_data(int fd)
 	while (get_next_line(fd, &line))
 	{
 		trim = ft_strtrim((char const *)line);
-		data = strjoinappend(data, trim);
-		free(line);
-		free(trim);
-		trim = NULL;
-		line = NULL;
+		if (trim[0] !=  COMMENT_CHAR)
+			data = strjoinappend(data, trim);
+		free_trim(line, trim);
 	}
 	d->tab = ft_strsplit(data, '$');
 	while (d->tab[i])
@@ -71,6 +77,6 @@ void			get_data(int fd)
 		i++;
 	}
 	get_labels(d);
-	free_data(d->tab, data);
 	free_labels(d);
+	free_data(d->tab, data);
 }
