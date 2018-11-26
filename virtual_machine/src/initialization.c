@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 12:47:26 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 17:30:28 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,17 @@ void	initialize_vm(int argc, char **argv, t_vm *vm)
 		ft_exit_malloc();
 }
 
-void	initialize_processus(t_processus **processus)
+void	initialize_processus(t_processus **processus, int nb_player, int start)
 {
 	int	i;
 
 	i = -1;
-	(*processus)->PC = 0;
+	(*processus)->PC = start;
 	if (!((*processus)->reg = malloc(sizeof(int) * 16)))
 		ft_exit_malloc();
 	while (++i <= 15)
 		(*processus)->reg[i] = 0;
+	(*processus)->reg[0] = nb_player;
 	(*processus)->cycles_wait = 0;
 	(*processus)->lives = 0;
 	(*processus)->next = NULL;
