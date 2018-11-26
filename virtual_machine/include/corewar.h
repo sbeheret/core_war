@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 12:24:58 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/26 17:01:25 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 /*
 ** -----------------------------------------------------------------------------
-** ---------------------------------- DEFINE -----------------------------------
-** -----------------------------------------------------------------------------
-*/
-
-
-
-/*
-** -----------------------------------------------------------------------------
 ** --------------------------------- INCLUDE -----------------------------------
 ** -----------------------------------------------------------------------------
 */
 # include "libft.h"
 # include "op.h"
+
+/*
+** -----------------------------------------------------------------------------
+** ---------------------------------- DEFINE -----------------------------------
+** -----------------------------------------------------------------------------
+*/
+
+# define BEGIN_BINARY (4 + PROG_NAME_LENGTH + 4 + COMMENT_LENGTH + 4)
 
 /*
 ** -----------------------------------------------------------------------------
@@ -77,10 +77,21 @@ typedef	struct		s_vm
 ** -----------------------------------------------------------------------------
 */
 
-
 /*
 ** --------- COREWAR
 */
+
+/*
+** --------- LOAD_IN_RAM
+*/
+void				load_champs(t_vm *vm);
+
+/*
+** --------- PROCESSUS
+*/
+void				make_list_process(t_champion **cham, t_processus **pcs);
+void				push_front_pcs(t_processus **pcs, t_processus *nw);
+t_processus			*new_processus(int p_nb, int start);
 
 
 /*
@@ -88,8 +99,6 @@ typedef	struct		s_vm
 */
 void				start_champions(t_champion **champ, int nb_champs);
 int					give_start(t_champion *champ, int nb_champs);
-void				start_3_players(t_champion *champ, int order);
-void				start_4_players(t_champion *champ, int order);
 
 /*
 ** --------- CHECK_PARAMETER
@@ -104,7 +113,7 @@ void				check_binary(t_champion *champion);
 ** --------- INITIALIZATION
 */
 void				initialize_vm(int argc, char **argv, t_vm *vm);
-void				initialize_processus(t_processus **processus);
+void				initialize_processus(t_processus **pcs, int nb, int start);
 void				initialize_champion(t_champion **champion);
 
 /*
