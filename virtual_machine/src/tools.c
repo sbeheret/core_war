@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/23 13:12:23 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 14:30:28 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,21 @@ void	print_memory(unsigned char *str, size_t size)
 
 void	print_struct_vm(t_vm vm)
 {
-	t_processus *tmp;
+	t_champion *tmp;
 
-	tmp = vm.processus;
+
+	tmp = vm.champion;
 	ft_printf("\n=============== STRUCT VM ===============\n");
 	ft_printf("flag_dump = %d\n", vm.flag_dump);
 	ft_printf("dump_cycle = %d\n", vm.dump_cycle);
 	ft_printf("----------PROCESSUS LIST-----------\n");
-
 	while (tmp)
 	{
 		ft_printf("-----------\n");
 		ft_printf("name = %s\n",tmp->name);
 		ft_printf("comment = %s\n",tmp->comment);
 		ft_printf("file = %s\n",tmp->file);
-		ft_printf("p_number = %d\n",tmp->p_number);
+		ft_printf("p_number = %#X\n",tmp->p_number);
 		ft_printf("weight = %s\n",tmp->weight);
 		ft_printf("-----------\n");
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 10:57:25 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/26 17:13:59 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ void	ft_read_argument(char **argv, t_vm *vm)
 	argv += 1;
 	while (*argv)
 	{
-		ft_printf("start while *argv = %s\n", *argv);
 		if (!(ft_strcmp(*argv, "-dump")))
 		{
-			ft_printf("-dump *argv = %s\n", *argv);
 			argv += 1;
 			(*vm).flag_dump = 1;
 			if (!(*argv))
@@ -59,10 +57,10 @@ void	ft_read_argument(char **argv, t_vm *vm)
 			(*vm).dump_cycle = ft_atoi(*argv);
 			argv += 1;
 		}
-		ft_printf("before create champ *argv = %s\n", *argv);
-		create_champion(&argv, (*vm).champion);
-		(*vm).nb_champion++;
-		ft_printf("after create champ *argv = %s\n", *argv);
+		create_champion(&argv, &(*vm).champion);
+		(*vm).nb_champs++;
+		if ((*vm).nb_champs > 4)
+			ft_exit_toomanychamp();
 	}
 }
 
@@ -75,28 +73,34 @@ void	ft_read_argument(char **argv, t_vm *vm)
 ** Si fichier valide, ecire les informations Name / Commentaires
 */
 
-void	create_champion(char ***argv, t_champion *champion)
+void	create_champion(char ***argv, t_champion **champion)
 {
 	t_champion	*new_elem;
+	// faire un verification que nom de champion donne soit bien different
+	static int 	player_number = 0xFFFFFF;
 
 	new_elem = new_champion();
 	if (!(ft_strcmp(**argv, "-n")))
 	{
-		ft_printf("- N **argv = %s\n", *argv);
 		*argv += 1;
 		if (!(**argv))
 			ft_exit_usage();
+		// Voir si besoin de plus de verification
 		new_elem->p_number = ft_atoi(**argv);
 		argv += 1;
 	}
-	ft_printf("**argv = %s\n", **argv);
+	else
+	{
+		new_elem->p_number = player_number;
+		player_number--;
+	}
 	if (!(**argv))
 		ft_exit_usage();
 	new_elem->file = **argv;
 	*argv += 1;
 	new_elem->binary = ft_read_champion(new_elem->file, &new_elem->binary_len);
 	check_binary(new_elem);
- 	ft_push_back_chmp(&champion, new_elem);
+ 	ft_push_back_chmp(champion, new_elem);
 }
 
 unsigned char	*ft_read_champion(char *file, size_t *binary_len)
@@ -124,13 +128,26 @@ unsigned char	*ft_read_champion(char *file, size_t *binary_len)
 
 void	check_binary(t_champion *champion)
 {
-	(void)processus;
-	ft_printf("======= check_binary =========\n");
-	// PROG_NAME_LENGTH			(128)
-	// COMMENT_LENGTH			(2048)
-	// COREWAR_EXEC_MAGIC		0xea83f3
-	// CHAMP_MAX_SIZE			(MEM_SIZE / 6)
-	// MEM_SIZE					(4 * 1024)
+	int magic_number;
+	size_t header_lenght;
+
+	//verifier que les .h sont des int ??
+	//paddind defini dans header ??
+	header_lenght = PROG_NAME_LENGTH + COMMENT_LENGTH + 16;
+	if (champion->binary_len < header_lenght)
+		ft_exit_toosmall(champion->file);
+	if ((magic_number = ft_octet_to_int(&(champion->binary))) != COREWAR_EXEC_MAGIC)
+		ft_exit_magicnumber(champ->file);
+	champion->name = ft_octet_to_char(&(champion->binary), PROG_NAME_LENGTH);
+	check_padding(&(champion->binary));
+	champion->weight = ft_octet_to_int(&(champion->binary));
+	champion->comment = ft_octet_to_char(&(champion->binary), COMMENT_LENGTH);
+	check_padding(&(champion->binary));
+	if (champion->weight != champion->binary_len - header_lenght)
+		ft_exit_header(champion->file);
+	if (champion->weight > CHAMP_MAX_SIZE)
+		ft_exit_toobig(champion->file);
+
 
 	//4		compare COREWAR_EXEC_MAGIC
 	//128	save name for the next PROG_NAME_LENGTH octet
@@ -139,9 +156,5 @@ void	check_binary(t_champion *champion)
 	//2048	save comment for the next COMMENT_LENGTH
 	//4		verify 4 octect padding
 	//662		verify programm length is true
-
-
-	// if (*binary_len < 2092)
-	// 	ft_exit_toosmall(file);
 }
 	//Error: File Untitled.cor has an invalid header

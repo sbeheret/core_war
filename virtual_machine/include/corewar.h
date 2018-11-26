@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 12:24:58 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/26 17:15:19 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef	struct			s_champion
 	char				*file;
 //		Avons nous besoin du commentaire ?
 	int					p_number;
-	int					weight;
+	size_t				weight;
 	unsigned char 		*binary;
 	size_t				binary_len;
 	int					start;
@@ -96,9 +96,10 @@ void				start_4_players(t_champion *champ, int order);
 */
 void				check_parameters(int argc, char **argv, t_vm *vm);
 void				ft_read_argument(char **argv, t_vm *vm);
-void				create_champion(char ***argv, t_champion *champion);
+void				create_champion(char ***argv, t_champion **champion);
 unsigned char		*ft_read_champion(char *file, size_t *binary_len);
 void				check_binary(t_champion *champion);
+void				check_padding(unsigned char **binary);
 
 /*
 ** --------- INITIALIZATION
@@ -110,7 +111,7 @@ void				initialize_champion(t_champion **champion);
 /*
 ** --------- TOOLS
 */
-t_champion			*new_chanpion(void);
+t_champion			*new_champion(void);
 void				ft_push_back_chmp(t_champion **begin, t_champion *to_add);
 
 /*
@@ -121,12 +122,21 @@ void				print_memory(unsigned char *str, size_t size);
 void				print_struct_vm(t_vm vm);
 
 /*
+** --------- CONVERT
+*/
+int					ft_octet_to_int(unsigned char **c);
+char				*ft_octet_to_char(unsigned char **binary, size_t lenght_max);
+
+/*
 ** --------- EXIT
 */
 void				ft_exit_malloc(void);
 void				ft_exit_nofile(char *file);
 void				ft_exit_toosmall(char *file);
+void				ft_exit_toobig(char *file);
 void				ft_exit_usage(void);
 void				ft_exit_toomanychamp(void);
+void				ft_exit_magicnumber(char *file);
+void				ft_exit_header(char *file);
 
 #endif
