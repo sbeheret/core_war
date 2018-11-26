@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/24 16:21:31 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/26 10:57:25 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_read_argument(char **argv, t_vm *vm)
 		}
 		ft_printf("before create champ *argv = %s\n", *argv);
 		create_champion(&argv, (*vm).champion);
+		(*vm).nb_champion++;
 		ft_printf("after create champ *argv = %s\n", *argv);
 	}
 }

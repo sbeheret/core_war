@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/24 16:20:31 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/26 12:24:58 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef	struct			s_champion
 	int					weight;
 	unsigned char 		*binary;
 	size_t				binary_len;
+	int					start;
 	struct	s_champion *next;
 }						t_champion;
 
@@ -58,6 +59,7 @@ typedef struct			s_processus
 
 typedef	struct		s_vm
 {
+	int				nb_champs;
 	int				flag_dump;
 	int				dump_cycle;
 	int				last_alive;
@@ -80,6 +82,14 @@ typedef	struct		s_vm
 ** --------- COREWAR
 */
 
+
+/*
+** --------- WHERE_START
+*/
+void				start_champions(t_champion **champ, int nb_champs);
+int					give_start(t_champion *champ, int nb_champs);
+void				start_3_players(t_champion *champ, int order);
+void				start_4_players(t_champion *champ, int order);
 
 /*
 ** --------- CHECK_PARAMETER
