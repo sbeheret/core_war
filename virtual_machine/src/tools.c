@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 14:30:28 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 18:54:52 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ void	print_ram(unsigned char *ram)
 		if (!(i % 64))
 		{
 			ft_printf("\n");
-			ft_printf("%p : ",ram + i);
+			ft_printf("0X");
+			ft_printf("%.4X : ", i);
 		}
 		ft_printf("%hhx", ram[i] / 16);
 		ft_printf("%hhx", ram[i] % 16);
 		ft_printf(" ");
 		i++;
 	}
+	ft_printf("\n");
 }
 
 void	print_memory(unsigned char *str, size_t size)
@@ -88,7 +90,7 @@ void	print_struct_vm(t_vm vm)
 		ft_printf("comment = %s\n",tmp->comment);
 		ft_printf("file = %s\n",tmp->file);
 		ft_printf("p_number = %#X\n",tmp->p_number);
-		ft_printf("weight = %s\n",tmp->weight);
+		ft_printf("weight = %d\n",tmp->weight);
 		ft_printf("-----------\n");
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 17:30:59 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 18:35:19 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 ** -----------------------------------------------------------------------------
 */
 
-# define BEGIN_BINARY (4 + PROG_NAME_LENGTH + 4 + COMMENT_LENGTH + 4)
+# define BEGIN_BINARY (4 + PROG_NAME_LENGTH + 8 + COMMENT_LENGTH + 4)
 
 /*
 ** -----------------------------------------------------------------------------
@@ -40,7 +40,7 @@ typedef	struct			s_champion
 	char				*comment;
 	char				*file;
 //		Avons nous besoin du commentaire ?
-	int					p_number;
+	unsigned int		p_number;
 	size_t				weight;
 	unsigned char 		*binary;
 	size_t				binary_len;
@@ -108,7 +108,8 @@ void				ft_read_argument(char **argv, t_vm *vm);
 void				create_champion(char ***argv, t_champion **champion);
 unsigned char		*ft_read_champion(char *file, size_t *binary_len);
 void				check_binary(t_champion *champion);
-void				check_padding(unsigned char **binary);
+void				check_padding(unsigned char **binary, char *file);
+int					check_number(unsigned int	number, t_champion *champion);
 
 /*
 ** --------- INITIALIZATION

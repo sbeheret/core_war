@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 17:02:49 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 18:17:14 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ char	*ft_octet_to_char(unsigned char **binary, size_t lenght_max)
 	if (!(str = (char *)ft_strnew(lenght_max)))
 		ft_exit_malloc();
 	i = 0;
-	while (**binary && i < lenght_max)
+	while (i < lenght_max)
 	{
-		**binary = str[i];
+		str[i] = **binary;
 		i++;
 		*binary = *binary + 1;
 	}

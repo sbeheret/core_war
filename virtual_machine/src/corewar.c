@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:33:51 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/23 12:52:51 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 18:50:46 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,7 @@ int main (int argc, char **argv)
 	check_parameters(argc, argv, &vm);
 
 
-	// print_ram(vm.ram);
+	print_ram(vm.ram);
 	ft_memdel((void **) &(vm.ram));
 	return (1);
 }
-
-
-
-/*
-
-
-list :
-struct processus
-{
-	name :
-	comment :
-	number :
-	file :
-	binary :
-	binary_size :
-
-
--
-}
-
-*/

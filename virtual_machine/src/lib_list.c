@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 13:19:03 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 14:23:31 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 18:09:58 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ void	ft_push_back_chmp(t_champion **begin, t_champion *to_add)
 
 	tmp = *begin;
 	if (*begin == NULL)
-	{
-		ft_printf("\nPUSH_BACK\n");
-
 		*begin = to_add;
-	}
 	else
 	{
 		if (tmp)
@@ -41,6 +37,5 @@ void	ft_push_back_chmp(t_champion **begin, t_champion *to_add)
 				tmp = tmp->next;
 		}
 		tmp->next = to_add;
-		ft_printf("\nPUSH_BACK 2\n");
 	}
 }

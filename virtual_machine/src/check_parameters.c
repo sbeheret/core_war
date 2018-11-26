@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 17:13:59 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 18:47:37 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	check_parameters(int argc, char **argv, t_vm *vm)
 		ft_exit_usage();
 	ft_read_argument(argv, vm);
 	print_struct_vm(*vm);
-	// 	ft_exit_toomanychamp();
 }
 
 /*
@@ -77,7 +76,8 @@ void	create_champion(char ***argv, t_champion **champion)
 {
 	t_champion	*new_elem;
 	// faire un verification que nom de champion donne soit bien different
-	static int 	player_number = 0xFFFFFF;
+	// faire un atoi en unsigned int ???
+	static int 	player_number = 0xFFFFFFFF;
 
 	new_elem = new_champion();
 	if (!(ft_strcmp(**argv, "-n")))
@@ -86,11 +86,15 @@ void	create_champion(char ***argv, t_champion **champion)
 		if (!(**argv))
 			ft_exit_usage();
 		// Voir si besoin de plus de verification
-		new_elem->p_number = ft_atoi(**argv);
-		argv += 1;
+		if (check_number(ft_atoi(**argv), *champion))
+			ft_exit_usage();
+		new_elem->p_number = (ft_atoi(**argv));
+		*argv += 1;
 	}
 	else
 	{
+		while (check_number(player_number, *champion))
+			player_number--;
 		new_elem->p_number = player_number;
 		player_number--;
 	}
@@ -129,32 +133,19 @@ unsigned char	*ft_read_champion(char *file, size_t *binary_len)
 void	check_binary(t_champion *champion)
 {
 	int magic_number;
-	size_t header_lenght;
 
 	//verifier que les .h sont des int ??
-	//paddind defini dans header ??
-	header_lenght = PROG_NAME_LENGTH + COMMENT_LENGTH + 16;
-	if (champion->binary_len < header_lenght)
+	if (champion->binary_len < BEGIN_BINARY)
 		ft_exit_toosmall(champion->file);
 	if ((magic_number = ft_octet_to_int(&(champion->binary))) != COREWAR_EXEC_MAGIC)
-		ft_exit_magicnumber(champ->file);
+		ft_exit_magicnumber(champion->file);
 	champion->name = ft_octet_to_char(&(champion->binary), PROG_NAME_LENGTH);
-	check_padding(&(champion->binary));
+	check_padding(&(champion->binary), champion->file);
 	champion->weight = ft_octet_to_int(&(champion->binary));
 	champion->comment = ft_octet_to_char(&(champion->binary), COMMENT_LENGTH);
-	check_padding(&(champion->binary));
-	if (champion->weight != champion->binary_len - header_lenght)
+	check_padding(&(champion->binary), champion->file);
+	if (champion->weight != champion->binary_len - BEGIN_BINARY)
 		ft_exit_header(champion->file);
 	if (champion->weight > CHAMP_MAX_SIZE)
 		ft_exit_toobig(champion->file);
-
-
-	//4		compare COREWAR_EXEC_MAGIC
-	//128	save name for the next PROG_NAME_LENGTH octet
-	//4		verify octect padding
-	//4		save programm length
-	//2048	save comment for the next COMMENT_LENGTH
-	//4		verify 4 octect padding
-	//662		verify programm length is true
 }
-	//Error: File Untitled.cor has an invalid header
