@@ -6,18 +6,14 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 17:30:28 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:35:35 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	initialize_vm(int argc, char **argv, t_vm *vm)
+void	initialize_vm(t_vm *vm)
 {
-	(void) argc;
-	(void) argv;
-
-	// Fonction to check arguments
 	(*vm).nb_champs = 0;
 	(*vm).flag_dump = 0;
 	(*vm).dump_cycle = 0;

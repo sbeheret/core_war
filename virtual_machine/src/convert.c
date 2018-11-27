@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 18:17:14 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:31:41 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int		ft_octet_to_int(unsigned char **binary)
 
 char	*ft_octet_to_char(unsigned char **binary, size_t lenght_max)
 {
-	char *str;
- 	size_t i;
+	char	*str;
+	size_t	i;
 
 	if (!(str = (char *)ft_strnew(lenght_max)))
 		ft_exit_malloc();

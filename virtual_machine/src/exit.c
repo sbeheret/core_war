@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:14:57 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 17:15:22 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:34:40 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,5 @@ void	ft_exit_toobig(char *file)
 void	ft_exit_usage(void)
 {
 	ft_printf("Usage : ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ");
-	exit(0);
-}
-
-void	ft_exit_toomanychamp(void)
-{
-	ft_printf("Error : Too many champions");
-	exit(0);
-}
-
-void	ft_exit_magicnumber(char *file)
-{
-	ft_printf("Error : File \"%s\" has an invalid magic_number", file);
-	exit(0);
-}
-
-void	ft_exit_header(char *file)
-{
-	ft_printf("Error : File \"%s\" has an invalid header", file);
 	exit(0);
 }

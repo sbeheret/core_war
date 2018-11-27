@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:47:24 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 18:37:30 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:30:55 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_padding(unsigned char **binary, char *file)
 	}
 }
 
-int		check_number(unsigned int	number, t_champion *champion)
+int		check_number(unsigned int number, t_champion *champion)
 {
 	while (champion)
 	{

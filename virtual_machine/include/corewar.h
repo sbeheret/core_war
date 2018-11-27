@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 19:15:15 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:35:36 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ int					give_start(t_champion *champ, int nb_champs);
 ** --------- CHECK_PARAMETER
 */
 void				check_parameters(int argc, char **argv, t_vm *vm);
-void				ft_read_argument(char **argv, t_vm *vm);
 void				create_champion(char ***argv, t_champion **champion);
+void				ft_assign_pnumber(char ***argv, t_champion **champion, t_champion **new_elem);
 unsigned char		*ft_read_champion(char *file, size_t *binary_len);
 void				check_binary(t_champion *champion);
 void				check_padding(unsigned char **binary, char *file);
@@ -114,7 +114,7 @@ int					check_number(unsigned int	number, t_champion *champion);
 /*
 ** --------- INITIALIZATION
 */
-void				initialize_vm(int argc, char **argv, t_vm *vm);
+void				initialize_vm(t_vm *vm);
 void				initialize_processus(t_processus **pcs, int nb, int start);
 void				initialize_champion(t_champion **champion);
 
@@ -123,6 +123,7 @@ void				initialize_champion(t_champion **champion);
 */
 t_champion			*new_champion(void);
 void				ft_push_back_chmp(t_champion **begin, t_champion *to_add);
+int					ft_atoi_exit(char *s, char *parameter, char *file);
 
 /*
 ** --------- TOOLS
@@ -148,5 +149,7 @@ void				ft_exit_usage(void);
 void				ft_exit_toomanychamp(void);
 void				ft_exit_magicnumber(char *file);
 void				ft_exit_header(char *file);
+void				ft_exit_parameter(char *argument, char *file);
+void				ft_exit_playernumber(char *file);
 
 #endif

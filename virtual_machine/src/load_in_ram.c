@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:45 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/26 19:14:57 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:36:36 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	load_champs(t_vm *vm)
 {
 	t_champion	*champ;
 	int			start;
-	size_t			i;
+	size_t		i;
 
 	champ = vm->champion;
 	start_champions(&(*vm).champion, (*vm).nb_champs);
@@ -26,7 +26,7 @@ void	load_champs(t_vm *vm)
 		start = champ->start;
 		while (i < champ->weight)
 		{
-			vm->ram[start + i] = champ->binary[i];
+			vm->ram[start + i] = champ->binary[BEGIN_BINARY + i];
 			i++;
 		}
 		champ = champ->next;
