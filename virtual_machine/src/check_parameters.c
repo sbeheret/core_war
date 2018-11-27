@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 15:30:22 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:58:08 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 
 /*
 ** FONCTION CREATE_CHAMPION
+** Lire les arguments concernant le numero du joueur et verifier que ceux-ci
+** sont valides.
 ** Creer le fichier binaire
 ** Lire le fichier binaire du champion et verifier que le fichier est valide
 **		- Bon header
@@ -79,7 +81,7 @@ void			ft_assign_pnumber(char ***argv, t_champion **champion,
 		*argv += 1;
 		if (!(**argv))
 			ft_exit_usage();
-		if (check_number(ft_atoi_exit(**argv, "-n", (*champion)->file),
+		if (check_number(ft_atoi_exit(**argv, "-n", (*new_elem)->file),
 		*champion))
 			ft_exit_playernumber((*champion)->file);
 		(*new_elem)->p_number = (ft_atoi(**argv));
