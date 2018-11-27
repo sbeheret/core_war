@@ -1,5 +1,4 @@
 #include "../includes/asm.h"
-#include "../includes/op.h"
 
 static void		add_to_label_list_end(t_data *d, t_labels *label)
 {
@@ -24,19 +23,13 @@ static t_labels	*make_label(char **line, int len, int y, int l)
     	label->name = strndup(line[0], len);
 	else
 		label->name = 0;
-	if (len > 0 && l == 0)
-		label->args = ft_strsplit(line[l] + len + 1, ' ');
-	else
-		label->args = ft_strsplit(line[l], ' ');
-	trim_spaces_commas_comments(label->args);
-	label->op_nb = find_op_nb(label->args[0]);
 	label->args_start_line = l;
 	label->position = y;
 	label->bytes = 1;
 	return (label);
 }
 
-int	find_tokens_line(char **tab, int y, int x)
+int	find_args_line(char **tab, int y, int x)
 {
 	while (tab[y])
 	{
@@ -52,11 +45,47 @@ int	find_tokens_line(char **tab, int y, int x)
 	return (y);
 }
 
+void		is_label(t_data *d, int *y, int len, int skip)
+{
+	int			l;
+	t_labels	*lb;
+
+	if (d->tab[*y][len + 1] && d->tab[*y][len + 1] != ' ' && d->tab[*y][len + 1] != '\t')
+		error_char(d->tab[*y][len + 1]);
+	l = find_args_line(d->tab, *y, len + 1);
+	lb = make_label(d->tab + *y, len, *y - skip, l - *y);
+	if (len > 0 && l - *y == 0)
+	{
+		len++;
+		len += find_op_code(lb, d->tab[l] + len, d->op);
+		lb->args = ft_strsplit(d->tab[l] + len, SEPARATOR_CHAR);
+		trim_spaces(lb->args);
+	}
+	else
+	{
+		len = find_op_code(lb, d->tab[l], d->op);
+		lb->args = ft_strsplit(d->tab[l] + len, SEPARATOR_CHAR);
+		trim_spaces(lb->args);
+	}
+	add_to_label_list_end(d, lb);
+	*y = l;
+}
+
+void	is_op_code(t_data *d, int y, int len, int skip)
+{
+	t_labels	*lb;
+
+	lb = make_label(d->tab + y, 0, y - skip, 0);
+	len = find_op_code(lb, d->tab[y], d->op);
+	lb->args = ft_strsplit(d->tab[y] + len, SEPARATOR_CHAR);
+	trim_spaces(lb->args);
+	add_to_label_list_end(d, lb);
+}
+
 void		get_labels(t_data *d)
 {
 	int	y;
 	int	len;
-	int l;
 	int	skip;
 
 	y = 2;
@@ -68,22 +97,20 @@ void		get_labels(t_data *d)
 		while (ft_strchr(LABEL_CHARS, d->tab[y][len]))
             len++;
 		if (d->tab[y][len] == LABEL_CHAR)
-		{
-			l = find_tokens_line(d->tab, y, len + 1);
-        	add_to_label_list_end(d, make_label(d->tab + y, len, y - skip, l - y));
-			y = l;
-		}
+			is_label(d, &y, len, skip);
 		else if (d->tab[y][0] == COMMENT_CHAR ||
 			ft_strstr(d->tab[y], NAME_CMD_STRING) ||
 			ft_strstr(d->tab[y], COMMENT_CMD_STRING))
 			skip++;
+		else if (d->tab[y][len] == ' ')
+			is_op_code(d, y, len, skip);
 		else
-			add_to_label_list_end(d, make_label(d->tab + y, 0, y - skip, 0));
+			error_char(d->tab[y][len]);
 		y++;
 	}
 	add_bytes(d);
-	printf("\nuntil label (in hex): %x\n",\
-	calc_bytes_till_label(d->first_label, d->first_label, 1));
+	//printf("\nuntil label (in hex): %x\n",\
+	//calc_bytes_till_label(d->first_label, d->first_label, 1));
 	show_labels(d); //tmp
 }
 
@@ -100,8 +127,7 @@ void show_labels(t_data *d) //tmp
         printf("NAME:\t\t%s\
 		\nop_code:\t%s\
 		\nop_nb:\t\t%i\
-		\nargs:", tmp->name, tmp->args[i], tmp->op_nb);
-		i++;
+		\nargs:", tmp->name, tmp->op_code, tmp->op_nb);
 		while (tmp->args[i])
 		{
 	        printf("\t\t%s\n", tmp->args[i]);

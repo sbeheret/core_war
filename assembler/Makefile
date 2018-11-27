@@ -31,7 +31,9 @@ SRCS =	main.c \
 		l_labels.c \
 		l_size.c \
 		l_trim.c \
-		l_calc.c
+		l_calc.c \
+		l_op.c \
+		l_errors.c
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 

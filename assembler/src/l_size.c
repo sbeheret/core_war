@@ -8,14 +8,14 @@ static void    live_ld_st_add_sub_zjmp_fork_lfork(t_labels *l)
         l->bytes += IND_SIZE; //T_DIR
     else if (l->op_nb == LD)
     {//T_IND | T_DIR, T_REG
-        if (l->args[1][0] == DIRECT_CHAR)
+        if (l->args[0][0] == DIRECT_CHAR)
             l->bytes += DIR_SIZE + 1;
         else
             l->bytes += IND_SIZE + 1;
     }
     else if (l->op_nb == ST)
     {//T_REG, T_IND | T_REG
-        if (l->args[2][0] == 'r')
+        if (l->args[0][0] == 'r')
             l->bytes += 1 + 1;
         else
             l->bytes += 1 + IND_SIZE;
@@ -28,15 +28,15 @@ static void    and_or_xor_lld_aff(t_labels *l)
 {
     if (l->op_nb == AND || l->op_nb == OR || l->op_nb == XOR)
     {//T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG
-        if (l->args[1][0] == 'r')
+        if (l->args[0][0] == 'r')
             l->bytes += 1;
-        else if (l->args[1][0] == DIRECT_CHAR)
+        else if (l->args[0][0] == DIRECT_CHAR)
             l->bytes += DIR_SIZE;
         else
             l->bytes += IND_SIZE;
-        if (l->args[2][0] == 'r')
+        if (l->args[1][0] == 'r')
             l->bytes += 1;
-        else if (l->args[2][0] == DIRECT_CHAR)
+        else if (l->args[1][0] == DIRECT_CHAR)
             l->bytes += DIR_SIZE;
         else
             l->bytes += IND_SIZE;
@@ -44,7 +44,7 @@ static void    and_or_xor_lld_aff(t_labels *l)
     }
     else if (l->op_nb == LLD)
     {//T_DIR | T_IND, T_REG
-        if (l->args[1][0] == DIRECT_CHAR)
+        if (l->args[0][0] == DIRECT_CHAR)
             l->bytes += DIR_SIZE + 1;
         else
             l->bytes += IND_SIZE + 1;
@@ -57,11 +57,11 @@ static void    ldi_lldi_sti(t_labels *l)
 {
     if (l->op_nb == LDI || l->op_nb == LLDI) //dir is treated as ind
     {//T_REG| T_IND | T_DIR, T_DIR | T_REG, T_REG
-        if (l->args[1][0] == 'r')
+        if (l->args[0][0] == 'r')
             l->bytes += 1;
         else
             l->bytes += IND_SIZE;
-        if (l->args[2][0] == 'r')
+        if (l->args[1][0] == 'r')
             l->bytes += 1;
         else
             l->bytes += IND_SIZE;
@@ -70,11 +70,11 @@ static void    ldi_lldi_sti(t_labels *l)
     else if (l->op_nb == STI) //dir is treated as ind
     {//T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG
         l->bytes += 1;
-        if (l->args[2][0] == 'r')
+        if (l->args[1][0] == 'r')
             l->bytes += 1;
         else
             l->bytes += IND_SIZE;
-        if (l->args[3][0] == 'r')
+        if (l->args[2][0] == 'r')
             l->bytes += 1;
         else
             l->bytes += IND_SIZE;

@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-static void			free_labels(t_data *d)
+void			free_labels(t_data *d)
 {
 	t_labels	*label;
 
@@ -77,6 +77,6 @@ void			get_data(int fd)
 		i++;
 	}
 	get_labels(d);
-	free_labels(d);
+//	free_labels(d);
 	free_data(d->tab, data);
 }
