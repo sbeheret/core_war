@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 16:52:54 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 19:21:38 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,19 @@ typedef	struct			s_vm
 	t_champion			*champion;
 	t_processus			*processus;
 }						t_vm;
+
+typedef	struct			s_op
+{
+	char				*name;
+	int					param_number;
+	int					param_type[3];
+	int					op_code;
+	int					cycle;
+	char				*comment;
+	int					encoding_byte;
+	int					direct_octect;
+}						t_op;
+
 
 /*
 ** -----------------------------------------------------------------------------

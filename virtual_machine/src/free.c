@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 16:32:56 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 17:17:05 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:44:32 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free_vm(t_vm *vm)
 {
-	if((*vm).ram)
+	if ((*vm).ram)
 	{
 		ft_printf("free ram\n");
 		ft_memdel((void**)&(*vm).ram);

@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.c                                          :+:      :+:    :+:   */
+/*   instruction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 12:33:51 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 17:38:26 by rfibigr          ###   ########.fr       */
+/*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
+/*   Updated: 2018/11/27 19:23:59 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-/*
-** Initilization of VM
-** -Check if arguments are valable
-** -Create ram and initialize all element
-*/
-
-int	main(int argc, char **argv)
+void	ft_live(t_op op_tab)
 {
-	t_vm	vm;
 
-	initialize_vm(&vm);
-	check_parameters(argc, argv, &vm);
-	load_champs(&vm);
-	
-	print_struct_vm(vm);
-	print_ram(vm.ram);
-	ft_free_vm(&vm);
-	return (1);
+}
+
+void	ft_ld(t_op op_tab, )
+{
+
+
+}
+
+void	ft_st(t_op op_tab)
+{
+
+}
+
+void	ft_add(t_op opt_tab)
+{
+
+}
+
+void	ft_add(t_op opt_tab)
+{
+
 }
