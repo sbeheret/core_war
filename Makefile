@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/22 11:27:03 by rfibigr           #+#    #+#              #
-#    Updated: 2018/11/22 14:38:29 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/11/27 16:54:29 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,3 +30,6 @@ fclean:
 re:
 	make fclean all -C $(ASM_PATH)
 	make fclean all -C $(COREWAR_PATH)
+
+debug:
+	make debug -C $(COREWAR_PATH)

@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/11/27 15:43:30 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/11/27 16:55:01 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -50,7 +50,8 @@ SRC =		corewar.c 	\
 			lib_list.c			\
 			convert.c			\
 			load_in_ram.c		\
-			#where_star.c		\
+			free.c				\
+
 
 LIBNAME =	libft/libft.a \
 
@@ -90,4 +91,4 @@ re: fclean all
 
 debug : $(OBJ)
 	@echo "$(PURPLE) --Linking--\t\t"
-	$(CC) -o $(NAME) $^ $(LIBP) -fsanitize=address -O1 -fno-omit-frame-pointer
+	$(CC) -o $(NAME_PATH)$(NAME) $^ $(LIBP) -fsanitize=address -O1 -fno-omit-frame-pointer

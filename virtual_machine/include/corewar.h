@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 16:06:42 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/27 16:52:54 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,26 @@ typedef	struct			s_champion
 
 typedef struct			s_processus
 {
-	int			PC;
-	int			*reg;
-	int			cycles_wait;
-	int			lives;
+	int					PC;
+	int					*reg;
+	int					cycles_wait;
+	int					lives;
 	struct s_processus	*next;
-}				t_processus;
+}						t_processus;
 
-typedef	struct		s_vm
+typedef	struct			s_vm
 {
-	int				nb_champs;
-	int				flag_dump;
-	int				dump_cycle;
-	int				last_alive;
-	int				CTD;
-	int				cycles_ttx;
-	int				cycles_now;
-	unsigned char	*ram;
-	t_champion		*champion;
-	t_processus		*processus;
-}					t_vm;
+	int					nb_champs;
+	int					flag_dump;
+	int					dump_cycle;
+	int					last_alive;
+	int					CTD;
+	int					cycles_ttx;
+	int					cycles_now;
+	unsigned char		*ram;
+	t_champion			*champion;
+	t_processus			*processus;
+}						t_vm;
 
 /*
 ** -----------------------------------------------------------------------------
@@ -151,5 +151,12 @@ void				ft_exit_magicnumber(char *file);
 void				ft_exit_header(char *file);
 void				ft_exit_parameter(char *argument, char *file);
 void				ft_exit_playernumber(char *file);
+
+/*
+** --------- FREE
+*/
+void				ft_free_vm(t_vm *vm);
+void				ft_free_champion(t_champion **champion);
+void				ft_free_processus(t_processus **processus);
 
 #endif
