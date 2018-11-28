@@ -6,7 +6,13 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/11/28 18:12:03 by rfibigr          ###   ########.fr       */
+||||||| merged common ancestors
+/*   Updated: 2018/11/28 15:30:53 by rfibigr          ###   ########.fr       */
+=======
+/*   Updated: 2018/11/28 17:56:51 by sbeheret         ###   ########.fr       */
+>>>>>>> 0cfffce0f040d309af2b208c53c0f59061282f54
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +55,15 @@ typedef	struct			s_champion
 	struct	s_champion *next;
 }						t_champion;
 
+typedef struct			s_action
+{
+	int					op_code;
+	int					*args;
+	int					nb_arg;
+	int					*type;
+	int					size_read;
+}						t_action;
+
 typedef struct			s_processus
 {
 	int					PC;
@@ -56,6 +71,7 @@ typedef struct			s_processus
 	int					*reg;
 	int					cycles_wait;
 	int					lives;
+	t_action			*action;
 	struct s_processus	*next;
 }						t_processus;
 
@@ -115,7 +131,7 @@ t_processus			*new_processus(int p_nb, int start);
 ** --------- WHERE_START
 */
 void				start_champions(t_champion **champ, int nb_champs);
-int					give_start(t_champion *champ, int nb_champs);
+void				give_start(t_champion *champ, int nb_champs);
 
 /*
 ** --------- CHECK_PARAMETER
@@ -149,6 +165,13 @@ void				print_ram(unsigned char *ram);
 void				print_memory(unsigned char *str, size_t size);
 void				print_struct_vm(t_vm vm);
 void				print_optab(void);
+
+/*
+** --------- GET_ACTION
+*/
+void				get_action(t_vm **vm, t_processus *pcs);
+void				args_action(unsigned char *ram, int PC, t_action *n);
+void				trad_encoding_byte(t_action *n, int enc_byte, int value);
 
 /*
 ** --------- CONVERT
