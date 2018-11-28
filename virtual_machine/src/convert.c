@@ -6,13 +6,13 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 15:31:41 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/28 15:30:00 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		ft_octet_to_int(unsigned char **binary)
+int		ft_octet_to_int(unsigned char **binary, int nb_octect)
 {
 	int		value;
 
@@ -21,12 +21,15 @@ int		ft_octet_to_int(unsigned char **binary)
 	*binary = *binary + 1;
 	value = value << 8;
 	value = value | **binary;
-	*binary = *binary + 1;
-	value = value << 8;
-	value = value | **binary;
-	*binary = *binary + 1;
-	value = value << 8;
-	value = value | **binary;
+	if (nb_octect == 4)
+	{
+		*binary = *binary + 1;
+		value = value << 8;
+		value = value | **binary;
+		*binary = *binary + 1;
+		value = value << 8;
+		value = value | **binary;
+	}
 	*binary = *binary + 1;
 	return (value);
 }

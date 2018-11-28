@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 10:28:21 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/28 15:34:51 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,26 @@
 ** -------------------------------- TYPE_DEF------------------------------------
 ** -----------------------------------------------------------------------------
 */
+
+typedef	struct			s_vm
+{
+	int					nb_champs;
+	int					flag_dump;
+	int					dump_cycle;
+	int					last_alive;
+	int					CTD;
+	int					cycles_ttx;
+	int					cycles_now;
+	unsigned char		*ram;
+	t_champion			*champion;
+	t_processus			*processus;
+}						t_vm;
+
 typedef	struct			s_champion
 {
 	char				*name;
 	char				*comment;
 	char				*file;
-//		Avons nous besoin du commentaire ?
 	unsigned int		p_number;
 	size_t				weight;
 	unsigned char 		*binary;
@@ -56,20 +70,6 @@ typedef struct			s_processus
 	int					lives;
 	struct s_processus	*next;
 }						t_processus;
-
-typedef	struct			s_vm
-{
-	int					nb_champs;
-	int					flag_dump;
-	int					dump_cycle;
-	int					last_alive;
-	int					CTD;
-	int					cycles_ttx;
-	int					cycles_now;
-	unsigned char		*ram;
-	t_champion			*champion;
-	t_processus			*processus;
-}						t_vm;
 
 typedef	struct			s_op
 {
@@ -144,11 +144,12 @@ int					ft_atoi_exit(char *s, char *parameter, char *file);
 void				print_ram(unsigned char *ram);
 void				print_memory(unsigned char *str, size_t size);
 void				print_struct_vm(t_vm vm);
+void				print_optab(void);
 
 /*
 ** --------- CONVERT
 */
-int					ft_octet_to_int(unsigned char **c);
+int					ft_octet_to_int(unsigned char **binary, int nb_octect);
 char				*ft_octet_to_char(unsigned char **binary, size_t lenght_max);
 
 /*
