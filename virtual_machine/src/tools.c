@@ -6,11 +6,12 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 18:54:52 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/28 12:11:48 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "op.c"
 
 void	print_ram(unsigned char *ram)
 {
@@ -31,6 +32,16 @@ void	print_ram(unsigned char *ram)
 		i++;
 	}
 	ft_printf("\n");
+}
+
+void	print_optab(void)
+{
+	int i = 0;
+	while (i<17)
+	{
+		ft_printf("tab[%d]= {\"%s\", %d, {%d,%d,%d}, %d, %d, %s, %d, %d}\n",i, op_tab[i].name,op_tab[i].param_number, op_tab[i].param_type[0], op_tab[i].param_type[1], op_tab[i].param_type[2], op_tab[i].op_code, op_tab[i].cycle, op_tab[i].comment, op_tab[i].encoding_byte, op_tab[i].direct_octect);
+		i++;
+	}
 }
 
 void	print_memory(unsigned char *str, size_t size)
