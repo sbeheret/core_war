@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 15:34:51 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/28 17:56:51 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,22 @@ typedef	struct			s_champion
 	struct	s_champion *next;
 }						t_champion;
 
+typedef struct			s_action
+{
+	int					op_code;
+	int					*args;
+	int					nb_arg;
+	int					*type;
+	int					size_read;
+}						t_action;
+
 typedef struct			s_processus
 {
 	int					PC;
 	int					*reg;
 	int					cycles_wait;
 	int					lives;
+	t_action			*action;
 	struct s_processus	*next;
 }						t_processus;
 
@@ -145,6 +155,13 @@ void				print_ram(unsigned char *ram);
 void				print_memory(unsigned char *str, size_t size);
 void				print_struct_vm(t_vm vm);
 void				print_optab(void);
+
+/*
+** --------- GET_ACTION
+*/
+void				get_action(t_vm **vm, t_processus *pcs);
+void				args_action(unsigned char *ram, int PC, t_action *n);
+void				trad_encoding_byte(t_action *n, int enc_byte, int value);
 
 /*
 ** --------- CONVERT
