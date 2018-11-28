@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 15:32:31 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/28 18:13:21 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 		- run intstruction
 **
 */
-
 
 void	run_vm(t_vm *vm)
 {
@@ -48,7 +47,25 @@ void	execute_processus(t_processus *processus)
 	}
 }
 
-void	decode_instruction()
+void	run_instruction()
 {
+	static t_instruction	instruction[] = {
+		{&ft_live},
+		{&ft_ld},
+		{&ft_st},
+		{&ft_add},
+		{&ft_sub},
+		{&ft_and},
+		{&ft_or},
+		{&ft_xor},
+		{&ft_zjump},
+		{&ft_ldi},
+		{&ft_sti},
+		{&ft_fork},
+		{&ft_lld},
+		{&ft_lldi},
+		{&ft_lfork},
+		{&ft_aff}
+   };
 
 }

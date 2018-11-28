@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/11/28 11:59:04 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/11/28 18:12:44 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -51,6 +51,10 @@ SRC =		corewar.c			\
 			convert.c			\
 			load_in_ram.c		\
 			free.c				\
+			instruction.c		\
+			instruction2.c		\
+			instruction3.c		\
+			instruction4.c		\
 
 
 LIBNAME =	libft/libft.a \

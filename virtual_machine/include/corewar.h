@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 15:37:17 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/28 18:12:03 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef	struct			s_champion
 typedef struct			s_processus
 {
 	int					PC;
+	int					carry;
 	int					*reg;
 	int					cycles_wait;
 	int					lives;
@@ -83,6 +84,8 @@ typedef	struct			s_op
 	int					encoding_byte;
 	int					direct_octect;
 }						t_op;
+
+typedef	void		(*t_inst)(t_vm);
 
 
 /*
@@ -152,6 +155,26 @@ void				print_optab(void);
 */
 int					ft_octet_to_int(unsigned char **binary, int nb_octect);
 char				*ft_octet_to_char(unsigned char **binary, size_t lenght_max);
+
+/*
+** --------- INSTRUCTION
+*/
+void				ft_live(t_vm *vm);
+void				ft_ld(t_vm *vm);
+void				ft_st(t_vm *vm);
+void				ft_add(t_vm *vm);
+void				ft_sub(t_vm *vm);
+void				ft_and(t_vm *vm);
+void				ft_or(t_vm *vm);
+void				ft_xor(t_vm *vm);
+void				ft_zjump(t_vm *vm);
+void				ft_ldi(t_vm *vm);
+void				ft_sti(t_vm *vm);
+void				ft_fork(t_vm *vm);
+void				ft_lld(t_vm *vm);
+void				ft_lldi(t_vm *vm);
+void				ft_lfork(t_vm *vm);
+void				ft_aff(t_vm *vm);
 
 /*
 ** --------- EXIT
