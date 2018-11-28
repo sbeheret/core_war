@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 15:30:53 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/28 15:37:17 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,6 @@
 ** -----------------------------------------------------------------------------
 */
 
-typedef	struct			s_vm
-{
-	int					nb_champs;
-	int					flag_dump;
-	int					dump_cycle;
-	int					last_alive;
-	int					CTD;
-	int					cycles_ttx;
-	int					cycles_now;
-	unsigned char		*ram;
-	t_champion			*champion;
-	t_processus			*processus;
-}						t_vm;
 
 typedef	struct			s_champion
 {
@@ -70,6 +57,20 @@ typedef struct			s_processus
 	int					lives;
 	struct s_processus	*next;
 }						t_processus;
+
+typedef	struct			s_vm
+{
+	int					nb_champs;
+	int					flag_dump;
+	int					dump_cycle;
+	int					last_alive;
+	int					CTD;
+	int					cycles_ttx;
+	int					cycles_now;
+	unsigned char		*ram;
+	t_champion			*champion;
+	t_processus			*processus;
+}						t_vm;
 
 typedef	struct			s_op
 {

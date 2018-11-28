@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 14:59:20 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/28 15:32:31 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	run_vm(t_vm *vm)
 	{
 		execute_processus((*vm).processus);
 		//do des trucs
-		(*vm).cyles_ttx++;
-		(*vm).cyles_now++;
+		(*vm).cycles_ttx++;
+		(*vm).cycles_now++;
 	}
 }
 
@@ -46,4 +46,9 @@ void	execute_processus(t_processus *processus)
 		}
 		(*processus) = (*processus)->next;
 	}
+}
+
+void	decode_instruction()
+{
+
 }
