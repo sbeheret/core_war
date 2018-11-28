@@ -108,7 +108,10 @@ void		get_labels(t_data *d)
 			error_char(d->tab[y][len]);
 		y++;
 	}
+	general_check(d);
+	compliance_check(d);
 	add_bytes(d);
+	//printf("param %i\n", (int)d->op[5].params_types[0]);
 	//printf("\nuntil label (in hex): %x\n",\
 	//calc_bytes_till_label(d->first_label, d->first_label, 1));
 	show_labels(d); //tmp

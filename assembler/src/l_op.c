@@ -44,7 +44,7 @@ static int    l(t_labels *lb, char *str, int i, t_op *op)
         return (i + 5);
     }
     else
-        error_arg(str + i);
+        error_op_code(str + i);
     return (0);
 }
 
@@ -69,7 +69,7 @@ static int    s(t_labels *lb, char *str, int i, t_op *op)
         return (i + 3);
     }
     else
-        error_arg(str + i);
+        error_op_code(str + i);
     return (0);
 }
 
@@ -94,7 +94,7 @@ static int    a(t_labels *lb, char *str, int i, t_op *op)
         return (i + 3);
     }
     else
-        error_arg(str + i);
+        error_op_code(str + i);
     return (0);
 }
 
@@ -109,7 +109,7 @@ static int    o_x_z(t_labels *lb, char *str, int i, t_op *op)
             return (i + 2);
         }
         else
-            error_arg(str + i);
+            error_op_code(str + i);
     }
     else if (str[i] == 'x')
     {
@@ -120,7 +120,7 @@ static int    o_x_z(t_labels *lb, char *str, int i, t_op *op)
             return (i + 3);
         }
         else
-            error_arg(str + i);
+            error_op_code(str + i);
 
     }
     else if (str[i] == 'z')
@@ -132,7 +132,7 @@ static int    o_x_z(t_labels *lb, char *str, int i, t_op *op)
             return (i + 4);
         }
         else
-            error_arg(str + i);
+            error_op_code(str + i);
     }
     return (0);
 }
@@ -153,6 +153,6 @@ int    find_op_code(t_labels *lb, char *str, t_op *op)
     else if (str[i] == 'o' || str[i] == 'x' || str[i] == 'z')
         return (o_x_z(lb, str, i, op));
     else
-        error_arg(str + i);
+        error_op_code(str + i);
     return (0);
 }
