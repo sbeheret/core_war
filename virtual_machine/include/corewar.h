@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 19:21:38 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/28 10:28:21 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_processus			*new_processus(int p_nb, int start);
 ** --------- WHERE_START
 */
 void				start_champions(t_champion **champ, int nb_champs);
-int					give_start(t_champion *champ, int nb_champs);
+void				give_start(t_champion *champ, int nb_champs);
 
 /*
 ** --------- CHECK_PARAMETER
