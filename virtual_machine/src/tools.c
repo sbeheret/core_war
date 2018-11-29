@@ -6,12 +6,11 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 15:18:46 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/29 17:50:35 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "op.c"
 
 void	print_ram(unsigned char *ram)
 {

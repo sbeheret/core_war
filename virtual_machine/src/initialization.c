@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 16:09:09 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/29 17:47:24 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,22 @@ void	initialize_processus(t_processus **processus, int nb_player, int start)
 	(*processus)->cycles_wait = 0;
 	(*processus)->lives = 0;
 	(*processus)->next = NULL;
-	(*processus)->action = NULL;
+	initialize_action(*processus);
+}
+
+void	initialize_action(t_processus *processus)
+{
+	processus->action.op_code = 0;
+	processus->action.args[0] = 0;
+	processus->action.args[1] = 0;
+	processus->action.args[2] = 0;
+	processus->action.args[3] = 0;
+	processus->action.nb_arg = 0;
+	processus->action.size_read = 0;
+	processus->action.type[0] = 0;
+	processus->action.type[1] = 0;
+	processus->action.type[2] = 0;
+	processus->action.type[3] = 0;
 }
 
 void	initialize_champion(t_champion **champion)

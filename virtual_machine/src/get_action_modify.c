@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/29 15:47:04 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 17:22:50 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,11 @@
 
 void	get_action(t_vm *vm, t_processus *processus)
 {
-	// t_action	*new;
-	//
-	// if (!(new = malloc(sizeof(t_action))))
-	// 	ft_exit_malloc();
-	// new->op_code = (*vm)->ram[pcs->PC];
-	// new->nb_arg = op_tab[new->op_code - 1][1];
-	// if (!(new->args = malloc(sizeof(int) * new->nb_arg)))
-	// 	ft_exit_malloc();
-	// if (!(new->type = malloc(sizeof(int) * 4)))
-	// 	ft_exit_malloc();
-	// args_action((*vm).ram, pcs->PC, new);
-
 	int		op_code;
 
 	op_code = (*vm).ram[circular(processus->PC)];
 	processus->action.op_code = op_code;
-	processus->action.nb_arg = op_tab[op_code -1][1];
+	processus->action.nb_arg = op_tab[op_code - 1].param_number;
 	args_action((*vm).ram, processus->PC, &processus->action);
 }
 
