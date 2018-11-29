@@ -6,25 +6,26 @@
 /*   By: sbeheret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/28 18:01:32 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/29 15:28:59 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "op.c"
 
-void	get_action(t_vm **vm, t_processus *pcs)
+void	get_action(t_vm *vm, t_processus *pcs)
 {
 	t_action	*new;
 
 	if (!(new = malloc(sizeof(t_action))))
 		ft_exit_malloc();
-	new->op_code = (*vm)->ram[pcs->PC];
-	new->nb_arg = op_tab[new->op_code - 1][1];
+	new->op_code = vm->ram[pcs->PC];
+	new->nb_arg = op_tab[new->op_code - 1].param_number;
 	if (!(new->args = malloc(sizeof(int) * new->nb_arg)))
 		ft_exit_malloc();
 	if (!(new->type = malloc(sizeof(int) * 4)))
 		ft_exit_malloc();
-	args_action((*vm)->ram, pcs->PC, new);
+	args_action(vm->ram, pcs->PC, new);
 }
 
 void	args_action(unsigned char *ram, int PC, t_action *new)
@@ -34,7 +35,7 @@ void	args_action(unsigned char *ram, int PC, t_action *new)
 	int		size;
 	int		enc_byte;
 
-	enc_byte = op_tab[new->op_code - 1][6];
+	enc_byte = op_tab[new->op_code - 1].encoding_byte;
 	size = 0;
 	i = 0;
 	trad_encoding_byte(new, enc_byte, ram[PC + 1]);

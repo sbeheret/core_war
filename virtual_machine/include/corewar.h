@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 18:17:56 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 15:25:45 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,11 +159,13 @@ void				print_ram(unsigned char *ram);
 void				print_memory(unsigned char *str, size_t size);
 void				print_struct_vm(t_vm vm);
 void				print_optab(void);
+void				print_processus(t_processus *pcs);
+void				print_action(t_action *action);
 
 /*
 ** --------- GET_ACTION
 */
-void				get_action(t_vm **vm, t_processus *pcs);
+void				get_action(t_vm *vm, t_processus *pcs);
 void				args_action(unsigned char *ram, int PC, t_action *n);
 void				trad_encoding_byte(t_action *n, int enc_byte, int value);
 

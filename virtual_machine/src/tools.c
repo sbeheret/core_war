@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 12:11:48 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 15:18:46 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	print_struct_vm(t_vm vm)
 	ft_printf("\n=============== STRUCT VM ===============\n");
 	ft_printf("flag_dump = %d\n", vm.flag_dump);
 	ft_printf("dump_cycle = %d\n", vm.dump_cycle);
-	ft_printf("----------PROCESSUS LIST-----------\n");
+	ft_printf("----------CHAMPION LIST-----------\n");
 	while (tmp)
 	{
 		ft_printf("-----------\n");
@@ -105,7 +105,7 @@ void	print_struct_vm(t_vm vm)
 		ft_printf("-----------\n");
 		tmp = tmp->next;
 	}
-	ft_printf("------END PROCESSUS LIST-----------\n");
+	ft_printf("------END CHAMPION LIST-----------\n");
+	print_processus(vm.processus);
 	ft_printf("\n============= END STRUC VM  =============\n");
-
 }
