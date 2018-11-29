@@ -1,5 +1,11 @@
 #include "asm.h"
 
+int32_t			swap_uint32(uint32_t val)
+{
+	val = ((val << 8) & 0xFF00FF00) | ((val >> 8) & 0xFF00FF);
+	return ((val << 16) | (val >> 16));
+}
+
 unsigned int hexatob(const char *ptr)
 {
 	unsigned int value;
@@ -10,7 +16,7 @@ unsigned int hexatob(const char *ptr)
 
 	while (ch == ' ' || ch == '\t')
 		ch = *(++ptr);
-	while (*ptr)
+	while (*ptr) 
 	{
 		if (ch >= '0' && ch <= '9')
 			value = (value << 4) + (ch - '0');

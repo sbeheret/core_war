@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:41:21 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/16 09:51:49 by esouza           ###   ########.fr       */
+/*   Updated: 2018/11/29 12:22:10 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ typedef char	t_arg_type;
 typedef struct		s_header
 {
 	unsigned int		magic;
-	char				prog_name[PROG_NAME_LENGTH + 1];
+	char				prog_name[PROG_NAME_LENGTH];
+	char				pad[T_IND];
 	unsigned int		prog_size;
-	char				comment[COMMENT_LENGTH + 1];
+	char				comment[COMMENT_LENGTH];
+	char				pad2[T_IND];
 }					t_header;
 
 #endif

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
+/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:01:16 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/22 14:33:14 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/28 17:40:57 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include "op.h"
 
 static void		check_args(int argc, char **argv)
 {
@@ -70,18 +69,15 @@ int				main(int argc, char **argv)
 	int		fd;
 	int		fd2;
 	char	name[PROG_NAME_LENGTH + 5];
-	t_header *header = malloc(sizeof(t_header));
 
 	check_args(argc, argv);
 	stocor(name, argv);
 	if (((fd = open(argv[1], O_NOFOLLOW | O_RDWR)) < 1))
 		print_error_open();
 	fd2 = open(name, O_RDWR | O_APPEND |  O_CREAT, RIGHTS);
-	set_header(header);
-	write(fd2, header, sizeof(t_header) + sizeof(char) * 8);
-	get_data(fd);
+	get_data(fd, fd2);
 	close(fd);
 	close(fd2);
-	free(header);
+//	while (1) ;
 	return (0);
 }
