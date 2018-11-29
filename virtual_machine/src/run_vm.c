@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 15:48:56 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 16:03:27 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 ** Fonction qui pour chaque cycle
 ** Parcourir les processus
 ** 	- Executer les processus si leur cycle d'attente est a 0
+		- si dans les instruction il y a un optcode valide on l'execute
 		- Decode instruction et parametre
-		- run intstruction
 **
 */
 

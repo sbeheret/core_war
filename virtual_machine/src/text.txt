@@ -1,0 +1,18 @@
+indirect ----> PC + value
+
+
+
+op_code 0
+op_code 10, pc + 5, cycle wait 10
+..
+..
+..0
+10 intruction[10]
+0 pc +1 cycle 1
+0
+get action pc +1
+
+verifier optcode valide :
+verifier encoding_byte valide ->
+
+a voir pour l'adresse du nouveau PC pour un jump

@@ -6,13 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2018/11/29 11:07:54 by rfibigr          ###   ########.fr        #
-||||||| merged common ancestors
-#    Updated: 2018/11/28 18:12:44 by rfibigr          ###   ########.fr        #
-=======
-#    Updated: 2018/11/29 15:26:41 by sbeheret         ###   ########.fr        #
->>>>>>> 4d38bbda37a746e96746f2e0205575382925d34e
+#    Updated: 2018/11/29 16:02:00 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
