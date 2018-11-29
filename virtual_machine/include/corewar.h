@@ -6,7 +6,13 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/11/29 15:44:06 by rfibigr          ###   ########.fr       */
+||||||| merged common ancestors
+/*   Updated: 2018/11/28 18:17:56 by rfibigr          ###   ########.fr       */
+=======
+/*   Updated: 2018/11/29 15:25:45 by sbeheret         ###   ########.fr       */
+>>>>>>> 4d38bbda37a746e96746f2e0205575382925d34e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +169,8 @@ void				print_ram(unsigned char *ram);
 void				print_memory(unsigned char *str, size_t size);
 void				print_struct_vm(t_vm vm);
 void				print_optab(void);
+void				print_processus(t_processus *pcs);
+void				print_action(t_action *action);
 
 /*
 ** --------- RUN VM
@@ -174,9 +182,19 @@ void				execute_processus(t_vm *vm);
 /*
 ** --------- GET_ACTION
 */
+<<<<<<< HEAD
 void				get_action(t_vm *vm, t_processus *processus);
 void				args_action(unsigned char *ram, int PC, t_action *action);
 void				trad_encoding_byte(t_action *action, int enc_byte, int value);
+||||||| merged common ancestors
+void				get_action(t_vm **vm, t_processus *pcs);
+void				args_action(unsigned char *ram, int PC, t_action *n);
+void				trad_encoding_byte(t_action *n, int enc_byte, int value);
+=======
+void				get_action(t_vm *vm, t_processus *pcs);
+void				args_action(unsigned char *ram, int PC, t_action *n);
+void				trad_encoding_byte(t_action *n, int enc_byte, int value);
+>>>>>>> 4d38bbda37a746e96746f2e0205575382925d34e
 
 /*
 ** --------- CONVERT

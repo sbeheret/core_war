@@ -6,7 +6,13 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2018/11/29 11:07:54 by rfibigr          ###   ########.fr        #
+||||||| merged common ancestors
+#    Updated: 2018/11/28 18:12:44 by rfibigr          ###   ########.fr        #
+=======
+#    Updated: 2018/11/29 15:26:41 by sbeheret         ###   ########.fr        #
+>>>>>>> 4d38bbda37a746e96746f2e0205575382925d34e
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -45,11 +51,13 @@ SRC =		corewar.c			\
 			check_parameters2.c	\
 			initialization.c 	\
 			tools.c				\
+			tools2.c			\
 			exit.c				\
 			exit2.c				\
 			lib_list.c			\
 			convert.c			\
 			load_in_ram.c		\
+			get_action.c		\
 			free.c				\
 			instruction.c		\
 			instruction2.c		\
