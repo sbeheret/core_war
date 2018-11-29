@@ -6,13 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/11/29 18:18:18 by rfibigr          ###   ########.fr       */
-||||||| merged common ancestors
-/*   Updated: 2018/11/29 16:31:22 by rfibigr          ###   ########.fr       */
-=======
-/*   Updated: 2018/11/29 18:00:14 by sbeheret         ###   ########.fr       */
->>>>>>> 8e3e6e153e038330a4b6072bbc1a3bf738cc996c
+/*   Updated: 2018/11/29 18:41:17 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +95,7 @@ typedef	struct			s_op
 	int					direct_octect;
 }						t_op;
 
-typedef	void		(*t_instruction)(t_vm *);
+typedef	void		(*t_instruction)(t_vm *, t_processus *);
 
 /*
 ** -----------------------------------------------------------------------------
@@ -175,7 +169,7 @@ void				print_action(t_action action);
 ** --------- RUN VM
 */
 void				run_vm(t_vm *vm);
-void				run_instruction(t_vm *vm, int op_code);
+void				run_instruction(t_vm *vm, t_processus *processus, int op_code);
 void				execute_processus(t_vm *vm);
 
 /*

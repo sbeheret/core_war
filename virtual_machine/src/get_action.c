@@ -6,11 +6,12 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/29 17:51:27 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/29 18:35:24 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "op.c"
 
 void	get_action(t_vm *vm, t_processus *pcs)
 {

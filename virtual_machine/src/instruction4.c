@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 18:19:38 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 18:37:57 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	ft_aff(t_vm *vm, t_processus *processus)
 {
 	(void)processus;
-	ft_printf("nb_champ = %d", (*vm).nb_champs, t_processus *processus);
+	ft_printf("nb_champ = %d", (*vm).nb_champs);
 
 }

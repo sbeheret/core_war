@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 18:19:10 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 18:37:25 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	ft_live(t_vm *vm, t_processus *processus)
 	// ecrire dans VM last_alive
 	// (printf (champion name))
 
-	t_action action;
+	// t_action action;
+	//
+	// action = (*vm).processus->action;
+	// (*vm).last_alive =
 
-	action = (*vm).processus->action;
-	(*vm).last_alive =
-
+	(void)processus;
+	ft_printf("ft_ld = %d", (*vm).nb_champs);
 }
 
 void	ft_ld(t_vm *vm, t_processus *processus)

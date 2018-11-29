@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/11/29 17:59:58 by sbeheret         ###   ########.fr        #
+#    Updated: 2018/11/29 18:39:20 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -43,20 +43,21 @@ NAME = 		our_coreware
 SRC =		corewar.c			\
 			check_parameters.c	\
 			check_parameters2.c	\
+			convert.c			\
+			exit.c				\
+			exit2.c				\
+			free.c				\
+			get_action.c		\
 			initialization.c 	\
 			tools.c				\
 			tools2.c			\
-			exit.c				\
-			exit2.c				\
-			lib_list.c			\
-			convert.c			\
-			load_in_ram.c		\
-			get_action.c		\
-			free.c				\
 			instruction.c		\
 			instruction2.c		\
 			instruction3.c		\
 			instruction4.c		\
+			lib_list.c			\
+			load_in_ram.c		\
+			run_vm.c			\
 
 
 LIBNAME =	libft/libft.a \
