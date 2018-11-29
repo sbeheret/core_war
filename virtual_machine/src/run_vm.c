@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 16:03:27 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 17:25:46 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	execute_processus(t_vm *vm)
 
 	t_processus *processus;
 	processus = (*vm).processus;
-	//processus circulaire ?? si c'est le cas il faut break a un moment
+	// processus chaine lister null terminated
 	while (processus)
 	{
 		op_code = processus->action.op_code;
@@ -49,7 +49,6 @@ void	execute_processus(t_vm *vm)
 			if (op_code > 0 && op_code < 17)
 				run_instruction(vm, op_code);
 			get_action(vm, processus);
-			//changer le PC
 		}
 		processus->cycles_wait--;
 		processus = processus->next;

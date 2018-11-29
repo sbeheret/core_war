@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 16:31:22 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 18:18:18 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,22 +189,22 @@ int					circular(int i);
 /*
 ** --------- INSTRUCTION
 */
-void				ft_live(t_vm *vm);
-void				ft_ld(t_vm *vm);
-void				ft_st(t_vm *vm);
-void				ft_add(t_vm *vm);
-void				ft_sub(t_vm *vm);
-void				ft_and(t_vm *vm);
-void				ft_or(t_vm *vm);
-void				ft_xor(t_vm *vm);
-void				ft_zjump(t_vm *vm);
-void				ft_ldi(t_vm *vm);
-void				ft_sti(t_vm *vm);
-void				ft_fork(t_vm *vm);
-void				ft_lld(t_vm *vm);
-void				ft_lldi(t_vm *vm);
-void				ft_lfork(t_vm *vm);
-void				ft_aff(t_vm *vm);
+void				ft_live(t_vm *vm, t_processus *processus);
+void				ft_ld(t_vm *vm, t_processus *processus);
+void				ft_st(t_vm *vm, t_processus *processus);
+void				ft_add(t_vm *vm, t_processus *processus);
+void				ft_sub(t_vm *vm, t_processus *processus);
+void				ft_and(t_vm *vm, t_processus *processus);
+void				ft_or(t_vm *vm, t_processus *processus);
+void				ft_xor(t_vm *vm, t_processus *processus);
+void				ft_zjump(t_vm *vm, t_processus *processus);
+void				ft_ldi(t_vm *vm, t_processus *processus);
+void				ft_sti(t_vm *vm, t_processus *processus);
+void				ft_fork(t_vm *vm, t_processus *processus);
+void				ft_lld(t_vm *vm, t_processus *processus);
+void				ft_lldi(t_vm *vm, t_processus *processus);
+void				ft_lfork(t_vm *vm, t_processus *processus);
+void				ft_aff(t_vm *vm, t_processus *processus);
 
 /*
 ** --------- EXIT

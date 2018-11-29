@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:33:51 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 16:00:17 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 17:23:21 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	initialize_vm(&vm);
 	check_parameters(argc, argv, &vm);
 	load_champs(&vm);
-	get_action(&vm, vm.processus);
+	run_vm(&vm);
 	print_optab();
 	print_struct_vm(vm);
 //	print_ram(vm.ram);
