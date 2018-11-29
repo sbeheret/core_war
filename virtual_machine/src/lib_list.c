@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 13:19:03 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 18:39:52 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 15:27:53 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_champion	*new_champion(void)
 	return (new_elem);
 }
 
-t_processus		*new_processus(int p_number, int start)
+t_processus	*new_processus(int p_number, int start)
 {
 	t_processus	*new;
 
@@ -50,7 +50,7 @@ void		ft_push_back_chmp(t_champion **begin, t_champion *to_add)
 	}
 }
 
-void			push_front_pcs(t_processus **pcs, t_processus *new)
+void		push_front_pcs(t_processus **pcs, t_processus *new)
 {
 	t_processus	*tmp;
 

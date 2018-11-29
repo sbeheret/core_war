@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 18:17:56 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 15:44:06 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ typedef	struct			s_champion
 typedef struct			s_action
 {
 	int					op_code;
-	int					*args;
+	// int					*args;
+	int					args[4];
 	int					nb_arg;
-	int					*type;
+	// int					*type;
+	int					type[4];
 	int					size_read;
 }						t_action;
 
@@ -65,7 +67,7 @@ typedef struct			s_processus
 	int					*reg;
 	int					cycles_wait;
 	int					lives;
-	t_action			*action;
+	t_action			action;
 	struct s_processus	*next;
 }						t_processus;
 
@@ -95,8 +97,7 @@ typedef	struct			s_op
 	int					direct_octect;
 }						t_op;
 
-typedef	void		(*t_inst)(t_vm);
-
+typedef	void		(*t_instruction)(t_vm *);
 
 /*
 ** -----------------------------------------------------------------------------
@@ -132,6 +133,7 @@ void				give_start(t_champion *champ, int nb_champs);
 */
 void				check_parameters(int argc, char **argv, t_vm *vm);
 void				create_champion(char ***argv, t_champion **champion);
+void				create_process(t_champion **champions, t_processus **pcs);
 void				ft_assign_pnumber(char ***argv, t_champion **champion, t_champion **new_elem);
 unsigned char		*ft_read_champion(char *file, size_t *binary_len);
 void				check_binary(t_champion *champion);
@@ -146,10 +148,12 @@ void				initialize_processus(t_processus **pcs, int nb, int start);
 void				initialize_champion(t_champion **champion);
 
 /*
-** --------- TOOLS
+** --------- LIBS
 */
 t_champion			*new_champion(void);
+t_processus			*new_processus(int p_number, int start);
 void				ft_push_back_chmp(t_champion **begin, t_champion *to_add);
+void				push_front_pcs(t_processus **pcs, t_processus *new);
 int					ft_atoi_exit(char *s, char *parameter, char *file);
 
 /*
@@ -161,17 +165,26 @@ void				print_struct_vm(t_vm vm);
 void				print_optab(void);
 
 /*
+** --------- RUN VM
+*/
+void				run_vm(t_vm *vm);
+void				run_instruction(t_vm *vm, int op_code);
+void				execute_processus(t_vm *vm);
+
+/*
 ** --------- GET_ACTION
 */
-void				get_action(t_vm **vm, t_processus *pcs);
-void				args_action(unsigned char *ram, int PC, t_action *n);
-void				trad_encoding_byte(t_action *n, int enc_byte, int value);
+void				get_action(t_vm *vm, t_processus *processus);
+void				args_action(unsigned char *ram, int PC, t_action *action);
+void				trad_encoding_byte(t_action *action, int enc_byte, int value);
 
 /*
 ** --------- CONVERT
 */
 int					ft_octet_to_int(unsigned char **binary, int nb_octect);
+int					ft_octet_to_int2(unsigned char *binary, int nb_octect, int index);
 char				*ft_octet_to_char(unsigned char **binary, size_t lenght_max);
+int					circular(int i);
 
 /*
 ** --------- INSTRUCTION

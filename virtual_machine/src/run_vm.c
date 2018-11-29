@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/28 18:13:21 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 15:48:56 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 ** Fonction qui pour chaque cycle
 ** Parcourir les processus
 ** 	- Executer les processus si leur cycle d'attente est a 0
-		- Read optcode
 		- Decode instruction et parametre
 		- run intstruction
 **
@@ -24,48 +23,58 @@
 
 void	run_vm(t_vm *vm)
 {
+	//condition du while a changer
 	while ((*vm).CTD)
 	{
-		execute_processus((*vm).processus);
-		//do des trucs
+		execute_processus(vm);
+		//voir les bonnes conditions et variables a inc/decrementer
 		(*vm).cycles_ttx++;
 		(*vm).cycles_now++;
+		(*vm).CTD--;
 	}
 }
 
-void	execute_processus(t_processus *processus)
+void	execute_processus(t_vm *vm)
 {
-	// a voir si fonctionne ou envoyer l'adresse
-	while (*processus)
+	int		op_code;
+
+	t_processus *processus;
+	processus = (*vm).processus;
+	//processus circulaire ?? si c'est le cas il faut break a un moment
+	while (processus)
 	{
-		if ((*processus).cycles_wait == 0)
+		op_code = processus->action.op_code;
+		if (processus->cycles_wait == 0)
 		{
-			decode_instruction()
-			run_instruction()
+			if (op_code > 0 && op_code < 17)
+				run_instruction(vm, op_code);
+			get_action(vm, processus);
+			//changer le PC
 		}
-		(*processus) = (*processus)->next;
+		processus->cycles_wait--;
+		processus = processus->next;
 	}
 }
 
-void	run_instruction()
+void	run_instruction(t_vm *vm, int op_code)
 {
 	static t_instruction	instruction[] = {
-		{&ft_live},
-		{&ft_ld},
-		{&ft_st},
-		{&ft_add},
-		{&ft_sub},
-		{&ft_and},
-		{&ft_or},
-		{&ft_xor},
-		{&ft_zjump},
-		{&ft_ldi},
-		{&ft_sti},
-		{&ft_fork},
-		{&ft_lld},
-		{&ft_lldi},
-		{&ft_lfork},
-		{&ft_aff}
-   };
-
+		&ft_live,
+		&ft_ld,
+		&ft_st,
+		&ft_add,
+		&ft_sub,
+		&ft_and,
+		&ft_or,
+		&ft_xor,
+		&ft_zjump,
+		&ft_ldi,
+		&ft_sti,
+		&ft_fork,
+		&ft_lld,
+		&ft_lldi,
+		&ft_lfork,
+		&ft_aff
+	};
+	instruction[op_code - 1](vm);
 }
