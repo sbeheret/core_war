@@ -6,7 +6,7 @@
 /*   By: sbeheret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:52:03 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/29 15:17:22 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/29 17:49:37 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,18 @@ void	print_processus(t_processus *pcs)
 	}
 }
 
-void	print_action(t_action *act)
+void	print_action(t_action act)
 {
-	t_action	*tmp;
 	int			i;
 
 	i = -1;
-	if (act == NULL)
-		return ;
-	tmp = act;
 	ft_printf("----------ACTION-----------\n");
-	ft_printf("op_code = %d\n", tmp->op_code);
-	ft_printf("nb_args = %d\n", tmp->nb_arg);
-	while (++i < tmp->nb_arg)
-		ft_printf("argument %d = %d\n", i, tmp->args[i]);
-	ft_printf("4 types %d - %d - %d - %d\n", tmp->type[0], tmp->type[1],
-			tmp->type[2], tmp->type[3]);
-	ft_printf("size read = %d\n", tmp->size_read);
+	ft_printf("op_code = %d\n", act.op_code);
+	ft_printf("nb_args = %d\n", act.nb_arg);
+	while (++i < act.nb_arg)
+		ft_printf("argument %d = %d\n", i, act.args[i]);
+	ft_printf("4 types %d - %d - %d - %d\n", act.type[0], act.type[1],
+			act.type[2], act.type[3]);
+	ft_printf("size read = %d\n", act.size_read);
 	return ;
 }

@@ -6,7 +6,13 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/11/29 18:18:18 by rfibigr          ###   ########.fr       */
+||||||| merged common ancestors
+/*   Updated: 2018/11/29 16:31:22 by rfibigr          ###   ########.fr       */
+=======
+/*   Updated: 2018/11/29 18:00:14 by sbeheret         ###   ########.fr       */
+>>>>>>> 8e3e6e153e038330a4b6072bbc1a3bf738cc996c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +58,9 @@ typedef	struct			s_champion
 typedef struct			s_action
 {
 	int					op_code;
-	int					*args;
+	int					args[4];
 	int					nb_arg;
-	int					*type;
+	int					type[4];
 	int					size_read;
 }						t_action;
 
@@ -144,6 +150,7 @@ int					check_number(unsigned int	number, t_champion *champion);
 void				initialize_vm(t_vm *vm);
 void				initialize_processus(t_processus **pcs, int nb, int start);
 void				initialize_champion(t_champion **champion);
+void				initialize_action(t_processus *processus);
 
 /*
 ** --------- LIBS
@@ -162,7 +169,7 @@ void				print_memory(unsigned char *str, size_t size);
 void				print_struct_vm(t_vm vm);
 void				print_optab(void);
 void				print_processus(t_processus *pcs);
-void				print_action(t_action *action);
+void				print_action(t_action action);
 
 /*
 ** --------- RUN VM
