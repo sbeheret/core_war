@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 16:43:56 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:23:12 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,10 +186,17 @@ void				trad_encoding_byte(t_action *n, int enc_byte, int value);
 /*
 ** --------- CONVERT
 */
+int					ft_int_to_octet(unsigned char **binary, int value, int id);
 int					ft_octet_to_int(unsigned char **binary, int nb_octect);
+<<<<<<< HEAD
+int					ft_octet_to_int2(unsigned char *binary, int nb_octect,
+		int index);
+char				*ft_octet_to_char(unsigned char **binary, size_t lnght_mx);
+=======
 int					ft_octet_to_int2(unsigned char *binary, int nb_octect, int index);
 char				*ft_octet_to_char(unsigned char **binary, size_t lenght_max);
 void				ft_int_to_octet(unsigned char **binary, int value, int index);
+>>>>>>> dfcde0001c69572702ac0171aebbb9506df9749e
 int					circular(int i);
 
 /*
