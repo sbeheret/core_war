@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 16:03:27 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 18:41:19 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,22 @@ void	execute_processus(t_vm *vm)
 
 	t_processus *processus;
 	processus = (*vm).processus;
-	//processus circulaire ?? si c'est le cas il faut break a un moment
+	// processus chaine lister null terminated
 	while (processus)
 	{
 		op_code = processus->action.op_code;
 		if (processus->cycles_wait == 0)
 		{
 			if (op_code > 0 && op_code < 17)
-				run_instruction(vm, op_code);
+				run_instruction(vm, processus, op_code);
 			get_action(vm, processus);
-			//changer le PC
 		}
 		processus->cycles_wait--;
 		processus = processus->next;
 	}
 }
 
-void	run_instruction(t_vm *vm, int op_code)
+void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 {
 	static t_instruction	instruction[] = {
 		&ft_live,
@@ -76,5 +75,5 @@ void	run_instruction(t_vm *vm, int op_code)
 		&ft_lfork,
 		&ft_aff
 	};
-	instruction[op_code - 1](vm);
+	instruction[op_code - 1](vm, processus);
 }
