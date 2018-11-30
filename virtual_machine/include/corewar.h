@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 16:36:17 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 16:43:56 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef	struct			s_champion
 
 typedef struct			s_action
 {
+	int					pc;
 	int					op_code;
 	int					args[4];
 	int					nb_arg;
@@ -95,7 +96,7 @@ typedef	struct			s_op
 	int					cycle;
 	char				*comment;
 	int					encoding_byte;
-	int					direct_octect;
+	int					direct_octet;
 }						t_op;
 
 typedef	void		(*t_instruction)(t_vm *, t_processus *);
@@ -188,7 +189,7 @@ void				trad_encoding_byte(t_action *n, int enc_byte, int value);
 int					ft_octet_to_int(unsigned char **binary, int nb_octect);
 int					ft_octet_to_int2(unsigned char *binary, int nb_octect, int index);
 char				*ft_octet_to_char(unsigned char **binary, size_t lenght_max);
-void				ft_int_to_octet(char **binary, int value, int index);
+void				ft_int_to_octet(unsigned char **binary, int value, int index);
 int					circular(int i);
 
 /*

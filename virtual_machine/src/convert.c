@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 16:21:09 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 16:43:32 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_octet_to_char(unsigned char **binary, size_t lenght_max)
 // 	return(str);
 // }
 
-void	ft_int_to_octet(char **binary, int value, int index)
+void	ft_int_to_octet(unsigned char **binary, int value, int index)
 {
 	*binary[index] = value >> 24;
 	*binary[index + 1] = (value & 0x00FF0000) >> 16;
