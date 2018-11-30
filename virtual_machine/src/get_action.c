@@ -6,13 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/11/30 14:54:33 by rfibigr          ###   ########.fr       */
-||||||| merged common ancestors
-/*   Updated: 2018/11/30 12:40:21 by rfibigr          ###   ########.fr       */
-=======
-/*   Updated: 2018/11/30 16:23:16 by sbeheret         ###   ########.fr       */
->>>>>>> dc112dbe9deb5fe53f64181318020f01ed237c15
+/*   Updated: 2018/11/30 17:33:47 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

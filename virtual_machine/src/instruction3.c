@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 17:27:18 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:51:03 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_sti(t_vm *vm, t_processus *processus)
 		value2 = processus->reg[processus->action.args[2] - 1];
 	else
 		value2 = processus->action.args[2];
+	ft_printf("reg = %d, value1 + value2 = %d\n", processus->reg[processus->action.args[0]- 1], circular(value1 + value2));
 	ft_int_to_octet(&vm->ram, processus->reg[processus->action.args[0] - 1],
 			circular(value1 + value2));
 	// argments 1, 2 et 3
@@ -52,6 +53,7 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 
 void	ft_lld(t_vm *vm, t_processus *processus)
 {
+	(void)vm;
 	int		registre;
 
 	ft_printf("~~~LLD~~~\n");

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 12:44:39 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:42:10 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	execute_processus(t_vm *vm)
 		}
 		processus->cycles_wait--;
 		processus = processus->next;
-		print_processus((*vm).processus);
 	}
 }
 
@@ -77,5 +76,12 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 		&ft_lfork,
 		&ft_aff
 	};
+
+	ft_printf("BEFORE INSTRUCTION\n");
+	print_processus((*vm).processus);
 	instruction[op_code - 1](vm, processus);
+	ft_printf("AFTER INSTRUCTION\n");
+	print_processus((*vm).processus);
+	print_struct_vm(*vm);
+	print_ram((*vm).ram);
 }

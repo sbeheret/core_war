@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 16:43:32 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:32:29 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,12 @@ char	*ft_octet_to_char(unsigned char **binary, size_t lenght_max)
 	return (str);
 }
 
-// char 	*ft_int_to_octet(int value)
-// {
-// 	char	*str;
-//
-// 	if(!(str = (char *)malloc(4)))
-// 		ft_exit_malloc();
-// 	str[0] = value >> 24;
-// 	str[1] = (value & 0x00FF0000) >> 16;
-// 	str[2] = (value & 0x0000FF00) >> 8;
-// 	str[3] = value & 0x000000FF;
-// 	return(str);
-// }
-
-void	ft_int_to_octet(unsigned char **binary, int value, int index)
+void	ft_int_to_octet(unsigned char **binary, int value, int id)
 {
-	*binary[index] = value >> 24;
-	*binary[index + 1] = (value & 0x00FF0000) >> 16;
-	*binary[index + 2] = (value & 0x0000FF00) >> 8;
-	*binary[index + 3] = value & 0x000000FF;
+	*binary[id] = value >> 24;
+	*binary[id + 1] = (value & 0x00FF0000) >> 16;
+	*binary[id + 2] = (value & 0x0000FF00) >> 8;
+	*binary[id + 3] = value & 0x000000FF;
 }
 
 int		circular(int i)

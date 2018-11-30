@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 10:56:06 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:39:34 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,19 @@ void	print_struct_vm(t_vm vm)
 	ft_printf("cycle to die CTD = %d\n", vm.CTD);
 	ft_printf("cycle ttx = %d\n", vm.cycles_ttx);
 	ft_printf("cycle now = %d\n", vm.cycles_now);
-	ft_printf("----------CHAMPION LIST-----------\n");
-	while (tmp)
-	{
-		ft_printf("-----------\n");
-		ft_printf("name = %s\n",tmp->name);
-		ft_printf("comment = %s\n",tmp->comment);
-		ft_printf("file = %s\n",tmp->file);
-		ft_printf("p_number = %#X\n",tmp->p_number);
-		ft_printf("weight = %d\n",tmp->weight);
-		ft_printf("-----------\n");
-		tmp = tmp->next;
-	}
-	ft_printf("------END CHAMPION LIST-----------\n");
-	print_processus(vm.processus);
+	// ft_printf("----------CHAMPION LIST-----------\n");
+	// while (tmp)
+	// {
+	// 	ft_printf("-----------\n");
+	// 	ft_printf("name = %s\n",tmp->name);
+	// 	ft_printf("comment = %s\n",tmp->comment);
+	// 	ft_printf("file = %s\n",tmp->file);
+	// 	ft_printf("p_number = %#X\n",tmp->p_number);
+	// 	ft_printf("weight = %d\n",tmp->weight);
+	// 	ft_printf("-----------\n");
+	// 	tmp = tmp->next;
+	// }
+	// ft_printf("------END CHAMPION LIST-----------\n");
+	// print_processus(vm.processus);
 	ft_printf("\n============= END STRUC VM  =============\n");
 }
