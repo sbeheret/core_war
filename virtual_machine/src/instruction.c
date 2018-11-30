@@ -6,16 +6,9 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 16:25:06 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:07:38 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** TYPE
-** 1 registre
-** 2 direct
-** 3 indirect
-*/
 
 /*
 ** Faire dans get action les verifications des valeurs de registres
@@ -26,19 +19,13 @@
 
 void	ft_live(t_vm *vm, t_processus *processus)
 {
-	// adresse du nom du programme dans la ram
-	// ecrire dans processus lives
-	//		pour ca il me faut le processus
-	// ecrire dans VM last_alive
-	// (printf (champion name))
+	int	champion;
+	t_action		action;
 
-	// t_action action;
-	//
-	// action = (*vm).processus->action;j
-	// (*vm).last_alive =
-
+	action = processus->action;
+	champion = ft_octet_to_int2((*vm).ram, 4, action.pc + 1);
 	processus->lives++;
-	ft_printf("ft_ld = %d", (*vm).nb_champs);
+	(*vm).last_alive = champion;
 }
 
 void	ft_ld(t_vm *vm, t_processus *processus)
@@ -59,13 +46,13 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 	if (action.args[1] < 1 || action.args[1] > 16)
 		return;
 	//change carry
-	if (processus->reg[action.args[1] - 1] = (*vm).ram[action.pc + action.args[0]])
+	if ((processus->reg[action.args[1] - 1] = (*vm).ram[action.pc + action.args[0]]))
 		processus->carry = 1;
 }
 
 void	ft_st(t_vm *vm, t_processus *processus)
 {
-	// est-ce que les valeurs sont bien des int
+	// est-ce que les valeurs sont bien des int ou unsigned int
 	t_action		action;
 	int				arg1;
 	int				arg2;
@@ -78,7 +65,6 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	{
 		processus->reg[arg1] = processus->reg[arg2];
 		return;
-
 	}
 	//get action ?
 	if (action.nb_arg != 2 || action.type[0] != REG || action.type[1] == DIR)
@@ -89,39 +75,48 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	if (action.type[1] == REG && (arg2 < 1 || arg2 > 16))
 		return;
 	ft_int_to_octet(&(*vm).ram, arg1, arg2);
-
-
-
-	// les deux parametre dans actions
-
-
-	// param 2 = registre [x]
-
 }
 
 void	ft_add(t_vm *vm, t_processus *processus)
 {
-	t_action action;
+	(void)vm;
+	t_action		action;
+	int				arg1;
+	int				arg2;
+	int				arg3;
+
 
 	action = processus->action;
-	if (action.nb_arg != 2 || action.type[0] == 1 || action.type[1] != 1)
+	arg1 = action.args[0];
+	arg2 = action.args[1];
+	arg3 = action.args[2];
+	if (action.nb_arg != 3 || action.type[0] != REG || action.type[1] != REG ||
+	action.type[2] != REG)
 		return;
-	// recuperer 3 registres
-	// le carry
-
-	// registre 3 =registre 1 + registre 2
-
+	if (arg1 < 1 || arg2 < 1 || arg3 < 1 || arg1 > 16 || arg2 > 16 || arg3 > 16)
+		return;
+	if ((processus->reg[arg3] = processus->reg[arg1] + processus->reg[arg2]))
+		processus->carry = 1;
 }
 
 void	ft_sub(t_vm *vm, t_processus *processus)
 {
-	t_action action;
+	(void)vm;
+	t_action		action;
+	int				arg1;
+	int				arg2;
+	int				arg3;
+
 
 	action = processus->action;
-	if (action.nb_arg != 2 || action.type[0] == 1 || action.type[1] != 1)
+	arg1 = action.args[0];
+	arg2 = action.args[1];
+	arg3 = action.args[2];
+	if (action.nb_arg != 3 || action.type[0] != REG || action.type[1] != REG ||
+	action.type[2] != REG)
 		return;
-	// recuperer 3 registres
-	// le carry
-
-	// registre 3 =registre 1 - registre 2
+	if (arg1 < 1 || arg2 < 1 || arg3 < 1 || arg1 > 16 || arg2 > 16 || arg3 > 16)
+		return;
+	if (!(processus->reg[arg3] = processus->reg[arg1] + processus->reg[arg2]))
+		processus->carry = 1;
 }
