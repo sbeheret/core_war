@@ -82,13 +82,11 @@ void	is_op_code(t_data *d, int y, int len, int skip)
 	add_to_label_list_end(d, lb);
 }
 
-void		get_labels(t_data *d)
+void		get_labels(t_data *d, int y)
 {
-	int	y;
 	int	len;
 	int	skip;
 
-	y = 2;
 	skip = y;
 	d->op = get_op_tab();
 	while (d->tab[y])
@@ -117,6 +115,26 @@ void		get_labels(t_data *d)
 	show_labels(d); //tmp
 }
 
+void	show_op_param_types(t_op *op) //tmp
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	while (op[i].id < 17)
+	{
+		n = 0;
+		printf("%s :\t", op[i].name);
+		while (n < op[i].params_nb)
+		{
+			printf("%i ", op[i].params_types[n]);
+			n++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
 void show_labels(t_data *d) //tmp
 {
     t_labels *tmp;
@@ -142,4 +160,5 @@ void show_labels(t_data *d) //tmp
 		tmp->position, d->op[tmp->op_nb - 1].encoded_byte, tmp->bytes);
 		tmp = tmp->next;
     }
+	//show_op_param_types(d->op);
 }

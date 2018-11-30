@@ -76,7 +76,7 @@ void			get_data(int fd)
 		printf("%s\n", d->tab[i]);
 		i++;
 	}
-	get_labels(d);
+	get_labels(d, 2);
 //	free_labels(d);
 	free_data(d->tab, data);
 }

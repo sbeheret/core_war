@@ -41,6 +41,17 @@ void    error_args(char *s)
     exit (0);
 }
 
+void    error_arg_type(char *arg, char *op_code)
+{
+    int    i;
+
+    i = 0;
+    ft_printf("\033[31mFor [%s] the argument [%s] ", op_code, arg);
+    ft_putstr("has an incompatible type\033[0;m\n");
+    //free_all
+    exit (0);
+}
+
 void    error_label(char *s)
 {
     int    i;

@@ -1,4 +1,4 @@
 .name "some name"
 .comment "some comments"
 
-live: ldi %1, %2, r1
+live: and %1, r2, r1
