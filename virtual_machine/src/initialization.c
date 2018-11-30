@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 17:47:24 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/30 16:21:10 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	initialize_action(t_processus *processus)
 	processus->action.args[3] = 0;
 	processus->action.nb_arg = 0;
 	processus->action.size_read = 0;
+	processus->action.pc = 0;
 	processus->action.type[0] = 0;
 	processus->action.type[1] = 0;
 	processus->action.type[2] = 0;

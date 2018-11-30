@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 18:41:17 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 15:48:43 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef	struct			s_champion
 
 typedef struct			s_action
 {
+	int					pc;
 	int					op_code;
 	int					args[4];
 	int					nb_arg;
@@ -92,7 +93,7 @@ typedef	struct			s_op
 	int					cycle;
 	char				*comment;
 	int					encoding_byte;
-	int					direct_octect;
+	int					direct_octet;
 }						t_op;
 
 typedef	void		(*t_instruction)(t_vm *, t_processus *);

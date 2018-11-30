@@ -6,17 +6,18 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/30 12:40:21 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 16:23:16 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "op.c"
 
-void	get_action(t_vm *vm, t_processus *pcs)
+void		get_action(t_vm *vm, t_processus *pcs)
 {
 	// ft_printf("here !\n");
 	initialize_action(pcs);
+	pcs->action.pc = pcs->PC;
 	pcs->action.op_code = vm->ram[circular(pcs->PC)];
 	if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
 	{
@@ -34,7 +35,17 @@ void	get_action(t_vm *vm, t_processus *pcs)
 //		JUMP JUMP JUMP JUMP
 }
 
-void	args_action(unsigned char *ram, int PC, t_action *action)
+static int	size_argument(int type, int direct_octet)
+{
+	if (type == 3 || (type == 2 && direct_octet))
+		return (2);
+	else if (type == 2)
+		return (4);
+	else
+		return (1);
+}
+
+void		args_action(unsigned char *ram, int PC, t_action *action)
 {
 	int		i;
 	int		i_ram;
@@ -49,14 +60,8 @@ void	args_action(unsigned char *ram, int PC, t_action *action)
 	i_ram = circular(PC + enc_byte + 1);
 	while (i < action->nb_arg)
 	{
-
-		if (action->type[i] == 3 || (action->type[i] == 2 &&
-			op_tab[action->op_code - 1].direct_octect))
-			size = 2;
-		else if (action->type[i] == 2)
-			size = 4;
-		else
-			size = 1;
+		size = size_argument(action->args[i],
+				op_tab[action->args[i] - 1].direct_octet);
 		action->args[i] = size == 1 ? ram[i_ram] : ft_octet_to_int2(ram, size,
 				i_ram);
 		if (action->type[i] == 3)
@@ -67,7 +72,7 @@ void	args_action(unsigned char *ram, int PC, t_action *action)
 	}
 }
 
-void	trad_encoding_byte(t_action *action, int enc_byte, int value)
+void		trad_encoding_byte(t_action *action, int enc_byte, int value)
 {
 	if (!enc_byte)
 	{
