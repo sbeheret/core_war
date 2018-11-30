@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 18:41:19 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 12:44:39 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	execute_processus(t_vm *vm)
 	// processus chaine lister null terminated
 	while (processus)
 	{
+		usleep(500000);
 		op_code = processus->action.op_code;
 		if (processus->cycles_wait == 0)
 		{
@@ -52,6 +53,7 @@ void	execute_processus(t_vm *vm)
 		}
 		processus->cycles_wait--;
 		processus = processus->next;
+		print_processus((*vm).processus);
 	}
 }
 

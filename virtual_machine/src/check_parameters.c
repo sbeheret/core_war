@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 11:08:25 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 11:27:55 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 		if ((*vm).nb_champs > 4)
 			ft_exit_toomanychamp();
 	}
-	create_process(&(*vm).champion, &(*vm).processus);
 }
 
 /*

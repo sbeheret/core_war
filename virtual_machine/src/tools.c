@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 18:36:40 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 10:56:06 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ void	print_struct_vm(t_vm vm)
 	ft_printf("\n=============== STRUCT VM ===============\n");
 	ft_printf("flag_dump = %d\n", vm.flag_dump);
 	ft_printf("dump_cycle = %d\n", vm.dump_cycle);
+	ft_printf("last_alive = %#.6X\n", vm.last_alive);
+	ft_printf("cycle to die CTD = %d\n", vm.CTD);
+	ft_printf("cycle ttx = %d\n", vm.cycles_ttx);
+	ft_printf("cycle now = %d\n", vm.cycles_now);
 	ft_printf("----------CHAMPION LIST-----------\n");
 	while (tmp)
 	{
