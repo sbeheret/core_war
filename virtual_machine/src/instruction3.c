@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 16:21:38 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/30 17:25:05 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,15 @@ void	ft_sti(t_vm *vm, t_processus *processus)
 
 void	ft_fork(t_vm *vm, t_processus *processus)
 {
-	(void)processus;
-	ft_printf("nb_champ = %d", (*vm).nb_champs);
+	t_processus *copy;
+	int	i;
 
+	copy = new_processus(0, processus->PC % IDX_MOD);
+	i = -1;
+	while (++i <= 15)
+		copy->reg[i] = processus->reg[i];
+	copy->carry = processus->carry;
+	push_front_pcs(&(*vm).processus, copy);
 }
 
 void	ft_lld(t_vm *vm, t_processus *processus)
@@ -64,7 +70,13 @@ void	ft_lldi(t_vm *vm, t_processus *processus)
 
 void	ft_lfork(t_vm *vm, t_processus *processus)
 {
-	(void)processus;
-	ft_printf("nb_champ = %d", (*vm).nb_champs);
+	t_processus *copy;
+	int	i;
 
+	copy = new_processus(0, processus->PC);
+	i = -1;
+	while (++i <= 15)
+		copy->reg[i] = processus->reg[i];
+	copy->carry = processus->carry;
+	push_front_pcs(&(*vm).processus, copy);
 }
