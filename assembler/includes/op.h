@@ -80,7 +80,7 @@ typedef struct		s_op
 	int		cycles;
 	char	description[50];
 	int		encoded_byte;
-	int		instructions_byte;
+	int		dir_as_ind;
 }					t_op;
 
 #endif

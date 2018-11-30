@@ -21,7 +21,7 @@ static int    ind(char c)
     return (1);
 }
 
-void    compliance_check(t_data *d)
+int    compliance_check(t_data *d)
 {
     t_labels    *l;
     int         i;
@@ -35,35 +35,36 @@ void    compliance_check(t_data *d)
             if (d->op[l->op_nb - 1].params_types[i] == T_REG)
             {
                 if (!reg(l->args[i][0]))
-                    error_arg_type(l->args[i], l->op_code);
+                    return (error_arg_type(l->args[i], l->op_code));
             }
             else if (d->op[l->op_nb - 1].params_types[i] == T_DIR)
             {
                 if (!dir(l->args[i][0]))
-                    error_arg_type(l->args[i], l->op_code);
+                    return (error_arg_type(l->args[i], l->op_code));
             }
             else if (d->op[l->op_nb - 1].params_types[i] == T_IND)
             {
                 if (!ind(l->args[i][0]))
-                    error_arg_type(l->args[i], l->op_code);
+                    return (error_arg_type(l->args[i], l->op_code));
             }
             else if (d->op[l->op_nb - 1].params_types[i] == T_REG + T_DIR)
             {
                 if (!reg(l->args[i][0]) && !dir(l->args[i][0]))
-                    error_arg_type(l->args[i], l->op_code);
+                    return (error_arg_type(l->args[i], l->op_code));
             }
             else if (d->op[l->op_nb - 1].params_types[i] == T_REG + T_IND)
             {
                 if (!reg(l->args[i][0]) && !ind(l->args[i][0]))
-                    error_arg_type(l->args[i], l->op_code);
+                    return (error_arg_type(l->args[i], l->op_code));
             }
             else if (d->op[l->op_nb - 1].params_types[i] == T_DIR + T_IND)
             {
                 if (!dir(l->args[i][0]) && !ind(l->args[i][0]))
-                    error_arg_type(l->args[i], l->op_code);
+                    return (error_arg_type(l->args[i], l->op_code));
             }
             i++;
         }
         l = l->next;
     }
+    return (1);
 }

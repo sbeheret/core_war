@@ -14,7 +14,7 @@ static void		add_to_label_list_end(t_data *d, t_labels *label)
 	}
 }
 
-static t_labels	*make_label(char **line, int len, int y, int l)
+static t_labels	*make_label(char **line, int len, int y)
 {
 	t_labels		*label;
 
@@ -23,7 +23,6 @@ static t_labels	*make_label(char **line, int len, int y, int l)
     	label->name = strndup(line[0], len);
 	else
 		label->name = 0;
-	label->args_start_line = l;
 	label->position = y;
 	label->bytes = 1;
 	return (label);
@@ -45,44 +44,51 @@ int	find_args_line(char **tab, int y, int x)
 	return (y);
 }
 
-void		is_label(t_data *d, int *y, int len, int skip)
+int		is_label(t_data *d, int *y, int len, int skip)
 {
 	int			l;
 	t_labels	*lb;
 
 	if (d->tab[*y][len + 1] && d->tab[*y][len + 1] != ' ' && d->tab[*y][len + 1] != '\t')
-		error_char(d->tab[*y][len + 1]);
+		return (error_char(d->tab[*y][len + 1]));
 	l = find_args_line(d->tab, *y, len + 1);
-	lb = make_label(d->tab + *y, len, *y - skip, l - *y);
+	lb = make_label(d->tab + *y, len, *y - skip);
 	if (len > 0 && l - *y == 0)
 	{
 		len++;
+		skip = len;
 		len += find_op_code(lb, d->tab[l] + len, d->op);
-		lb->args = ft_strsplit(d->tab[l] + len, SEPARATOR_CHAR);
-		trim_spaces(lb->args);
+		if (len - skip == 0)
+			return (0);
 	}
 	else
 	{
 		len = find_op_code(lb, d->tab[l], d->op);
-		lb->args = ft_strsplit(d->tab[l] + len, SEPARATOR_CHAR);
-		trim_spaces(lb->args);
+		if (len == 0)
+			return (0);
 	}
+	lb->args = ft_strsplit(d->tab[l] + len, SEPARATOR_CHAR);
+	trim_spaces(lb->args);
 	add_to_label_list_end(d, lb);
 	*y = l;
+	return (1);
 }
 
-void	is_op_code(t_data *d, int y, int len, int skip)
+int	is_op_code(t_data *d, int y, int len, int skip)
 {
 	t_labels	*lb;
 
-	lb = make_label(d->tab + y, 0, y - skip, 0);
+	lb = make_label(d->tab + y, 0, y - skip);
 	len = find_op_code(lb, d->tab[y], d->op);
+	if (len == 0)
+		return (0);
 	lb->args = ft_strsplit(d->tab[y] + len, SEPARATOR_CHAR);
 	trim_spaces(lb->args);
 	add_to_label_list_end(d, lb);
+	return (1);
 }
 
-void		get_labels(t_data *d, int y)
+int		get_labels(t_data *d, int y)
 {
 	int	len;
 	int	skip;
@@ -95,24 +101,31 @@ void		get_labels(t_data *d, int y)
 		while (ft_strchr(LABEL_CHARS, d->tab[y][len]))
             len++;
 		if (d->tab[y][len] == LABEL_CHAR)
-			is_label(d, &y, len, skip);
+		{
+			if (!is_label(d, &y, len, skip))
+				return (0);
+		}
 		else if (d->tab[y][0] == COMMENT_CHAR ||
 			ft_strstr(d->tab[y], NAME_CMD_STRING) ||
 			ft_strstr(d->tab[y], COMMENT_CMD_STRING))
 			skip++;
 		else if (d->tab[y][len] == ' ')
-			is_op_code(d, y, len, skip);
+		{
+			if (!is_op_code(d, y, len, skip))
+				return (0);
+		}
 		else
-			error_char(d->tab[y][len]);
+			return (error_char(d->tab[y][len]));
 		y++;
 	}
-	general_check(d);
-	compliance_check(d);
+	if (!general_check(d) || !compliance_check(d))
+		return (0);
 	add_bytes(d);
 	//printf("param %i\n", (int)d->op[5].params_types[0]);
 	//printf("\nuntil label (in hex): %x\n",\
 	//calc_bytes_till_label(d->first_label, d->first_label, 1));
 	show_labels(d); //tmp
+	return (1);
 }
 
 void	show_op_param_types(t_op *op) //tmp
@@ -160,5 +173,6 @@ void show_labels(t_data *d) //tmp
 		tmp->position, d->op[tmp->op_nb - 1].encoded_byte, tmp->bytes);
 		tmp = tmp->next;
     }
+	printf("total number of bytes : %zu\n", d->total_bytes);
 	//show_op_param_types(d->op);
 }

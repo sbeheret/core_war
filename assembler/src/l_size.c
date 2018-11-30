@@ -52,7 +52,7 @@ static void    and_or_xor_lld_aff(t_labels *l)
     else if (l->op_nb == AFF) //T_REG
         l->bytes += 1;
 }
-//-> add diff for lldi
+//lldi - Same as ´ldi´ but we do not use ´% IND_MOD´ with our first parameter ???????
 static void    ldi_lldi_sti(t_labels *l)
 {
     if (l->op_nb == LDI || l->op_nb == LLDI) //dir is treated as ind
@@ -89,7 +89,6 @@ void    add_bytes(t_data *d)
     while (l)
     {
         l->bytes += d->op[l->op_nb - 1].encoded_byte;
-        //l->bytes += d->op[l->op_nb].instructions_byte;
         if ((l->op_nb >= LIVE && l->op_nb <= SUB) ||
             l->op_nb == ZJMP || l->op_nb == FORK || l->op_nb == LFORK)
             live_ld_st_add_sub_zjmp_fork_lfork(l);
@@ -98,6 +97,7 @@ void    add_bytes(t_data *d)
             and_or_xor_lld_aff(l);
         else if (l->op_nb == LDI || l->op_nb == LLDI || l->op_nb == STI)
             ldi_lldi_sti(l);
+        d->total_bytes += l->bytes;
         l = l->next;
     }
 }

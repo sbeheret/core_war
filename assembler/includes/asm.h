@@ -47,7 +47,6 @@ typedef struct			s_labels
 	int					op_nb;
 	char 				**args;
     int				    position;
-    int                 args_start_line;
 	int					bytes;
 	struct s_labels		*next;
 }						t_labels;
@@ -58,6 +57,7 @@ typedef struct			s_data
     t_labels			*first_label;
 	t_labels			*last_label;
 	t_op				*op;
+	size_t				total_bytes;
 }						t_data;
 
 
@@ -67,7 +67,7 @@ unsigned int		hexatoi(const char *ptr);
 char			*strjoinappend(char *s1, char *s2);
 void			get_data(int fd);
 
-void		get_labels(t_data *d, int y);
+int			get_labels(t_data *d, int y);
 void    	check_label(char *s);
 void 		trim_spaces(char **tab);
 void        show_labels(t_data *d);
@@ -75,16 +75,16 @@ void        show_labels(t_data *d);
 t_op		*get_op_tab(void);
 int    		find_op_code(t_labels *l, char *s, t_op *op);
 int			find_op_nb(char *s);
-void    	general_check(t_data *d);
-void    	compliance_check(t_data *d);
-void    	add_bytes(t_data *d);
+int	    	general_check(t_data *d);
+int	    	compliance_check(t_data *d);
+void 	  	add_bytes(t_data *d);
 
 int    		calc_bytes_till_label(t_labels *first_label, t_labels *current_l, int a);
 
-void    	error_char(char c);
-void   	 	error_op_code(char *s);
-void    	error_args(char *s);
-void    	error_arg_type(char *s, char *op_code);
-void    	error_label(char *s);
-void    	error_param_nb(char *op_code, int expected, int got);
+int    	error_char(char c);
+int   	error_op_code(char *s);
+int    	error_args(char *s);
+int    	error_arg_type(char *s, char *op_code);
+int    	error_label(char *s);
+int    	error_param_nb(char *op_code, int expected, int got);
 #endif

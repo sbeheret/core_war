@@ -33,7 +33,7 @@ static int   args_error(char **s)
     {
         x = 0;
         if (s[y][x] == 'r' && (ft_atoi(s[y] + 1) > REG_NUMBER || s[y][1] == '0'))
-            error_args(s[y]);
+            return (error_args(s[y]) - 2);
         if (s[y][x] == DIRECT_CHAR || s[y][x] == 'r')
             x++;
         if (s[y][x] == LABEL_CHAR)
@@ -41,7 +41,7 @@ static int   args_error(char **s)
         while (s[y][x])
         {
             if (!ft_isdigit(s[y][x]))
-                    error_args(s[y]);
+                    return (error_args(s[y]) - 2);
             x++;
         }
         y++;
@@ -49,7 +49,7 @@ static int   args_error(char **s)
     return (-1);
 }
 
-static void    args_nb_check(t_labels *l, t_op *op)
+static int    args_nb_check(t_labels *l, t_op *op)
 {
     int    i;
 
@@ -59,26 +59,31 @@ static void    args_nb_check(t_labels *l, t_op *op)
         while (l->args[i])
             i++;
         if (i != op[l->op_nb - 1].params_nb)
-            error_param_nb(l->op_code, op[l->op_nb - 1].params_nb, i);
+            return (error_param_nb(l->op_code, op[l->op_nb - 1].params_nb, i));
         l = l->next;
     }
+    return (1);
 }
 
-void    general_check(t_data *d)
+int    general_check(t_data *d)
 {
     int         a;
     t_labels    *l;
 
     l = d->first_label;
-    args_nb_check(d->first_label, d->op);
+    if (!args_nb_check(d->first_label, d->op))
+        return (0);
     while (l)
     {
         a = args_error(l->args);
-        if (a >= 0)
+        if (a == -2)
+            return (0);
+        else if (a >= 0)
         {
             if (label_error(d->first_label, l->args[a]))
-                error_label(l->args[a]);
+                return (error_label(l->args[a]));
         }
         l = l->next;
     }
+    return (1);
 }

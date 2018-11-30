@@ -1,9 +1,4 @@
 #include "../includes/asm.h"
-//DIRECT_CHAR
-//SEPARATOR_CHAR
-//params_nb
-//params_types T_REG T_DIR T_LAB
-//REG_NUMBER
 
 static int    l(t_labels *lb, char *str, int i, t_op *op)
 {
@@ -43,8 +38,7 @@ static int    l(t_labels *lb, char *str, int i, t_op *op)
         lb->op_nb = op[14].id;
         return (i + 5);
     }
-    else
-        error_op_code(str + i);
+    error_op_code(str + i);
     return (0);
 }
 
@@ -68,8 +62,7 @@ static int    s(t_labels *lb, char *str, int i, t_op *op)
         lb->op_nb = op[10].id;
         return (i + 3);
     }
-    else
-        error_op_code(str + i);
+    error_op_code(str + i);
     return (0);
 }
 
@@ -93,8 +86,7 @@ static int    a(t_labels *lb, char *str, int i, t_op *op)
         lb->op_nb = op[15].id;
         return (i + 3);
     }
-    else
-        error_op_code(str + i);
+    error_op_code(str + i);
     return (0);
 }
 
@@ -108,8 +100,6 @@ static int    o_x_z(t_labels *lb, char *str, int i, t_op *op)
             lb->op_nb = op[6].id;
             return (i + 2);
         }
-        else
-            error_op_code(str + i);
     }
     else if (str[i] == 'x')
     {
@@ -119,9 +109,6 @@ static int    o_x_z(t_labels *lb, char *str, int i, t_op *op)
             lb->op_nb = op[7].id;
             return (i + 3);
         }
-        else
-            error_op_code(str + i);
-
     }
     else if (str[i] == 'z')
     {
@@ -131,9 +118,8 @@ static int    o_x_z(t_labels *lb, char *str, int i, t_op *op)
             lb->op_nb = op[8].id;
             return (i + 4);
         }
-        else
-            error_op_code(str + i);
     }
+    error_op_code(str + i);
     return (0);
 }
 
@@ -152,7 +138,6 @@ int    find_op_code(t_labels *lb, char *str, t_op *op)
         return (a(lb, str, i, op));
     else if (str[i] == 'o' || str[i] == 'x' || str[i] == 'z')
         return (o_x_z(lb, str, i, op));
-    else
-        error_op_code(str + i);
+    error_op_code(str + i);
     return (0);
 }
