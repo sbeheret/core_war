@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 16:25:06 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 16:36:28 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	{
 		processus->reg[arg1] = processus->reg[arg2];
 		return;
-
 	}
 	//get action ?
 	if (action.nb_arg != 2 || action.type[0] != REG || action.type[1] == DIR)
