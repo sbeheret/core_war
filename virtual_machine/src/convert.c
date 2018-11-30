@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 12:26:07 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 16:21:09 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,27 @@ char	*ft_octet_to_char(unsigned char **binary, size_t lenght_max)
 		*binary = *binary + 1;
 	}
 	return (str);
+}
+
+// char 	*ft_int_to_octet(int value)
+// {
+// 	char	*str;
+//
+// 	if(!(str = (char *)malloc(4)))
+// 		ft_exit_malloc();
+// 	str[0] = value >> 24;
+// 	str[1] = (value & 0x00FF0000) >> 16;
+// 	str[2] = (value & 0x0000FF00) >> 8;
+// 	str[3] = value & 0x000000FF;
+// 	return(str);
+// }
+
+void	ft_int_to_octet(char **binary, int value, int index)
+{
+	*binary[index] = value >> 24;
+	*binary[index + 1] = (value & 0x00FF0000) >> 16;
+	*binary[index + 2] = (value & 0x0000FF00) >> 8;
+	*binary[index + 3] = value & 0x000000FF;
 }
 
 int		circular(int i)
