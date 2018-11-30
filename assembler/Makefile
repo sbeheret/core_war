@@ -6,7 +6,7 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/11/28 17:42:21 by esouza           ###   ########.fr        #
+#    Updated: 2018/11/30 12:33:10 by esouza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS =	main.c \
 		hexatob.c \
 		get_data.c \
 		error.c \
+		check_words.c \
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 

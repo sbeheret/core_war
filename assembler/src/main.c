@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:01:16 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/28 17:40:57 by esouza           ###   ########.fr       */
+/*   Updated: 2018/11/30 12:26:21 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,47 +35,16 @@ static void		print_error_open(void)
 	exit(EXIT_FAILURE);
 }
 
-static void		stocor(char name[], char **argv)
-{
-	short	i;
-	short	j;
-	char	*p;
-
-	i = 0;
-	j = 0;
-	p = ".cor";
-	if (ft_strlen(argv[1]) > (FILE_NAME_LENGTH - 5))
-	{
-		ft_putstr("File name too long\n");
-		exit(EXIT_FAILURE);
-	}
-	while (argv[1][i] != '\0' && i < (FILE_NAME_LENGTH - 5))
-	{
-		name[i] = argv[1][i];
-		i++;
-	}
-	i -= 2;
-	while (p[j])
-	{
-		name[i] = p[j];
-		i++;
-		j++;
-	}
-	name[i] = '\0';
-}
-
 int				main(int argc, char **argv)
 {
 	int		fd;
 	int		fd2;
-	char	name[PROG_NAME_LENGTH + 5];
 
 	check_args(argc, argv);
-	stocor(name, argv);
 	if (((fd = open(argv[1], O_NOFOLLOW | O_RDWR)) < 1))
 		print_error_open();
-	fd2 = open(name, O_RDWR | O_APPEND |  O_CREAT, RIGHTS);
-	get_data(fd, fd2);
+	fd2 = 0;
+	get_data(argv, fd, fd2);
 	close(fd);
 	close(fd2);
 //	while (1) ;

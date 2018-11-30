@@ -6,28 +6,18 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/29 12:23:59 by esouza           ###   ########.fr       */
+/*   Updated: 2018/11/30 12:26:34 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int				check_end(char **tab, int col, int row)
-{
-	while (tab[col][++row])
-	{
-		if (tab[col][row] > 32 && tab[col][row] < 127)
-			return (1);
-	}
-	return (0);
-}
-
-static int				parse_name(t_header *h, char **tab, int frst)
+static int			parse_name(t_header *h, char **tab, int frst)
 {
 	int			i;
 	int			j;
 	int			quotes;
-	
+
 	i = 5;
 	j = 0;
 	while (tab[frst][i] == ' ' || tab[frst][i] == '\t')
@@ -51,7 +41,7 @@ static int				parse_name(t_header *h, char **tab, int frst)
 	return (frst);
 }
 
-static int	parse_comment(t_header *h, char **tab, int sec)
+static int			parse_comment(t_header *h, char **tab, int sec)
 {
 	int			i;
 	int			j;
@@ -63,7 +53,7 @@ static int	parse_comment(t_header *h, char **tab, int sec)
 		i++;
 	(tab[sec][i] != '\"') ? err_dots(sec, i, tab, h) : i++;
 	quotes = 1;
-	while (tab[sec] && tab[sec][i]  && j <= COMMENT_LENGTH)
+	while (tab[sec] && tab[sec][i] && j <= COMMENT_LENGTH)
 	{
 		(tab[sec][i] == '\"') ? quotes++ : quotes;
 		if (quotes == 2)
@@ -81,7 +71,7 @@ static int	parse_comment(t_header *h, char **tab, int sec)
 	return (sec);
 }
 
-static int		name_comment(t_header *h, char **tab, int frst, int sec)
+static int			name_comment(t_header *h, char **tab, int frst, int sec)
 {
 	int			position;
 
@@ -100,12 +90,12 @@ static int		name_comment(t_header *h, char **tab, int frst, int sec)
 			err_dots(sec, sec, tab, h);
 		position = parse_name(h, tab, sec);
 	}
-	else 
+	else
 		err_dots(frst, 1, tab, h);
 	return (position);
 }
 
-static int 			parse_name_comment(t_header *h, char **tab)
+static int			parse_name_comment(t_header *h, char **tab)
 {
 	int			idx;
 	int			start_dot;
@@ -132,23 +122,17 @@ static int 			parse_name_comment(t_header *h, char **tab)
 	return (name_comment(h, tab, first, second));
 }
 
-int			set_header(int fd2, char **tab)
+int					set_header(char **tab, t_header *header)
 {
 	int			position;
-	t_header	*header;
 
 	position = 0;
-	if (!(header = (t_header *)malloc(sizeof(t_header))))
-		exit(EXIT_FAILURE); // missing function to free **tab here
 	ft_bzero(header->prog_name, PROG_NAME_LENGTH);
 	ft_bzero(header->comment, COMMENT_LENGTH);
-	ft_bzero(header->pad, T_IND);
-	ft_bzero(header->pad2, T_IND);
+	ft_bzero(header->pad, 4);
+	ft_bzero(header->pad2, 4);
 	header->magic = swap_uint32(COREWAR_EXEC_MAGIC);
-	header->prog_size = 0x2AA; // not right 
+	header->prog_size = swap_uint32(COREWAR_EXEC_MAGIC);
 	position = parse_name_comment(header, tab);
-	write(fd2, header, sizeof(t_header));
-	free(header);
-	header = NULL;
 	return (position);
 }
