@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 14:30:02 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/11/30 17:19:54 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,9 @@ void	ft_xor(t_vm *vm, t_processus *processus)
 
 void	ft_zjump(t_vm *vm, t_processus *processus)
 {
-	(void)processus;
-	// recuperer l'index
-	// changer la valeur de PC si carry = 1, sinon PC + 1
-	ft_printf("nb_champ = %d", (*vm).nb_champs);
-
+	if (processus->carry == 1)
+		processus->PC = circular(processus->action.pc
+				+ processus->action.args[0]);
 }
 
 void	ft_ldi(t_vm *vm, t_processus *processus)
