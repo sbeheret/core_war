@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/11/29 18:39:20 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/12/03 17:36:18 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -46,6 +46,7 @@ SRC =		corewar.c			\
 			convert.c			\
 			exit.c				\
 			exit2.c				\
+			exit3.c				\
 			free.c				\
 			get_action.c		\
 			initialization.c 	\

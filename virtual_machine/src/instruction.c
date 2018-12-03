@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 15:56:12 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 18:12:01 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void	ft_live(t_vm *vm, t_processus *processus)
 
 	ft_printf("~~~LIVE~~~\n");
 	action = processus->action;
-	ft_printf("action.pc = %d\n", action.pc);
-	champion = ft_octet_to_int2((*vm).ram, 4, action.pc + 1);
+	// ft_printf("action.pc = %d\n", action.pc);
+	champion = ft_octet_to_int2((*vm).ram, 4, circular(action.pc + 1));
+	//verifier si on ne doit faire ca que sur un numero de joueur valide
+	//"un processus dit que le joueur x(nom_champion) est en vie"
 	processus->lives++;
 	(*vm).last_alive = champion;
 }
@@ -37,7 +39,6 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 	int				arg1;
 	int				arg2;
 
-
 	ft_printf("~~~LD~~~\n");
 	action = processus->action;
 	arg1 = action.args[0];
@@ -48,9 +49,9 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 	//get action ?
 	if (action.args[1] < 1 || action.args[1] > 16)
 		return;
-	//change carry
-	if ((processus->reg[action.args[1] - 1] = (*vm).ram[action.pc + action.args[0]]))
-		processus->carry = 1;
+	// depend de la taille a lire ??
+	processus->reg[action.args[1] - 1] = (*vm).ram[circular(action.pc + action.args[0])];
+	processus->carry = 1;
 }
 
 void	ft_st(t_vm *vm, t_processus *processus)
@@ -59,7 +60,6 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	t_action		action;
 	int				arg1;
 	int				arg2;
-
 
 	ft_printf("~~~ST~~~\n");
 	action = processus->action;
@@ -78,7 +78,7 @@ void	ft_st(t_vm *vm, t_processus *processus)
 		return;
 	if (action.type[1] == REG && (arg2 < 1 || arg2 > 16))
 		return;
-	ft_int_to_octet(vm->ram, arg1, arg2);
+	ft_int_to_octet(vm->ram, arg1, circular(arg2));
 }
 
 void	ft_add(t_vm *vm, t_processus *processus)
@@ -88,7 +88,6 @@ void	ft_add(t_vm *vm, t_processus *processus)
 	int				arg1;
 	int				arg2;
 	int				arg3;
-
 
 	ft_printf("~~~ADD~~~\n");
 	action = processus->action;

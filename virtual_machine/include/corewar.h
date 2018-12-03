@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 12:24:03 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/03 17:30:08 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef	struct			s_vm
 	int					nb_champs;
 	int					flag_dump;
 	int					dump_cycle;
-	int					last_alive;
+	unsigned int		last_alive;
 	int					CTD;
 	int					cycles_ttx;
 	int					cycles_now;
@@ -175,6 +175,8 @@ void				print_action(t_action action);
 void				run_vm(t_vm *vm);
 void				run_instruction(t_vm *vm, t_processus *processus, int op_code);
 void				execute_processus(t_vm *vm);
+int					kill_processus(t_vm *vm);
+void				declare_winner(t_vm *vm);
 
 /*
 ** --------- GET_ACTION
@@ -226,6 +228,7 @@ void				ft_exit_magicnumber(char *file);
 void				ft_exit_header(char *file);
 void				ft_exit_parameter(char *argument, char *file);
 void				ft_exit_playernumber(char *file);
+void				ft_exit_dump(t_vm *vm);
 
 /*
 ** --------- FREE

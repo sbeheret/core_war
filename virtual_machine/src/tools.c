@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 15:08:54 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 16:20:15 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ void	print_ram(unsigned char *ram)
 {
 	size_t i;
 
+	// i = 0;
+	// while (i < MEM_SIZE && i < 40)
+	// {
+	// 	if (!(i % 64))
+	// 	{
+	// 		ft_printf("\n");
+	// 		ft_printf("0X");
+	// 		ft_printf("%.4X : ", i);
+	// 	}
+	// 	if (i / 10 == 0)
+	// 		ft_printf(" ");
+	// 	ft_printf("%d", i);
+	// 	ft_printf(" ");
+	// 	i++;
+	// }
 	i = 0;
-	while (i < MEM_SIZE && i < 40)
-	{
-		if (!(i % 64))
-		{
-			ft_printf("\n");
-			ft_printf("0X");
-			ft_printf("%.4X : ", i);
-		}
-		if (i / 10 == 0)
-			ft_printf(" ");
-		ft_printf("%d", i);
-		ft_printf(" ");
-		i++;
-	}
-	i = 0;
-	while (i < MEM_SIZE && i < 40)
+	while (i < MEM_SIZE)
 	{
 		if (!(i % 64))
 		{

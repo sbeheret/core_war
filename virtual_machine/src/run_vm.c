@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 14:11:11 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 18:25:05 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,32 @@
 
 void	run_vm(t_vm *vm)
 {
-	//condition du while a changer
-	while ((*vm).CTD)
+	int nb_decrement;
+	int	total_live;
+
+	nb_decrement = 0;
+	while ((*vm).processus)
 	{
-		execute_processus(vm);
-		//voir les bonnes conditions et variables a inc/decrementer
-//		print_struct_vm(*vm);
-		usleep(50000);
-		(*vm).cycles_ttx++;
-		(*vm).cycles_now++;
-		(*vm).CTD--;
+		(*vm).cycles_now = 0;
+		total_live = 0;
+		while ((*vm).cycles_now < (*vm).CTD)
+		{
+			execute_processus(vm);
+			(*vm).cycles_ttx++;
+			(*vm).cycles_now++;
+			if ((*vm).flag_dump == 1 && (*vm).dump_cycle == (*vm).cycles_ttx)
+				ft_exit_dump(vm);
+		}
+		ft_printf("KILL PROCESSUS !\n");
+		total_live = kill_processus(vm);
+		if (total_live > NBR_LIVE || nb_decrement > MAX_CHECKS)
+		{
+			(*vm).CTD -= CYCLE_DELTA;
+			nb_decrement = 0;
+		}
+		nb_decrement++;
 	}
+	declare_winner(vm);
 }
 
 void	execute_processus(t_vm *vm)
@@ -44,6 +59,8 @@ void	execute_processus(t_vm *vm)
 	processus = (*vm).processus;
 	while (processus)
 	{
+		ft_printf("processus PC = %d\n", processus->PC);
+		// usleep(50000);
 		op_code = processus->action.op_code;
 		if (processus->cycles_wait == 0)
 		{
@@ -54,6 +71,46 @@ void	execute_processus(t_vm *vm)
 		processus->cycles_wait--;
 		processus = processus->next;
 	}
+}
+
+int		kill_processus(t_vm *vm)
+{
+	int			total_live;
+	t_processus	*tmp;
+	t_processus	*tmp1;
+	t_processus *previous;
+
+	previous = NULL;
+	tmp1 = NULL;
+	total_live = 0;
+	tmp = (*vm).processus;
+	int i = 0;
+	while (tmp)
+	{
+		i++;
+		ft_printf("processus number = %d\n", i);
+		if (tmp->lives == 0)
+		{
+			tmp1 = tmp->next;
+			if (previous)
+				previous->next = tmp1;
+			else
+				(*vm).processus = tmp1;
+			ft_memdel((void**)&(tmp->reg));
+			ft_memdel((void**)&tmp);
+			ft_printf("del number %d\n", i);
+			tmp = tmp1;
+		}
+		else
+		{
+			total_live += tmp->lives;
+			tmp->lives = 0;
+			tmp = tmp->next;
+		}
+		previous = tmp;
+	}
+	print_processus((*vm).processus);
+	return (total_live);
 }
 
 void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
@@ -76,11 +133,32 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 		&ft_lfork,
 		&ft_aff
 	};
-	print_ram((*vm).ram);
-	ft_printf("BEFORE INSTRUCTION\n");
-	print_processus((*vm).processus);
+	// print_ram((*vm).ram);
+	// ft_printf("BEFORE INSTRUCTION\n");
+	// print_processus((*vm).processus);
 	instruction[op_code - 1](vm, processus);
-	ft_printf("AFTER INSTRUCTION\n");
-	print_processus((*vm).processus);
-	print_ram((*vm).ram);
+	// ft_printf("AFTER INSTRUCTION\n");
+	// print_processus((*vm).processus);
+	// print_ram((*vm).ram);
+}
+
+void	declare_winner(t_vm *vm)
+{
+	char		*name;
+	t_champion	*champion;
+
+	name = NULL;
+	champion = (*vm).champion;
+	while(champion)
+	{
+		if (champion->p_number == (*vm).last_alive)
+		{
+			name = champion->name;
+			break;
+		}
+		champion = champion->next;
+	}
+	if (name == NULL)
+		ft_printf("Aucun live avec un nom de champion valide n'a ete lance.\n");
+	ft_printf("le joueur %#X(%s)a gagne\n",(*vm).last_alive, name);
 }
