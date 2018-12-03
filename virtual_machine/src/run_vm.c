@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 17:42:10 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 11:52:06 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	run_vm(t_vm *vm)
 	{
 		execute_processus(vm);
 		//voir les bonnes conditions et variables a inc/decrementer
+//		print_struct_vm(*vm);
+		usleep(500000);
 		(*vm).cycles_ttx++;
 		(*vm).cycles_now++;
 		(*vm).CTD--;
@@ -43,7 +45,6 @@ void	execute_processus(t_vm *vm)
 	// processus chaine lister null terminated
 	while (processus)
 	{
-		usleep(500000);
 		op_code = processus->action.op_code;
 		if (processus->cycles_wait == 0)
 		{
@@ -77,11 +78,11 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 		&ft_aff
 	};
 
-	ft_printf("BEFORE INSTRUCTION\n");
-	print_processus((*vm).processus);
+//	ft_printf("BEFORE INSTRUCTION\n");
+//	print_processus((*vm).processus);
 	instruction[op_code - 1](vm, processus);
-	ft_printf("AFTER INSTRUCTION\n");
-	print_processus((*vm).processus);
-	print_struct_vm(*vm);
 	print_ram((*vm).ram);
+	print_processus((*vm).processus);
+	usleep(500000);
+//	ft_printf("AFTER INSTRUCTION\n");
 }

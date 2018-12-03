@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 17:39:34 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 11:50:53 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_ram(unsigned char *ram)
 	size_t i;
 
 	i = 0;
-	while (i < MEM_SIZE)
+	while (i < MEM_SIZE && i < 40)
 	{
 		if (!(i % 64))
 		{
@@ -110,5 +110,5 @@ void	print_struct_vm(t_vm vm)
 	// }
 	// ft_printf("------END CHAMPION LIST-----------\n");
 	// print_processus(vm.processus);
-	ft_printf("\n============= END STRUC VM  =============\n");
+	ft_printf("============= END STRUC VM  =============\n");
 }
