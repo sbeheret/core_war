@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/30 17:33:47 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 15:14:30 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void		get_action(t_vm *vm, t_processus *pcs)
 {
-	// ft_printf("here !\n");
 	initialize_action(pcs);
 	pcs->action.pc = pcs->PC;
 	pcs->action.op_code = vm->ram[circular(pcs->PC)];
@@ -27,12 +26,10 @@ void		get_action(t_vm *vm, t_processus *pcs)
 		return ;
 	}
 	pcs->cycles_wait = op_tab[pcs->action.op_code - 1].cycle;
-	pcs->action.size_read++;
 	pcs->action.nb_arg = op_tab[pcs->action.op_code - 1].param_number;
+	pcs->action.size_read++;
 	args_action(vm->ram, pcs->PC, &pcs->action);
-	pcs->PC += pcs->action.size_read;
-//	if (pcs->action.op_code == 12)
-//		JUMP JUMP JUMP JUMP
+	pcs->PC = pcs->PC + pcs->action.size_read;
 }
 
 static int	size_argument(int type, int direct_octet)
@@ -60,8 +57,8 @@ void		args_action(unsigned char *ram, int PC, t_action *action)
 	i_ram = circular(PC + enc_byte + 1);
 	while (i < action->nb_arg)
 	{
-		size = size_argument(action->args[i],
-				op_tab[action->args[i] - 1].direct_octet);
+		size = size_argument(action->type[i],
+				op_tab[action->op_code - 1].direct_octet);
 		action->args[i] = size == 1 ? ram[i_ram] : ft_octet_to_int2(ram, size,
 				i_ram);
 		if (action->type[i] == 3)

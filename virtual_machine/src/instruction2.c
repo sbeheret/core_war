@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 17:34:26 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 16:03:38 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_and(t_vm *vm, t_processus *processus)
 	else
 		value2 = processus->action.args[1];
 	processus->reg[processus->action.args[2] - 1] = value1 & value2;
+	processus->carry = 1;
 }
 
 void	ft_or(t_vm *vm, t_processus *processus)
@@ -50,6 +51,7 @@ void	ft_or(t_vm *vm, t_processus *processus)
 	else
 		value2 = processus->action.args[1];
 	processus->reg[processus->action.args[2] - 1] = value1 | value2;
+	processus->carry = 1;
 }
 
 void	ft_xor(t_vm *vm, t_processus *processus)
@@ -70,14 +72,22 @@ void	ft_xor(t_vm *vm, t_processus *processus)
 	else
 		value2 = processus->action.args[1];
 	processus->reg[processus->action.args[2] - 1] = value1 ^ value2;
+	processus->carry = 1;
 }
 
 void	ft_zjump(t_vm *vm, t_processus *processus)
 {
+	short	a;
+
 	(void)vm;
+	ft_printf("~~~JUMP~~~\n");
 	if (processus->carry == 1)
-		processus->PC = circular(processus->action.pc
-				+ processus->action.args[0]);
+	{
+		a = (short)processus->action.args[0] % IDX_MOD;
+		if (a < 0)
+			a++;
+		processus->PC = circular(processus->action.pc + a);
+	}
 }
 
 void	ft_ldi(t_vm *vm, t_processus *processus)

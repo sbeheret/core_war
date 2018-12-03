@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 12:23:42 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/03 12:28:22 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ char	*ft_octet_to_char(unsigned char **binary, size_t lenght_max)
 
 void	ft_int_to_octet(unsigned char *binary, int value, int id)
 {
-	ft_printf("BONJOUR%0xBONJOUR@%d\n", value, id);
-	ft_printf("&%x&\n", binary[id]);
 	binary[id] = value >> 24;
-	ft_printf("&%x&\n", binary[id]);
 	binary[id + 1] = (value & 0x00FF0000) >> 16;
 	binary[id + 2] = (value & 0x0000FF00) >> 8;
 	binary[id + 3] = value & 0x000000FF;

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 17:23:03 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 12:46:29 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	initialize_processus(t_processus **processus, int nb_player, int start)
 
 	i = -1;
 	(*processus)->PC = start;
+	(*processus)->carry = 0;
 	if (!((*processus)->reg = malloc(sizeof(int) * 16)))
 		ft_exit_malloc();
 	while (++i <= 15)

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 17:07:38 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 15:56:12 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 
 void	ft_live(t_vm *vm, t_processus *processus)
 {
-	int	champion;
-	t_action		action;
+	int			champion;
+	t_action	action;
 
+	ft_printf("~~~LIVE~~~\n");
 	action = processus->action;
+	ft_printf("action.pc = %d\n", action.pc);
 	champion = ft_octet_to_int2((*vm).ram, 4, action.pc + 1);
 	processus->lives++;
 	(*vm).last_alive = champion;
@@ -36,6 +38,7 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 	int				arg2;
 
 
+	ft_printf("~~~LD~~~\n");
 	action = processus->action;
 	arg1 = action.args[0];
 	arg2 = action.args[1];
@@ -58,6 +61,7 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	int				arg2;
 
 
+	ft_printf("~~~ST~~~\n");
 	action = processus->action;
 	arg1 = action.args[0];
 	arg2 = action.args[1];
@@ -74,7 +78,7 @@ void	ft_st(t_vm *vm, t_processus *processus)
 		return;
 	if (action.type[1] == REG && (arg2 < 1 || arg2 > 16))
 		return;
-	ft_int_to_octet(&(*vm).ram, arg1, arg2);
+	ft_int_to_octet(vm->ram, arg1, arg2);
 }
 
 void	ft_add(t_vm *vm, t_processus *processus)
@@ -86,6 +90,7 @@ void	ft_add(t_vm *vm, t_processus *processus)
 	int				arg3;
 
 
+	ft_printf("~~~ADD~~~\n");
 	action = processus->action;
 	arg1 = action.args[0];
 	arg2 = action.args[1];
@@ -107,7 +112,7 @@ void	ft_sub(t_vm *vm, t_processus *processus)
 	int				arg2;
 	int				arg3;
 
-
+	ft_printf("~~~SUB~~~\n");
 	action = processus->action;
 	arg1 = action.args[0];
 	arg2 = action.args[1];
