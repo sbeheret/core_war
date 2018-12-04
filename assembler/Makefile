@@ -6,11 +6,11 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/11/22 14:51:03 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/11/25 20:22:32 by dshults          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_PATH = ../
+NAME_PATH = ./
 NAME = asm
 
 LIBFT = ../lib/libft
@@ -20,13 +20,27 @@ SRC_PATH =	src
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 SRCS =	main.c \
-		set_header.c \
-		strjoinappend.c \
-		hexatob.c \
+		check_words.c \
+		error.c \
+		extras.c \
+		free_data.c \
+		ft_strchr_no_zero.c \
 		get_data.c \
+		hexatob.c \
+		l_args.c \
+		l_calc.c \
+		l_check.c \
+		l_errors.c \
+		l_labels.c \
+		l_op.c \
+		l_size.c \
+		l_trim.c \
+		op.c	\
+		set_header.c \
+		strjoinappend.c
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 

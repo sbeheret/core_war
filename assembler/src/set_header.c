@@ -3,28 +3,134 @@
 /*                                                        :::      ::::::::   */
 /*   set_header.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
+/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/22 14:33:24 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/01 15:29:47 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
-#include "op.h"
+#include "../includes/asm.h"
 
-void			set_header(t_header *header)
+static int			parse_name(t_header *h, char **tab, int frst)
 {
-	int	i;
+	int			i;
+	int			j;
+	int			quotes;
 
-	i = 0;
-	ft_bzero(header->prog_name, PROG_NAME_LENGTH + 1);
-	ft_bzero(header->comment, COMMENT_LENGTH + 1);
-	header->magic = COREWAR_EXEC_MAGIC;
-	while ( i < PROG_NAME_LENGTH)
-		header->prog_name[i++] = 'A';
-	i = 0;
-	while ( i < COMMENT_LENGTH)
-		header->comment[i++] = 'B';
-//	printf("%s\n", header->prog_name);
+	i = 5;
+	j = 0;
+	while (tab[frst][i] == ' ' || tab[frst][i] == '\t')
+		i++;
+	(tab[frst][i] != '\"') ? err_dots(frst, i, tab, h) : i++;
+	quotes = 1;
+	while (tab[frst][i] && j <= PROG_NAME_LENGTH)
+	{
+		(tab[frst][i] == '\"') ? quotes++ : quotes;
+		if (quotes == 2)
+			break ;
+		h->prog_name[j++] = tab[frst][i++];
+		if (tab[frst][i] == '\0')
+		{
+			frst++;
+			i = 0;
+		}
+	}
+	if (quotes < 2 || (quotes == 2 && check_end(tab, frst, i)))
+		err_dots(frst, frst, tab, h);
+	return (frst);
+}
+
+static int			parse_comment(t_header *h, char **tab, int sec)
+{
+	t_var			var;
+
+	var.i = 8;
+	var.j = 0;
+	while (tab[sec][var.i] == ' ' || tab[sec][var.i] == '\t')
+		var.i++;
+	(tab[sec][var.i] != '\"') ? err_dots(sec, var.i, tab, h) : var.i++;
+	var.quotes = 1;
+	while (tab[sec] && tab[sec][var.i] && var.j <= COMMENT_LENGTH)
+	{
+		(tab[sec][var.i] == '\"') ? var.quotes++ : var.quotes;
+		if (var.quotes == 2)
+			break ;
+		h->comment[var.j++] = tab[sec][var.i++];
+		if (tab[sec] && tab[sec][var.i] == '\0')
+		{
+			sec++;
+			var.i = 0;
+			h->comment[var.j++] = '\n';
+		}
+	}
+	if (var.quotes < 2 || (var.quotes == 2 && check_end(tab, sec, var.i)))
+		err_dots(sec, var.i, tab, h);
+	return (sec);
+}
+
+static int			name_comment(t_header *h, char **tab, int frst, int sec)
+{
+	int			position;
+
+	position = 0;
+	if (ft_strncmp(tab[frst], ".name", 5) == 0)
+	{
+		parse_name(h, tab, frst);
+		if (ft_strncmp(tab[sec], ".comment", 8) != 0)
+			err_dots(sec, sec, tab, h);
+		position = parse_comment(h, tab, sec);
+	}
+	else if (ft_strncmp(tab[frst], ".comment", 8) == 0)
+	{
+		parse_comment(h, tab, frst);
+		if (ft_strncmp(tab[sec], ".name", 5) != 0)
+			err_dots(sec, sec, tab, h);
+		position = parse_name(h, tab, sec);
+	}
+	else
+		err_dots(frst, 1, tab, h);
+	return (position);
+}
+
+static int			parse_name_comment(t_header *h, char **tab)
+{
+	int			idx;
+	int			start_dot;
+	short		frst;
+	short		second;
+
+	idx = 0;
+	start_dot = 0;
+	frst = -1;
+	second = 0;
+	while (tab[idx])
+	{
+		if (tab[idx][0] == '.')
+		{
+			start_dot++;
+			frst = (frst < 0) ? idx : frst;
+			if (frst != -1 && second == 0)
+				second = idx;
+			(start_dot > 2) ? err_dots(idx, 1, tab, h) : 0;
+		}
+		idx++;
+	}
+	(start_dot < 2) ? err_dots(1, 0, tab, h) : 0;
+	return (name_comment(h, tab, frst, second));
+}
+
+int					set_header(char **tab, t_header *header)
+{
+	int			position;
+
+	position = 0;
+	ft_bzero(header->prog_name, PROG_NAME_LENGTH);
+	ft_bzero(header->comment, COMMENT_LENGTH);
+	ft_bzero(header->pad, 4);
+	ft_bzero(header->pad2, 4);
+	header->magic = swap_uint32(COREWAR_EXEC_MAGIC);
+	header->prog_size = swap_uint32(COREWAR_EXEC_MAGIC);
+	position = parse_name_comment(header, tab);
+	return (position);
 }
