@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/30 12:25:56 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/04 14:53:39 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 static void		stocor(char name[], char **argv)
 {
@@ -41,32 +41,7 @@ static void		stocor(char name[], char **argv)
 	name[i] = '\0';
 }
 
-static void			free_data(char **tab, char *data, t_header *header)
-{
-	int		i;
 
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	free(header);
-	free(data);
-	free(tab);
-	header = NULL;
-	data = NULL;
-	tab = NULL;
-}
-
-static void			free_trim(char *line, char *trim)
-{
-	free(line);
-	free(trim);
-	line = NULL;
-	trim = NULL;
-}
 
 static void			read_fd(int fd, char **data)
 {
@@ -83,33 +58,32 @@ static void			read_fd(int fd, char **data)
 	}
 }
 
-int				get_data(char **argv, int fd, int fd2)
+void			get_data(char **argv, int fd, int fd2)
 {
+	t_data		*d;
 	char		*data;
-	char		**tab;
 	char		name[PROG_NAME_LENGTH];
 	int			position;
 	t_header	*header;
-	int			i; // to delte
 
-	if (!(header = (t_header *)malloc(sizeof(t_header))))
+	if (!(header = (t_header *)malloc(sizeof(t_header)))
+			|| !(d = (t_data *)ft_memalloc(sizeof(t_data))))
 		exit(EXIT_FAILURE);
 	data = ft_strnew(0);
-	position = 0;
-	i = 0;
 	read_fd(fd, &data);
-	tab = ft_strsplit(data, '$');
-	position = set_header(tab, header);
-	//check_start_opcode(tab, position + 1);
+	d->tab = ft_strsplit(data, '$');
+	position = set_header(d->tab, header);
+	if (!get_labels(d, position + 1))
+	{
+		free_data(d, data, header);
+		ft_printf("Error, file has a bad format\n");
+		exit(EXIT_FAILURE);
+	}
+	header->prog_size = swap_uint32(d->total_bytes);
 	stocor(name, argv);
 	fd2 = open(name, O_RDWR | O_APPEND | O_CREAT, RIGHTS);
 	write(fd2, header, sizeof(t_header));
-	printf("{%s}\n", tab[position]);
-	while (tab[i])
-	{
-		printf("%s\n", tab[i]);
-		i++;
-	}
-	free_data(tab, data, header);
-	return (position);
+	create_file_body(d, fd2);
+	print_tab(d, position); //tmp
+	free_data(d, data, header);
 }

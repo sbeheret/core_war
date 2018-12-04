@@ -6,50 +6,60 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/11/30 12:33:10 by esouza           ###   ########.fr        #
+#    Updated: 2018/12/04 12:52:23 by esouza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_PATH = ../
 NAME = asm
 
-LIBFT = ../lib/libft
-INC_PATH =	includes
-OBJ_PATH =	obj
-SRC_PATH =	src
+LIBFT = libft
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra
+#FLAGS = -Wall -Werror -Wextra
+FLAGS = -g
 
-SRCS =	main.c \
-		set_header.c \
-		strjoinappend.c \
-		hexatob.c \
-		get_data.c \
-		error.c \
-		check_words.c \
+SRCS =  ./src/main.c \
+	   ./src/set_header.c \
+		./src/strjoinappend.c \
+		./src/hexatob.c \
+		./src/get_data.c \
+		./src/free_data.c \
+		./src/error.c \
+		./src/check_words.c \
+		./src/l_labels.c \
+		./src/l_size.c \
+		./src/l_trim.c \
+		./src/l_calc.c \
+		./src/l_op.c \
+		./src/l_args.c \
+		./src/l_check.c \
+		./src/l_errors.c \
+		./src/op.c	\
+		./src/extras.c \
+		./src/create_file_body.c \
 
-OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
-all : $(NAME_PATH)$(NAME)
+OBJS = $(SRCS:.c=.o)
 
-$(NAME_PATH)$(NAME) : $(OBJS)
+all : $(LIBFT) $(NAME)
+
+$(LIBFT) :
 	@make -C $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME)
+
+$(NAME) : $(OBJS)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME)
 	@echo "\033[32;4m	   ***Executable $(NAME) created***   \033[0;m"
 
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) $(FLAGS) -c $< -o $@ -I$(INC_PATH)
+%.o : %.c
+	@$(CC) $(FLAGS) -c $< -o $@
 
 clean :
 	@make clean -C $(LIBFT)
-	@rm -rf $(OBJ_PATH) 2> /dev/null || true
-
-fclean : clean
-	@make fclean -C $(LIBFT)
-	@rm -f $(NAME_PATH)$(NAME)
+	@rm -f $(OBJS)
+fclean :
+	@make clean -C $(LIBFT)
+	@rm -f $(NAME)
 
 re : fclean all
 

@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_words.c                                      :+:      :+:    :+:   */
+/*   create_file_body.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 12:51:54 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/30 12:11:21 by esouza           ###   ########.fr       */
+/*   Created: 2018/12/04 12:49:39 by esouza            #+#    #+#             */
+/*   Updated: 2018/12/04 15:03:10 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int				check_end(char **tab, int col, int row)
+int			create_file_body(t_data *d, int fd2)
 {
-	while (tab[col][++row])
+	t_labels		*head;
+
+	head = d->first_label;
+	while (head)
 	{
-		if (tab[col][row] > 32 && tab[col][row] < 127)
-			return (1);
+		printf(">>1 {%s}\n", head->args[0]);
+		printf(">>2 {%s}\n", head->args[1]);
+		printf(">>3 {%s}\n", head->args[2]);
+		head = head->next;
 	}
-	return (0);
+
+	return (fd2);
 }
