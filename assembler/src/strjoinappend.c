@@ -6,11 +6,11 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:08:42 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:37:28 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/04 15:53:14 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 static char	*ft_getresult(char *s1, char *s2, char *array)
 {

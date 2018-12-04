@@ -6,11 +6,11 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:36:39 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/04 15:57:38 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 static void		stocor(char name[], char **argv)
 {
@@ -66,8 +66,8 @@ void			get_data(char **argv, int fd, int fd2)
 	int			position;
 	t_header	*header;
 
-	if (!(header = (t_header *)malloc(sizeof(t_header)))
-			|| !(d = (t_data *)ft_memalloc(sizeof(t_data))))
+	if (!(header = (t_header *)malloc(sizeof(t_header))) ||
+		!(d = (t_data *)ft_memalloc(sizeof(t_data))))
 		exit(EXIT_FAILURE);
 	data = ft_strnew(0);
 	read_fd(fd, &data);

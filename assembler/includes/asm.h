@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:37:58 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/04 16:01:19 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define LFORK 15
 # define AFF 16
 
+# define YES printf("YES\n"); //tmp
 
 /*
  * ****************************************************************************
@@ -78,6 +79,7 @@ typedef struct			s_labels
 typedef struct			s_data
 {
 	char				**tab;
+	int					y;
 	t_labels			*first_label;
 	t_labels			*last_label;
 	t_op				*op;
@@ -151,5 +153,6 @@ int    	error_param_nb(char *op_code, int expected, int got);
 
 void		print_tab(t_data *d, int i);
 void        show_labels(t_data *d);
+char		*ft_strchr_no_zero(const char *s, int c);
 
 #endif

@@ -1,4 +1,10 @@
-#include "asm.h"
+#include "../includes/asm.h"
+
+int32_t			swap_uint32(uint32_t val)
+{
+	val = ((val << 8) & 0xFF00FF00) | ((val >> 8) & 0xFF00FF);
+	return ((val << 16) | (val >> 16));
+}
 
 int32_t			swap_uint32(uint32_t val)
 {
