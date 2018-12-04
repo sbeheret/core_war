@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 18:25:05 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/04 11:58:38 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	run_vm(t_vm *vm)
 			if ((*vm).flag_dump == 1 && (*vm).dump_cycle == (*vm).cycles_ttx)
 				ft_exit_dump(vm);
 		}
-		ft_printf("KILL PROCESSUS !\n");
 		total_live = kill_processus(vm);
+		ft_printf("cycles_now = %d < CTD = %d| cylces ttx = %d | total_live = %d > NBR_LIVE = %d | nb_decrement = %d > MAX_CHECKS = %d \n"
+	,(*vm).cycles_now, (*vm).CTD, (*vm).cycles_ttx, total_live, NBR_LIVE, nb_decrement, MAX_CHECKS);
 		if (total_live > NBR_LIVE || nb_decrement > MAX_CHECKS)
 		{
 			(*vm).CTD -= CYCLE_DELTA;
@@ -59,7 +60,6 @@ void	execute_processus(t_vm *vm)
 	processus = (*vm).processus;
 	while (processus)
 	{
-		ft_printf("processus PC = %d\n", processus->PC);
 		// usleep(50000);
 		op_code = processus->action.op_code;
 		if (processus->cycles_wait == 0)
@@ -75,41 +75,44 @@ void	execute_processus(t_vm *vm)
 
 int		kill_processus(t_vm *vm)
 {
+	//parcours la liste,
+	// on addition le nombre de live
+	// si un processus a live a 0 on le supprime
+
 	int			total_live;
 	t_processus	*tmp;
-	t_processus	*tmp1;
 	t_processus *previous;
 
-	previous = NULL;
-	tmp1 = NULL;
 	total_live = 0;
+	previous = NULL;
 	tmp = (*vm).processus;
-	int i = 0;
 	while (tmp)
 	{
-		i++;
-		ft_printf("processus number = %d\n", i);
 		if (tmp->lives == 0)
 		{
-			tmp1 = tmp->next;
-			if (previous)
-				previous->next = tmp1;
+			if (previous == NULL)
+			{
+				tmp = tmp->next;
+				ft_memdel((void**)&((*vm).processus)->reg);
+				ft_memdel((void**)&(*vm).processus);
+				(*vm).processus = tmp;
+			}
 			else
-				(*vm).processus = tmp1;
-			ft_memdel((void**)&(tmp->reg));
-			ft_memdel((void**)&tmp);
-			ft_printf("del number %d\n", i);
-			tmp = tmp1;
+			{
+				previous->next = tmp->next;
+				ft_memdel((void**)&tmp->reg);
+				ft_memdel((void**)&tmp);
+				tmp = previous->next;
+			}
 		}
 		else
 		{
 			total_live += tmp->lives;
 			tmp->lives = 0;
+			previous = tmp;
 			tmp = tmp->next;
 		}
-		previous = tmp;
 	}
-	print_processus((*vm).processus);
 	return (total_live);
 }
 

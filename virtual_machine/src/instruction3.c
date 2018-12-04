@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 12:32:14 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/04 11:52:57 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ void	ft_sti(t_vm *vm, t_processus *processus)
 		value2 = processus->action.args[2];
 	ft_int_to_octet(vm->ram, processus->reg[processus->action.args[0] - 1],
 			circular(value1 + value2));
-	// argments 1, 2 et 3
-	// 2 + 3 = adresse
-	// write 1 at adresse
 }
 
 void	ft_fork(t_vm *vm, t_processus *processus)
@@ -42,12 +39,15 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 	t_processus *copy;
 	int	i;
 
-	copy = new_processus(0, processus->PC % IDX_MOD);
+	if (processus->action.type[0] != 2)
+		return;
+	copy = new_processus(0, (processus->PC + processus->action.args[0]) % IDX_MOD);
 	i = -1;
 	while (++i <= 15)
 		copy->reg[i] = processus->reg[i];
 	copy->carry = processus->carry;
 	push_front_pcs(&(*vm).processus, copy);
+	processus->PC = circular(processus->action.pc + 3);
 }
 
 void	ft_lld(t_vm *vm, t_processus *processus)
