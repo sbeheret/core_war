@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/11/22 14:35:32 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/11/28 17:07:02 by sbeheret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -86,6 +86,7 @@ SRC_MEMORY =		ft_bzero.c \
 					ft_memset.c \
 
 SRC_NUMBER =		ft_itoa.c \
+					ft_itoa_base.c \
 					ft_lgnbr.c \
 					ft_abs.c \
 

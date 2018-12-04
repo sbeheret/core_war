@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:45 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/27 15:36:36 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/28 10:28:23 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	start_champions(t_champion **champion, int nb_champs)
 	}
 }
 
-int		give_start(t_champion *champ, int nb_champs)
+void	give_start(t_champion *champ, int nb_champs)
 {
 	static int	order = 0;
 
@@ -56,5 +56,4 @@ int		give_start(t_champion *champ, int nb_champs)
 	else
 		champ->start = (MEM_SIZE / nb_champs) * order;
 	order++;
-	return (1);
 }
