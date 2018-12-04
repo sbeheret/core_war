@@ -1,4 +1,4 @@
-#include "../includes/asm.h"
+#include "asm.h"
 
 void		print_tab(t_data *d, int i)
 {

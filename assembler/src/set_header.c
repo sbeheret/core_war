@@ -6,11 +6,11 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 12:07:56 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/04 15:37:17 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
 static int			ft_strmcmp(char *s1, char *s2, size_t len)
 {

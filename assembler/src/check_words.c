@@ -6,11 +6,11 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 12:51:54 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/30 12:11:21 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/04 15:35:48 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
 int				check_end(char **tab, int col, int row)
 {

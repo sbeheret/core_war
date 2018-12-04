@@ -6,11 +6,11 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 12:49:39 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:03:10 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/04 15:35:56 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
 int			create_file_body(t_data *d, int fd2)
 {
