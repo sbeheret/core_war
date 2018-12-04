@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
+/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:41:21 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/23 13:18:11 by dshults          ###   ########.fr       */
+/*   Updated: 2018/11/29 11:31:10 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,11 @@ typedef char	t_arg_type;
 typedef struct		s_header
 {
 	unsigned int		magic;
-	char				prog_name[PROG_NAME_LENGTH + 1];
+	char				prog_name[PROG_NAME_LENGTH];
+	char				pad[T_IND];
 	unsigned int		prog_size;
-	char				comment[COMMENT_LENGTH + 1];
+	char				comment[COMMENT_LENGTH];
+	char				pad2[T_IND];
 }					t_header;
-
-typedef struct		s_op
-{
-	char	name[5];
-	int		params_nb;
-	char	params_types[3];
-	int		id;
-	int		cycles;
-	char	description[50];
-	int		encoded_byte;
-	int		dir_as_ind;
-}					t_op;
 
 #endif

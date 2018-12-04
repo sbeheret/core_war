@@ -6,77 +6,82 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/23 12:52:37 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/02 15:51:22 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-void			free_labels(t_data *d)
+static void		stocor(char name[], char **argv)
 {
-	t_labels	*label;
+	short	i;
+	short	j;
+	char	*p;
 
-	while (d->first_label)
+	i = 0;
+	j = 0;
+	p = ".cor";
+	if (ft_strlen(argv[1]) > (FILE_NAME_LENGTH - 5))
 	{
-		label = d->first_label;
-		d->first_label = d->first_label->next;
-        free(label->name);
-		free(label);
+		ft_putstr("File name too long\n");
+		exit(EXIT_FAILURE);
 	}
+	while (argv[1][i] != '\0' && i < (FILE_NAME_LENGTH - 5))
+	{
+		name[i] = argv[1][i];
+		i++;
+	}
+	i -= 2;
+	while (p[j])
+	{
+		name[i] = p[j];
+		i++;
+		j++;
+	}
+	name[i] = '\0';
 }
 
-static void			free_data(char **tab, char *data)
-{
-		int		i;
 
-		i = 0;
-		while (tab[i])
-		{
-			free(tab[i]);
-			tab[i] = NULL;
-			i++;
-		}
-		free(data);
-		free(tab);
-		data = NULL;
-		tab = NULL;
-}
 
-static void			free_trim(char *line, char *trim)
+static void			read_fd(int fd, char **data)
 {
-	free(line);
-	free(trim);
-	line = NULL;
-	trim = NULL;
-}
-
-void			get_data(int fd)
-{
-	char		*data;
 	char		*line;
 	char		*trim;
-	int			i;
-	t_data		*d;
 
-	d = ft_memalloc(sizeof(t_data));
-	data = ft_strnew(0);
 	line = NULL;
-	trim = NULL;
-	i = 0;
 	while (get_next_line(fd, &line))
 	{
 		trim = ft_strtrim((char const *)line);
-		if (trim[0] !=  COMMENT_CHAR)
-			data = strjoinappend(data, trim);
+		if (trim[0] != COMMENT_CHAR)
+			*data = strjoinappend(*data, trim);
 		free_trim(line, trim);
 	}
+}
+
+void			get_data(char **argv, int fd, int fd2)
+{
+	t_data		*d;
+	char		*data;
+	char		name[PROG_NAME_LENGTH];
+	int			position;
+	t_header	*header;
+
+	if (!(header = (t_header *)malloc(sizeof(t_header))) ||
+		!(d = (t_data *)ft_memalloc(sizeof(t_data))))
+		exit(EXIT_FAILURE);
+	data = ft_strnew(0);
+	read_fd(fd, &data);
 	d->tab = ft_strsplit(data, '$');
-	while (d->tab[i])
+	position = set_header(d->tab, header);
+	if (!get_labels(d, position + 1))
 	{
-		printf("%s\n", d->tab[i]);
-		i++;
+		free_data(d, data, header);
+		ft_printf("Error, file has a bad format\n");
+		exit(EXIT_FAILURE);
 	}
-	get_labels(d, 2);
-//	free_labels(d);
-	free_data(d->tab, data);
+	stocor(name, argv);
+	fd2 = open(name, O_RDWR | O_APPEND | O_CREAT, RIGHTS);
+	write(fd2, header, sizeof(t_header));
+	print_tab(d, position); //tmp
+	free_data(d, data, header);
 }

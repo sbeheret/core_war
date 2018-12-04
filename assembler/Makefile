@@ -23,19 +23,23 @@ CC = gcc
 FLAGS = -Wall -Werror -Wextra -g
 
 SRCS =	main.c \
-		op.c	\
-		set_header.c \
-		strjoinappend.c \
-		hexatob.c \
+		check_words.c \
+		error.c \
+		extras.c \
+		free_data.c \
 		get_data.c \
+		hexatob.c \
+		l_args.c \
+		l_calc.c \
+		l_check.c \
+		l_errors.c \
 		l_labels.c \
+		l_op.c \
 		l_size.c \
 		l_trim.c \
-		l_calc.c \
-		l_op.c \
-		l_args.c \
-		l_check.c \
-		l_errors.c
+		op.c	\
+		set_header.c \
+		strjoinappend.c
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 

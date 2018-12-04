@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:08:42 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/20 13:50:40 by esouza           ###   ########.fr       */
+/*   Updated: 2018/11/26 10:45:08 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static char	*ft_getresult(char *s1, char *s2, char *array)
 
 	i = 0;
 	k = 0;
-	while (s1[i] != '\0')
+	while (s1[i] != '\0' && s1[i] != COMMENT_CHAR)
 	{
 		array[i] = s1[i];
 		i++;
 	}
-	while (s2[k] != '\0')
+	while (s2[k] != '\0' && s2[k] != COMMENT_CHAR)
 	{
 		array[i] = s2[k];
 		i++;
@@ -36,6 +36,19 @@ static char	*ft_getresult(char *s1, char *s2, char *array)
 	return (array);
 }
 
+void		trim_backwards(char *s)
+{
+	int		i;
+
+	i = 0;
+	while (s[i] && s[i] != COMMENT_CHAR)
+		i++;
+	i--;
+	while ((s[i] == ' ' || s[i] == '\t'))
+		i--;
+	s[i + 1] = '\0';
+}
+
 char		*strjoinappend(char *s1, char *s2)
 {
 	int		len;
@@ -43,6 +56,8 @@ char		*strjoinappend(char *s1, char *s2)
 
 	if (s1 && s2)
 	{
+		if (ft_strchr(s2, COMMENT_CHAR))
+			trim_backwards(s2);
 		len = ((ft_strlen((char *)s1)) + (ft_strlen((char *)s2)) + 2);
 		if (!(array = (char *)malloc(sizeof(*array) * len)))
 			return (NULL);

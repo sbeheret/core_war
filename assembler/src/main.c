@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:01:16 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/21 12:52:59 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/02 17:50:10 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-#include "../includes/op.h"
 
 static void		check_args(int argc, char **argv)
 {
@@ -36,46 +35,18 @@ static void		print_error_open(void)
 	exit(EXIT_FAILURE);
 }
 
-static void		stocor(char name[], char **argv)
-{
-	short	i;
-	short	j;
-	char	*p;
-
-	i = 0;
-	j = 0;
-	p = ".cor";
-	while (argv[1][i] != '.' && i < PROG_NAME_LENGTH)
-	{
-		name[i] = argv[1][i];
-		i++;
-	}
-	while (p[j])
-	{
-		name[i] = p[j];
-		i++;
-		j++;
-	}
-	name[i] = '\0';
-}
-
 int				main(int argc, char **argv)
 {
 	int		fd;
 	int		fd2;
-	char	name[PROG_NAME_LENGTH + 5];
-	t_header *header = malloc(sizeof(t_header));
 
 	check_args(argc, argv);
-	stocor(name, argv);
 	if (((fd = open(argv[1], O_NOFOLLOW | O_RDWR)) < 1))
 		print_error_open();
-	fd2 = open(name, O_RDWR | O_APPEND |  O_CREAT, RIGHTS);
-	set_header(header);
-	write(fd2, header, sizeof(t_header) + sizeof(char) * 8);
-	get_data(fd);
+	fd2 = 0;
+	get_data(argv, fd, fd2);
 	close(fd);
 	close(fd2);
-	free(header);
+//	while (1) ;
 	return (0);
 }
