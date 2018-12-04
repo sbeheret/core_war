@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:37:17 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/04 16:20:05 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static int			name_comment(t_header *h, char **tab, int frst, int sec)
 		parse_comment(h, tab, frst);
 		if (ft_strmcmp(tab[sec], NAME_CMD_STRING,
 					ft_strlen(NAME_CMD_STRING)) != 0)
-			err_dots(sec, sec, tab, h);
+		err_dots(sec, sec, tab, h);
 		position = parse_name(h, tab, sec);
 	}
 	else

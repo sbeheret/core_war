@@ -6,37 +6,38 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/12/04 15:39:11 by esouza           ###   ########.fr        #
+#    Updated: 2018/12/04 16:06:36 by esouza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME_PATH = ./
 NAME = asm
 
 LIBFT = libft
 
 CC = gcc
 
-#FLAGS = -Wall -Werror -Wextra
-FLAGS = -g
+FLAGS = -Wall -Werror -Wextra -g
 
-SRCS =  main.c \
-	   set_header.c \
-		strjoinappend.c \
-		hexatob.c \
-		get_data.c \
-		free_data.c \
-		error.c \
+SRCS =	main.c \
 		check_words.c \
-		l_labels.c \
-		l_size.c \
-		l_trim.c \
-		l_calc.c \
-		l_op.c \
+		error.c \
+		extras.c \
+		free_data.c \
+		ft_strchr_no_zero.c \
+		get_data.c \
+		hexatob.c \
 		l_args.c \
+		l_calc.c \
 		l_check.c \
 		l_errors.c \
+		l_labels.c \
+		l_op.c \
+		l_size.c \
+		l_trim.c \
 		op.c	\
-		extras.c \
+		set_header.c \
+		strjoinappend.c
 		create_file_body.c \
 
 
