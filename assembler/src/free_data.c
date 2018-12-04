@@ -6,11 +6,11 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:17 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/04 16:14:28 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/02 18:24:50 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 void			free_trim(char *line, char *trim)
 {
@@ -32,7 +32,7 @@ static void			free_labels(t_data *d)
         free(label->name);
 		label->name = NULL;
 		i = 0;
-	if (label->op_nb != 0)
+		if (label->op_nb != 0)
 		{
 			while (label->args[i])
 			{
