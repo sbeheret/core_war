@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/21 15:47:14 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/26 18:54:52 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,79 @@ void	print_ram(unsigned char *ram)
 		if (!(i % 64))
 		{
 			ft_printf("\n");
-			ft_printf("%p : ",ram + i);
+			ft_printf("0X");
+			ft_printf("%.4X : ", i);
 		}
-		ft_printf("%hhd", ram[i] / 16);
-		ft_printf("%hhd", ram[i] % 16);
+		ft_printf("%hhx", ram[i] / 16);
+		ft_printf("%hhx", ram[i] % 16);
 		ft_printf(" ");
 		i++;
 	}
+	ft_printf("\n");
+}
+
+void	print_memory(unsigned char *str, size_t size)
+{
+	size_t start;
+	size_t i;
+
+	start = 0;
+	ft_printf("\n================ FT_PRINT_MEMORY =============\n");
+	while (start < size)
+	{
+		ft_printf("%.10x :", start);
+		i = start;
+		while (i < start + 16 && i < size)
+		{
+			ft_printf("%hhx", str[i] / 16);
+			ft_printf("%hhx", str[i] % 16);
+			ft_putchar(' ');
+			i++;
+		}
+		while (i < start + 16)
+		{
+			ft_putstr("   ");
+			i++;
+		}
+		ft_putchar('|');
+		i = start;
+		while (i < start + 16 && i < size)
+		{
+			if (str[i] > 31 && str[i] < 127)
+				ft_putchar(str[i]);
+			else
+				ft_putchar('.');
+			i++;
+		}
+		ft_putchar('|');
+		ft_putchar('\n');
+		start += 16;
+	}
+	ft_printf("\n============= END FT_PRINT_MEMORY =============\n");
+}
+
+void	print_struct_vm(t_vm vm)
+{
+	t_champion *tmp;
+
+
+	tmp = vm.champion;
+	ft_printf("\n=============== STRUCT VM ===============\n");
+	ft_printf("flag_dump = %d\n", vm.flag_dump);
+	ft_printf("dump_cycle = %d\n", vm.dump_cycle);
+	ft_printf("----------PROCESSUS LIST-----------\n");
+	while (tmp)
+	{
+		ft_printf("-----------\n");
+		ft_printf("name = %s\n",tmp->name);
+		ft_printf("comment = %s\n",tmp->comment);
+		ft_printf("file = %s\n",tmp->file);
+		ft_printf("p_number = %#X\n",tmp->p_number);
+		ft_printf("weight = %d\n",tmp->weight);
+		ft_printf("-----------\n");
+		tmp = tmp->next;
+	}
+	ft_printf("------END PROCESSUS LIST-----------\n");
+	ft_printf("\n============= END STRUC VM  =============\n");
+
 }

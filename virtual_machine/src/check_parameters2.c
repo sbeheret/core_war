@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.c                                          :+:      :+:    :+:   */
+/*   check_parameters2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 12:33:51 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 16:12:37 by rfibigr          ###   ########.fr       */
+/*   Created: 2018/11/26 16:47:24 by rfibigr           #+#    #+#             */
+/*   Updated: 2018/11/27 15:58:34 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-/*
-** Initilization of VM
-** -Check if arguments are valable
-** -Create ram and initialize all element
-*/
-
-int	main(int argc, char **argv)
+void	check_padding(unsigned char **binary, char *file)
 {
-	t_vm	vm;
+	int i;
 
-	initialize_vm(&vm);
-	check_parameters(argc, argv, &vm);
-	load_champs(&vm);
-	print_struct_vm(vm);
-	print_ram(vm.ram);
-	//fonction to free all vm
-	ft_memdel((void **)&(vm.ram));
-	return (1);
+	i = 0;
+	while (i < 4)
+	{
+		if (**binary != 0)
+			ft_exit_header(file);
+		*binary = *binary + 1;
+		i++;
+	}
+}
+
+int		check_number(unsigned int number, t_champion *champion)
+{
+	while (champion)
+	{
+		if (number == champion->p_number)
+			return (1);
+		champion = champion->next;
+	}
+	return (0);
 }

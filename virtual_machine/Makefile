@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/11/22 11:19:56 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/11/27 15:43:30 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -42,9 +42,15 @@ NAME = 		our_coreware
 #/********************** SOURCE *********************/
 SRC =		corewar.c 	\
 			check_parameters.c	\
+			check_parameters2.c	\
 			initialization.c 	\
 			tools.c				\
 			exit.c				\
+			exit2.c				\
+			lib_list.c			\
+			convert.c			\
+			load_in_ram.c		\
+			#where_star.c		\
 
 LIBNAME =	libft/libft.a \
 
@@ -61,11 +67,11 @@ all : $(NAME_PATH)$(NAME)
 $(NAME_PATH)$(NAME) : $(OBJ)
 	@echo "$(LOW_GREEN) --Compiling lib--\tlibft"
 	@make -C $(LIB_PATH)/libft
-	@echo "$(PURPLE) --Linking--\t\tlem_in"
+	@echo "$(PURPLE) --Linking--\t\t$(NAME)"
 	$(CC) -o $@ $^ $(LIBP)
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
-	@echo "$(GREEN) --Compiling--\t\tlem_in"
+	@echo "$(GREEN) --Compiling--\t\t$(NAME)"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
 
@@ -83,5 +89,5 @@ fclean : clean
 re: fclean all
 
 debug : $(OBJ)
-	@echo "$(PURPLE) --Linking--\t\tlem_in"
+	@echo "$(PURPLE) --Linking--\t\t"
 	$(CC) -o $(NAME) $^ $(LIBP) -fsanitize=address -O1 -fno-omit-frame-pointer
