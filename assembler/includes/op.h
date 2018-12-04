@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:41:21 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/29 11:31:10 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/04 16:10:23 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define IND_SIZE				2
 # define REG_SIZE				4
-# define DIR_SIZE				REG_SIZE
+# define DIR_SIZE				4
 
 # define REG_CODE				1
 # define DIR_CODE				2
@@ -23,9 +23,9 @@
 
 # define MAX_ARGS_NUMBER			4
 # define MAX_PLAYERS				4
-# define MEM_SIZE				(4*1024)
-# define IDX_MOD					(MEM_SIZE / 8)
-# define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
+# define MEM_SIZE				4096
+# define IDX_MOD				512
+# define CHAMP_MAX_SIZE			682
 
 # define COMMENT_CHAR			'#'
 # define LABEL_CHAR				':'
@@ -66,11 +66,9 @@ typedef char	t_arg_type;
 typedef struct		s_header
 {
 	unsigned int		magic;
-	char				prog_name[PROG_NAME_LENGTH];
-	char				pad[T_IND];
+	char				prog_name[132];
 	unsigned int		prog_size;
-	char				comment[COMMENT_LENGTH];
-	char				pad2[T_IND];
+	char				comment[2052];
 }					t_header;
 
 #endif

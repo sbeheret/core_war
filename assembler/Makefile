@@ -6,17 +6,14 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/11/25 20:22:32 by dshults          ###   ########.fr        #
+#    Updated: 2018/12/04 16:06:36 by esouza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_PATH = ./
 NAME = asm
 
-LIBFT = ../lib/libft
-INC_PATH =	includes
-OBJ_PATH =	obj
-SRC_PATH =	src
+LIBFT = libft
 
 CC = gcc
 
@@ -41,27 +38,29 @@ SRCS =	main.c \
 		op.c	\
 		set_header.c \
 		strjoinappend.c
+		create_file_body.c \
 
-OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
-all : $(NAME_PATH)$(NAME)
+OBJS = $(SRCS:.c=.o)
 
-$(NAME_PATH)$(NAME) : $(OBJS)
+all : $(LIBFT) $(NAME)
+
+$(LIBFT) :
 	@make -C $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME)
+
+$(NAME) : $(OBJS)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME)
 	@echo "\033[32;4m	   ***Executable $(NAME) created***   \033[0;m"
 
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) $(FLAGS) -c $< -o $@ -I$(INC_PATH)
+%.o : %.c
+	@$(CC) $(FLAGS) -c $< -o $@
 
 clean :
 	@make clean -C $(LIBFT)
-	@rm -rf $(OBJ_PATH) 2> /dev/null || true
-
-fclean : clean
-	@make fclean -C $(LIBFT)
-	@rm -f $(NAME_PATH)$(NAME)
+	@rm -f $(OBJS)
+fclean :
+	@make clean -C $(LIBFT)
+	@rm -f $(NAME)
 
 re : fclean all
 

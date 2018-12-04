@@ -1,4 +1,4 @@
-#include "../includes/asm.h"
+#include "asm.h"
 
 void		print_tab(t_data *d, int i)
 {
@@ -45,11 +45,12 @@ void    show_labels(t_data *d) //tmp
 		\nop_code:\t%s\
 		\nop_nb:\t\t%i\
 		\nargs:", tmp->name, tmp->op_code, tmp->op_nb);
-		while (tmp->op_nb != 0 && tmp->args[i])
+	while (tmp->op_nb != 0 && tmp->args[i])
 		{
 	        printf("\t\t%s\n", tmp->args[i]);
 			i++;
 		}
+		tmp->position, d->op[tmp->op_nb - 1].encoded_byte, tmp->bytes);
 		if (tmp->op_nb != 0)
 		{
 	        printf("position:\t%i\
