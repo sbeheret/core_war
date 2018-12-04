@@ -45,15 +45,29 @@ void    show_labels(t_data *d) //tmp
 		\nop_code:\t%s\
 		\nop_nb:\t\t%i\
 		\nargs:", tmp->name, tmp->op_code, tmp->op_nb);
-		while (tmp->args[i])
+		while (tmp->op_nb != 0 && tmp->args[i])
 		{
 	        printf("\t\t%s\n", tmp->args[i]);
 			i++;
 		}
-        printf("position:\t%i\
-		\nencoded_byte:\t%i\
-		\nbytes:\t\t%i\n\n\n",\
-		tmp->position, d->op[tmp->op_nb - 1].encoded_byte, tmp->bytes);
+		if (tmp->op_nb != 0)
+		{
+	        printf("position:\t%i\
+			\nencoded_byte:\t%i\
+			\ndir_as_ind:\t%i\
+			\nbytes:\t\t%i\n\n\n",\
+			tmp->position, d->op[tmp->op_nb - 1].dir_as_ind,\
+			d->op[tmp->op_nb - 1].encoded_byte, tmp->bytes);
+		}
+		else
+		{
+	        printf("\t\t%s\nposition:\t%i\
+			\nencoded_byte:\t%i\
+			\ndir_as_ind:\t%i\
+			\nbytes:\t\t%i\n\n\n",\
+			(char*)0, tmp->position, d->op[tmp->op_nb].dir_as_ind,\
+			d->op[tmp->op_nb].encoded_byte, tmp->bytes);
+		}
 		tmp = tmp->next;
     }
 	printf("total number of bytes : %zu\n\n", d->total_bytes);

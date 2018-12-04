@@ -41,6 +41,11 @@ int    compliance_check(t_data *d)
 	l = d->first_label;
 	while (l)
 	{
+		if (l->op_nb == 0)
+		{
+			l = l->next;
+			continue;
+		}
 		i = 0;
 		while (i < d->op[l->op_nb - 1].params_nb)
 		{

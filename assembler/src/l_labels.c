@@ -64,24 +64,27 @@ int				is_label(t_data *d, int *y, int len, int skip)
 
 	if (d->tab[*y][len + 1] && d->tab[*y][len + 1] != ' ' && d->tab[*y][len + 1] != '\t')
 		return (error_char(d->tab[*y][len + 1]));
-	l = find_args_line(d->tab, *y, len + 1);
+	l = *y;//= find_args_line(d->tab, *y, len + 1);
 	lb = make_label(d->tab + *y, len, *y - skip);
 	if (len > 0 && l - *y == 0)
 	{
 		len++;
 		skip = len;
 		len += find_op_code(lb, d->tab[l] + len, d->op);
-		if (len - skip == 0 || !check_commas(d->tab[l] + skip))
+		if (len - skip == 0 || (len - skip != 1 && !check_commas(d->tab[l] + skip)))
 			return (0);
 	}
 	else
 	{
 		len = find_op_code(lb, d->tab[l], d->op);
-		if (len == 0 || !check_commas(d->tab[l]))
+		if (len == 0 || (len != 1 && !check_commas(d->tab[l])))
 			return (0);
 	}
-	lb->args = ft_strsplit(d->tab[l] + len, SEPARATOR_CHAR);
-	trim_spaces(lb->args);
+	if (lb->op_nb != 0)
+	{
+		lb->args = ft_strsplit(d->tab[l] + len, SEPARATOR_CHAR);
+		trim_spaces(lb->args);
+	}
 	add_to_label_list_end(d, lb);
 	*y = l;
 	return (1);
@@ -93,7 +96,7 @@ int				is_op_code(t_data *d, int y, int len, int skip)
 
 	lb = make_label(d->tab + y, 0, y - skip);
 	len = find_op_code(lb, d->tab[y], d->op);
-	if (len == 0 || !check_commas(d->tab[y]))
+	if (len == 0 || !check_commas(d->tab[y])) // || len == 1 ?
 		return (0);
 	lb->args = ft_strsplit(d->tab[y] + len, SEPARATOR_CHAR);
 	trim_spaces(lb->args);
@@ -111,7 +114,7 @@ int				get_labels(t_data *d, int y)
 	while (d->tab[y])
 	{
 		len = 0;
-		while (ft_strchr(LABEL_CHARS, d->tab[y][len]))
+		while (ft_strchr_no_zero(LABEL_CHARS, d->tab[y][len]))
 			len++;
 		if (d->tab[y][len] == LABEL_CHAR)
 		{
@@ -122,13 +125,19 @@ int				get_labels(t_data *d, int y)
 			|| ft_strstr(d->tab[y], NAME_CMD_STRING)
 			|| ft_strstr(d->tab[y], COMMENT_CMD_STRING))
 			skip++;
-		else if (d->tab[y][len] == ' ')
+		else if (d->tab[y][len] == ' ' || d->tab[y][len] == '\t')
 		{
 			if (!is_op_code(d, y, len, skip))
 				return (0);
 		}
 		else
-			return (error_char(d->tab[y][len]));
+		{
+			if (!d->tab[y][len])
+				ft_printf("\033[31mInvalide line [%s]\033[0;m\n", d->tab[y]);
+			else
+				error_char(d->tab[y][len]);
+			return (0);
+		}
 		y++;
 	}
 	if (!general_check(d) || !compliance_check(d))

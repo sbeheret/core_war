@@ -27,6 +27,7 @@ SRCS =	main.c \
 		error.c \
 		extras.c \
 		free_data.c \
+		ft_strchr_no_zero.c \
 		get_data.c \
 		hexatob.c \
 		l_args.c \

@@ -100,6 +100,11 @@ void    add_bytes(t_data *d)
     l = d->first_label;
     while (l)
     {
+		if (l->op_nb == 0)
+		{
+			l = l->next;
+			continue;
+		}
         l->bytes += d->op[l->op_nb - 1].encoded_byte;
         if ((l->op_nb >= LIVE && l->op_nb <= SUB) ||
             l->op_nb == ZJMP || l->op_nb == FORK || l->op_nb == LFORK)

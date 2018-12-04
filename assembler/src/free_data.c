@@ -32,14 +32,17 @@ static void			free_labels(t_data *d)
         free(label->name);
 		label->name = NULL;
 		i = 0;
-		while (label->args[i])
+		if (label->op_nb != 0)
 		{
-			free(label->args[i]);
-			label->args[i] = NULL;
-			i++;
+			while (label->args[i])
+			{
+				free(label->args[i]);
+				label->args[i] = NULL;
+				i++;
+			}
+			free(label->args);
+			label->args = NULL;
 		}
-		free(label->args);
-		label->args = NULL;
 		free(label);
 		label = NULL;
 	}

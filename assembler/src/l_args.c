@@ -50,6 +50,8 @@ static int   args_error(char **s, int *y)
 			return (*y);
 		while (s[*y][x])
 		{
+			if (s[*y][x] == '-' && s[*y][x + 1] != '-')
+				x++;
 			if (!ft_isdigit(s[*y][x]))
 				return (error_args(s[*y]) - 2);
 			x++;
@@ -66,6 +68,11 @@ static int    args_nb_check(t_labels *l, t_op *op)
 	while (l)
 	{
 		i = 0;
+		if (l->op_nb == 0)
+		{
+			l = l->next;
+			continue;
+		}
 		while (l->args[i])
 			i++;
 		if (i != op[l->op_nb - 1].params_nb)
@@ -87,6 +94,11 @@ int    general_check(t_data *d)
 		return (0);
 	while (l)
 	{
+		if (l->op_nb == 0)
+		{
+			l = l->next;
+			continue;
+		}
 		a = args_error(l->args, &y);
 		if (a == -2)
 			return (0);
@@ -101,6 +113,7 @@ int    general_check(t_data *d)
 			}
 		}
 		l = l->next;
+		y = 0;
 	}
 	return (1);
 }

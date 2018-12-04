@@ -37,6 +37,7 @@
 # define LFORK 15
 # define AFF 16
 
+# define YES printf("YES\n"); //tmp
 
 /*
  * ****************************************************************************
@@ -78,6 +79,7 @@ typedef struct			s_labels
 typedef struct			s_data
 {
 	char				**tab;
+	int					y;
 	t_labels			*first_label;
 	t_labels			*last_label;
 	t_op				*op;
@@ -150,5 +152,6 @@ int    	error_param_nb(char *op_code, int expected, int got);
 
 void		print_tab(t_data *d, int i);
 void        show_labels(t_data *d);
+char		*ft_strchr_no_zero(const char *s, int c);
 
 #endif
