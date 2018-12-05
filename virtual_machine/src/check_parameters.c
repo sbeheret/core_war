@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 15:58:08 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/30 11:27:55 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 **		- Commentaires
 **		- Programme binaire
 **		- Numero du joueur
+** Creer les processus avec PC et REG1
 */
 
 void			check_parameters(int argc, char **argv, t_vm *vm)
@@ -127,11 +128,11 @@ void			check_binary(t_champion *champion)
 	binary = champion->binary;
 	if (champion->binary_len < BEGIN_BINARY)
 		ft_exit_toosmall(champion->file);
-	if ((magic_number = ft_octet_to_int(&binary)) != COREWAR_EXEC_MAGIC)
+	if ((magic_number = ft_octet_to_int(&binary, 4)) != COREWAR_EXEC_MAGIC)
 		ft_exit_magicnumber(champion->file);
 	champion->name = ft_octet_to_char(&binary, PROG_NAME_LENGTH);
 	check_padding(&binary, champion->file);
-	champion->weight = ft_octet_to_int(&binary);
+	champion->weight = ft_octet_to_int(&binary, 4);
 	champion->comment = ft_octet_to_char(&binary, COMMENT_LENGTH);
 	check_padding(&binary, champion->file);
 	if (champion->weight != champion->binary_len - BEGIN_BINARY)

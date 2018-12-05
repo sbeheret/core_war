@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/11/27 15:43:30 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/12/03 17:36:18 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -40,17 +40,26 @@ NAME_PATH = ../
 NAME = 		our_coreware
 
 #/********************** SOURCE *********************/
-SRC =		corewar.c 	\
+SRC =		corewar.c			\
 			check_parameters.c	\
 			check_parameters2.c	\
-			initialization.c 	\
-			tools.c				\
+			convert.c			\
 			exit.c				\
 			exit2.c				\
+			exit3.c				\
+			free.c				\
+			get_action.c		\
+			initialization.c 	\
+			tools.c				\
+			tools2.c			\
+			instruction.c		\
+			instruction2.c		\
+			instruction3.c		\
+			instruction4.c		\
 			lib_list.c			\
-			convert.c			\
 			load_in_ram.c		\
-			#where_star.c		\
+			run_vm.c			\
+
 
 LIBNAME =	libft/libft.a \
 
@@ -90,4 +99,4 @@ re: fclean all
 
 debug : $(OBJ)
 	@echo "$(PURPLE) --Linking--\t\t"
-	$(CC) -o $(NAME) $^ $(LIBP) -fsanitize=address -O1 -fno-omit-frame-pointer
+	$(CC) -o $(NAME_PATH)$(NAME) $^ $(LIBP) -fsanitize=address -O1 -fno-omit-frame-pointer

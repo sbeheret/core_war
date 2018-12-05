@@ -1,0 +1,7 @@
+DEAD A Cycle_to_die
+Decrementer CTD
+les cycles_now
+
+Faire les fonctions OP CODE
+
+circular avec negatif PARTOUT
