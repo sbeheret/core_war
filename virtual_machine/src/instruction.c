@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 18:12:01 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/05 16:46:13 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,22 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 {
 	// est-ce que les valeurs sont bien des int
 	t_action		action;
-	int				arg1;
+	unsigned int	arg1;
 	int				arg2;
+	int				nb_octect;
 
 	ft_printf("~~~LD~~~\n");
+	nb_octect = 2;
 	action = processus->action;
 	arg1 = action.args[0];
 	arg2 = action.args[1];
-	//get action ?
 	if (action.nb_arg != 2 || action.type[0] == REG || action.type[1] != REG)
 		return;
-	//get action ?
-	if (action.args[1] < 1 || action.args[1] > 16)
+	if (arg2 < 1 || arg2 > 16)
 		return;
-	// depend de la taille a lire ??
-	processus->reg[action.args[1] - 1] = (*vm).ram[circular(action.pc + action.args[0])];
+	if (action.type[0] == 2)
+		nb_octect = 4;
+	processus->reg[arg2 - 1] = ft_octet_to_int2((*vm).ram, nb_octect, action.pc + 2);
 	processus->carry = 1;
 }
 
@@ -58,18 +59,13 @@ void	ft_st(t_vm *vm, t_processus *processus)
 {
 	// est-ce que les valeurs sont bien des int ou unsigned int
 	t_action		action;
-	int				arg1;
+	unsigned int	arg1;
 	int				arg2;
 
 	ft_printf("~~~ST~~~\n");
 	action = processus->action;
 	arg1 = action.args[0];
 	arg2 = action.args[1];
-	if (action.type[1] == REG)
-	{
-		processus->reg[arg1] = processus->reg[arg2];
-		return;
-	}
 	//get action ?
 	if (action.nb_arg != 2 || action.type[0] != REG || action.type[1] == DIR)
 		return;
@@ -78,7 +74,18 @@ void	ft_st(t_vm *vm, t_processus *processus)
 		return;
 	if (action.type[1] == REG && (arg2 < 1 || arg2 > 16))
 		return;
-	ft_int_to_octet(vm->ram, arg1, circular(arg2));
+	if (action.type[1] == REG)
+	{
+		processus->reg[arg1] = processus->reg[arg2];
+		return;
+	}
+	else
+	{
+		ft_printf("int_to_octect(ram, %d, %d)\n", processus->reg[arg1 - 1], circular(arg2));
+		ft_int_to_octet((*vm).ram, processus->reg[arg1 - 1], circular(arg2));
+
+	}
+	print_ram((*vm).ram);
 }
 
 void	ft_add(t_vm *vm, t_processus *processus)

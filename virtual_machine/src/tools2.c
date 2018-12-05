@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:52:03 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/30 12:03:31 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/05 17:45:28 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ void	print_processus(t_processus *pcs)
 		ft_printf("---------Processus-----------\n");
 		ft_printf("PC = %d\n", tmp->PC);
 		ft_printf("Carry = %d\n", tmp->carry);
-		ft_printf("Registres 1 to 8: %#x-%u-%u-%u-%u-%u-%u-%u\n", tmp->reg[0],
+		ft_printf("Registres 1 to 8: %#u-%u-%u-%u-%u-%u-%u-%u\n", tmp->reg[0],
 				tmp->reg[1], tmp->reg[2], tmp->reg[3], tmp->reg[4],
 				tmp->reg[5], tmp->reg[6], tmp->reg[7]);
+		ft_printf("Registres 9 to 16: %#u-%u-%u-%u-%u-%u-%u-%u\n", tmp->reg[9],
+				tmp->reg[10], tmp->reg[11], tmp->reg[12], tmp->reg[13],
+				tmp->reg[14], tmp->reg[15], tmp->reg[16]);
 		ft_printf("Cycles to wait = %d\n", tmp->cycles_wait);
 		ft_printf("Lives = %d\n", tmp->lives);
 		print_action(tmp->action);
