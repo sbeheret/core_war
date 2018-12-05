@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   set_header.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/01 15:29:47 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 13:57:26 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
+
+static int			ft_strmcmp(char *s1, char *s2, size_t len)
+{
+	while (--len && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
 
 static int			parse_name(t_header *h, char **tab, int frst)
 {
@@ -18,7 +28,7 @@ static int			parse_name(t_header *h, char **tab, int frst)
 	int			j;
 	int			quotes;
 
-	i = 5;
+	i = ft_strlen(NAME_CMD_STRING);
 	j = 0;
 	while (tab[frst][i] == ' ' || tab[frst][i] == '\t')
 		i++;
@@ -45,7 +55,7 @@ static int			parse_comment(t_header *h, char **tab, int sec)
 {
 	t_var			var;
 
-	var.i = 8;
+	var.i = ft_strlen(COMMENT_CMD_STRING);
 	var.j = 0;
 	while (tab[sec][var.i] == ' ' || tab[sec][var.i] == '\t')
 		var.i++;
@@ -74,17 +84,20 @@ static int			name_comment(t_header *h, char **tab, int frst, int sec)
 	int			position;
 
 	position = 0;
-	if (ft_strncmp(tab[frst], ".name", 5) == 0)
+	if (ft_strmcmp(tab[frst], NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0)
 	{
 		parse_name(h, tab, frst);
-		if (ft_strncmp(tab[sec], ".comment", 8) != 0)
+		if (ft_strmcmp(tab[sec], COMMENT_CMD_STRING,
+					ft_strlen(COMMENT_CMD_STRING)) != 0)
 			err_dots(sec, sec, tab, h);
 		position = parse_comment(h, tab, sec);
 	}
-	else if (ft_strncmp(tab[frst], ".comment", 8) == 0)
+	else if (ft_strmcmp(tab[frst], COMMENT_CMD_STRING,
+				ft_strlen(COMMENT_CMD_STRING)) == 0)
 	{
 		parse_comment(h, tab, frst);
-		if (ft_strncmp(tab[sec], ".name", 5) != 0)
+		if (ft_strmcmp(tab[sec], NAME_CMD_STRING,
+					ft_strlen(NAME_CMD_STRING)) != 0)
 			err_dots(sec, sec, tab, h);
 		position = parse_name(h, tab, sec);
 	}
@@ -125,12 +138,9 @@ int					set_header(char **tab, t_header *header)
 	int			position;
 
 	position = 0;
-	ft_bzero(header->prog_name, PROG_NAME_LENGTH);
-	ft_bzero(header->comment, COMMENT_LENGTH);
-	ft_bzero(header->pad, 4);
-	ft_bzero(header->pad2, 4);
+	ft_bzero(header->prog_name, PROG_NAME_LENGTH + T_IND);
+	ft_bzero(header->comment, COMMENT_LENGTH + T_IND);
 	header->magic = swap_uint32(COREWAR_EXEC_MAGIC);
-	header->prog_size = swap_uint32(COREWAR_EXEC_MAGIC);
 	position = parse_name_comment(header, tab);
 	return (position);
 }

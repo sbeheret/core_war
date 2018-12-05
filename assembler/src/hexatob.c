@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   hexatob.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 09:36:00 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 09:36:16 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 13:56:19 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../includes/asm.h"
 
 unsigned int hexatob(const char *ptr)
 {
@@ -23,7 +21,7 @@ unsigned int hexatob(const char *ptr)
 
 	while (ch == ' ' || ch == '\t')
 		ch = *(++ptr);
-	while (*ptr) 
+	while (*ptr)
 	{
 		if (ch >= '0' && ch <= '9')
 			value = (value << 4) + (ch - '0');
