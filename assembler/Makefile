@@ -6,7 +6,7 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/12/05 13:13:00 by dshults          ###   ########.fr        #
+#    Updated: 2018/12/05 13:41:02 by dshults          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS =	main.c \
 		extras.c \
 		free_data.c \
 		ft_strchr_no_zero.c \
+		ft_strndup.c \
 		get_data.c \
 		hexatob.c \
 		l_args.c \

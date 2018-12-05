@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/02 16:57:21 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/05 13:41:04 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,5 +153,6 @@ int    	error_param_nb(char *op_code, int expected, int got);
 void		print_tab(t_data *d, int i);
 void        show_labels(t_data *d);
 char		*ft_strchr_no_zero(const char *s, int c);
+char		*ft_strndup(const char *s, size_t n);
 
 #endif

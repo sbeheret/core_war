@@ -6,7 +6,7 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:50 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/02 16:08:11 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/05 13:28:44 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,6 @@ int    find_op_code(t_labels *lb, char *str, t_op *op)
 	i = 0;
 	if (!str || !str[0])
 	{
-		//str = lb->name;
-		//ft_bzero(lb, 5);
-		//lb->name = str;
 		lb->bytes = 0;
 		return (1);
 	}
