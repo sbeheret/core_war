@@ -6,7 +6,7 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:41:23 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/02 18:02:34 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/05 13:28:59 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,12 @@ static t_labels		*make_label(char **line, int len, int y)
 
 	label = ft_memalloc(sizeof(t_labels));
 	if (len > 0)
-		label->name = strndup(line[0], len);
+		label->name = ft_strndup(line[0], len);
 	else
 		label->name = 0;
 	label->position = y;
 	label->bytes = 1;
 	return (label);
-}
-
-int					find_args_line(char **tab, int y, int x)
-{
-	while (tab[y])
-	{
-		while (tab[y][x])
-		{
-			if (tab[y][x] != ' ' && ft_isprint(tab[y][x]))
-				return (y);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-	return (y);
 }
 
 int				is_label(t_data *d, int *y, int len, int skip)
@@ -64,7 +48,7 @@ int				is_label(t_data *d, int *y, int len, int skip)
 
 	if (d->tab[*y][len + 1] && d->tab[*y][len + 1] != ' ' && d->tab[*y][len + 1] != '\t')
 		return (error_char(d->tab[*y][len + 1]));
-	l = *y;//= find_args_line(d->tab, *y, len + 1);
+	l = *y;
 	lb = make_label(d->tab + *y, len, *y - skip);
 	if (len > 0 && l - *y == 0)
 	{
