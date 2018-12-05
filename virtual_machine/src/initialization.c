@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 15:35:35 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 12:46:29 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	initialize_processus(t_processus **processus, int nb_player, int start)
 
 	i = -1;
 	(*processus)->PC = start;
+	(*processus)->carry = 0;
 	if (!((*processus)->reg = malloc(sizeof(int) * 16)))
 		ft_exit_malloc();
 	while (++i <= 15)
@@ -41,6 +42,23 @@ void	initialize_processus(t_processus **processus, int nb_player, int start)
 	(*processus)->cycles_wait = 0;
 	(*processus)->lives = 0;
 	(*processus)->next = NULL;
+	initialize_action(*processus);
+}
+
+void	initialize_action(t_processus *processus)
+{
+	processus->action.op_code = 0;
+	processus->action.args[0] = 0;
+	processus->action.args[1] = 0;
+	processus->action.args[2] = 0;
+	processus->action.args[3] = 0;
+	processus->action.nb_arg = 0;
+	processus->action.size_read = 0;
+	processus->action.pc = 0;
+	processus->action.type[0] = 0;
+	processus->action.type[1] = 0;
+	processus->action.type[2] = 0;
+	processus->action.type[3] = 0;
 }
 
 void	initialize_champion(t_champion **champion)

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 13:19:03 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 15:58:16 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/11/29 15:27:53 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ t_champion	*new_champion(void)
 		ft_exit_malloc();
 	initialize_champion(&new_elem);
 	return (new_elem);
+}
+
+t_processus	*new_processus(int p_number, int start)
+{
+	t_processus	*new;
+
+	if (!(new = malloc(sizeof(t_processus))))
+		ft_exit_malloc();
+	initialize_processus(&new, p_number, start);
+	return (new);
 }
 
 void		ft_push_back_chmp(t_champion **begin, t_champion *to_add)
@@ -37,6 +47,20 @@ void		ft_push_back_chmp(t_champion **begin, t_champion *to_add)
 				tmp = tmp->next;
 		}
 		tmp->next = to_add;
+	}
+}
+
+void		push_front_pcs(t_processus **pcs, t_processus *new)
+{
+	t_processus	*tmp;
+
+	tmp = (*pcs);
+	if (tmp == NULL)
+		(*pcs) = new;
+	else
+	{
+		new->next = tmp;
+		(*pcs) = new;
 	}
 }
 

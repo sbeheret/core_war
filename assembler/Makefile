@@ -6,11 +6,11 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/11/25 20:22:32 by dshults          ###   ########.fr        #
+#    Updated: 2018/12/05 13:13:00 by dshults          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_PATH = ./
+NAME_PATH = ../
 NAME = asm
 
 LIBFT = ../lib/libft
@@ -38,9 +38,10 @@ SRCS =	main.c \
 		l_op.c \
 		l_size.c \
 		l_trim.c \
-		op.c	\
+		op.c \
 		set_header.c \
-		strjoinappend.c
+		strjoinappend.c \
+		create_file_body.c \
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
@@ -65,4 +66,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re libft
+.PHONY : all clean fclean re libf
