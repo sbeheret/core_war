@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 static int			ft_strmcmp(char *s1, char *s2, size_t len)
 {

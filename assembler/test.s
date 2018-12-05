@@ -1,4 +1,8 @@
-.name "stayin' alive"
-.comment "Ha, Ha, Ha, stayiiiiin' aliiiiiiiiiive"
+.name "zork"
+.comment "I'M ALIIIIVE"
 
-sti	
+l2:		sti r1, %:live, %1
+		and r1, %0, r1
+
+live:	live %1
+		zjmp %:live

@@ -6,10 +6,17 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 09:36:00 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 13:56:19 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/05 14:08:01 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/asm.h"
+
+int32_t			swap_uint32(uint32_t val)
+{
+	val = ((val << 8) & 0xFF00FF00) | ((val >> 8) & 0xFF00FF);
+	return ((val << 16) | (val >> 16));
+}
 
 unsigned int hexatob(const char *ptr)
 {
