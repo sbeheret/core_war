@@ -6,18 +6,21 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/12/04 16:02:43 by esouza           ###   ########.fr        #
+#    Updated: 2018/12/05 10:03:47 by esouza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_PATH = ./
+NAME_PATH = ../
 NAME = asm
 
-LIBFT = libft
+LIBFT = ../lib/libft
+INC_PATH =	includes
+OBJ_PATH =	obj
+SRC_PATH =	src
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
 SRCS =	main.c \
 		check_words.c \
@@ -37,31 +40,30 @@ SRCS =	main.c \
 		l_trim.c \
 		op.c	\
 		set_header.c \
-		strjoinappend.c
+		strjoinappend.c \
 		create_file_body.c \
 
+OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
-OBJS = $(SRCS:.c=.o)
+all : $(NAME_PATH)$(NAME)
 
-all : $(LIBFT) $(NAME)
-
-$(LIBFT) :
+$(NAME_PATH)$(NAME) : $(OBJS)
 	@make -C $(LIBFT)
-
-$(NAME) : $(OBJS)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME)
 	@echo "\033[32;4m	   ***Executable $(NAME) created***   \033[0;m"
 
-%.o : %.c
-	@$(CC) $(FLAGS) -c $< -o $@
+$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@$(CC) $(FLAGS) -c $< -o $@ -I$(INC_PATH)
 
 clean :
 	@make clean -C $(LIBFT)
-	@rm -f $(OBJS)
-fclean :
-	@make clean -C $(LIBFT)
-	@rm -f $(NAME)
+	@rm -rf $(OBJ_PATH) 2> /dev/null || true
+
+fclean : clean
+	@make fclean -C $(LIBFT)
+	@rm -f $(NAME_PATH)$(NAME)
 
 re : fclean all
 
-.PHONY : all clean fclean re libft
+.PHONY : all clean fclean re libf

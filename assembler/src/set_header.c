@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:56:33 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 10:03:22 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static int			parse_comment(t_header *h, char **tab, int sec)
 		}
 	}
 	if (var.quotes < 2 || (var.quotes == 2 && check_end(tab, sec, var.i)))
+		err_dots(sec, var.i, tab, h);
+	return (sec);
 }
 
 static int			name_comment(t_header *h, char **tab, int frst, int sec)
