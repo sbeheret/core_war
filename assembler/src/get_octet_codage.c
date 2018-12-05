@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 11:39:13 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 14:57:14 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 16:30:08 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		write_buff(t_labels *head, char b[])
 
 	i = 0;
 	bit = 0;
-	while (head->args[i] && i < 3)
+	while (head->args[i])
 	{
 		if (head->args[i][0] == DIRECT_CHAR)
 			direct(b, &bit);
@@ -58,11 +58,17 @@ static void		write_buff(t_labels *head, char b[])
 int				get_octet_codage(t_labels *head, int fd2)
 {
 	char	b[9];
+	int		i;
 
-	b[8] = '\0';
-	b[7] = '0';
-	b[6] = '0';
+	i = 0;
+	while (i < 8)
+	{
+		b[i] = '0';
+		i++;
+	}
+	b[i] = '\0';
 	write_buff(head, b);
+//	printf("{{%s}}\n", b);
 	ft_putchar_fd((unsigned char)binary_char_to_int(b), fd2);
 	return (fd2);
 }

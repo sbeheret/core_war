@@ -8,8 +8,8 @@ int				binary_char_to_int(char *s)
 	while (*s)
 	{
 		nb <<= 1;
-	if (*s++ == '1')
-		nb ^=1;	
+		if (*s++ == '1')
+			nb ^=1;	
 	}
 	return (nb);
 }
