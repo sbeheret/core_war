@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 16:16:49 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 09:40:50 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void			get_data(char **argv, int fd, int fd2)
 	fd2 = open(name, O_RDWR | O_APPEND | O_CREAT, RIGHTS);
 	write(fd2, header, sizeof(t_header));
 	create_file_body(d, fd2);
+	printf("After create file\n");
 	print_tab(d, position); //tmp
 	free_data(d, data, header);
 }
