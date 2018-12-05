@@ -6,7 +6,7 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/12/05 10:03:47 by esouza           ###   ########.fr        #
+#    Updated: 2018/12/05 11:42:55 by esouza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ SRCS =	main.c \
 		set_header.c \
 		strjoinappend.c \
 		create_file_body.c \
+		get_opcode.c \
+		get_octet_codage.c \
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 

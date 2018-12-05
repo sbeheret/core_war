@@ -1,5 +1,19 @@
 #include "../includes/asm.h"
 
+int				binary_char_to_int(char *s)
+{
+	int			nb;
+
+	nb = 0;
+	while (*s)
+	{
+		nb <<= 1;
+	if (*s++ == '1')
+		nb ^=1;	
+	}
+	return (nb);
+}
+
 int32_t			swap_uint32(uint32_t val)
 {
 	val = ((val << 8) & 0xFF00FF00) | ((val >> 8) & 0xFF00FF);

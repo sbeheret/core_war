@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 16:01:19 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 14:53:48 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ int32_t						swap_uint32(uint32_t val);
 void						err_dots(int idx, int err, char **tab, t_header *h);
 int							check_end(char **tab, int col, int row);
 int							create_file_body(t_data *d, int fd2);
+int							get_opcode(t_labels *head, int fd2);
+int							get_octet_codage(t_labels *head, int fd2);
+int							binary_char_to_int(char *s);
 
 /*
  *******************************************************************************
