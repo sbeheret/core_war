@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/26 18:54:52 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/03 16:20:15 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@ void	print_ram(unsigned char *ram)
 {
 	size_t i;
 
+	// i = 0;
+	// while (i < MEM_SIZE && i < 40)
+	// {
+	// 	if (!(i % 64))
+	// 	{
+	// 		ft_printf("\n");
+	// 		ft_printf("0X");
+	// 		ft_printf("%.4X : ", i);
+	// 	}
+	// 	if (i / 10 == 0)
+	// 		ft_printf(" ");
+	// 	ft_printf("%d", i);
+	// 	ft_printf(" ");
+	// 	i++;
+	// }
 	i = 0;
 	while (i < MEM_SIZE)
 	{
@@ -32,6 +47,16 @@ void	print_ram(unsigned char *ram)
 	}
 	ft_printf("\n");
 }
+//
+// void	print_optab(void)
+// {
+// 	int i = 0;
+// 	while (i<17)
+// 	{
+// 		ft_printf("tab[%d]= {\"%s\", %d, {%d,%d,%d}, %d, %d, %s, %d, %d}\n",i, op_tab[i].name,op_tab[i].param_number, op_tab[i].param_type[0], op_tab[i].param_type[1], op_tab[i].param_type[2], op_tab[i].op_code, op_tab[i].cycle, op_tab[i].comment, op_tab[i].encoding_byte, op_tab[i].direct_octect);
+// 		i++;
+// 	}
+// }
 
 void	print_memory(unsigned char *str, size_t size)
 {
@@ -82,19 +107,23 @@ void	print_struct_vm(t_vm vm)
 	ft_printf("\n=============== STRUCT VM ===============\n");
 	ft_printf("flag_dump = %d\n", vm.flag_dump);
 	ft_printf("dump_cycle = %d\n", vm.dump_cycle);
-	ft_printf("----------PROCESSUS LIST-----------\n");
-	while (tmp)
-	{
-		ft_printf("-----------\n");
-		ft_printf("name = %s\n",tmp->name);
-		ft_printf("comment = %s\n",tmp->comment);
-		ft_printf("file = %s\n",tmp->file);
-		ft_printf("p_number = %#X\n",tmp->p_number);
-		ft_printf("weight = %d\n",tmp->weight);
-		ft_printf("-----------\n");
-		tmp = tmp->next;
-	}
-	ft_printf("------END PROCESSUS LIST-----------\n");
-	ft_printf("\n============= END STRUC VM  =============\n");
-
+	ft_printf("last_alive = %#.6X\n", vm.last_alive);
+	ft_printf("cycle to die CTD = %d\n", vm.CTD);
+	ft_printf("cycle ttx = %d\n", vm.cycles_ttx);
+	ft_printf("cycle now = %d\n", vm.cycles_now);
+	// ft_printf("----------CHAMPION LIST-----------\n");
+	// while (tmp)
+	// {
+	// 	ft_printf("-----------\n");
+	// 	ft_printf("name = %s\n",tmp->name);
+	// 	ft_printf("comment = %s\n",tmp->comment);
+	// 	ft_printf("file = %s\n",tmp->file);
+	// 	ft_printf("p_number = %#X\n",tmp->p_number);
+	// 	ft_printf("weight = %d\n",tmp->weight);
+	// 	ft_printf("-----------\n");
+	// 	tmp = tmp->next;
+	// }
+	// ft_printf("------END CHAMPION LIST-----------\n");
+	// print_processus(vm.processus);
+	ft_printf("============= END STRUC VM  =============\n");
 }

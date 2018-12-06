@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   strjoinappend.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:08:42 by esouza            #+#    #+#             */
 /*   Updated: 2018/12/06 15:22:42 by esouza           ###   ########.fr       */

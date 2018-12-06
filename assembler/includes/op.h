@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:41:21 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 16:00:20 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 13:55:42 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define IND_SIZE				2
 # define REG_SIZE				4
-# define DIR_SIZE				4
+# define DIR_SIZE				REG_SIZE
 
 # define REG_CODE				1
 # define DIR_CODE				2
@@ -23,9 +23,9 @@
 
 # define MAX_ARGS_NUMBER			4
 # define MAX_PLAYERS				4
-# define MEM_SIZE				4096
-# define IDX_MOD				512
-# define CHAMP_MAX_SIZE			682
+# define MEM_SIZE				(4*1024)
+# define IDX_MOD					(MEM_SIZE / 8)
+# define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
 # define COMMENT_CHAR			'#'
 # define LABEL_CHAR				':'

@@ -6,11 +6,11 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:01:16 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:56:52 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 13:56:26 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 static void		check_args(int argc, char **argv)
 {

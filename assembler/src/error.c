@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 11:55:36 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:59:26 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 13:55:32 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 void				err_dots(int idx, int err, char **tab, t_header *h)
 {

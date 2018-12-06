@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hexatob.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/05 09:36:00 by esouza            #+#    #+#             */
+/*   Updated: 2018/12/05 14:08:01 by dshults          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/asm.h"
 
 int				binary_char_to_int(char *s)
@@ -30,7 +42,7 @@ unsigned int hexatob(const char *ptr)
 
 	while (ch == ' ' || ch == '\t')
 		ch = *(++ptr);
-	while (*ptr) 
+	while (*ptr)
 	{
 		if (ch >= '0' && ch <= '9')
 			value = (value << 4) + (ch - '0');

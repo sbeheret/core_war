@@ -6,11 +6,11 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:17 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/04 15:58:22 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 13:55:48 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 void			free_trim(char *line, char *trim)
 {

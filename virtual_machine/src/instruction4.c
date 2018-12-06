@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.c                                          :+:      :+:    :+:   */
+/*   instruction4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 12:33:51 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 17:00:48 by rfibigr          ###   ########.fr       */
+/*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
+/*   Updated: 2018/11/30 17:07:05 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-/*
-** Initilization of VM
-** -Check if arguments are valable
-** -Create ram and initialize all element
-*/
 
-int	main(int argc, char **argv)
+void	ft_aff(t_vm *vm, t_processus *processus)
 {
-	t_vm	vm;
+	(void)vm;
+	t_action		action;
+	int				arg1;
 
-	initialize_vm(&vm);
-	check_parameters(argc, argv, &vm);
-	load_champs(&vm);
-	create_process(&(vm).champion, &(vm).processus);
-	print_ram((vm).ram);
-	run_vm(&vm);
-	// print_optab();
-	// print_struct_vm(vm);
-//	print_ram(vm.ram);
-	ft_free_vm(&vm);
-	return (1);
+	action = processus->action;
+	arg1 = action.args[0];
+	if (arg1 < 1 || arg1 > 16)
+		return;
+	if (action.type[1] == REG && arg1 > 1 && arg1 < 16)
+	{
+		ft_printf("%c", processus->reg[arg1] % 256);
+		return;
+	}
 }

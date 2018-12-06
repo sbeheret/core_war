@@ -20,7 +20,7 @@ SRC_PATH =	src
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 SRCS =	main.c \
 		check_words.c \
@@ -28,17 +28,18 @@ SRCS =	main.c \
 		extras.c \
 		free_data.c \
 		ft_strchr_no_zero.c \
+		ft_strndup.c \
 		get_data.c \
 		hexatob.c \
 		l_args.c \
-		l_calc.c \
+		l_bytes_till_label.c \
 		l_check.c \
 		l_errors.c \
 		l_labels.c \
 		l_op.c \
 		l_size.c \
 		l_trim.c \
-		op.c	\
+		op.c \
 		set_header.c \
 		strjoinappend.c \
 		create_file_body.c \

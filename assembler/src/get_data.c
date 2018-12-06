@@ -41,8 +41,6 @@ static void		stocor(char name[], char **argv)
 	name[i] = '\0';
 }
 
-
-
 static void			read_fd(int fd, char **data)
 {
 	char		*line;
@@ -51,8 +49,7 @@ static void			read_fd(int fd, char **data)
 	line = NULL;
 	while (get_next_line(fd, &line))
 	{
-		printf("line before (%s)\n", line);
-		trim = ft_strtrim((char const *)line);
+		trim = str_trim((char const *)line);
 		if (trim[0] != COMMENT_CHAR)
 			*data = strjoinappend(*data, trim);
 		printf("line after (%s)\n", line);
@@ -75,7 +72,8 @@ void			get_data(char **argv, int fd, int fd2)
 	read_fd(fd, &data);
 	d->tab = ft_strsplit(data, '$');
 	position = set_header(d->tab, header);
-	if (!get_labels(d, position + 1))
+	d->y = position + 1;
+	if (!get_labels(d))
 	{
 		free_data(d, data, header);
 		ft_printf("Error, file has a bad format\n");
@@ -85,7 +83,7 @@ void			get_data(char **argv, int fd, int fd2)
 	stocor(name, argv);
 	fd2 = open(name, O_RDWR | O_APPEND | O_CREAT, RIGHTS);
 	write(fd2, header, sizeof(t_header));
-	create_file_body(d, fd2);
+	//create_file_body(d, fd2);
 	print_tab(d, position); //tmp
 	free_data(d, data, header);
 }

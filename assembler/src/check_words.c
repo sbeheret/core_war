@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_words.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 12:51:54 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:59:38 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/05 13:55:10 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 int				check_end(char **tab, int col, int row)
 {
