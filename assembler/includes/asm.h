@@ -127,7 +127,7 @@ void			free_data(t_data *d, char *data, t_header *header);
 void 		trim_spaces(char **tab);
 int			check_commas(char *s);
 
-int			get_labels(t_data *d, int y);
+int			get_labels(t_data *d);
 void    	check_label(char *s);
 int	    	general_check(t_data *d);
 int	    	compliance_check(t_data *d);
@@ -158,5 +158,6 @@ void		print_tab(t_data *d, int i);
 void        show_labels(t_data *d);
 char		*ft_strchr_no_zero(const char *s, int c);
 char		*ft_strndup(const char *s, size_t n);
+char		*str_trim(char const *s);
 
 #endif

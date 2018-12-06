@@ -67,9 +67,32 @@ void		trim_spaces(char **tab)
 	while (tab[y])
 	{
 		tmp = tab[y];
-		tab[y] = ft_strtrim(tab[y]);
+		tab[y] = str_trim(tab[y]);
 		free(tmp);
         tmp = NULL;
 		y++;
 	}
+}
+
+char	*str_trim(char const *s)
+{
+	int		i;
+	int		len;
+	char	*str;
+
+	i = 0;
+	while (*s == ' ' || *s == '\t' || *s == '\n')
+		s++;
+	if (*s == '\0')
+		return (ft_strnew(0));
+	len = (int)ft_strlen(s);
+	while (s[len - 1] == ' ' || s[len - 1] == '\t' || s[len - 1] == '\n')
+		len--;
+	i = 0;
+	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
+		return (0);
+	while (i < len)
+		str[i++] = *s++;
+	str[i] = '\0';
+	return (str);
 }

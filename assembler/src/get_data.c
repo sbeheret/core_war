@@ -49,7 +49,7 @@ static void			read_fd(int fd, char **data)
 	line = NULL;
 	while (get_next_line(fd, &line))
 	{
-		trim = ft_strtrim((char const *)line);
+		trim = str_trim((char const *)line);
 		if (trim[0] != COMMENT_CHAR)
 			*data = strjoinappend(*data, trim);
 		free_trim(line, trim);
@@ -71,7 +71,8 @@ void			get_data(char **argv, int fd, int fd2)
 	read_fd(fd, &data);
 	d->tab = ft_strsplit(data, '$');
 	position = set_header(d->tab, header);
-	if (!get_labels(d, position + 1))
+	d->y = position + 1;
+	if (!get_labels(d))
 	{
 		free_data(d, data, header);
 		ft_printf("Error, file has a bad format\n");
