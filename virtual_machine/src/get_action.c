@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/06 17:05:46 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 21:57:36 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	print_verbose(t_processus *processus)
 			value2 = processus->reg[processus->action.args[2] - 1];
 		else
 			value2 = processus->action.args[2];
-			ft_printf("\t  | -> store to %d + %d = %d (with pc and mod %d)\n",
-			value1, value2, value1 + value2, action.pc + value1 + value2);
+		ft_printf("\t  | -> store to %d + %d = %d (with pc and mod %d)\n",
+		value1, value2, value1 + value2, action.pc + value1 + value2);
 	}
 }

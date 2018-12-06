@@ -20,6 +20,7 @@
 # include "libft.h"
 
 # define BUFF_SIZE 4096
+# define OPEN_MAX 256
 
 typedef struct	s_struct
 {

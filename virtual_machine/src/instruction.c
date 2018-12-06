@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/06 17:33:20 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 21:59:26 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 	else if (action.type[ARG1] == 3)
 	{
 		address = (short)circular(processus->PC + arg1);
-		processus->reg[arg2] = ft_octet_to_int2((*vm).ram, 4, arg1);
+		processus->reg[arg2] = ft_octet_to_int2((*vm).ram, 4, address);
 	}
 	processus->carry = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 11:27:55 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 21:56:27 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,12 @@ unsigned char	*ft_read_champion(char *file, size_t *binary_len)
 {
 	int				fd;
 	int				rd;
-	int				i;
 	unsigned char	*binary;
 
 	if (!(binary = (unsigned char *)malloc(BUFF_SIZE)))
 		ft_exit_malloc();
 	if (((fd = open(file, O_RDONLY)) == -1))
 		ft_exit_nofile(file);
-	i = 0;
 	while ((rd = read(fd, binary, BUFF_SIZE)) > 0)
 	{
 		if (rd == -1)

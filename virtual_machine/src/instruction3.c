@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/06 15:04:33 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 21:59:52 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	ft_sti(t_vm *vm, t_processus *processus)
 	//DIRECT 2 BYTES
 	int		value1;
 	int		value2;
-	int		i;
 
-	i = -1;
 	// ft_printf("~~~STI~~~\n");
 	if (processus->action.args[0] < 1 || processus->action.args[0] > 16)
 		return ;
