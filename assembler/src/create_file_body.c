@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 12:49:39 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 14:29:23 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/05 16:30:42 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int			create_file_body(t_data *d, int fd2)
 	head = d->first_label;
 	while (head)
 	{
-		printf(">>1 {%s}\n", head->args[0]);
-		printf(">>2 {%s}\n", head->args[1]);
-		printf(">>3 {%s}\n", head->args[2]);
+		get_opcode(head, fd2);
+		if (d->op[head->op_nb - 1].encoded_byte)
+			get_octet_codage(head, fd2);
 		head = head->next;
 	}
 

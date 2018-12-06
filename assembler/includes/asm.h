@@ -106,6 +106,9 @@ int32_t						swap_uint32(uint32_t val);
 void						err_dots(int idx, int err, char **tab, t_header *h);
 int							check_end(char **tab, int col, int row);
 int							create_file_body(t_data *d, int fd2);
+int							get_opcode(t_labels *head, int fd2);
+int							get_octet_codage(t_labels *head, int fd2);
+int							binary_char_to_int(char *s);
 
 /*
  *******************************************************************************

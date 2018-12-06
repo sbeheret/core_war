@@ -2,7 +2,7 @@
 
 void		print_tab(t_data *d, int i)
 {
-	printf("{%s}\n", d->tab[i]);
+	//printf("{%s}\n", d->tab[i]);
 	i = 0;
 	while (d->tab[i])
 	{

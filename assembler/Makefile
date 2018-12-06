@@ -43,6 +43,8 @@ SRCS =	main.c \
 		set_header.c \
 		strjoinappend.c \
 		create_file_body.c \
+		get_opcode.c \
+		get_octet_codage.c \
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
