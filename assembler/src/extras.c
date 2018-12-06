@@ -56,8 +56,8 @@ void    show_labels(t_data *d) //tmp
 					\nencoded_byte:\t%i\
 					\ndir_as_ind:\t%i\
 					\nbytes:\t\t%i\n\n\n",\
-					tmp->position, d->op[tmp->op_nb - 1].dir_as_ind,\
-					d->op[tmp->op_nb - 1].encoded_byte, tmp->bytes);
+					tmp->position, d->op[tmp->op_nb - 1].encoded_byte,\
+					d->op[tmp->op_nb - 1].dir_as_ind, tmp->bytes);
 		}
 		else
 		{
@@ -65,8 +65,8 @@ void    show_labels(t_data *d) //tmp
 					\nencoded_byte:\t%i\
 					\ndir_as_ind:\t%i\
 					\nbytes:\t\t%i\n\n\n",\
-					(char*)0, tmp->position, d->op[tmp->op_nb].dir_as_ind,\
-					d->op[tmp->op_nb].encoded_byte, tmp->bytes);
+					(char*)0, tmp->position, d->op[tmp->op_nb].encoded_byte,\
+					d->op[tmp->op_nb].dir_as_ind, tmp->bytes);
 		}
 		tmp = tmp->next;
 	}
