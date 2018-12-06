@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 12:46:29 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 16:42:46 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ void	initialize_vm(t_vm *vm)
 void	initialize_processus(t_processus **processus, int nb_player, int start)
 {
 	int	i;
+	static int processus_number = 1;
 
 	i = -1;
+	(*processus)->processus_number = processus_number;
+	processus_number++;
 	(*processus)->PC = start;
 	(*processus)->carry = 0;
-	if (!((*processus)->reg = malloc(sizeof(int) * 16)))
+	if (!((*processus)->reg = malloc(sizeof(int) * 17)))
 		ft_exit_malloc();
-	while (++i <= 15)
+	while (++i <= 16)
 		(*processus)->reg[i] = 0;
 	(*processus)->reg[0] = nb_player;
 	(*processus)->cycles_wait = 0;

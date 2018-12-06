@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/05 14:52:34 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 14:36:26 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_ram(unsigned char *ram)
 		i++;
 	}
 	i = 0;
-	while (i < MEM_SIZE && i < 1000)
+	while (i < MEM_SIZE)
 	{
 		if (!(i % 64))
 		{

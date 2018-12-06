@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/04 11:52:57 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 15:04:33 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	ft_sti(t_vm *vm, t_processus *processus)
 {
+	//DIRECT 2 BYTES
 	int		value1;
 	int		value2;
 	int		i;
 
 	i = -1;
-	ft_printf("~~~STI~~~\n");
+	// ft_printf("~~~STI~~~\n");
 	if (processus->action.args[0] < 1 || processus->action.args[0] > 16)
 		return ;
 	if (processus->action.type[1] == 1)
@@ -36,12 +37,13 @@ void	ft_sti(t_vm *vm, t_processus *processus)
 
 void	ft_fork(t_vm *vm, t_processus *processus)
 {
+	//DIRECT 2 BYTES
 	t_processus *copy;
 	int	i;
 
 	if (processus->action.type[0] != 2)
 		return;
-	copy = new_processus(0, (processus->PC + processus->action.args[0]) % IDX_MOD);
+	copy = new_processus(0, ((short)circular(processus->action.pc + processus->action.args[0]) % IDX_MOD));
 	i = -1;
 	while (++i <= 15)
 		copy->reg[i] = processus->reg[i];
@@ -52,10 +54,11 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 
 void	ft_lld(t_vm *vm, t_processus *processus)
 {
+	//DIRECT 4 BYTES
 	(void)vm;
 	int		registre;
 
-	ft_printf("~~~LLD~~~\n");
+	// ft_printf("~~~LLD~~~\n");
 	registre = processus->action.args[1];
 	if (registre < 1 || registre > 16)
 		return ;
@@ -65,10 +68,11 @@ void	ft_lld(t_vm *vm, t_processus *processus)
 
 void	ft_lldi(t_vm *vm, t_processus *processus)
 {
+	//DIRECT 2 BYTES
 	int		value1;
 	int		value2;
 
-	ft_printf("~~~LLDI~~~\n");
+	// ft_printf("~~~LLDI~~~\n");
 	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
 		return ;
 	if (processus->action.type[0] == 1)
@@ -85,6 +89,7 @@ void	ft_lldi(t_vm *vm, t_processus *processus)
 
 void	ft_lfork(t_vm *vm, t_processus *processus)
 {
+	//DIRECT 2 BYTES
 	t_processus *copy;
 	int	i;
 

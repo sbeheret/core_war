@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/05 16:43:49 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 16:40:46 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@
 */
 
 # define BEGIN_BINARY (4 + PROG_NAME_LENGTH + 8 + COMMENT_LENGTH + 4)
-# define REG 1
-# define DIR 2
-# define IND 3
+# define REG 1 //coder sur 4 bytes
+# define DIR 2 //coder sur 2 bytes ou 4
+# define IND 3 //coder sur 2 bytes
+# define ARG1 0
+# define ARG2 1
+# define ARG3 2
+
 
 /*
 ** -----------------------------------------------------------------------------
@@ -64,6 +68,7 @@ typedef struct			s_action
 
 typedef struct			s_processus
 {
+	int					processus_number;
 	int					PC;
 	int					carry;
 	int					*reg;
@@ -214,6 +219,12 @@ void				ft_lld(t_vm *vm, t_processus *processus);
 void				ft_lldi(t_vm *vm, t_processus *processus);
 void				ft_lfork(t_vm *vm, t_processus *processus);
 void				ft_aff(t_vm *vm, t_processus *processus);
+
+/*
+** --------- VERBOSE
+*/
+void				print_verbose(t_processus *processus);
+
 
 /*
 ** --------- EXIT
