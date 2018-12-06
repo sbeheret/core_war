@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_file_body.c                                 :+:      :+:    :+:   */
+/*   third_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 12:49:39 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/06 10:41:12 by esouza           ###   ########.fr       */
+/*   Created: 2018/12/06 10:41:30 by esouza            #+#    #+#             */
+/*   Updated: 2018/12/06 11:42:34 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int			create_file_body(t_data *d, int fd2)
+int			third_arg(t_labels *head, int fd2)
 {
-	t_labels		*head;
-
-	head = d->first_label;
-	while (head)
-	{
-		get_opcode(head, fd2);
-		if (d->op[head->op_nb - 1].encoded_byte)
-			get_octet_codage(head, fd2);
-		first_arg(head, fd2);
-		second_arg(head, fd2);
-		third_arg(head, fd2);
-		head = head->next;
-	}
-
-	return (fd2);
+	if (arg_len(head) < 2)
+		return (1);
+	else if (head->args[TWO][ZERO] == 'r')
+		write_register(head, TWO, fd2);
+	return (0);
 }

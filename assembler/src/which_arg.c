@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_file_body.c                                 :+:      :+:    :+:   */
+/*   which_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 12:49:39 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/06 10:41:12 by esouza           ###   ########.fr       */
+/*   Created: 2018/12/05 16:49:56 by esouza            #+#    #+#             */
+/*   Updated: 2018/12/05 17:46:05 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int			create_file_body(t_data *d, int fd2)
+int			which_arg(t_labels *head, int idx)
 {
-	t_labels		*head;
-
-	head = d->first_label;
-	while (head)
-	{
-		get_opcode(head, fd2);
-		if (d->op[head->op_nb - 1].encoded_byte)
-			get_octet_codage(head, fd2);
-		first_arg(head, fd2);
-		second_arg(head, fd2);
-		third_arg(head, fd2);
-		head = head->next;
-	}
-
-	return (fd2);
+	if (head->args[idx][0] == 'r')
+		return (T_REG);
+	else if (head->args[idx][0] == DIRECT_CHAR)
+		return (T_DIR);
+	else if  (head->args[idx][0] == LABEL_CHAR)
+		return (T_LAB);
+	return (T_IND);
 }

@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:08:42 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:53:14 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/06 15:22:42 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char		*strjoinappend(char *s1, char *s2)
 
 	if (s1 && s2)
 	{
+	printf("in strjoinabppend (%s)\n", s2);
+
 		if (ft_strchr(s2, COMMENT_CHAR))
 			trim_backwards(s2);
 		len = ((ft_strlen((char *)s1)) + (ft_strlen((char *)s2)) + 2);

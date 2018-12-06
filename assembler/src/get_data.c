@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/04 15:57:38 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/06 15:24:08 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ static void			read_fd(int fd, char **data)
 	line = NULL;
 	while (get_next_line(fd, &line))
 	{
+		printf("line before (%s)\n", line);
 		trim = ft_strtrim((char const *)line);
 		if (trim[0] != COMMENT_CHAR)
 			*data = strjoinappend(*data, trim);
+		printf("line after (%s)\n", line);
 		free_trim(line, trim);
 	}
 }
@@ -66,8 +68,8 @@ void			get_data(char **argv, int fd, int fd2)
 	int			position;
 	t_header	*header;
 
-	if (!(header = (t_header *)malloc(sizeof(t_header))) ||
-		!(d = (t_data *)ft_memalloc(sizeof(t_data))))
+	if (!(header = (t_header *)malloc(sizeof(t_header)))
+			|| !(d = (t_data *)ft_memalloc(sizeof(t_data))))
 		exit(EXIT_FAILURE);
 	data = ft_strnew(0);
 	read_fd(fd, &data);

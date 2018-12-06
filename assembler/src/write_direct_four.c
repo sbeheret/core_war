@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_file_body.c                                 :+:      :+:    :+:   */
+/*   write_direct_four.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 12:49:39 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/06 10:41:12 by esouza           ###   ########.fr       */
+/*   Created: 2018/12/06 12:23:42 by esouza            #+#    #+#             */
+/*   Updated: 2018/12/06 13:52:44 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int			create_file_body(t_data *d, int fd2)
+int			write_direct_four(t_labels *head, int idx, int fd2)
 {
-	t_labels		*head;
-
-	head = d->first_label;
-	while (head)
-	{
-		get_opcode(head, fd2);
-		if (d->op[head->op_nb - 1].encoded_byte)
-			get_octet_codage(head, fd2);
-		first_arg(head, fd2);
-		second_arg(head, fd2);
-		third_arg(head, fd2);
-		head = head->next;
-	}
-
-	return (fd2);
+	int len = ft_strlen(&head->args[idx][1]);
+	long int nb = ft_atoi(&head->args[idx][1]);
+	unsigned int hex32;
+	hex32 = nb & 0xFFFFFFFF;
+	printf(">> %lu len \t%d\n", sizeof(hex32), len);
+	ft_putchar_fd(hex32, fd2);
+	return (0);
 }
