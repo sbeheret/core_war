@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 13:54:03 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/06 12:26:27 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define LLDI 14
 # define LFORK 15
 # define AFF 16
+# define ZERO 0
+# define ONE 1
+# define TWO 2
 
 # define YES printf("YES\n"); //tmp
 
@@ -103,12 +106,19 @@ unsigned int				hexatoi(const char *ptr);
 char						*strjoinappend(char *s1, char *s2);
 void						get_data(char **argv, int fd, int fd2);
 int32_t						swap_uint32(uint32_t val);
+int							binary_char_to_int(char *s);
 void						err_dots(int idx, int err, char **tab, t_header *h);
 int							check_end(char **tab, int col, int row);
 int							create_file_body(t_data *d, int fd2);
 int							get_opcode(t_labels *head, int fd2);
 int							get_octet_codage(t_labels *head, int fd2);
-int							binary_char_to_int(char *s);
+int							arg_len(t_labels *head);
+int							first_arg(t_labels *head, int fd2);
+int							second_arg(t_labels *head, int fd2);
+int							third_arg(t_labels *head, int fd2);
+int							which_arg(t_labels *head, int idx); // not in use
+int							write_register(t_labels *head,int idx, int fd2);
+int							write_direct_four(t_labels *head,int idx, int fd2);
 
 /*
  *******************************************************************************
