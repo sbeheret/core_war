@@ -137,7 +137,7 @@ t_op		*get_op_tab(void);
 int			find_op_nb(char *s);
 int    		find_op_code(t_labels *l, char *s, t_op *op);
 
-int    		calc_bytes_till_label(t_labels *first_label, t_labels *current_l, int a);
+int    		bytes_till_label(t_labels *first_label, t_labels *current, int arg);
 
 /*
 **	ERRORS

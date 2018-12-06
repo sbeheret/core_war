@@ -32,7 +32,7 @@ SRCS =	main.c \
 		get_data.c \
 		hexatob.c \
 		l_args.c \
-		l_calc.c \
+		l_bytes_till_label.c \
 		l_check.c \
 		l_errors.c \
 		l_labels.c \

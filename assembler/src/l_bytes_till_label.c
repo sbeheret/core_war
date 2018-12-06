@@ -43,26 +43,51 @@ static int    rew_count(t_labels *f, int cp, int lp)
 	return (bytes);
 }
 
-//printf("param %i\n", (int)d->op[5].params_types[0]);
-//printf("\nuntil label (in hex): %x\n",\
-//calc_bytes_till_label(d->first_label, d->first_label, 1));
+/*
+**	first_label		starting point in the linked list
+**	current 		start calculating from this label
+**	arg				argument number that contains the label call
+**
+**	EXAMPLE
+**
+**	 label comes after the call (consecutive order, result is positive number):
+**				and %:live, r1, r2
+**		live:	live %1
+**
+**	 |	bytes_till_label(d->first_label, current, 0)
+**	 |		==	8 (8 in hex)
+**
+**
+**	 label is before the call (reverse order, result is negative number):
+**		live:	live %1
+**				and %:live, r1, r2
+**
+**	 |	bytes_till_label(d->first_label, current, 0)
+**	 |		==	(-8 converted to unsigned int) 4294967291 (fffffffb in hex)
+**
+*/
 
-int    calc_bytes_till_label(t_labels *first_label, t_labels *current_l, int a)
+int    bytes_till_label(t_labels *first_label, t_labels *current, int arg)
 {
 	t_labels *l;
-	int    i;
+	int		i;
+	int		skip_chars;
 
 	l = first_label;
 	i = 0;
+	if (current->args[arg][0] == LABEL_CHAR)
+		skip_chars = 1;
+	else
+		skip_chars = 2;
 	while (l)
 	{
-		if (ft_strequ(l->name, current_l->args[a] + 2))
+		if (ft_strequ(l->name, current->args[arg] + skip_chars))
 		{
-			if (l->position > current_l->position)
-				i += count(l->position - current_l->position, current_l);
+			if (l->position > current->position)
+				i += count(l->position - current->position, current);
 			else
 				i += (unsigned int)rew_count(first_label,
-						current_l->position, l->position);
+						current->position, l->position);
 		}
 		l = l->next;
 	}

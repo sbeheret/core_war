@@ -31,6 +31,19 @@ void	show_op_param_types(t_op *op) //tmp
 	}
 }
 
+void	show_bytes_till_label(t_data *d)
+{
+	t_labels *current = d->first_label;
+	int	line = 0;
+	int	label = 0;
+
+	while (line--)
+		current = current->next;
+	printf("bytes from [%s] till label [%s] in hex : %x\n\n",\
+			current->op_code, current->args[label],\
+			bytes_till_label(d->first_label, current, label));
+}
+
 void    show_labels(t_data *d) //tmp
 {
 	t_labels *tmp;
@@ -71,5 +84,6 @@ void    show_labels(t_data *d) //tmp
 		tmp = tmp->next;
 	}
 	printf("total number of bytes : %zu\n\n", d->total_bytes);
-	//show_op_param_types(d->op);
+//	show_bytes_till_label(d);
+//	show_op_param_types(d->op);
 }

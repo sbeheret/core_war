@@ -41,8 +41,6 @@ static void		stocor(char name[], char **argv)
 	name[i] = '\0';
 }
 
-
-
 static void			read_fd(int fd, char **data)
 {
 	char		*line;
