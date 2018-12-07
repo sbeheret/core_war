@@ -1,5 +1,7 @@
-.name "zork"
-.comment "I'M ALIIIIVE"
+.name           "42"
+.comment        "Just a basic Winner Program"
 
-and %:live, r1, r2
-live:	live %1
+
+sti	r1, %:tirb, %1
+
+tirb:	live	%1

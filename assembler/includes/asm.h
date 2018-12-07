@@ -137,18 +137,18 @@ void			free_data(t_data *d, char *data, t_header *header);
 /*
 **	LABELS
 */
-void 		trim_spaces(char **tab);
-int			check_commas(char *s);
 
 int			get_labels(t_data *d);
-void    	check_label(char *s);
+t_labels	*make_label(char **line, int len, int p);
+void		add_to_label_list_end(t_data *d, t_labels *label);
+
+t_op		*get_op_tab(void);
+int    		find_op_code(t_labels *l, char *s, t_op *op);
+
+int			check_commas(char *s);
 int	    	general_check(t_data *d);
 int	    	compliance_check(t_data *d);
 void 	  	add_bytes(t_data *d);
-
-t_op		*get_op_tab(void);
-int			find_op_nb(char *s);
-int    		find_op_code(t_labels *l, char *s, t_op *op);
 
 int    		bytes_till_label(t_labels *first_label, t_labels *current, int arg);
 
@@ -167,10 +167,11 @@ int    	error_param_nb(char *op_code, int expected, int got);
 **	EXTRAS
 */
 
-void		print_tab(t_data *d, int i);
-void        show_labels(t_data *d);
 char		*ft_strchr_no_zero(const char *s, int c);
 char		*ft_strndup(const char *s, size_t n);
 char		*str_trim(char const *s);
+void 		trim_spaces(char **tab);
 
+void		print_tab(t_data *d, int i);
+void        show_labels(t_data *d);
 #endif
