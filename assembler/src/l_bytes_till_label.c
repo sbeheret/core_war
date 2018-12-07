@@ -63,7 +63,7 @@ static int    rew_count(t_labels *f, int cp, int lp)
 **				and %:live, r1, r2
 **
 **	 |	bytes_till_label(d->first_label, current, 0)
-**	 |		==	(-8 converted to unsigned int) 4294967291 (fffffffb in hex)
+**	 |		==	(-5 converted to unsigned int) 4294967291 (fffffffb in hex)
 **
 */
 
@@ -86,7 +86,7 @@ int    bytes_till_label(t_labels *first_label, t_labels *current, int arg)
 			if (l->position > current->position)
 				i += count(l->position - current->position, current);
 			else
-				i += (unsigned int)rew_count(first_label,
+				i += rew_count(first_label,
 						current->position, l->position);
 		}
 		l = l->next;

@@ -73,13 +73,8 @@ int				is_label(t_data *d, int len, int skip)
 	return (1);
 }
 
-int				get_labels(t_data *d)
+int				get_them(t_data *d, int len, int skip)
 {
-	int		len;
-	int		skip;
-
-	skip = d->y;
-	d->op = get_op_tab();
 	while (d->tab[d->y])
 	{
 		len = 0;
@@ -105,7 +100,13 @@ int				get_labels(t_data *d)
 		}
 		d->y++;
 	}
-	if (!general_check(d) || !compliance_check(d))
+	return (1);
+}
+
+int				get_labels(t_data *d)
+{
+	d->op = get_op_tab();
+	if (!get_them(d, 0, d->y) || !general_check(d) || !compliance_check(d))
 		return (0);
 	add_bytes(d);
 	show_labels(d); //tmp

@@ -120,7 +120,7 @@ int							second_arg(t_data *d, t_labels *head, int fd2);
 int							third_arg(t_labels *head, int fd2);
 int							which_arg(t_labels *head, int idx); // not in use
 int							write_register(t_labels *head,int idx, int fd2);
-int							write_direct_four(t_labels *head,int idx, int fd2);
+int							write_direct_four(t_data *d, t_labels *head,int idx, int fd2);
 int							write_two_octet(t_labels *head,int idx, int fd2);
 
 /*
