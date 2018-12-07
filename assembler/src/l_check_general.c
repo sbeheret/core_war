@@ -31,9 +31,9 @@ static int    label_error(t_labels *l, char *to_check)
 }
 
 /*
- * **  arguments are digits-only
- * **  register is between 1 and REG_NUMBER(16)
- * */
+**  arguments are digits-only
+**  register is between 1 and REG_NUMBER(16)
+*/
 
 static int   args_error(char **s, int *y)
 {
@@ -82,16 +82,8 @@ static int    args_nb_check(t_labels *l, t_op *op)
 	return (1);
 }
 
-int    general_check(t_data *d)
+static int	check_the_rest(t_data *d, t_labels *l, int y, int a)
 {
-	int         a;
-	int			y;
-	t_labels    *l;
-
-	l = d->first_label;
-	y = 0;
-	if (!args_nb_check(d->first_label, d->op))
-		return (0);
 	while (l)
 	{
 		if (l->op_nb == 0)
@@ -115,5 +107,13 @@ int    general_check(t_data *d)
 		l = l->next;
 		y = 0;
 	}
+	return (1);
+}
+
+int    general_check(t_data *d)
+{
+	if (!args_nb_check(d->first_label, d->op)
+		|| !check_the_rest(d, d->first_label, 0, 0))
+		return (0);
 	return (1);
 }

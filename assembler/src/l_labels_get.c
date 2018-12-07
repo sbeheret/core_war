@@ -37,7 +37,10 @@ static int	is_label(t_data *d, int len, int skip)
 
 	if (d->tab[d->y][len + 1]
 		&& d->tab[d->y][len + 1] != ' ' && d->tab[d->y][len + 1] != '\t')
-		return (error_char(d->tab[d->y][len + 1]));
+	{
+		ft_printf("\033[31mBad char [%c]\033[0;m\n", d->tab[d->y][len + 1]);
+		return (0);
+	}
 	lb = make_label(d->tab + d->y, len, d->y - skip);
 	len++;
 	if (!is_op_code(d, lb, len, skip))
@@ -61,7 +64,7 @@ static int	get_all(t_data *d, int len, int skip, int ret)
 			if (!d->tab[d->y][len])
 				ft_printf("\033[31mInvalide line [%s]\033[0;m\n", d->tab[d->y]);
 			else
-				error_char(d->tab[d->y][len]);
+				ft_printf("\033[31mBad char [%c]\033[0;m\n", d->tab[d->y][len]);
 			ret = 0;
 		}
 		if (!ret)
@@ -74,9 +77,11 @@ static int	get_all(t_data *d, int len, int skip, int ret)
 int			get_labels(t_data *d)
 {
 	d->op = get_op_tab();
-	if (!get_all(d, 0, d->y, 0) || !general_check(d) || !compliance_check(d))
+	if (!get_all(d, 0, d->y, 0)
+		|| !general_check(d)
+		|| !compliance_check(d, d->first_label))
 		return (0);
-	add_bytes(d);
+	add_bytes(d, d->first_label, 0);
 	show_labels(d); //tmp
 	return (1);
 }

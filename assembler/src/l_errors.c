@@ -12,12 +12,6 @@
 
 #include "../includes/asm.h"
 
-int    error_char(char c)
-{
-	ft_printf("\033[31mBad char [%c]\033[0;m\n", c);
-	return (0);
-}
-
 int    error_op_code(char *s)
 {
 	int    i;

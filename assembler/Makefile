@@ -31,14 +31,14 @@ SRCS =	main.c \
 		ft_strndup.c \
 		get_data.c \
 		hexatob.c \
-		l_add_bytes.c \
-		l_bytes_till_label.c \
+		l_bytes.c \
 		l_check_compliance.c \
 		l_check_general.c \
 		l_errors.c \
 		l_labels_get.c \
 		l_labels_make_add.c \
 		l_op_find_code.c \
+		l_op_l.c \
 		l_trim.c \
 		op.c \
 		set_header.c \

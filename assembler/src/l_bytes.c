@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   l_calc.c                                           :+:      :+:    :+:   */
+/*   l_bytes.c			                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,6 +11,33 @@
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+void    add_bytes(t_data *d, t_labels *l, int a)
+{
+    while (l)
+    {
+		if (l->op_nb == 0)
+		{
+			l = l->next;
+			continue;
+		}
+        l->bytes += d->op[l->op_nb - 1].encoded_byte;
+		a = 0;
+		while (l->args[a])
+		{
+			if (l->args[a][0] == 'r')
+				l->bytes += 1;
+			else if (l->args[a][0] == DIRECT_CHAR
+				&& !d->op[l->op_nb - 1].dir_as_ind)
+				l->bytes += DIR_SIZE;
+			else
+				l->bytes += IND_SIZE;
+			a++;
+		}
+        d->total_bytes += l->bytes;
+        l = l->next;
+    }
+}
 
 static int    count(int pos, t_labels *l)
 {

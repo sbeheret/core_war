@@ -17,7 +17,7 @@ int			arg_len(t_labels *head)
 	int		len;
 
 	len = 0;
-	if (head->args[len] == NULL)
+	if (!head->args || head->args[len] == NULL)
 		return (-1);
 	while (head->args[len])
 		len++;

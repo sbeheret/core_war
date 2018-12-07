@@ -144,11 +144,12 @@ void		add_to_label_list_end(t_data *d, t_labels *label);
 
 t_op		*get_op_tab(void);
 int    		find_op_code(t_labels *l, char *s, t_op *op);
+int    		op_l(t_labels *lb, char *str, int i, t_op *op);
 
 int			check_commas(char *s);
 int	    	general_check(t_data *d);
-int	    	compliance_check(t_data *d);
-void 	  	add_bytes(t_data *d);
+int	    	compliance_check(t_data *d, t_labels *l);
+void 	  	add_bytes(t_data *d, t_labels *l, int a);
 
 int    		bytes_till_label(t_labels *first_label, t_labels *current, int arg);
 
@@ -156,7 +157,6 @@ int    		bytes_till_label(t_labels *first_label, t_labels *current, int arg);
 **	ERRORS
 */
 
-int    	error_char(char c);
 int   	error_op_code(char *s);
 int    	error_args(char *s);
 int    	error_arg_type(char *s, char *op_code);
