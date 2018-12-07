@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:38:06 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/06 12:21:46 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/07 11:42:29 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,20 @@ int			write_register(t_labels *head, int idx, int fd2)
 	return (0);
 }
 
-int			first_arg(t_labels *head, int fd2)
+int			first_arg(t_data *d, t_labels *head, int fd2)
 {
 	if (arg_len(head) < 0)
 		return (1);
 	else if (head->args[ZERO][ZERO] == 'r')
 		write_register(head, ZERO, fd2);
-	else if (head->args[ZERO][ZERO] == DIRECT_CHAR)
-		write_direct_four(head, ZERO, fd2);
+	else if (head->args[ZERO][ZERO] == DIRECT_CHAR
+			&& !d->op[head->op_nb - 1].dir_as_ind)
+			write_direct_four(head, ZERO, fd2);
+	else if (head->args[ZERO][ZERO] == DIRECT_CHAR
+			&& d->op[head->op_nb - 1].dir_as_ind)
+			write_two_octet(head, ZERO, fd2);
+	else if ((head->args[ZERO][ZERO] == LABEL_CHAR)
+			|| (head->args[ZERO][ZERO] >= 0 && head->args[ZERO][ZERO] <= 9))
+			write_two_octet(head, ZERO, fd2);
 	return (0);
 }

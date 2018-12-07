@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/06 12:26:27 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/07 11:38:55 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,18 +107,21 @@ char						*strjoinappend(char *s1, char *s2);
 void						get_data(char **argv, int fd, int fd2);
 int32_t						swap_uint32(uint32_t val);
 int							binary_char_to_int(char *s);
+void						int_to_octet(int fd2, int value);
+void						short_to_octet(int fd2, int value);
 void						err_dots(int idx, int err, char **tab, t_header *h);
 int							check_end(char **tab, int col, int row);
 int							create_file_body(t_data *d, int fd2);
 int							get_opcode(t_labels *head, int fd2);
 int							get_octet_codage(t_labels *head, int fd2);
 int							arg_len(t_labels *head);
-int							first_arg(t_labels *head, int fd2);
-int							second_arg(t_labels *head, int fd2);
+int							first_arg(t_data *d, t_labels *head, int fd2);
+int							second_arg(t_data *d, t_labels *head, int fd2);
 int							third_arg(t_labels *head, int fd2);
 int							which_arg(t_labels *head, int idx); // not in use
 int							write_register(t_labels *head,int idx, int fd2);
 int							write_direct_four(t_labels *head,int idx, int fd2);
+int							write_two_octet(t_labels *head,int idx, int fd2);
 
 /*
  *******************************************************************************

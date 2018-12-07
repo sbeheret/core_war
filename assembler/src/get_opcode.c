@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 10:16:24 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 11:37:35 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/07 09:49:51 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int		op_codenb(t_labels *head)
 		return (8);
 	else if (ft_strcmp(head->op_code, "zjmp") == 0)
 		return (9);
-	else if (ft_strcmp(head->op_code, "ldl") == 0)
+	else if (ft_strcmp(head->op_code, "ldi") == 0)
 		return (10);
 	else
 		return (op_codenb2(head));
