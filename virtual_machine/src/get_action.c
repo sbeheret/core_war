@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/06 21:57:36 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/07 16:38:05 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void		get_action(t_vm *vm, t_processus *pcs)
 	pcs->action.size_read++;
 	args_action(vm->ram, pcs->PC, &pcs->action);
 	pcs->PC = pcs->PC + pcs->action.size_read;
-	print_verbose(pcs);
 }
 
 static int	size_argument(int type, int direct_octet)
@@ -89,9 +88,19 @@ void		trad_encoding_byte(t_action *action, int enc_byte, int value)
 	}
 }
 
+
 /*
 ** Fonction pour debug
 */
+void	print_optab(void)
+{
+	int i = 0;
+	while (i<17)
+	{
+		ft_printf("tab[%d]= {\"%s\", %d, {%d,%d,%d}, %d, %d, %s, %d, %d}\n",i, op_tab[i].name,op_tab[i].param_number, op_tab[i].param_type[0], op_tab[i].param_type[1], op_tab[i].param_type[2], op_tab[i].op_code, op_tab[i].cycle, op_tab[i].comment, op_tab[i].encoding_byte, op_tab[i].direct_octet);
+		i++;
+	}
+}
 void	print_verbose(t_processus *processus)
 {
 	int	i;

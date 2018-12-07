@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/06 16:40:46 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/07 17:03:46 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,10 @@ void				ft_lldi(t_vm *vm, t_processus *processus);
 void				ft_lfork(t_vm *vm, t_processus *processus);
 void				ft_aff(t_vm *vm, t_processus *processus);
 
+/*
+** --------- CHECKI INSTRUCTION ARG
+*/
+int					decode_arg_ld(t_vm *vm, t_processus *processus);
 /*
 ** --------- VERBOSE
 */

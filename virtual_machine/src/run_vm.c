@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/06 17:34:16 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/07 17:09:42 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ void	execute_processus(t_vm *vm)
 		if (processus->cycles_wait == 0)
 		{
 			if (op_code > 0 && op_code < 17)
+			{
+				print_verbose(processus);
 				run_instruction(vm, processus, op_code);
+			}
 			get_action(vm, processus);
 			// print_processus(processus);
 		}
@@ -137,13 +140,7 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 		&ft_lfork,
 		&ft_aff
 	};
-	// print_ram((*vm).ram);
-	// ft_printf("BEFORE INSTRUCTION\n");
-	// print_processus((*vm).processus);
 	instruction[op_code - 1](vm, processus);
-	// ft_printf("AFTER INSTRUCTION\n");
-	// print_processus((*vm).processus);
-	// print_ram((*vm).ram);
 }
 
 void	declare_winner(t_vm *vm)

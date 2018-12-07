@@ -1,7 +1,5 @@
-DEAD A Cycle_to_die
-Decrementer CTD
-les cycles_now
+verfier les arguments
 
-Faire les fonctions OP CODE
-
-circular avec negatif PARTOUT
+si REG
+	verifier type = REG
+	verifier que arg n'est pas < 1 || > 16

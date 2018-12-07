@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/06 12:04:43 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/07 16:15:32 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	ft_int_to_octet(unsigned char *binary, int value, int id)
 	binary[id + 2] = (value & 0x0000FF00) >> 8;
 	binary[id + 3] = value & 0x000000FF;
 }
+
 
 int		circular(int i)
 {
