@@ -52,7 +52,6 @@ static void			read_fd(int fd, char **data)
 		trim = str_trim((char const *)line);
 		if (trim[0] != COMMENT_CHAR)
 			*data = strjoinappend(*data, trim);
-		printf("line after (%s)\n", line);
 		free_trim(line, trim);
 	}
 }

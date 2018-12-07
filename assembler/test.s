@@ -1,4 +1,5 @@
 .name "zork"
 .comment "I'M ALIIIIVE"
 
-and %2, r1, r2,
+and %:live, r1, r2
+live:	live %1

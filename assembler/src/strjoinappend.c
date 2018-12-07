@@ -56,8 +56,6 @@ char		*strjoinappend(char *s1, char *s2)
 
 	if (s1 && s2)
 	{
-	printf("in strjoinabppend (%s)\n", s2);
-
 		if (ft_strchr(s2, COMMENT_CHAR))
 			trim_backwards(s2);
 		len = ((ft_strlen((char *)s1)) + (ft_strlen((char *)s2)) + 2);
