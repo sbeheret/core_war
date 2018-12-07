@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/07 11:38:55 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/07 12:35:45 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,11 @@ int							get_octet_codage(t_labels *head, int fd2);
 int							arg_len(t_labels *head);
 int							first_arg(t_data *d, t_labels *head, int fd2);
 int							second_arg(t_data *d, t_labels *head, int fd2);
-int							third_arg(t_labels *head, int fd2);
+int							third_arg(t_data *d, t_labels *head, int fd2);
 int							which_arg(t_labels *head, int idx); // not in use
 int							write_register(t_labels *head,int idx, int fd2);
-int							write_direct_four(t_labels *head,int idx, int fd2);
-int							write_two_octet(t_labels *head,int idx, int fd2);
+int							write_direct_four(t_data *d, t_labels *head,int idx, int fd2);
+int							write_two_octet(t_data *d, t_labels *head,int idx, int fd2);
 
 /*
  *******************************************************************************
