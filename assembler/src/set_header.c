@@ -6,21 +6,11 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 13:57:26 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:44:04 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
-
-static int			ft_strmcmp(char *s1, char *s2, size_t len)
-{
-	while (--len && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-	return (*s1 - *s2);
-}
+#include "asm.h"
 
 static int			parse_name(t_header *h, char **tab, int frst)
 {

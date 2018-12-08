@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/07 12:40:19 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/08 11:53:12 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void		stocor(char name[], char **argv)
 	name[i] = '\0';
 }
 
-static void			read_fd(int fd, char **data)
+static void		read_fd(int fd, char **data)
 {
 	char		*line;
 	char		*trim;
@@ -54,6 +54,13 @@ static void			read_fd(int fd, char **data)
 			*data = strjoinappend(*data, trim);
 		free_trim(line, trim);
 	}
+}
+
+static void		bad_file_format(t_data *d, char *data, t_header *header)
+{
+	free_data(d, data, header);
+	ft_putstr("Error, file has a bad format\n");
+	exit(EXIT_FAILURE);
 }
 
 void			get_data(char **argv, int fd, int fd2)
@@ -73,16 +80,12 @@ void			get_data(char **argv, int fd, int fd2)
 	position = set_header(d->tab, header);
 	d->y = position + 1;
 	if (!get_labels(d))
-	{
-		free_data(d, data, header);
-		ft_printf("Error, file has a bad format\n");
-		exit(EXIT_FAILURE);
-	}
+		bad_file_format(d, data, header);
 	header->prog_size = swap_uint32(d->total_bytes);
 	stocor(name, argv);
 	fd2 = open(name, O_RDWR | O_APPEND | O_CREAT, RIGHTS);
 	write(fd2, header, sizeof(t_header));
 	create_file_body(d, fd2);
-//	print_tab(d, position); //tmp
+	ft_printf("Writing output program to %s\n", name);
 	free_data(d, data, header);
 }

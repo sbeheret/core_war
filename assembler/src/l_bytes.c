@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   l_bytes.c			                                :+:      :+:    :+:   */
+/*   l_bytes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:30 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/02 15:54:38 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:29:36 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
-void    add_bytes(t_data *d, t_labels *l, int a)
+void		add_bytes(t_data *d, t_labels *l, int a)
 {
-    while (l)
-    {
+	while (l)
+	{
 		if (l->op_nb == 0)
 		{
 			l = l->next;
 			continue;
 		}
-        l->bytes += d->op[l->op_nb - 1].encoded_byte;
+		l->bytes += d->op[l->op_nb - 1].encoded_byte;
 		a = 0;
 		while (l->args[a])
 		{
@@ -34,15 +34,15 @@ void    add_bytes(t_data *d, t_labels *l, int a)
 				l->bytes += IND_SIZE;
 			a++;
 		}
-        d->total_bytes += l->bytes;
-        l = l->next;
-    }
+		d->total_bytes += l->bytes;
+		l = l->next;
+	}
 }
 
-static int    count(int pos, t_labels *l)
+static int	count(int pos, t_labels *l)
 {
-	int    i;
-	int    bytes;
+	int i;
+	int bytes;
 
 	bytes = 0;
 	i = 0;
@@ -55,9 +55,9 @@ static int    count(int pos, t_labels *l)
 	return (bytes);
 }
 
-static int    rew_count(t_labels *f, int cp, int lp)
+static int	rew_count(t_labels *f, int cp, int lp)
 {
-	int    bytes;
+	int bytes;
 
 	bytes = 0;
 	while (f && f->position < lp)
@@ -94,11 +94,11 @@ static int    rew_count(t_labels *f, int cp, int lp)
 **
 */
 
-int    bytes_till_label(t_labels *first_label, t_labels *current, int arg)
+int			bytes_till_label(t_labels *first_label, t_labels *current, int arg)
 {
-	t_labels *l;
-	int		i;
-	int		skip_chars;
+	t_labels	*l;
+	int			i;
+	int			skip_chars;
 
 	l = first_label;
 	i = 0;

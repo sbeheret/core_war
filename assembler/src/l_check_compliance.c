@@ -6,11 +6,11 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:42 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/02 15:42:44 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:29:49 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
 static int	reg(char c)
 {
@@ -53,10 +53,10 @@ static int	combos(t_data *d, t_labels *l, int a)
 	return (1);
 }
 
-int    		compliance_check(t_data *d, t_labels *l)
+int			compliance_check(t_data *d, t_labels *l)
 {
-	int         a;
-	int			ret;
+	int		a;
+	int		ret;
 
 	while (l)
 	{

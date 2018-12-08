@@ -6,15 +6,15 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:00 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/02 15:42:05 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:29:10 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
-int    error_op_code(char *s)
+int			error_op_code(char *s)
 {
-	int    i;
+	int	i;
 
 	i = 0;
 	ft_putstr("\033[31mBad op_code [");
@@ -28,9 +28,9 @@ int    error_op_code(char *s)
 	return (0);
 }
 
-int    error_args(char *s)
+int			error_args(char *s)
 {
-	int    i;
+	int	i;
 
 	i = 0;
 	ft_putstr("\033[31mBad argument [");
@@ -44,9 +44,9 @@ int    error_args(char *s)
 	return (0);
 }
 
-int    error_arg_type(char *arg, char *op_code)
+int			error_arg_type(char *arg, char *op_code)
 {
-	int    i;
+	int	i;
 
 	i = 0;
 	ft_printf("\033[31mFor [%s] the argument [%s] ", op_code, arg);
@@ -54,9 +54,9 @@ int    error_arg_type(char *arg, char *op_code)
 	return (0);
 }
 
-int    error_label(char *s)
+int			error_label(char *s)
 {
-	int    i;
+	int	i;
 
 	i = 0;
 	ft_putstr("\033[31mBad label [");
@@ -70,7 +70,7 @@ int    error_label(char *s)
 	return (0);
 }
 
-int    error_param_nb(char *op_code, int expected, int got)
+int			error_param_nb(char *op_code, int expected, int got)
 {
 	ft_printf("\033[31mBad number of parameters for [%s] - ", op_code);
 	ft_printf("expected [%i], got [%i]\033[0;m\n", expected, got);

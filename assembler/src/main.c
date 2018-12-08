@@ -6,11 +6,11 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:01:16 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 13:56:26 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:38:43 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
 static void		check_args(int argc, char **argv)
 {
@@ -47,6 +47,5 @@ int				main(int argc, char **argv)
 	get_data(argv, fd, fd2);
 	close(fd);
 	close(fd2);
-//	while (1) ;
 	return (0);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   l_op_l.c   		                                :+:      :+:    :+:   */
+/*   l_op_l.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:50 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/05 14:08:01 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:36:38 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
-int    op_l(t_labels *lb, char *str, int i, t_op *op)
+int		op_l(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (ft_strnequ(str + i, "live", 4)
 		&& (str[i + 4] == ' ' || str[i + 4] == '\t'))

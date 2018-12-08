@@ -6,11 +6,11 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 09:36:00 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 14:08:01 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:29:25 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
 int				binary_char_to_int(char *s)
 {
@@ -21,7 +21,7 @@ int				binary_char_to_int(char *s)
 	{
 		nb <<= 1;
 		if (*s++ == '1')
-			nb ^=1;	
+			nb ^= 1;
 	}
 	return (nb);
 }
@@ -32,14 +32,13 @@ int32_t			swap_uint32(uint32_t val)
 	return ((val << 16) | (val >> 16));
 }
 
-unsigned int hexatob(const char *ptr)
+unsigned int	hexatob(const char *ptr)
 {
-	unsigned int value;
-	char ch;
+	unsigned int	value;
+	char			ch;
 
 	ch = *ptr;
 	value = 0;
-
 	while (ch == ' ' || ch == '\t')
 		ch = *(++ptr);
 	while (*ptr)
@@ -51,7 +50,7 @@ unsigned int hexatob(const char *ptr)
 		else if (ch >= 'a' && ch <= 'f')
 			value = (value << 4) + (ch - 'a' + 10);
 		else
-			return value;
+			return (value);
 		ch = *(++ptr);
 	}
 	return (value);

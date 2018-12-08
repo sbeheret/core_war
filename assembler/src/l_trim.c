@@ -6,16 +6,16 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:43:05 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/02 17:59:30 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:38:15 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
-static void    skip_spaces(char const *s, int *i)
+static void		skip_spaces(char const *s, int *i)
 {
-    while (s[*i] == ' ' || s[*i] == '\t')
-        (*i)++;
+	while (s[*i] == ' ' || s[*i] == '\t')
+		(*i)++;
 }
 
 static int		find_args(char *s, int i)
@@ -58,7 +58,7 @@ int				check_commas(char *s)
 	return (1);
 }
 
-void		trim_spaces(char **tab)
+void			trim_spaces(char **tab)
 {
 	int		y;
 	char	*tmp;
@@ -69,12 +69,12 @@ void		trim_spaces(char **tab)
 		tmp = tab[y];
 		tab[y] = str_trim(tab[y]);
 		free(tmp);
-        tmp = NULL;
+		tmp = NULL;
 		y++;
 	}
 }
 
-char	*str_trim(char const *s)
+char			*str_trim(char const *s)
 {
 	int		i;
 	int		len;

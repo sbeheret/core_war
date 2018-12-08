@@ -6,15 +6,15 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:41:40 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/02 15:41:43 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:30:01 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
-static int    label_error(t_labels *l, char *to_check)
+static int		label_error(t_labels *l, char *to_check)
 {
-	int    i;
+	int	i;
 
 	i = 0;
 	if (to_check[i] == DIRECT_CHAR)
@@ -35,14 +35,15 @@ static int    label_error(t_labels *l, char *to_check)
 **  register is between 1 and REG_NUMBER(16)
 */
 
-static int   args_error(char **s, int *y)
+static int		args_error(char **s, int *y)
 {
-	int    x;
+	int	x;
 
 	while (s[*y])
 	{
 		x = 0;
-		if (s[*y][x] == 'r' && (ft_atoi(s[*y] + 1) > REG_NUMBER || s[*y][1] == '0'))
+		if (s[*y][x] == 'r' && (ft_atoi(s[*y] + 1) > REG_NUMBER
+					|| s[*y][1] == '0'))
 			return (error_args(s[*y]) - 2);
 		if (s[*y][x] == DIRECT_CHAR || s[*y][x] == 'r')
 			x++;
@@ -61,9 +62,9 @@ static int   args_error(char **s, int *y)
 	return (-1);
 }
 
-static int    args_nb_check(t_labels *l, t_op *op)
+static int		args_nb_check(t_labels *l, t_op *op)
 {
-	int    i;
+	int	i;
 
 	while (l)
 	{
@@ -82,7 +83,7 @@ static int    args_nb_check(t_labels *l, t_op *op)
 	return (1);
 }
 
-static int	check_the_rest(t_data *d, t_labels *l, int y, int a)
+static int		check_the_rest(t_data *d, t_labels *l, int y, int a)
 {
 	while (l)
 	{
@@ -110,7 +111,7 @@ static int	check_the_rest(t_data *d, t_labels *l, int y, int a)
 	return (1);
 }
 
-int    general_check(t_data *d)
+int				general_check(t_data *d)
 {
 	if (!args_nb_check(d->first_label, d->op)
 		|| !check_the_rest(d, d->first_label, 0, 0))

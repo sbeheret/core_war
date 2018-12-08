@@ -6,13 +6,13 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:50 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/05 14:08:01 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:33:42 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
-static int    s(t_labels *lb, char *str, int i, t_op *op)
+static int		s(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (ft_strnequ(str + i, "st", 2)
 		&& (str[i + 2] == ' ' || str[i + 2] == '\t'))
@@ -39,7 +39,7 @@ static int    s(t_labels *lb, char *str, int i, t_op *op)
 	return (0);
 }
 
-static int    a(t_labels *lb, char *str, int i, t_op *op)
+static int		a(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (ft_strnequ(str + i, "add", 3)
 		&& (str[i + 3] == ' ' || str[i + 3] == '\t'))
@@ -66,7 +66,7 @@ static int    a(t_labels *lb, char *str, int i, t_op *op)
 	return (0);
 }
 
-static int    f_o_x_z(t_labels *lb, char *str, int i, t_op *op)
+static int		f_o_x_z(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (str[i] == 'f')
 	{
@@ -112,9 +112,9 @@ static int    f_o_x_z(t_labels *lb, char *str, int i, t_op *op)
 	return (0);
 }
 
-int    find_op_code(t_labels *lb, char *str, t_op *op)
+int				find_op_code(t_labels *lb, char *str, t_op *op)
 {
-	int    i;
+	int	i;
 
 	i = 0;
 	if (!str || !str[0])

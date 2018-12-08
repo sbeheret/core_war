@@ -6,7 +6,7 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:17 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/05 13:55:48 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 11:45:45 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			free_trim(char *line, char *trim)
 	trim = NULL;
 }
 
-static void			free_labels(t_data *d)
+static void		free_labels(t_data *d)
 {
 	t_labels	*label;
 	int			i;
@@ -29,16 +29,15 @@ static void			free_labels(t_data *d)
 	{
 		label = d->first_label;
 		d->first_label = d->first_label->next;
-        free(label->name);
+		free(label->name);
 		label->name = NULL;
-		i = 0;
+		i = -1;
 		if (label->op_nb != 0)
 		{
-			while (label->args[i])
+			while (label->args[++i])
 			{
 				free(label->args[i]);
 				label->args[i] = NULL;
-				i++;
 			}
 			free(label->args);
 			label->args = NULL;

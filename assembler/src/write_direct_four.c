@@ -6,13 +6,13 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 12:23:42 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/07 12:42:04 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/08 12:47:07 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void    int_to_octet(int fd2, int value)
+void		int_to_octet(int fd2, int value)
 {
 	char c;
 
@@ -26,9 +26,9 @@ void    int_to_octet(int fd2, int value)
 	write(fd2, &c, 1);
 }
 
-void    short_to_octet(int fd2, int value)
+void		short_to_octet(int fd2, int value)
 {
-	char c;
+	char	c;
 
 	c = (value & 0x0000FF00) >> 8;
 	write(fd2, &c, 1);
@@ -46,7 +46,7 @@ int			write_two_octet(t_data *d, t_labels *head, int idx, int fd2)
 	{
 		nb = bytes_till_label(d->first_label, head, idx);
 		short_to_octet(fd2, nb);
-		return(0);
+		return (0);
 	}
 	if (head->args[idx][0] == LABEL_CHAR || head->args[idx][0] == DIRECT_CHAR)
 		i++;
@@ -59,7 +59,7 @@ int			write_two_octet(t_data *d, t_labels *head, int idx, int fd2)
 
 int			write_direct_four(t_data *d, t_labels *head, int idx, int fd2)
 {
-	long int 	nb;
+	long int	nb;
 	int			i;
 
 	i = 1;
@@ -67,7 +67,7 @@ int			write_direct_four(t_data *d, t_labels *head, int idx, int fd2)
 	{
 		nb = bytes_till_label(d->first_label, head, idx);
 		int_to_octet(fd2, nb);
-		return(0);
+		return (0);
 	}
 	if (head->args[idx][i] == LABEL_CHAR)
 		i++;

@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 11:39:13 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/05 16:30:08 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/08 11:54:20 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int				get_octet_codage(t_labels *head, int fd2)
 	}
 	b[i] = '\0';
 	write_buff(head, b);
-//	printf("{{%s}}\n", b);
 	ft_putchar_fd((unsigned char)binary_char_to_int(b), fd2);
 	return (fd2);
 }

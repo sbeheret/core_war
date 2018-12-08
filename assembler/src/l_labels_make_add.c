@@ -6,12 +6,11 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:41:23 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/07 12:40:51 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/08 12:31:57 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../includes/asm.h"
+#include "asm.h"
 
 t_labels	*make_label(char **line, int len, int p)
 {
