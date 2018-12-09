@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 16:03:38 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/09 11:22:51 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_and(t_vm *vm, t_processus *processus)
 	int		value1;
 	int		value2;
 
-	ft_printf("~~~AND~~~\n");
+//	ft_printf("~~~AND~~~\n");
 	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
 		return ;
 	if (processus->action.type[0] == 1)
@@ -39,7 +39,7 @@ void	ft_or(t_vm *vm, t_processus *processus)
 	int		value1;
 	int		value2;
 
-	ft_printf("~~~OR~~~\n");
+//	ft_printf("~~~OR~~~\n");
 	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
 		return ;
 	if (processus->action.type[0] == 1)
@@ -60,7 +60,7 @@ void	ft_xor(t_vm *vm, t_processus *processus)
 	int		value1;
 	int		value2;
 
-	ft_printf("~~~XOR~~~\n");
+//	ft_printf("~~~XOR~~~\n");
 	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
 		return ;
 	if (processus->action.type[0] == 1)
@@ -80,7 +80,7 @@ void	ft_zjump(t_vm *vm, t_processus *processus)
 	short	a;
 
 	(void)vm;
-	ft_printf("~~~JUMP~~~\n");
+//	ft_printf("~~~JUMP~~~\n");
 	if (processus->carry == 1)
 	{
 		a = (short)processus->action.args[0] % IDX_MOD;
@@ -96,7 +96,7 @@ void	ft_ldi(t_vm *vm, t_processus *processus)
 	int		value1;
 	int		value2;
 
-	ft_printf("~~~LDI~~~\n");
+//	ft_printf("~~~LDI~~~\n");
 	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
 		return ;
 	if (processus->action.type[0] == 1)

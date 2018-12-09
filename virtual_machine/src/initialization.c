@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 12:46:29 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 14:56:17 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	initialize_vm(t_vm *vm)
 	(*vm).nb_champs = 0;
 	(*vm).flag_dump = 0;
 	(*vm).dump_cycle = 0;
+	(*vm).visu = 0;
 	(*vm).last_alive = 0;
 	(*vm).CTD = CYCLE_TO_DIE;
 	(*vm).cycles_ttx = 0;
@@ -27,13 +28,14 @@ void	initialize_vm(t_vm *vm)
 		ft_exit_malloc();
 }
 
-void	initialize_processus(t_processus **processus, int nb_player, int start)
+void	initialize_processus(t_processus **processus, int nb_player, int start, int color)
 {
 	int	i;
 
 	i = -1;
 	(*processus)->PC = start;
 	(*processus)->carry = 0;
+	(*processus)->color = color;
 	if (!((*processus)->reg = malloc(sizeof(int) * 16)))
 		ft_exit_malloc();
 	while (++i <= 15)

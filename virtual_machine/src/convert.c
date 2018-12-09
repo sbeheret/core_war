@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/05 17:37:32 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/09 15:37:20 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ char	*ft_octet_to_char(unsigned char **binary, size_t lenght_max)
 
 void	ft_int_to_octet(unsigned char *binary, int value, int id)
 {
-	ft_printf("value = %d\n", value);
+//	ft_printf("value = %d\n", value);
 	binary[id] = value >> 24;
-	ft_printf("binary[%d] = %X\n", id, binary[id]);
+//	ft_printf("binary[%d] = %X\n", id, binary[id]);
 	binary[id + 1] = (value & 0x00FF0000) >> 16;
-	ft_printf("binary[%d] = %X\n", id + 1, binary[id]);
+//	ft_printf("binary[%d] = %X\n", id + 1, binary[id]);
 	binary[id + 2] = (value & 0x0000FF00) >> 8;
-	ft_printf("binary[%d] = %X\n", id + 2, binary[id]);
+//	ft_printf("binary[%d] = %X\n", id + 2, binary[id]);
 	binary[id + 3] = value & 0x000000FF;
-	ft_printf("binary[%d] = %X\n", id + 3, binary[id]);
+//ft_printf("binary[%d] = %X\n", id + 3, binary[id]);
 }
 
 int		circular(int i)

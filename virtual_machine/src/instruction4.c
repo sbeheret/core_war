@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 17:07:05 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/09 15:54:31 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_aff(t_vm *vm, t_processus *processus)
 		return;
 	if (action.type[1] == REG && arg1 > 1 && arg1 < 16)
 	{
-		ft_printf("%c", processus->reg[arg1] % 256);
+		if (!vm->visu)
+			ft_printf("%c", processus->reg[arg1] % 256);
 		return;
 	}
 }

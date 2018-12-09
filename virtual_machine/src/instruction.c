@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/05 16:46:13 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/09 16:00:55 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ void	ft_live(t_vm *vm, t_processus *processus)
 	int			champion;
 	t_action	action;
 
-	ft_printf("~~~LIVE~~~\n");
+//	ft_printf("~~~LIVE~~~\n");
 	action = processus->action;
 	// ft_printf("action.pc = %d\n", action.pc);
 	champion = ft_octet_to_int2((*vm).ram, 4, circular(action.pc + 1));
 	//verifier si on ne doit faire ca que sur un numero de joueur valide
 	//"un processus dit que le joueur x(nom_champion) est en vie"
+	if (vm->visu)
+		update_lives(champion, vm, vm->champion);
 	processus->lives++;
-	(*vm).last_alive = champion;
 }
 
 void	ft_ld(t_vm *vm, t_processus *processus)
@@ -40,7 +41,7 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 	int				arg2;
 	int				nb_octect;
 
-	ft_printf("~~~LD~~~\n");
+//	ft_printf("~~~LD~~~\n");
 	nb_octect = 2;
 	action = processus->action;
 	arg1 = action.args[0];
@@ -62,7 +63,7 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	unsigned int	arg1;
 	int				arg2;
 
-	ft_printf("~~~ST~~~\n");
+//	ft_printf("~~~ST~~~\n");
 	action = processus->action;
 	arg1 = action.args[0];
 	arg2 = action.args[1];
@@ -81,11 +82,12 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	}
 	else
 	{
-		ft_printf("int_to_octect(ram, %d, %d)\n", processus->reg[arg1 - 1], circular(arg2));
+//		ft_printf("int_to_octect(ram, %d, %d)\n", processus->reg[arg1 - 1], circular(arg2));
 		ft_int_to_octet((*vm).ram, processus->reg[arg1 - 1], circular(arg2));
-
+		if (vm->visu)
+			write_in_ram((*vm).ram, processus, circular(arg2));
 	}
-	print_ram((*vm).ram);
+//	print_ram((*vm).ram);
 }
 
 void	ft_add(t_vm *vm, t_processus *processus)
@@ -96,7 +98,7 @@ void	ft_add(t_vm *vm, t_processus *processus)
 	int				arg2;
 	int				arg3;
 
-	ft_printf("~~~ADD~~~\n");
+//	ft_printf("~~~ADD~~~\n");
 	action = processus->action;
 	arg1 = action.args[0];
 	arg2 = action.args[1];
@@ -118,7 +120,7 @@ void	ft_sub(t_vm *vm, t_processus *processus)
 	int				arg2;
 	int				arg3;
 
-	ft_printf("~~~SUB~~~\n");
+//	ft_printf("~~~SUB~~~\n");
 	action = processus->action;
 	arg1 = action.args[0];
 	arg2 = action.args[1];

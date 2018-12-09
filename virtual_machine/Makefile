@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/12/03 17:36:18 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/12/09 11:19:02 by sbeheret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -50,6 +50,8 @@ SRC =		corewar.c			\
 			free.c				\
 			get_action.c		\
 			initialization.c 	\
+			print_ram_curses.c 	\
+			use_ncurses.c 	\
 			tools.c				\
 			tools2.c			\
 			instruction.c		\
@@ -77,7 +79,7 @@ $(NAME_PATH)$(NAME) : $(OBJ)
 	@echo "$(LOW_GREEN) --Compiling lib--\tlibft"
 	@make -C $(LIB_PATH)/libft
 	@echo "$(PURPLE) --Linking--\t\t$(NAME)"
-	$(CC) -o $@ $^ $(LIBP)
+	$(CC) -lncurses -o $@ $^ $(LIBP)
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@echo "$(GREEN) --Compiling--\t\t$(NAME)"

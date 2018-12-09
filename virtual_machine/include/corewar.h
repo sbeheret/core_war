@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/05 16:43:49 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/09 16:00:07 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 */
 # include "libft.h"
 # include "op.h"
+# include <ncurses.h>
 
 /*
 ** -----------------------------------------------------------------------------
@@ -65,6 +66,7 @@ typedef struct			s_action
 typedef struct			s_processus
 {
 	int					PC;
+	int					color;
 	int					carry;
 	int					*reg;
 	int					cycles_wait;
@@ -78,6 +80,7 @@ typedef	struct			s_vm
 	int					nb_champs;
 	int					flag_dump;
 	int					dump_cycle;
+	int					visu;
 	unsigned int		last_alive;
 	int					CTD;
 	int					cycles_ttx;
@@ -121,7 +124,6 @@ void				load_champs(t_vm *vm);
 */
 void				make_list_process(t_champion **cham, t_processus **pcs);
 void				push_front_pcs(t_processus **pcs, t_processus *nw);
-t_processus			*new_processus(int p_nb, int start);
 
 
 /*
@@ -146,7 +148,7 @@ int					check_number(unsigned int	number, t_champion *champion);
 ** --------- INITIALIZATION
 */
 void				initialize_vm(t_vm *vm);
-void				initialize_processus(t_processus **pcs, int nb, int start);
+void				initialize_processus(t_processus **pcs, int nb, int start, int color);
 void				initialize_champion(t_champion **champion);
 void				initialize_action(t_processus *processus);
 
@@ -154,7 +156,7 @@ void				initialize_action(t_processus *processus);
 ** --------- LIBS
 */
 t_champion			*new_champion(void);
-t_processus			*new_processus(int p_number, int start);
+t_processus			*new_processus(int p_number, int start, int color);
 void				ft_push_back_chmp(t_champion **begin, t_champion *to_add);
 void				push_front_pcs(t_processus **pcs, t_processus *new);
 int					ft_atoi_exit(char *s, char *parameter, char *file);
@@ -236,5 +238,18 @@ void				ft_exit_dump(t_vm *vm);
 void				ft_free_vm(t_vm *vm);
 void				ft_free_champion(t_champion **champion);
 void				ft_free_processus(t_processus **processus);
+
+/*
+** --------- NCURSES
+*/
+
+void				init_ncurses(void);
+void				print_ram_curses(t_vm *vm);
+void				print_ram_nocolor(unsigned char *ram, int i);
+int				print_ram_color(unsigned char *ram, int i, int c, int size);
+void				update_pc_visu(unsigned char *ram, t_processus *pcs);
+void				update_lives(unsigned int nb, t_vm *vm, t_champion *chmps);
+void				update_cycles(t_vm *vm, int a);
+void				write_in_ram(unsigned char *ram, t_processus *pcs, int id);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:47:24 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 11:27:57 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 14:43:49 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,16 @@ void			create_process(t_champion **champions, t_processus **pcs)
 {
 	t_champion		*champ;
 	t_processus		*new;
-	// t_processus		*tmp_pcs;
+	int			i;
 
+	i = 1;
 	champ = (*champions);
 	new = NULL;
 	while (champ != NULL)
 	{
-		new = new_processus(champ->p_number, champ->start);
+		new = new_processus(champ->p_number, champ->start, i);
 		push_front_pcs(pcs, new);
 		champ = champ->next;
+		i++;
 	}
-	/*
-	** liste chainee ciruclaire
-	*/
-	// tmp_pcs = (*pcs);
-	// while (tmp_pcs->next != NULL)
-	// 	tmp_pcs = tmp_pcs->next;
-	// tmp_pcs->next = (*pcs);
 }

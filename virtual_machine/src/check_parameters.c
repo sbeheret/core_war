@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 11:27:55 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 15:01:47 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 			(*vm).dump_cycle = ft_atoi_exit(*argv, "dump", NULL);
 			argv += 1;
 		}
+		if (!(ft_strcmp(*argv, "-v")))
+		{
+			argv += 1;
+			(*vm).visu = 1;
+		}
 		create_champion(&argv, &(*vm).champion);
 		(*vm).nb_champs++;
 		if ((*vm).nb_champs > 4)
@@ -62,6 +67,8 @@ void			create_champion(char ***argv, t_champion **champion)
 	t_champion	*new_elem;
 
 	new_elem = new_champion();
+	if (!(**argv))
+		ft_exit_usage();
 	ft_assign_pnumber(argv, champion, &new_elem);
 	if (!(**argv))
 		ft_exit_usage();

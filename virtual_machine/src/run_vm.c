@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/05 17:40:19 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/09 15:31:26 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ void	run_vm(t_vm *vm)
 				ft_exit_dump(vm);
 		}
 		total_live = kill_processus(vm);
-		ft_printf("cycles_now = %d < CTD = %d| cylces ttx = %d | total_live = %d > NBR_LIVE = %d | nb_decrement = %d > MAX_CHECKS = %d \n"
-	,(*vm).cycles_now, (*vm).CTD, (*vm).cycles_ttx, total_live, NBR_LIVE, nb_decrement, MAX_CHECKS);
+//		ft_printf("cycles_now = %d < CTD = %d| cylces ttx = %d | total_live = %d > NBR_LIVE = %d | nb_decrement = %d > MAX_CHECKS = %d \n"
+//	,(*vm).cycles_now, (*vm).CTD, (*vm).cycles_ttx, total_live, NBR_LIVE, nb_decrement, MAX_CHECKS);
 		if (total_live > NBR_LIVE || nb_decrement > MAX_CHECKS)
 		{
 			(*vm).CTD -= CYCLE_DELTA;
+			update_cycles(vm, 1);
 			nb_decrement = 0;
 		}
 		nb_decrement++;
@@ -58,16 +59,20 @@ void	execute_processus(t_vm *vm)
 
 	t_processus *processus;
 	processus = (*vm).processus;
+	if (vm->visu)
+		update_cycles(vm, 0);
 	while (processus)
 	{
 		// usleep(50000);
 		op_code = processus->action.op_code;
 		if (processus->cycles_wait == 0)
 		{
-			print_processus(processus);
+//			print_processus(processus);
 			if (op_code > 0 && op_code < 17)
 				run_instruction(vm, processus, op_code);
 			get_action(vm, processus);
+			if (vm->visu)
+				update_pc_visu(vm->ram, vm->processus);
 		}
 		processus->cycles_wait--;
 		processus = processus->next;
@@ -140,7 +145,13 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 	// print_ram((*vm).ram);
 	// ft_printf("BEFORE INSTRUCTION\n");
 	// print_processus((*vm).processus);
+	ft_printf("OPCODE = %d\n", op_code);
 	instruction[op_code - 1](vm, processus);
+	ft_printf("INSTRUCTION DONE\n", op_code);
+	ft_printf("INSTRUCTION DONE\n", op_code);
+	ft_printf("INSTRUCTION DONE\n", op_code);
+	ft_printf("INSTRUCTION DONE\n", op_code);
+	ft_printf("INSTRUCTION DONE\n", op_code);
 	// ft_printf("AFTER INSTRUCTION\n");
 	// print_processus((*vm).processus);
 	// print_ram((*vm).ram);
@@ -162,8 +173,8 @@ void	declare_winner(t_vm *vm)
 		}
 		champion = champion->next;
 	}
-	if (name == NULL)
+//	if (name == NULL)
 	// sauvegarder le dernier champion au cas ou le numeor change
-		ft_printf("Aucun live avec un nom de champion valide n'a ete lance.\n");
-	ft_printf("le joueur %#X(%s)a gagne\n",(*vm).last_alive, name);
+//		ft_printf("Aucun live avec un nom de champion valide n'a ete lance.\n");
+//	ft_printf("le joueur %#X(%s)a gagne\n",(*vm).last_alive, name);
 }

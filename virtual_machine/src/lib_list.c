@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 13:19:03 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/29 15:27:53 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 14:41:01 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ t_champion	*new_champion(void)
 	return (new_elem);
 }
 
-t_processus	*new_processus(int p_number, int start)
+t_processus	*new_processus(int p_number, int start, int color)
 {
 	t_processus	*new;
 
 	if (!(new = malloc(sizeof(t_processus))))
 		ft_exit_malloc();
-	initialize_processus(&new, p_number, start);
+	initialize_processus(&new, p_number, start, color);
 	return (new);
 }
 
