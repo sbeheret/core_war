@@ -6,7 +6,7 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:42:50 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/08 12:33:42 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/09 18:36:34 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int		a(t_labels *lb, char *str, int i, t_op *op)
 	return (0);
 }
 
-static int		f_o_x_z(t_labels *lb, char *str, int i, t_op *op)
+static int		f_o(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (str[i] == 'f')
 	{
@@ -88,7 +88,12 @@ static int		f_o_x_z(t_labels *lb, char *str, int i, t_op *op)
 			return (i + 2);
 		}
 	}
-	else if (str[i] == 'x')
+	error_op_code(str + i);
+	return (0);
+}
+static int		x_z(t_labels *lb, char *str, int i, t_op *op)
+{
+	if (str[i] == 'x')
 	{
 		if (ft_strnequ(str + i, "xor", 3)
 			&& (str[i + 3] == ' ' || str[i + 3] == '\t'))
@@ -130,8 +135,10 @@ int				find_op_code(t_labels *lb, char *str, t_op *op)
 		return (s(lb, str, i, op));
 	else if (str[i] == 'a')
 		return (a(lb, str, i, op));
-	else if (str[i] == 'f' || str[i] == 'o' || str[i] == 'x' || str[i] == 'z')
-		return (f_o_x_z(lb, str, i, op));
+	else if (str[i] == 'f' || str[i] == 'o')
+		return (f_o(lb, str, i, op));
+	else if (str[i] == 'x' || str[i] == 'z')
+		return (x_z(lb, str, i, op));
 	error_op_code(str + i);
 	return (0);
 }
