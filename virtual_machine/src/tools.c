@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/05 14:52:34 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/06 21:58:22 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_ram(unsigned char *ram)
 		i++;
 	}
 	i = 0;
-	while (i < MEM_SIZE && i < 1000)
+	while (i < MEM_SIZE)
 	{
 		if (!(i % 64))
 		{
@@ -100,10 +100,8 @@ void	print_memory(unsigned char *str, size_t size)
 
 void	print_struct_vm(t_vm vm)
 {
-	t_champion *tmp;
-
-
-	tmp = vm.champion;
+	// t_champion *tmp;
+	// tmp = vm.champion;
 	ft_printf("\n=============== STRUCT VM ===============\n");
 	ft_printf("flag_dump = %d\n", vm.flag_dump);
 	ft_printf("dump_cycle = %d\n", vm.dump_cycle);

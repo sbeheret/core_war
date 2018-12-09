@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/09 15:31:26 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/09 16:05:21 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ void	execute_processus(t_vm *vm)
 		{
 //			print_processus(processus);
 			if (op_code > 0 && op_code < 17)
+			{
+				print_verbose(processus);
 				run_instruction(vm, processus, op_code);
+			}
 			get_action(vm, processus);
 			if (vm->visu)
 				update_pc_visu(vm->ram, vm->processus);
+			// print_processus(processus);
 		}
 		processus->cycles_wait--;
 		processus = processus->next;
@@ -145,13 +149,7 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 	// print_ram((*vm).ram);
 	// ft_printf("BEFORE INSTRUCTION\n");
 	// print_processus((*vm).processus);
-	ft_printf("OPCODE = %d\n", op_code);
 	instruction[op_code - 1](vm, processus);
-	ft_printf("INSTRUCTION DONE\n", op_code);
-	ft_printf("INSTRUCTION DONE\n", op_code);
-	ft_printf("INSTRUCTION DONE\n", op_code);
-	ft_printf("INSTRUCTION DONE\n", op_code);
-	ft_printf("INSTRUCTION DONE\n", op_code);
 	// ft_printf("AFTER INSTRUCTION\n");
 	// print_processus((*vm).processus);
 	// print_ram((*vm).ram);
