@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 17:13:40 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 17:23:16 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ int		ft_get_reg(t_processus *processus, int arg, int *error)
 int		ft_get_ind(t_vm *vm, t_processus *processus, int arg)
 {
 	int				address;
-	short				argument;
-	(void)vm;
+	short			argument;
+	(void)*vm;
 
 //	ft_printf("action args = %d \n", processus->action.args[arg]);
 	argument = (short)(*processus).action.args[arg];
 //	ft_printf("argument = %hd \n", argument);
 	address = circular((*processus).action.pc + (argument % IDX_MOD));
-//	ft_printf("adress = %hd \n", address);
-	//return(ft_octet_to_int2((*vm).ram, REG_SIZE, address));
+	ft_printf("adress = %hd \n", address);
+	// return(ft_octet_to_int2((*vm).ram, REG_SIZE, address));
 	return(address);
 }
 
