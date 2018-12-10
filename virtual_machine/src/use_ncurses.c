@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 11:07:06 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/10 17:10:27 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 18:02:54 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	write_in_ram(unsigned char *ram, t_processus *pcs, int id)
 //	z++;
 	while (i < 4)
 	{
-		move((id / 64 + 1) % 64 + 1, 8 + 3 * (id % 64));
+		id = circular(id);
+		move(id / 64 + 1, 8 + 3 * (id % 64));
 		printw("%hhx", ram[id] / 16);
 		printw("%hhx", ram[id] % 16);
 		printw(" ");
@@ -50,8 +51,8 @@ void	update_cycles(t_vm *vm, int a)
 	}
 	else
 	{
-		mvprintw(5, 215, "              ");
-		mvprintw(3, 212, "0             ");
+		mvprintw(5, 215, "      ");
+		mvprintw(3, 212, "0     ");
 		refresh();
 		mvprintw(5, 215, "%d", vm->CTD);
 	}
@@ -114,21 +115,21 @@ void	update_pc_visu(unsigned char *ram, t_processus *pcs)
 	int	i;
 	int	b;
 
-	i = pcs->last_pc;
+	i = circular(pcs->last_pc);
 	if (i == pcs->action.pc)
 		return ;
 	b = mvinch(i / 64 + 1, 8 + 3 * (i % 64)) & A_COLOR;
 	if (b == COLOR_PAIR(pcs->color + 5))
 	{
 		if (ram[i] != 0)
-			attron(COLOR_PAIR(pcs->color));
+			attron(COLOR_PAIR(pcs->color+2));
 		mvprintw(i / 64 + 1, 8 + 3 * (i % 64), "%hhx", ram[i] / 16);
 		printw("%hhx", ram[i] % 16);
 		if (ram[i] != 0)
-			attroff(COLOR_PAIR(pcs->color));
+			attroff(COLOR_PAIR(pcs->color+2));
 		refresh();
 	}
-	i = pcs->action.pc;
+	i = circular(pcs->action.pc);
 	pcs->last_pc = i;
 	attron(COLOR_PAIR(pcs->color + 5));
 	mvprintw(i / 64 + 1, 8 + 3 * (i % 64), "%hhx", ram[i] / 16);
