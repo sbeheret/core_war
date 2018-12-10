@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/09 16:18:01 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 10:59:34 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	initialize_vm(t_vm *vm)
 	(*vm).flag_dump = 0;
 	(*vm).dump_cycle = 0;
 	(*vm).visu = 0;
+	(*vm).verbose = 0;
 	(*vm).last_alive = 0;
 	(*vm).CTD = CYCLE_TO_DIE;
 	(*vm).cycles_ttx = 0;

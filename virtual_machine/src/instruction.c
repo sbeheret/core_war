@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/09 16:24:02 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 16:11:05 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_live(t_vm *vm, t_processus *processus)
 	champion = ft_octet_to_int2((*vm).ram, 4, circular(action.pc + 1));
 	//verifier si on ne doit faire ca que sur un numero de joueur valide
 	//"un processus dit que le joueur x(nom_champion) est en vie"
+	if ((*vm).verbose)
+		ft_print_live(processus->processus_number, champion);
 	if (vm->visu)
 		update_lives(champion, vm, vm->champion);
 	processus->lives++;
@@ -57,34 +59,39 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 	}
 	processus->reg[arg2] = arg1;
 	processus->carry = 1;
-
+	if ((*vm).verbose)
+		ft_print_ld(processus, arg1, arg2);
 }
 
+
+/*
+** ST - 2arg
+** arg1 = T_REG
+** arg2 = T_IND | T_REG
+*/
 void	ft_st(t_vm *vm, t_processus *processus)
 {
 	t_action		action;
-	int				arg1;
-	int				arg2;
 	int				address;
+	int				error;
 
+	print_action(processus->action);
 	action = processus->action;
-	arg1 = action.args[ARG1];
-	arg2 = action.args[ARG2];
-	if (action.nb_arg != 2 || action.type[ARG1] != REG || action.type[ARG2] == DIR)
-		return;
-	if (arg1 < 1 || arg1 > 16)
-		return;
-	if (action.type[ARG2] == REG && (arg2 < 1 || arg2 > 16))
-		return;
-	if (action.type[ARG2] == REG)
-		processus->reg[arg1] = processus->reg[arg2];
-	else if (action.type[ARG2] == IND)
+	error = 0;
+	if (action.type[1] == REG)
+		action.args[ARG2] = ft_get_reg(processus, ARG2, &error);
+	else if (action.type[1] == IND)
+		action.args[ARG2] = ft_get_ind(vm, processus, ARG2);
+	ft_printf("retour = %d\n", action.args[ARG2]);
+	if (error == 0 && action.args[0] >= 1 && action.args[0] <= 16)
 	{
-//	print_ram((*vm).ram);
-		address = circular(action.pc + ((short)arg2 % IDX_MOD));
-		ft_int_to_octet((*vm).ram, processus->reg[arg1], address);
+		address = circular(action.pc + (short)action.args[ARG2] % IDX_MOD);
+		ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], address);
 		if (vm->visu)
-			write_in_ram((*vm).ram, processus, circular(arg2));
+			write_in_ram(vm->ram, processus, address);
+		if ((*vm).verbose)
+			ft_print_st(processus, action.args[0], action.args[1]);
+		processus->carry = 1;
 	}
 }
 
@@ -108,6 +115,8 @@ void	ft_add(t_vm *vm, t_processus *processus)
 		return;
 	processus->reg[arg3] = processus->reg[arg1] + processus->reg[arg2];
 	processus->carry = 1;
+	if ((*vm).verbose)
+		ft_print_add(processus, arg1, arg2, arg3);
 }
 
 void	ft_sub(t_vm *vm, t_processus *processus)
@@ -130,4 +139,6 @@ void	ft_sub(t_vm *vm, t_processus *processus)
 		return;
 	processus->reg[arg3] = processus->reg[arg1] + processus->reg[arg2];
 	processus->carry = 1;
+	if ((*vm).verbose)
+		ft_print_sub(processus, arg1, arg2, arg3);
 }

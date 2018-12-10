@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/09 16:05:21 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 15:39:24 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,11 @@ void	execute_processus(t_vm *vm)
 		op_code = processus->action.op_code;
 		if (processus->cycles_wait == 0)
 		{
-//			print_processus(processus);
 			if (op_code > 0 && op_code < 17)
-			{
-				print_verbose(processus);
 				run_instruction(vm, processus, op_code);
-			}
 			get_action(vm, processus);
 			if (vm->visu)
 				update_pc_visu(vm->ram, vm->processus);
-			// print_processus(processus);
 		}
 		processus->cycles_wait--;
 		processus = processus->next;

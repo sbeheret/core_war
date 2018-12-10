@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/09 16:19:48 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 10:59:18 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 		{
 			argv += 1;
 			(*vm).visu = 1;
+		}
+		if (!(ft_strcmp(*argv, "-verbose")))
+		{
+			argv += 1;
+			(*vm).verbose = 1;
 		}
 		create_champion(&argv, &(*vm).champion);
 		(*vm).nb_champs++;

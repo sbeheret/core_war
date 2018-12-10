@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/12/09 16:03:43 by sbeheret         ###   ########.fr        #
+#    Updated: 2018/12/10 15:36:38 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -58,6 +58,9 @@ SRC =		corewar.c			\
 			instruction2.c		\
 			instruction3.c		\
 			instruction4.c		\
+			print_instruction.c	\
+			print_instruction2.c\
+			print_instruction3.c\
 			lib_list.c			\
 			load_in_ram.c		\
 			run_vm.c			\

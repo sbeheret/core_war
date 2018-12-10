@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/09 16:20:36 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 15:33:30 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef	struct			s_vm
 	int					flag_dump;
 	int					dump_cycle;
 	int					visu;
+	int					verbose;
 	unsigned int		last_alive;
 	int					CTD;
 	int					cycles_ttx;
@@ -223,9 +224,31 @@ void				ft_lfork(t_vm *vm, t_processus *processus);
 void				ft_aff(t_vm *vm, t_processus *processus);
 
 /*
+** ---------PRINT INSTRUCTION
+*/
+void				ft_print_live(int processus, unsigned int champion);
+void				ft_print_ld(t_processus *processus, int arg1, int arg2);
+void				ft_print_st(t_processus *processus, int arg1, int arg2);
+void				ft_print_add(t_processus *processus, int arg1, int arg2, int arg3);
+void				ft_print_sub(t_processus *processus, int arg1, int arg2, int arg3);
+void				ft_print_and(t_processus *processus, int arg1, int arg2, int arg3);
+void				ft_print_or(t_processus *processus, int arg1, int arg2, int arg3);
+void				ft_print_xor(t_processus *processus, int arg1, int arg2, int arg3);
+void				ft_print_zjump(t_processus *processus, int jump);
+void				ft_print_ldi(t_processus *processus, int arg1, int arg2, int arg3);
+void				ft_print_sti(t_processus *processus, int arg1, int arg2, int arg3);
+void				ft_print_fork(t_processus *processus, int arg);
+void				ft_print_lld(t_processus *processus, int arg1, int arg2);
+void				ft_print_lldi(t_processus *processus, int arg1, int arg2, int arg3);
+void				ft_print_lfork(t_processus *processus, int arg);
+
+/*
 ** --------- CHECKI INSTRUCTION ARG
 */
-int					decode_arg_ld(t_vm *vm, t_processus *processus);
+int					ft_get_reg(t_processus *processus, int arg, int *error);
+int					ft_get_ind(t_vm *vm, t_processus *processus, int arg);
+int					ft_get_lind(t_vm *vm, t_processus *processus, int arg);
+
 /*
 ** --------- VERBOSE
 */
