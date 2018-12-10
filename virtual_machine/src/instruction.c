@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 16:22:27 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/10 17:10:43 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 		arg1 = ft_octet_to_int2((*vm).ram, REG_SIZE, address);
 	}
 	processus->reg[arg2] = arg1;
+	ft_printf("registre r%d = %#x\n", arg2, arg1);
 	processus->carry = 1;
 	if ((*vm).verbose)
 		ft_print_ld(processus, arg1, arg2);
@@ -72,7 +73,6 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 void	ft_st(t_vm *vm, t_processus *processus)
 {
 	t_action		action;
-	int				address;
 	int				error;
 
 	print_action(processus->action);
@@ -85,10 +85,9 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	ft_printf("retour = %d\n", action.args[ARG2]);
 	if (error == 0 && action.args[0] >= 1 && action.args[0] <= 16)
 	{
-		address = circular(action.pc + (short)action.args[ARG2] % IDX_MOD);
-		ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], address);
+		ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], action.args[ARG2]);
 		if (vm->visu)
-			write_in_ram(vm->ram, processus, address);
+			write_in_ram(vm->ram, processus, action.args[ARG2]);
 		if ((*vm).verbose)
 			ft_print_st(processus, action.args[0], action.args[1]);
 		processus->carry = 1;
