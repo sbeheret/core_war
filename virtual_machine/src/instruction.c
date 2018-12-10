@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 17:10:43 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/10 17:23:44 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	t_action		action;
 	int				error;
 
-	print_action(processus->action);
+//	print_action(processus->action);
 	action = processus->action;
 	error = 0;
 	if (action.type[1] == REG)
 		action.args[ARG2] = ft_get_reg(processus, ARG2, &error);
 	else if (action.type[1] == IND)
 		action.args[ARG2] = ft_get_ind(vm, processus, ARG2);
-	ft_printf("retour = %d\n", action.args[ARG2]);
+	//ft_printf("retour = %d\n", action.args[ARG2]);
 	if (error == 0 && action.args[0] >= 1 && action.args[0] <= 16)
 	{
 		ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], action.args[ARG2]);

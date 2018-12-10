@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 16:21:36 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/10 16:37:09 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_sti(t_vm *vm, t_processus *processus)
 	t_action	action;
 	int			address;
 
+	error = 0;
 	action = processus->action;
 	if (action.type[1] == REG)
 		action.args[ARG2] = ft_get_reg(processus, ARG2, &error);
