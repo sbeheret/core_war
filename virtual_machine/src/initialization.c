@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 10:59:34 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/10 16:22:47 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	initialize_processus(t_processus **processus, int nb_player, int start, int
 	(*processus)->processus_number = processus_number;
 	processus_number++;
 	(*processus)->PC = start;
+	(*processus)->last_pc = start;
 	(*processus)->carry = 0;
 	(*processus)->color = color;
 	if (!((*processus)->reg = malloc(sizeof(int) * 17)))

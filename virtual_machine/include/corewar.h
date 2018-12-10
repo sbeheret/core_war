@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 15:33:30 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/10 16:23:13 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct			s_processus
 {
 	int					processus_number;
 	int					PC;
+	int					last_pc;
 	int					color;
 	int					carry;
 	int					*reg;
@@ -289,5 +290,6 @@ void				update_pc_visu(unsigned char *ram, t_processus *pcs);
 void				update_lives(unsigned int nb, t_vm *vm, t_champion *chmps);
 void				update_cycles(t_vm *vm, int a);
 void				write_in_ram(unsigned char *ram, t_processus *pcs, int id);
+void				init_data_visu(t_vm *vm);
 
 #endif
