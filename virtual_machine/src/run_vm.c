@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/09 16:05:21 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 16:07:24 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	run_vm(t_vm *vm)
 		total_live = kill_processus(vm);
 //		ft_printf("cycles_now = %d < CTD = %d| cylces ttx = %d | total_live = %d > NBR_LIVE = %d | nb_decrement = %d > MAX_CHECKS = %d \n"
 //	,(*vm).cycles_now, (*vm).CTD, (*vm).cycles_ttx, total_live, NBR_LIVE, nb_decrement, MAX_CHECKS);
+		update_cycles(vm, 1);
 		if (total_live > NBR_LIVE || nb_decrement > MAX_CHECKS)
 		{
 			(*vm).CTD -= CYCLE_DELTA;
-			update_cycles(vm, 1);
 			nb_decrement = 0;
 		}
 		nb_decrement++;
@@ -70,14 +70,14 @@ void	execute_processus(t_vm *vm)
 //			print_processus(processus);
 			if (op_code > 0 && op_code < 17)
 			{
-				print_verbose(processus);
+				//print_verbose(processus);
 				run_instruction(vm, processus, op_code);
 			}
 			get_action(vm, processus);
-			if (vm->visu)
-				update_pc_visu(vm->ram, vm->processus);
 			// print_processus(processus);
 		}
+		if (vm->visu)
+			update_pc_visu(vm->ram, processus);
 		processus->cycles_wait--;
 		processus = processus->next;
 	}

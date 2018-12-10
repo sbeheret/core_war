@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/12/09 16:03:43 by sbeheret         ###   ########.fr        #
+#    Updated: 2018/12/10 12:10:35 by sbeheret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -101,4 +101,4 @@ re: fclean all
 
 debug : $(OBJ)
 	@echo "$(PURPLE) --Linking--\t\t"
-	$(CC) -o $(NAME_PATH)$(NAME) $^ $(LIBP) -fsanitize=address -O1 -fno-omit-frame-pointer
+	$(CC) -lncurses -o $(NAME_PATH)$(NAME) $^ $(LIBP) -fsanitize=address -O1 -fno-omit-frame-pointer

@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 14:25:26 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/06 16:07:11 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 15:29:28 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	print_ram_curses(t_vm *vm)
 	i = 0;
 	c = 0;
 	tmp = vm->champion;
-	while (i < MEM_SIZE && i < 3500)
+	while (i < MEM_SIZE)
 	{
 		if (tmp->start == i)
 		{
@@ -72,20 +72,26 @@ void	print_ram_curses(t_vm *vm)
 			i++;
 		}
 	}
+	init_data_visu(vm);
 }
 
 void	init_ncurses(void)
 {
 	initscr();
 	start_color();
-	init_pair(1, COLOR_YELLOW, COLOR_BLACK);
+	curs_set(0);
+	init_color(COLOR_WHITE, 500, 500, 500);
+	init_color(COLOR_GREEN, 0, 1000, 329);
+	init_color(COLOR_RED, 1000, 0, 329);
+	init_color(COLOR_BLUE, 0, 529, 1000);
+	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(2, COLOR_GREEN, COLOR_BLACK);
-	init_pair(3, COLOR_BLUE, COLOR_BLACK);
-	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(6, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(4, COLOR_RED, COLOR_BLACK);
+	init_pair(1, COLOR_BLUE, COLOR_BLACK);
+	init_pair(8, COLOR_BLACK, COLOR_YELLOW);
 	init_pair(7, COLOR_BLACK, COLOR_GREEN);
-	init_pair(8, COLOR_BLACK, COLOR_BLUE);
-	init_pair(9, COLOR_BLACK, COLOR_MAGENTA);
+	init_pair(9, COLOR_BLACK, COLOR_RED);
+	init_pair(6, COLOR_BLACK, COLOR_BLUE);
 	raw();
 	noecho();
 }
