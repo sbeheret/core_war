@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 14:25:26 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/10 15:29:28 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/11 12:12:51 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ void	init_ncurses(void)
 	init_color(COLOR_GREEN, 0, 1000, 329);
 	init_color(COLOR_RED, 1000, 0, 329);
 	init_color(COLOR_BLUE, 0, 529, 1000);
-	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(2, COLOR_GREEN, COLOR_BLACK);
-	init_pair(4, COLOR_RED, COLOR_BLACK);
-	init_pair(1, COLOR_BLUE, COLOR_BLACK);
-	init_pair(8, COLOR_BLACK, COLOR_YELLOW);
-	init_pair(7, COLOR_BLACK, COLOR_GREEN);
-	init_pair(9, COLOR_BLACK, COLOR_RED);
-	init_pair(6, COLOR_BLACK, COLOR_BLUE);
+	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(3, COLOR_GREEN, COLOR_BLACK);
+	init_pair(1, COLOR_RED, COLOR_BLACK);
+	init_pair(4, COLOR_BLUE, COLOR_BLACK);
+	init_pair(7, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(8, COLOR_BLACK, COLOR_GREEN);
+	init_pair(6, COLOR_BLACK, COLOR_RED);
+	init_pair(9, COLOR_BLACK, COLOR_BLUE);
 	raw();
 	noecho();
 }

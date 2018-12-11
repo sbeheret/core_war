@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 16:21:11 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 11:38:58 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	run_vm(t_vm *vm)
 		total_live = 0;
 		while ((*vm).cycles_now < (*vm).CTD)
 		{
+			ncurses_input(vm);
 			execute_processus(vm);
 			(*vm).cycles_ttx++;
 			(*vm).cycles_now++;
