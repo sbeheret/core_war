@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 13:58:09 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:53:19 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ unsigned char		*ft_read_champion(char *file, size_t *binary_len);
 void				check_binary(t_champion *champion);
 void				check_padding(unsigned char **binary, char *file);
 int					check_number(unsigned int	number, t_champion *champion);
+void				ft_option(char ***argv, t_vm *vm);
 
 /*
 ** --------- INITIALIZATION
@@ -166,7 +167,7 @@ void				initialize_action(t_processus *processus);
 t_champion			*new_champion(void);
 t_processus			*new_processus(int p_number, int start, int color);
 void				ft_push_back_chmp(t_champion **begin, t_champion *to_add);
-void				push_front_pcs(t_processus **pcs, t_processus *new);
+void				push_front_pcs(t_processus **pcs, t_processus *nw);
 int					ft_atoi_exit(char *s, char *parameter, char *file);
 
 /*
