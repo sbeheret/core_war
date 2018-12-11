@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 11:07:06 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/11 12:35:06 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 16:53:42 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	update_cycles(t_vm *vm, int a)
 {
 	if (!vm->visu)
 		return ;
-	usleep(50000);
+	usleep(vm->sleep);
 	if (a == 0)
 	{
 		mvprintw(1, 208, "%d", vm->cycles_ttx);
@@ -56,6 +56,8 @@ void	update_cycles(t_vm *vm, int a)
 		refresh();
 		mvprintw(5, 215, "%d", vm->CTD);
 	}
+	mvprintw(22, 200, "                             ");
+	mvprintw(22, 200, "%d Cycles / secondes", 1000000 / vm->sleep);
 	refresh();
 }
 
@@ -77,7 +79,7 @@ void	update_lives(unsigned int nb, t_vm *vm, t_champion *chmps)
 //	tmp->lives++;
 	if (vm->visu)
 	{
-		mvprintw(10 + (i * 3), 210, "%d", vm->cycles_ttx);
+		mvprintw(10 + (i * 3), 213, "%d", vm->cycles_ttx);
 		refresh();
 	}
 		//	mvprintw(11 + (i * 4), 222, "%d", tmp->lives);
@@ -107,6 +109,7 @@ void	init_data_visu(t_vm *vm)
 		tmp = tmp->next;
 		color++;
 	}
+	mvprintw(++i, 200, "10 Cycles / secondes");
 	refresh();
 }
 

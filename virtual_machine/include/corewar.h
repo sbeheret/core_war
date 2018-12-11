@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 15:48:19 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 16:57:13 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef	struct			s_vm
 	int					visu;
 	int					verbose;
 	unsigned int		last_alive;
+	unsigned int		sleep;
 	int					CTD;
 	int					cycles_ttx;
 	int					cycles_now;
@@ -166,7 +167,7 @@ void				initialize_action(t_processus *processus);
 t_champion			*new_champion(void);
 t_processus			*new_processus(int p_number, int start, int color);
 void				ft_push_back_chmp(t_champion **begin, t_champion *to_add);
-void				push_front_pcs(t_processus **pcs, t_processus *new);
+void				push_front_pcs(t_processus **pcs, t_processus *nw);
 int					ft_atoi_exit(char *s, char *parameter, char *file);
 
 /*
