@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 11:07:06 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/11 11:52:47 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 12:35:06 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ void	write_in_ram(unsigned char *ram, t_processus *pcs, int id)
 //	static int z = 0;
 
 	i = 0;
-	attron(COLOR_PAIR(pcs->color+1));
+	attron(COLOR_PAIR(pcs->color));
 //	usleep(50000000);
 //	mvprintw(70+z,50,"%d %d %d %d", ram[id], ram[id+1], ram[id+2], ram[id+3]);
 //	z++;
 	while (i < 4)
 	{
-		move((id / 64 + 1) % 64 + 1, 8 + 3 * (id % 64));
+		id = circular(id);
+		move(id / 64 + 1, 8 + 3 * (id % 64));
 		printw("%hhx", ram[id] / 16);
 		printw("%hhx", ram[id] % 16);
 		printw(" ");
@@ -34,7 +35,7 @@ void	write_in_ram(unsigned char *ram, t_processus *pcs, int id)
 		id++;
 		i++;
 	}
-	attroff(COLOR_PAIR(pcs->color+1));
+	attroff(COLOR_PAIR(pcs->color));
 	refresh();
 }
 
@@ -42,7 +43,7 @@ void	update_cycles(t_vm *vm, int a)
 {
 	if (!vm->visu)
 		return ;
-	usleep(500000);
+	usleep(50000);
 	if (a == 0)
 	{
 		mvprintw(1, 208, "%d", vm->cycles_ttx);
@@ -50,8 +51,8 @@ void	update_cycles(t_vm *vm, int a)
 	}
 	else
 	{
-		mvprintw(5, 215, "              ");
-		mvprintw(3, 212, "0             ");
+		mvprintw(5, 215, "      ");
+		mvprintw(3, 212, "0     ");
 		refresh();
 		mvprintw(5, 215, "%d", vm->CTD);
 	}
@@ -114,7 +115,7 @@ void	update_pc_visu(unsigned char *ram, t_processus *pcs)
 	int	i;
 	int	b;
 
-	i = pcs->last_pc;
+	i = circular(pcs->last_pc);
 	if (i == pcs->action.pc)
 		return ;
 	b = mvinch(i / 64 + 1, 8 + 3 * (i % 64)) & A_COLOR;
@@ -128,7 +129,7 @@ void	update_pc_visu(unsigned char *ram, t_processus *pcs)
 			attroff(COLOR_PAIR(pcs->color));
 		refresh();
 	}
-	i = pcs->action.pc;
+	i = circular(pcs->action.pc);
 	pcs->last_pc = i;
 	attron(COLOR_PAIR(pcs->color + 5));
 	mvprintw(i / 64 + 1, 8 + 3 * (i % 64), "%hhx", ram[i] / 16);

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 17:39:54 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 12:36:15 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,7 @@ void				ft_exit_header(char *file);
 void				ft_exit_parameter(char *argument, char *file);
 void				ft_exit_playernumber(char *file);
 void				ft_exit_dump(t_vm *vm);
+void				ft_exit_visu(t_vm *vm);
 
 /*
 ** --------- FREE
@@ -292,5 +293,6 @@ void				update_lives(unsigned int nb, t_vm *vm, t_champion *chmps);
 void				update_cycles(t_vm *vm, int a);
 void				write_in_ram(unsigned char *ram, t_processus *pcs, int id);
 void				init_data_visu(t_vm *vm);
+void				ncurses_input(t_vm *vm);
 
 #endif

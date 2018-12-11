@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 11:31:11 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 12:35:53 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 		arg1 = ft_octet_to_int2((*vm).ram, REG_SIZE, address);
 	}
 	processus->reg[arg2] = arg1;
+//	ft_printf("registre r%d = %#x\n", arg2, arg1);
 	processus->carry = 1;
 	if ((*vm).verbose)
 		ft_print_ld(processus, arg1, arg2);
