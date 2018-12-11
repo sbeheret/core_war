@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 17:23:44 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 11:31:11 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 		arg1 = ft_octet_to_int2((*vm).ram, REG_SIZE, address);
 	}
 	processus->reg[arg2] = arg1;
-	ft_printf("registre r%d = %#x\n", arg2, arg1);
 	processus->carry = 1;
 	if ((*vm).verbose)
 		ft_print_ld(processus, arg1, arg2);
@@ -69,29 +68,34 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 ** ST - 2arg
 ** arg1 = T_REG
 ** arg2 = T_IND | T_REG
-*/
+st r4,34 store la valeur de r4 à l’adresse ( PC + (34 % IDX_MOD))
+st r3,r8 copie r3 dans r8*/
+
+
 void	ft_st(t_vm *vm, t_processus *processus)
 {
 	t_action		action;
-	int				error;
 
-//	print_action(processus->action);
 	action = processus->action;
-	error = 0;
 	if (action.type[1] == REG)
-		action.args[ARG2] = ft_get_reg(processus, ARG2, &error);
-	else if (action.type[1] == IND)
-		action.args[ARG2] = ft_get_ind(vm, processus, ARG2);
-	//ft_printf("retour = %d\n", action.args[ARG2]);
-	if (error == 0 && action.args[0] >= 1 && action.args[0] <= 16)
 	{
-		ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], action.args[ARG2]);
-		if (vm->visu)
-			write_in_ram(vm->ram, processus, action.args[ARG2]);
-		if ((*vm).verbose)
-			ft_print_st(processus, action.args[0], action.args[1]);
-		processus->carry = 1;
+		if (action.args[0] < 1 || action.args[0] > 16 || action.args[1] < 1
+		|| action.args[1] > 16)
+			return ;
+		processus->reg[action.args[1]] = processus->reg[action.args[1]];
 	}
+	else
+	{
+		if (action.type[1] != IND || action.args[0] < 1 || action.args[0] > 16)
+			return;
+		action.args[ARG2] = ft_get_ind(vm, processus, ARG2);
+		ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], action.args[ARG2]);
+	}
+	if (vm->visu)
+		write_in_ram(vm->ram, processus, action.args[ARG2]);
+	if ((*vm).verbose)
+		ft_print_st(processus, action.args[0], action.args[1]);
+	processus->carry = 1;
 }
 
 void	ft_add(t_vm *vm, t_processus *processus)

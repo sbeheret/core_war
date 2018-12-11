@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 16:37:09 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/10 18:12:31 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ void	ft_sti(t_vm *vm, t_processus *processus)
 	action = processus->action;
 	if (action.type[1] == REG)
 		action.args[ARG2] = ft_get_reg(processus, ARG2, &error);
-	else if (action.type[1] == IND)
-		action.args[ARG2] = ft_get_ind(vm, processus, ARG2);
+	// else if (action.type[1] == IND)
+	// 	action.args[ARG2] = ft_get_lind(vm, processus, ARG2);
 	if (action.type[2] == REG)
 		action.args[ARG3] = ft_get_reg(processus, ARG3, &error);
 	if (error == 0 && action.args[0] >= 1 && action.args[0] <= 16)
 	{
+		//error ici
 		address = circular(action.pc + ((action.args[ARG2] + action.args[ARG3]) % IDX_MOD));
 		ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], address);
 		if (vm->visu)

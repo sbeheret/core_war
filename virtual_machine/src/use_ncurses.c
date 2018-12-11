@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 11:07:06 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/10 17:10:27 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/11 11:52:47 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	update_cycles(t_vm *vm, int a)
 {
 	if (!vm->visu)
 		return ;
-	usleep(5000);
+	usleep(500000);
 	if (a == 0)
 	{
 		mvprintw(1, 208, "%d", vm->cycles_ttx);

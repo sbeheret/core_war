@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 17:24:17 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 10:47:51 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,33 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 	argv += 1;
 	while (*argv)
 	{
-		if (!(ft_strcmp(*argv, "-dump")))
+		if (*argv[0] == '-')
+			ft_option(&argv, vm);
+		else
 		{
-			argv += 1;
-			(*vm).flag_dump = 1;
-			if (!(*argv))
-				ft_exit_usage();
-			(*vm).dump_cycle = ft_atoi_exit(*argv, "dump", NULL);
-			argv += 1;
+			create_champion(&argv, &(*vm).champion);
+			(*vm).nb_champs++;
+			if ((*vm).nb_champs > 4)
+				ft_exit_toomanychamp();
 		}
-		if (!(ft_strcmp(*argv, "-v")))
-		{
-			argv += 1;
-			(*vm).visu = 1;
-		}
-		if (!(ft_strcmp(*argv, "-verbose")))
-		{
-			argv += 1;
-			(*vm).verbose = 1;
-		}
-		create_champion(&argv, &(*vm).champion);
-		(*vm).nb_champs++;
-		if ((*vm).nb_champs > 4)
-			ft_exit_toomanychamp();
 	}
+}
+
+void	ft_option(char ***argv, t_vm *vm)
+{
+	if (!(ft_strcmp(**argv, "-dump")))
+	{
+		*argv += 1;
+		(*vm).flag_dump = 1;
+		if (!(**argv))
+			ft_exit_usage();
+		(*vm).dump_cycle = ft_atoi_exit(**argv, "dump", NULL);
+	}
+	else if (!(ft_strcmp(**argv, "-v")))
+		(*vm).visu = 1;
+	else if (!(ft_strcmp(**argv, "-verbose")))
+		(*vm).verbose = 1;
+	*argv += 1;
 }
 
 /*

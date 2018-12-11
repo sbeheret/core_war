@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 16:23:13 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/10 17:39:54 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ unsigned char		*ft_read_champion(char *file, size_t *binary_len);
 void				check_binary(t_champion *champion);
 void				check_padding(unsigned char **binary, char *file);
 int					check_number(unsigned int	number, t_champion *champion);
+void				ft_option(char ***argv, t_vm *vm);
 
 /*
 ** --------- INITIALIZATION
