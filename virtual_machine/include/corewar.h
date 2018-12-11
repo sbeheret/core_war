@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 12:08:33 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/11 13:58:09 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef	struct			s_vm
 	int					visu;
 	int					verbose;
 	unsigned int		last_alive;
+	unsigned int		sleep;
 	int					CTD;
 	int					cycles_ttx;
 	int					cycles_now;

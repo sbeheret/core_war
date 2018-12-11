@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 14:25:26 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/11 12:12:51 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/11 14:31:22 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	print_ram_curses(t_vm *vm)
 void	init_ncurses(void)
 {
 	initscr();
+	keypad(stdscr, TRUE);
 	start_color();
 	curs_set(0);
 	init_color(COLOR_WHITE, 500, 500, 500);
