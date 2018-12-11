@@ -70,30 +70,6 @@ static int	rew_count(t_labels *f, int cp, int lp)
 	return (bytes);
 }
 
-/*
-**	first_label		starting point in the linked list
-**	current 		start calculating from this label
-**	arg				argument number that contains the label call
-**
-**	EXAMPLE
-**
-**	 label comes after the call (consecutive order, result is positive number):
-**				and %:live, r1, r2
-**		live:	live %1
-**
-**	 |	bytes_till_label(d->first_label, current, 0)
-**	 |		==	8 (8 in hex)
-**
-**
-**	 label is before the call (reverse order, result is negative number):
-**		live:	live %1
-**				and %:live, r1, r2
-**
-**	 |	bytes_till_label(d->first_label, current, 0)
-**	 |		==	(-5 converted to unsigned int) 4294967291 (fffffffb in hex)
-**
-*/
-
 int			bytes_till_label(t_labels *first_label, t_labels *current, int arg)
 {
 	t_labels	*l;

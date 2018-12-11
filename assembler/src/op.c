@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-t_op	op_tab[17] =
+t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
@@ -41,19 +41,5 @@ t_op	op_tab[17] =
 
 t_op	*get_op_tab(void)
 {
-	return (op_tab);
-}
-
-int		find_op_nb(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (i < 16)
-	{
-		if (ft_strequ(op_tab[i].name, s))
-			return (op_tab[i].id);
-		i++;
-	}
-	return (0);
+	return (g_op_tab);
 }

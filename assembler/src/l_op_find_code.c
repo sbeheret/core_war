@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-static int		s(t_labels *lb, char *str, int i, t_op *op)
+static int	s(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (ft_strnequ(str + i, "st", 2)
 		&& (str[i + 2] == ' ' || str[i + 2] == '\t'))
@@ -39,7 +39,7 @@ static int		s(t_labels *lb, char *str, int i, t_op *op)
 	return (0);
 }
 
-static int		a(t_labels *lb, char *str, int i, t_op *op)
+static int	a(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (ft_strnequ(str + i, "add", 3)
 		&& (str[i + 3] == ' ' || str[i + 3] == '\t'))
@@ -66,7 +66,7 @@ static int		a(t_labels *lb, char *str, int i, t_op *op)
 	return (0);
 }
 
-static int		f_o(t_labels *lb, char *str, int i, t_op *op)
+static int	f_o(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (str[i] == 'f')
 	{
@@ -91,7 +91,8 @@ static int		f_o(t_labels *lb, char *str, int i, t_op *op)
 	error_op_code(str + i);
 	return (0);
 }
-static int		x_z(t_labels *lb, char *str, int i, t_op *op)
+
+static int	x_z(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (str[i] == 'x')
 	{
@@ -117,7 +118,7 @@ static int		x_z(t_labels *lb, char *str, int i, t_op *op)
 	return (0);
 }
 
-int				find_op_code(t_labels *lb, char *str, t_op *op)
+int			find_op_code(t_labels *lb, char *str, t_op *op)
 {
 	int	i;
 

@@ -20,7 +20,7 @@ SRC_PATH =	src
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
 SRCS =	main.c \
 		check_words.c \
@@ -50,14 +50,16 @@ SRCS =	main.c \
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
+HDRS = $(addprefix $(INC_PATH)/,asm.h ft_printf.h get_next_line.h libft.h op.h)
+
 all : $(NAME_PATH)$(NAME)
 
-$(NAME_PATH)$(NAME) : $(OBJS)
+$(NAME_PATH)$(NAME) : $(OBJS) $(HDRS) Makefile
 	@make -C $(LIBFT)
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME)
 	@echo "\033[32;4m	   ***Executable $(NAME) created***   \033[0;m"
 
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
+$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HDRS) Makefile
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(FLAGS) -c $< -o $@ -I$(INC_PATH)
 

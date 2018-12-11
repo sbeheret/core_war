@@ -81,6 +81,6 @@ int			get_labels(t_data *d)
 		|| !compliance_check(d, d->first_label))
 		return (0);
 	add_bytes(d, d->first_label, 0);
-	show_labels(d);
+	//show_labels(d);
 	return (1);
 }
