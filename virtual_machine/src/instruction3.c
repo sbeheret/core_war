@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 16:46:03 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 18:48:20 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,29 @@
 //sti r2,%4,%5 sti copie REG_SIZE octet de r2 a l’adresse (4 + 5)
 //Les paramètres 2 et 3 sont des index. Si les paramètres 2 ou 3
 //sont des registres, on utilisera leur contenu comme un index.
+//T_REG,
+//T_REG | T_DIR | T_IND,
+//T_DIR | T_REG
+// IND = valeur a l'adresse;
 
 void	ft_sti(t_vm *vm, t_processus *processus)
 {
 	//DIRECT 2 bytes
 	t_action	action;
 	int			address;
+	int			value1;
+	int			value2;
 
 	action = processus->action;
+	value1 = (short)action.args[1];
+	value2 = (short)action.args[2];
 	if (action.type[1] == REG)
-		action.args[ARG2] = processus->reg[action.args[1]];
-	// else if (action.type[1] == IND)
-		// action.args[ARG2] = ft_get_lind(vm, processus, ARG2);
+		value1 = processus->reg[action.args[1]];
+	else if (action.type[1] == IND)
+		value1 = ft_get_ind(vm, processus, ARG2);
 	if (action.type[2] == REG)
-		action.args[ARG3] = processus->reg[action.args[2]];
-	address = circular(action.pc + ((action.args[ARG2] + action.args[ARG3]) % IDX_MOD));
+		value2 = processus->reg[action.args[2]];
+	address = circular(action.pc + ((value1 + value2) % IDX_MOD));
 	ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], address);
 	if (vm->visu)
 		write_in_ram(vm->ram, processus, address);

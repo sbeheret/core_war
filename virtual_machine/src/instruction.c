@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 16:01:31 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 19:23:51 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,26 +65,18 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 ** arg2 = T_IND | T_REG
 st r4,34 store la valeur de r4 à l’adresse ( PC + (34 % IDX_MOD))
 st r3,r8 copie r3 dans r8*/
-
-
 void	ft_st(t_vm *vm, t_processus *processus)
 {
+	int				address;
 	t_action		action;
 
 	action = processus->action;
 	if (action.type[1] == REG)
-	{
-		if (action.args[0] < 1 || action.args[0] > 16 || action.args[1] < 1
-		|| action.args[1] > 16)
-			return ;
-		processus->reg[action.args[1]] = processus->reg[action.args[1]];
-	}
+		processus->reg[action.args[1]] = processus->reg[action.args[0]];
 	else
 	{
-		if (action.type[1] != IND || action.args[0] < 1 || action.args[0] > 16)
-			return;
-		action.args[ARG2] = ft_get_ind(vm, processus, ARG2);
-		ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], action.args[ARG2]);
+		address = circular(action.pc + ((short)action.args[1] % IDX_MOD));
+		ft_int_to_octet((*vm).ram, processus->reg[action.args[0]], address);
 	}
 	if (vm->visu)
 		write_in_ram(vm->ram, processus, action.args[ARG2]);

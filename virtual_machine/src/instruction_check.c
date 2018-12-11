@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:49:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 15:48:24 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 18:18:08 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // t_dir | t_ind | t_reg = 7
 //
 // si reg il faut = (1 || 3 || 5 || 7)  != 2 && != 6
-// si dir il faut = (2 || 3 || 7 )		!= 1 && != 4 && !=5 && 6
+// si dir il faut = (2 || 3 || 6 || 7 )		!= 1 && != 4 && !=5 && 6
 // si ind il faut = (4 || 5 || 6 || 7)
 
 
@@ -45,6 +45,7 @@ int		ft_get_ind(t_vm *vm, t_processus *processus, int arg)
 
 	argument = (short)(*processus).action.args[arg];
 	address = circular((*processus).action.pc + (argument % IDX_MOD));
+	return(ft_octet_to_int2((*vm).ram, REG_SIZE, address));
 	return(address);
 }
 
