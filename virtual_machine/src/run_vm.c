@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 11:38:58 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:32:12 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	run_vm(t_vm *vm)
 				ft_exit_dump(vm);
 		}
 		total_live = kill_processus(vm);
-//		ft_printf("cycles_now = %d < CTD = %d| cylces ttx = %d | total_live = %d > NBR_LIVE = %d | nb_decrement = %d > MAX_CHECKS = %d \n"
-//	,(*vm).cycles_now, (*vm).CTD, (*vm).cycles_ttx, total_live, NBR_LIVE, nb_decrement, MAX_CHECKS);
 		update_cycles(vm, 1);
 		if (total_live > NBR_LIVE || nb_decrement > MAX_CHECKS)
 		{
@@ -81,10 +79,6 @@ void	execute_processus(t_vm *vm)
 
 int		kill_processus(t_vm *vm)
 {
-	//parcours la liste,
-	// on addition le nombre de live
-	// si un processus a live a 0 on le supprime
-
 	int			total_live;
 	t_processus	*tmp;
 	t_processus *previous;
@@ -142,13 +136,13 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 		&ft_lfork,
 		&ft_aff
 	};
-	// print_ram((*vm).ram);
-	// ft_printf("BEFORE INSTRUCTION\n");
-	// print_processus((*vm).processus);
-	instruction[op_code - 1](vm, processus);
-	// ft_printf("AFTER INSTRUCTION\n");
-	// print_processus((*vm).processus);
-	// print_ram((*vm).ram);
+	if (instruction_check(processus))
+		instruction[op_code - 1](vm, processus);
+	else
+		processus->PC = processus->action.pc + 2;
+	//verifier la valeur de si instruction false
+	//surement seulement plus 1 si encoding_byte
+
 }
 
 void	declare_winner(t_vm *vm)

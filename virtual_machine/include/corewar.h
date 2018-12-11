@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 12:36:15 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 15:48:19 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,9 +245,9 @@ void				ft_print_lldi(t_processus *processus, int arg1, int arg2, int arg3);
 void				ft_print_lfork(t_processus *processus, int arg);
 
 /*
-** --------- CHECKI INSTRUCTION ARG
+** --------- CHECK INSTRUCTION ARG
 */
-int					ft_get_reg(t_processus *processus, int arg, int *error);
+int					instruction_check(t_processus *processus);
 int					ft_get_ind(t_vm *vm, t_processus *processus, int arg);
 int					ft_get_lind(t_vm *vm, t_processus *processus, int arg);
 

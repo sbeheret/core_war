@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/10 15:38:54 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 16:29:30 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,30 @@ void		trad_encoding_byte(t_action *action, int enc_byte, int value)
 	}
 }
 
+int		instruction_check(t_processus *processus)
+{
+	int 		i;
+	t_action	action;
+	int			param;
 
-/*
-** Fonction pour debug
-*/
+	action = processus->action;
+	if (op_tab[action.op_code - 1].param_number != action.nb_arg)
+		return (0);
+	i = 0;
+	while (i < action.nb_arg)
+	{
+		param = op_tab[action.op_code - 1].param_type[i];
+		if (action.type[i] == REG && (param == 2 || param == 6 || param == 4
+		|| action.args[i] < 1 || action.args[i] > 16))
+			return (0);
+		else if (action.type[i] == DIR && (param == 1 || param == 4
+			|| param == 5))
+			return (0);
+		else if (action.type[i] == IND && param < 4)
+			return (0);
+		else if (action.type[i] <= 0 || action.type[i] >= 4)
+			return (0);
+		i++;
+	}
+	return (1);
+}

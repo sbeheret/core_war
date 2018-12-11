@@ -6,38 +6,36 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 18:12:31 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/11 16:46:03 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+//sti r2,%4,%5 sti copie REG_SIZE octet de r2 a l’adresse (4 + 5)
+//Les paramètres 2 et 3 sont des index. Si les paramètres 2 ou 3
+//sont des registres, on utilisera leur contenu comme un index.
+
 void	ft_sti(t_vm *vm, t_processus *processus)
 {
 	//DIRECT 2 bytes
-	int			error;
 	t_action	action;
 	int			address;
 
-	error = 0;
 	action = processus->action;
 	if (action.type[1] == REG)
-		action.args[ARG2] = ft_get_reg(processus, ARG2, &error);
+		action.args[ARG2] = processus->reg[action.args[1]];
 	// else if (action.type[1] == IND)
-	// 	action.args[ARG2] = ft_get_lind(vm, processus, ARG2);
+		// action.args[ARG2] = ft_get_lind(vm, processus, ARG2);
 	if (action.type[2] == REG)
-		action.args[ARG3] = ft_get_reg(processus, ARG3, &error);
-	if (error == 0 && action.args[0] >= 1 && action.args[0] <= 16)
-	{
-		//error ici
-		address = circular(action.pc + ((action.args[ARG2] + action.args[ARG3]) % IDX_MOD));
-		ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], address);
-		if (vm->visu)
-			write_in_ram(vm->ram, processus, address);
-		if ((*vm).verbose)
-			ft_print_sti(processus, action.args[0], action.args[1], action.args[2]);
-		processus->carry = 1;
-	}
+		action.args[ARG3] = processus->reg[action.args[2]];
+	address = circular(action.pc + ((action.args[ARG2] + action.args[ARG3]) % IDX_MOD));
+	ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], address);
+	if (vm->visu)
+		write_in_ram(vm->ram, processus, address);
+	if ((*vm).verbose)
+		ft_print_sti(processus, action.args[0], action.args[1], action.args[2]);
+	processus->carry = 1;
 }
 
 void	ft_fork(t_vm *vm, t_processus *processus)
@@ -94,21 +92,18 @@ void	ft_lldi(t_vm *vm, t_processus *processus)
 	action = &(processus->action);
 	error = 0;
 	if (action->type[0] == REG)
-		action->args[ARG1] = ft_get_reg(processus, ARG1, &error);
+		action->args[ARG1] = processus->reg[action->args[0]];
 	else if (action->type[0] == IND)
 		action->args[ARG1] = ft_get_lind(vm, processus, ARG1);
 	if (action->type[1] == REG)
-		action->args[ARG2] = ft_get_reg(processus, ARG2, &error);
+		action->args[ARG2] = processus->reg[action->args[1]];
 	else if (action->type[1] == IND)
 		action->args[ARG2] = ft_get_lind(vm, processus, ARG2);
-	if (error == 0 && action->args[2] >= 1 && action->args[2] <= 16)
-	{
-		address = circular(action->pc + (action->args[0] + action->args[1]));
-		processus->reg[action->args[2]] = ft_octet_to_int2((*vm).ram, REG_SIZE, address);
-		processus->carry = 1;
-		if ((*vm).verbose)
-			ft_print_lldi(processus, action->args[0], action->args[1], action->args[2]);
-	}
+	address = circular(action->pc + (action->args[0] + action->args[1]));
+	processus->reg[action->args[2]] = ft_octet_to_int2((*vm).ram, REG_SIZE, address);
+	processus->carry = 1;
+	if ((*vm).verbose)
+		ft_print_lldi(processus, action->args[0], action->args[1], action->args[2]);
 }
 
 void	ft_lfork(t_vm *vm, t_processus *processus)
