@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/11 18:12:22 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 12:09:26 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void		get_action(t_vm *vm, t_processus *pcs)
 		return ;
 	}
 	pcs->cycles_wait = op_tab[pcs->action.op_code - 1].cycle;
-	pcs->action.nb_arg = op_tab[pcs->action.op_code - 1].param_number;
 	pcs->action.size_read++;
 	args_action(vm->ram, pcs->PC, &pcs->action);
 	pcs->PC = pcs->PC + pcs->action.size_read;
@@ -52,8 +51,8 @@ void		args_action(unsigned char *ram, int PC, t_action *action)
 	if ((enc_byte = op_tab[action->op_code - 1].encoding_byte))
 		action->size_read++;
 	size = 0;
-	i = 0;
 	trad_encoding_byte(action, enc_byte, ram[circular(PC + 1)]);
+	i = 0;
 	i_ram = circular(PC + enc_byte + 1);
 	while (i < action->nb_arg)
 	{
@@ -69,6 +68,8 @@ void		args_action(unsigned char *ram, int PC, t_action *action)
 
 void		trad_encoding_byte(t_action *action, int enc_byte, int value)
 {
+	int		i;
+
 	if (!enc_byte)
 	{
 		action->type[0] = 2;
@@ -82,6 +83,12 @@ void		trad_encoding_byte(t_action *action, int enc_byte, int value)
 		action->type[1] = (value & 0b00110000) >> 4;
 		action->type[2] = (value & 0b00001100) >> 2;
 		action->type[3] = 0;
+	}
+	i = -1;
+	while (++i < 4)
+	{
+		if (action->type[i])
+			action->nb_arg++;
 	}
 }
 
