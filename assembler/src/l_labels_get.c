@@ -37,7 +37,8 @@ static int	is_label(t_data *d, int len, int skip)
 	if (d->tab[d->y][len + 1]
 		&& d->tab[d->y][len + 1] != ' ' && d->tab[d->y][len + 1] != '\t')
 	{
-		ft_printf("\033[31mBad char [%c]\033[0;m\n", d->tab[d->y][len + 1]);
+		ft_printf("\033[31mLine [%s] has a bad char [%c]\033[0;m\n",\
+			d->tab[d->y], d->tab[d->y][len + 1]);
 		return (0);
 	}
 	lb = make_label(d->tab + d->y, len, d->y - skip);
@@ -56,14 +57,16 @@ static int	get_all(t_data *d, int len, int skip, int ret)
 			len++;
 		if (d->tab[d->y][len] == LABEL_CHAR)
 			ret = is_label(d, len, skip);
-		else if (d->tab[d->y][len] == ' ' || d->tab[d->y][len] == '\t')
+		else if (d->tab[d->y][len] == ' ' || d->tab[d->y][len] == '\t'
+				|| d->tab[d->y][len] == DIRECT_CHAR)
 			ret = is_op_code(d, NULL, 0, skip);
 		else
 		{
 			if (!d->tab[d->y][len])
 				ft_printf("\033[31mInvalide line [%s]\033[0;m\n", d->tab[d->y]);
 			else
-				ft_printf("\033[31mBad char [%c]\033[0;m\n", d->tab[d->y][len]);
+				ft_printf("\033[31mLine [%s] has a bad char [%c]\033[0;m\n",\
+					d->tab[d->y], d->tab[d->y][len]);
 			ret = 0;
 		}
 		if (!ret)
@@ -81,6 +84,6 @@ int			get_labels(t_data *d)
 		|| !compliance_check(d, d->first_label))
 		return (0);
 	add_bytes(d, d->first_label, 0);
-	//show_labels(d);
+//	show_labels(d);
 	return (1);
 }

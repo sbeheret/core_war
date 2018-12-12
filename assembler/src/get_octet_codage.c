@@ -43,15 +43,18 @@ static void		write_buff(t_labels *head, char b[])
 
 	i = 0;
 	bit = 0;
-	while (head->args[i])
+	if (head->args)
 	{
-		if (head->args[i][0] == DIRECT_CHAR)
-			direct(b, &bit);
-		else if (head->args[i][0] == 'r')
-			aregister(b, &bit);
-		else
-			indirect(b, &bit);
-		i++;
+		while (head->args[i])
+		{
+			if (head->args[i][0] == DIRECT_CHAR)
+				direct(b, &bit);
+			else if (head->args[i][0] == 'r')
+				aregister(b, &bit);
+			else
+				indirect(b, &bit);
+			i++;
+		}
 	}
 }
 

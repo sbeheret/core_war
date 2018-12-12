@@ -14,25 +14,22 @@
 
 static int	s(t_labels *lb, char *str, int i, t_op *op)
 {
-	if (ft_strnequ(str + i, "st", 2)
-		&& (str[i + 2] == ' ' || str[i + 2] == '\t'))
+	if (ft_strnequ(str + i, "sti", 3))
+	{
+		lb->op_code = op[10].name;
+		lb->op_nb = op[10].id;
+		return (i + 3);
+	}
+	else if (ft_strnequ(str + i, "st", 2))
 	{
 		lb->op_code = op[2].name;
 		lb->op_nb = op[2].id;
 		return (i + 2);
 	}
-	else if (ft_strnequ(str + i, "sub", 3)
-		&& (str[i + 3] == ' ' || str[i + 3] == '\t'))
+	else if (ft_strnequ(str + i, "sub", 3))
 	{
 		lb->op_code = op[4].name;
 		lb->op_nb = op[4].id;
-		return (i + 3);
-	}
-	else if (ft_strnequ(str + i, "sti", 3)
-		&& (str[i + 3] == ' ' || str[i + 3] == '\t'))
-	{
-		lb->op_code = op[10].name;
-		lb->op_nb = op[10].id;
 		return (i + 3);
 	}
 	error_op_code(str + i);
@@ -41,22 +38,19 @@ static int	s(t_labels *lb, char *str, int i, t_op *op)
 
 static int	a(t_labels *lb, char *str, int i, t_op *op)
 {
-	if (ft_strnequ(str + i, "add", 3)
-		&& (str[i + 3] == ' ' || str[i + 3] == '\t'))
+	if (ft_strnequ(str + i, "add", 3))
 	{
 		lb->op_code = op[3].name;
 		lb->op_nb = op[3].id;
 		return (i + 3);
 	}
-	else if (ft_strnequ(str + i, "and", 3)
-		&& (str[i + 3] == ' ' || str[i + 3] == '\t'))
+	else if (ft_strnequ(str + i, "and", 3))
 	{
 		lb->op_code = op[5].name;
 		lb->op_nb = op[5].id;
 		return (i + 3);
 	}
-	else if (ft_strnequ(str + i, "aff", 3)
-		&& (str[i + 3] == ' ' || str[i + 3] == '\t'))
+	else if (ft_strnequ(str + i, "aff", 3))
 	{
 		lb->op_code = op[15].name;
 		lb->op_nb = op[15].id;
@@ -70,8 +64,7 @@ static int	f_o(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (str[i] == 'f')
 	{
-		if (ft_strnequ(str + i, "fork", 4)
-			&& (str[i + 4] == ' ' || str[i + 4] == '\t'))
+		if (ft_strnequ(str + i, "fork", 4))
 		{
 			lb->op_code = op[11].name;
 			lb->op_nb = op[11].id;
@@ -80,8 +73,7 @@ static int	f_o(t_labels *lb, char *str, int i, t_op *op)
 	}
 	else if (str[i] == 'o')
 	{
-		if (ft_strnequ(str + i, "or", 2)
-			&& (str[i + 2] == ' ' || str[i + 2] == '\t'))
+		if (ft_strnequ(str + i, "or", 2))
 		{
 			lb->op_code = op[6].name;
 			lb->op_nb = op[6].id;
@@ -96,8 +88,7 @@ static int	x_z(t_labels *lb, char *str, int i, t_op *op)
 {
 	if (str[i] == 'x')
 	{
-		if (ft_strnequ(str + i, "xor", 3)
-			&& (str[i + 3] == ' ' || str[i + 3] == '\t'))
+		if (ft_strnequ(str + i, "xor", 3))
 		{
 			lb->op_code = op[7].name;
 			lb->op_nb = op[7].id;
@@ -106,8 +97,7 @@ static int	x_z(t_labels *lb, char *str, int i, t_op *op)
 	}
 	else if (str[i] == 'z')
 	{
-		if (ft_strnequ(str + i, "zjmp", 4)
-			&& (str[i + 4] == ' ' || str[i + 4] == '\t'))
+		if (ft_strnequ(str + i, "zjmp", 4))
 		{
 			lb->op_code = op[8].name;
 			lb->op_nb = op[8].id;

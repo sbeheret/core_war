@@ -20,7 +20,7 @@ SRC_PATH =	src
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 SRCS =	main.c \
 		check_words.c \
@@ -57,7 +57,7 @@ all : $(NAME_PATH)$(NAME)
 
 $(NAME_PATH)$(NAME) : $(OBJS) $(HDRS) Makefile
 	@make -C $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME) 
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME)
 	@echo "\033[32;4m	   ***Executable $(NAME) created***   \033[0;m"
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HDRS) Makefile

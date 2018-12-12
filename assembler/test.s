@@ -1,7 +1,6 @@
-.name           "42"
-.comment        "Just a basic Winner Program"
+.name "Explosive Kitty"
+.comment "Jan-ken-pon"
 
-
-sti	r1, %:tirb, %1
-
-tirb:	live	%1
+start:
+	ld -42, r2
+	zjmp %2
