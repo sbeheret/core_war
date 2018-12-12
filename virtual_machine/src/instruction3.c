@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/12 13:20:44 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 15:26:34 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 {
 	//DIRECT 2 BYTES
 	t_processus *copy;
+	t_processus *tmp;
 	int	i;
 
+	tmp = NULL;
 	if (processus->action.type[ARG1] != 2)
 		return;
 	copy = new_processus(0,(circular(processus->action.pc +
@@ -61,7 +63,13 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 		copy->reg[i] = processus->reg[i];
 	copy->carry = processus->carry;
 	get_action(vm, copy);
+	copy->cycles_wait--;
+	// if (processus->next)
+	// 	tmp = processus->next;
+	// processus->next = copy;
+	// copy->next = tmp;
 	push_front_pcs(&(*vm).processus, copy);
+	// print_processus((*vm).processus);
 	processus->PC = circular(processus->action.pc + 3);
 	if ((*vm).verbose)
 		ft_print_fork(processus, (short)processus->action.args[ARG1] % IDX_MOD);

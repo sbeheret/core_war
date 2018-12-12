@@ -5,6 +5,7 @@ ld %0, r2
 ld %10, r3
 ld 0, r4
 ld 10, r5
+fork %0
 ld 25, r6
 ld 512, r9
 ld 522, r10
@@ -18,9 +19,11 @@ live %1029131
 live %1029131
 ld %-12, r11
 ld -12, r12
+fork %64
 live %1029131
 live %1029131
 live %1029131
+fork %-20
 live %1029131
 live %1029131
 live %1029131

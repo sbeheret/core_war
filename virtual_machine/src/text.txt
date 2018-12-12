@@ -3,3 +3,5 @@ verfier les arguments
 si REG
 	verifier type = REG
 	verifier que arg n'est pas < 1 || > 16
+
+le processus n'est pas actualise dans l'affichage juste apres le fork.

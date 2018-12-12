@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 19:23:51 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 16:02:05 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 		ft_print_ld(processus, arg1, arg2);
 }
 
-
 /*
 ** ST - 2arg
 ** arg1 = T_REG
@@ -71,6 +70,7 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	t_action		action;
 
 	action = processus->action;
+	// print_action(action);
 	if (action.type[1] == REG)
 		processus->reg[action.args[1]] = processus->reg[action.args[0]];
 	else
@@ -79,7 +79,7 @@ void	ft_st(t_vm *vm, t_processus *processus)
 		ft_int_to_octet((*vm).ram, processus->reg[action.args[0]], address);
 	}
 	if (vm->visu)
-		write_in_ram(vm->ram, processus, action.args[ARG2]);
+		write_in_ram(vm->ram, processus, address);
 	if ((*vm).verbose)
 		ft_print_st(processus, action.args[0], action.args[1]);
 	processus->carry = 1;

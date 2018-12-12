@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/12 12:05:09 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 15:27:01 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	execute_processus(t_vm *vm)
 		update_cycles(vm, 0);
 	while (processus)
 	{
-		// usleep(50000);
 		op_code = processus->action.op_code;
 		if (processus->cycles_wait == 0)
 		{
+			// ft_printf("cycle_ttx = %d | Execute op_code %d\n", (*vm).cycles_ttx, op_code);
 			if (op_code > 0 && op_code < 17)
 				run_instruction(vm, processus, op_code);
 			get_action(vm, processus);
