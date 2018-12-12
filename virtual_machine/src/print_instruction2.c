@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/10 15:41:43 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 17:49:04 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,8 @@ void	ft_print_zjump(t_processus *processus, int jump)
 
 void	ft_print_ldi(t_processus *processus, int arg1, int arg2, int arg3)
 {
-	ft_printf("P\t%d | ldi r%d ", processus->processus_number, arg3);
-	if ((*processus).action.type[ARG1] == REG)
-		ft_printf("r");
-	ft_printf("%d ",arg1);
-	if ((*processus).action.type[ARG2] == REG)
-		ft_printf("r");
-	ft_printf("%d\n",arg2);
-
-
+	ft_printf("P\t%d | ldi ", processus->processus_number);
+	ft_printf("%d ", arg1);
+	ft_printf("%d ", arg2);
+	ft_printf("r%d\n", arg3);
 }

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/12 16:08:21 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 17:55:28 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 //T_DIR | T_REG
 // IND = valeur a l'adresse;
 
-void	ft_sti(t_vm *vm, t_processus *processus)
+void	ft_sti(t_vm *vm, t_processus *pcs)
 {
 	//DIRECT 2 bytes
 	t_action	action;
@@ -28,22 +28,17 @@ void	ft_sti(t_vm *vm, t_processus *processus)
 	int			value1;
 	int			value2;
 
-	action = processus->action;
-	value1 = (short)action.args[1];
-	value2 = (short)action.args[2];
-	if (action.type[1] == REG)
-		value1 = processus->reg[action.args[1]];
-	else if (action.type[1] == IND)
-		value1 = ft_get_ind(vm, processus, ARG2);
-	if (action.type[2] == REG)
-		value2 = processus->reg[action.args[2]];
+	action = pcs->action;
+	value1 = get_content_value(vm->ram, pcs, pcs->action.type[1],
+			pcs->action.args[1]);
+	value2 = get_content_value(vm->ram, pcs, pcs->action.type[2],
+			pcs->action.args[2]);
 	address = circular(action.pc + ((value1 + value2) % IDX_MOD));
-	ft_int_to_octet((*vm).ram, processus->reg[action.args[ARG1]], address);
+	ft_int_to_octet((*vm).ram, pcs->reg[action.args[0]], address);
 	if (vm->visu)
-		write_in_ram(vm->ram, processus, address);
+		write_in_ram(vm->ram, pcs, address);
 	if ((*vm).verbose)
-		ft_print_sti(processus, action.args[0], action.args[1], action.args[2]);
-	processus->carry = 1;
+		ft_print_sti(pcs, action.args[0], value1, value2);
 }
 
 void	ft_fork(t_vm *vm, t_processus *processus)
@@ -107,9 +102,9 @@ void	ft_lldi(t_vm *vm, t_processus *pcs)
 	int			addrs;
 
 	action = &(pcs->action);
-	value1 = get_long_content_value(vm->ram, pcs, action->type[0],
+	value1 = (short)get_long_content_value(vm->ram, pcs, action->type[0],
 			action->args[0]);
-	value2 = get_long_content_value(vm->ram, pcs, action->type[1],
+	value2 = (short)get_long_content_value(vm->ram, pcs, action->type[1],
 			action->args[2]);
 	addrs = circular (pcs->action.pc + (value1 + value2));
 	pcs->reg[pcs->action.args[2]] = ft_octet_to_int2(vm->ram, REG_SIZE, addrs);
