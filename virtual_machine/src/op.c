@@ -6,7 +6,7 @@
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2018/12/07 16:39:41 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 12:09:54 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,18 @@ t_op    op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-/*
+/*typedef	struct			s_op
+{
+	char				*name;
+	int					param_number;
+	int					param_type[3];
+	int					op_code;
+	int					cycle;
+	char				*comment;
+	int					encoding_byte;
+	int					direct_octet;
+}						t_op;
+*//*
 ** tab[0]= {"live", 1, {2,0,0}, 1, 10, alive, 0, 0}
 ** tab[1]= {"ld", 2, {6,1,0}, 2, 5, load, 1, 0}
 ** tab[2]= {"st", 2, {1,5,0}, 3, 5, store, 1, 0}
