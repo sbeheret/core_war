@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/12 12:09:26 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/12 12:17:28 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ static int	size_argument(int type, int direct_octet)
 		return (2);
 	else if (type == 2)
 		return (4);
-	else
+	else if (type == 1)
 		return (1);
+	else
+		return (0);
 }
 
 void		args_action(unsigned char *ram, int PC, t_action *action)
