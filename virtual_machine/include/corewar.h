@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/12 15:22:29 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 16:08:44 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,10 @@ void				declare_winner(t_vm *vm);
 void				get_action(t_vm *vm, t_processus *pcs);
 void				args_action(unsigned char *ram, int PC, t_action *n);
 void				trad_encoding_byte(t_action *n, int enc_byte, int value);
-
+int					get_content_value(unsigned char *m, t_processus *p,
+					int type, int address);
+int					get_long_content_value(unsigned char *m, t_processus *p,
+					int type, int address);
 /*
 ** --------- CONVERT
 */

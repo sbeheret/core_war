@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 14:25:26 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/11 14:31:22 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/12 12:23:17 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	init_ncurses(void)
 	curs_set(0);
 	init_color(COLOR_WHITE, 500, 500, 500);
 	init_color(COLOR_GREEN, 0, 1000, 329);
-	init_color(COLOR_RED, 1000, 0, 329);
+	init_color(COLOR_RED, 1000, 0, 888);
 	init_color(COLOR_BLUE, 0, 529, 1000);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(3, COLOR_GREEN, COLOR_BLACK);

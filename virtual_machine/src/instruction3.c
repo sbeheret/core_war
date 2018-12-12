@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/12 15:26:34 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 16:08:21 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,27 +99,26 @@ void	ft_lld(t_vm *vm, t_processus *processus)
 		ft_print_lld(processus, arg1, arg2);
 }
 
-void	ft_lldi(t_vm *vm, t_processus *processus)
+void	ft_lldi(t_vm *vm, t_processus *pcs)
 {
-	int			error;
-	int			address;
 	t_action	*action;
+	int			value1;
+	int			value2;
+	int			addrs;
 
-	action = &(processus->action);
-	error = 0;
-	if (action->type[0] == REG)
-		action->args[ARG1] = processus->reg[action->args[0]];
-	else if (action->type[0] == IND)
-		action->args[ARG1] = ft_get_lind(vm, processus, ARG1);
-	if (action->type[1] == REG)
-		action->args[ARG2] = processus->reg[action->args[1]];
-	else if (action->type[1] == IND)
-		action->args[ARG2] = ft_get_lind(vm, processus, ARG2);
-	address = circular(action->pc + (action->args[0] + action->args[1]));
-	processus->reg[action->args[2]] = ft_octet_to_int2((*vm).ram, REG_SIZE, address);
-	processus->carry = 1;
+	action = &(pcs->action);
+	value1 = get_long_content_value(vm->ram, pcs, action->type[0],
+			action->args[0]);
+	value2 = get_long_content_value(vm->ram, pcs, action->type[1],
+			action->args[2]);
+	addrs = circular (pcs->action.pc + (value1 + value2));
+	pcs->reg[pcs->action.args[2]] = ft_octet_to_int2(vm->ram, REG_SIZE, addrs);
+	if (pcs->reg[pcs->action.args[2]] == 0)
+		pcs->carry = 1;
+	else
+		pcs->carry = 0;
 	if ((*vm).verbose)
-		ft_print_lldi(processus, action->args[0], action->args[1], action->args[2]);
+		ft_print_lldi(pcs, action->args[0], action->args[1], action->args[2]);
 }
 
 void	ft_lfork(t_vm *vm, t_processus *processus)
