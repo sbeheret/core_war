@@ -31,8 +31,16 @@ live %1029131
 live %1029131
 live %1029131
 live %1029131
-st r1, 10
-st r1, 15
+sti r1, 10, %11
+sti r1, %10, %5
+st r1, -42
+st r1, 250
+st r1, r2
+st r1, r3
+st r1, -452
+st r1, 2500
+st r1, r2
+st r1, r3
 st r1, -42
 st r1, 250
 st r1, r2

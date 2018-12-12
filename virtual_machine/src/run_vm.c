@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 16:32:12 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 12:05:09 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,10 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 	};
 	if (instruction_check(processus))
 		instruction[op_code - 1](vm, processus);
-	else
-		processus->PC = processus->action.pc + 2;
+	// else
+	// 	processus->PC = processus->action.pc + 2;
 	//verifier la valeur de si instruction false
 	//surement seulement plus 1 si encoding_byte
-
 }
 
 void	declare_winner(t_vm *vm)
@@ -164,5 +163,5 @@ void	declare_winner(t_vm *vm)
 //	if (name == NULL)
 	// sauvegarder le dernier champion au cas ou le numeor change
 //		ft_printf("Aucun live avec un nom de champion valide n'a ete lance.\n");
-//	ft_printf("le joueur %#X(%s)a gagne\n",(*vm).last_alive, name);
+	// ft_printf("le joueur %#X(%s)a gagne\n",(*vm).last_alive, name);
 }
