@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/08 12:44:04 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/11 16:39:33 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,27 @@
 
 static int			parse_name(t_header *h, char **tab, int frst)
 {
-	int			i;
-	int			j;
-	int			quotes;
+	t_var			var;
 
-	i = ft_strlen(NAME_CMD_STRING);
-	j = 0;
-	while (tab[frst][i] == ' ' || tab[frst][i] == '\t')
-		i++;
-	(tab[frst][i] != '\"') ? err_dots(frst, i, tab, h) : i++;
-	quotes = 1;
-	while (tab[frst][i] && j <= PROG_NAME_LENGTH)
+	var.i = ft_strlen(NAME_CMD_STRING);
+	var.j = 0;
+	while (tab[frst][var.i] == ' ' || tab[frst][var.i] == '\t')
+		var.i++;
+	(tab[frst][var.i] != '\"') ? err_dots(frst, var.i, tab, h) : var.i++;
+	var.quotes = 1;
+	while (tab[frst][var.i] && var.j <= PROG_NAME_LENGTH)
 	{
-		(tab[frst][i] == '\"') ? quotes++ : quotes;
-		if (quotes == 2)
+		(tab[frst][var.i] == '\"') ? var.quotes++ : var.quotes;
+		if (var.quotes == 2)
 			break ;
-		h->prog_name[j++] = tab[frst][i++];
-		if (tab[frst][i] == '\0')
+		h->prog_name[var.j++] = tab[frst][var.i++];
+		if (tab[frst][var.i] == '\0')
 		{
 			frst++;
-			i = 0;
+			var.i = 0;
 		}
 	}
-	if (quotes < 2 || (quotes == 2 && check_end(tab, frst, i)))
+	if (var.quotes < 2 || (var.quotes == 2 && check_end(tab, frst, var.i)))
 		err_dots(frst, frst, tab, h);
 	return (frst);
 }
@@ -106,14 +104,14 @@ static int			parse_name_comment(t_header *h, char **tab)
 	idx = 0;
 	start_dot = 0;
 	frst = -1;
-	second = 0;
+	second = -1;
 	while (tab[idx])
 	{
 		if (tab[idx][0] == '.')
 		{
 			start_dot++;
 			frst = (frst < 0) ? idx : frst;
-			if (frst != -1 && second == 0)
+			if (frst != -1 && second < 0 && start_dot > 1)
 				second = idx;
 			(start_dot > 2) ? err_dots(idx, 1, tab, h) : 0;
 		}
@@ -126,7 +124,7 @@ static int			parse_name_comment(t_header *h, char **tab)
 int					set_header(char **tab, t_header *header)
 {
 	int			position;
-
+	
 	position = 0;
 	ft_bzero(header->prog_name, PROG_NAME_LENGTH + T_IND);
 	ft_bzero(header->comment, COMMENT_LENGTH + T_IND);

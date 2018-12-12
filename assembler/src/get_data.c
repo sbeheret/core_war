@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/08 11:53:12 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/12 12:19:58 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		read_fd(int fd, char **data)
 	line = NULL;
 	while (get_next_line(fd, &line))
 	{
-		trim = str_trim((char const *)line);
+		trim = ft_str_trim((char const *)line);
 		if (trim[0] != COMMENT_CHAR)
 			*data = strjoinappend(*data, trim);
 		free_trim(line, trim);
@@ -78,12 +78,13 @@ void			get_data(char **argv, int fd, int fd2)
 	read_fd(fd, &data);
 	d->tab = ft_strsplit(data, '$');
 	position = set_header(d->tab, header);
+	name_comment_length(d, data, header, fd);
 	d->y = position + 1;
 	if (!get_labels(d))
 		bad_file_format(d, data, header);
 	header->prog_size = swap_uint32(d->total_bytes);
 	stocor(name, argv);
-	fd2 = open(name, O_RDWR | O_APPEND | O_CREAT, RIGHTS);
+	fd2 = open(name, O_RDWR | O_CREAT, RIGHTS);
 	write(fd2, header, sizeof(t_header));
 	create_file_body(d, fd2);
 	ft_printf("Writing output program to %s\n", name);

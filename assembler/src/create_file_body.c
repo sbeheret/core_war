@@ -6,11 +6,30 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 12:49:39 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/08 12:47:41 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/11 11:36:34 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+static int	ft_iswhitespace(char c)
+{
+	return ((c == ' ' || c == '\n' || c == '\t') ? 1 : 0);
+}
+
+char		*ft_str_trim(char const *s)
+{
+	size_t	n;
+
+	if (!s)
+		return (NULL);
+	while (ft_iswhitespace(*s))
+		s++;
+	n = ft_strlen(s);
+	while (n > 0 && ft_iswhitespace(s[n - 1]))
+		n--;
+	return (ft_strsub(s, 0, n));
+}
 
 int						ft_strmcmp(char *s1, char *s2, size_t len)
 {

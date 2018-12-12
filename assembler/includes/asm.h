@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/08 13:00:49 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/12 11:51:27 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct			s_data
 	t_labels			*first_label;
 	t_labels			*last_label;
 	t_op				*op;
+	char				*file;
 	size_t				total_bytes;
 }						t_data;
 
@@ -110,6 +111,9 @@ int						write_direct_four(t_data *d, t_labels *head,
 		int idx, int fd2);
 int						write_two_octet(t_data *d, t_labels *head, int idx,
 		int fd2);
+int						name_comment_length(t_data *d, char *data,
+		t_header *header, int fd);
+char					*ft_str_trim(char const *s);
 
 /*
 **	FREE
