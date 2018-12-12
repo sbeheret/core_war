@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 18:48:20 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/12 13:20:44 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 	push_front_pcs(&(*vm).processus, copy);
 	processus->PC = circular(processus->action.pc + 3);
 	if ((*vm).verbose)
-		ft_print_fork(processus, processus->action.args[ARG1] % IDX_MOD);
+		ft_print_fork(processus, (short)processus->action.args[ARG1] % IDX_MOD);
 }
 
 void	ft_lld(t_vm *vm, t_processus *processus)
@@ -131,5 +131,5 @@ void	ft_lfork(t_vm *vm, t_processus *processus)
 	push_front_pcs(&(*vm).processus, copy);
 	processus->PC = circular(processus->action.pc + 3);
 	if ((*vm).verbose)
-		ft_print_fork(processus, processus->action.args[ARG1]);
+		ft_print_fork(processus, (short)processus->action.args[ARG1]);
 }
