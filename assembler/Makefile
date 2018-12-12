@@ -6,7 +6,7 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/12/08 11:58:43 by esouza           ###   ########.fr        #
+#    Updated: 2018/12/11 14:34:11 by esouza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS =	main.c \
 		get_octet_codage.c \
 		first_arg.c \
 		write_direct_four.c \
+		name_comment_length.c \
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
@@ -54,7 +55,7 @@ all : $(NAME_PATH)$(NAME)
 
 $(NAME_PATH)$(NAME) : $(OBJS)
 	@make -C $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME) 
 	@echo "\033[32;4m	   ***Executable $(NAME) created***   \033[0;m"
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
@@ -68,6 +69,11 @@ clean :
 fclean : clean
 	@make fclean -C $(LIBFT)
 	@rm -f $(NAME_PATH)$(NAME)
+
+debug : $(OBJS)
+	@make -C $(LIBFT)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME) -fsanitize=address -O1 -fno-omit-frame-pointer
+	@echo "\033[32;4m	   ***Executable DEBUG $(NAME) created***   \033[0;m"
 
 re : fclean all
 
