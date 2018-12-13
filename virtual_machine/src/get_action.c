@@ -6,29 +6,55 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/13 12:18:01 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:28:37 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "op.c"
+
+t_op	g_op_tab[17] =
+{
+	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
+	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
+	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},
+	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},
+	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6,
+		"et (and  r1, r2, r3   r1&r2 -> r3", 1, 0},
+	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
+		"ou  (or   r1, r2, r3   r1 | r2 -> r3", 1, 0},
+	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
+		"ou (xor  r1, r2, r3   r1^r2 -> r3", 1, 0},
+	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1},
+	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
+		"load index", 1, 1},
+	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
+		"store index", 1, 1},
+	{"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
+	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},
+	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
+		"long load index", 1, 1},
+	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
+	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
+	{0, 0, {0}, 0, 0, 0, 0, 0}
+};
 
 void		get_action(t_vm *vm, t_processus *pcs)
 {
 	initialize_action(pcs);
-	pcs->action.pc = pcs->PC;
-	pcs->action.op_code = vm->ram[circular(pcs->PC)];
+	pcs->action.pc = pcs->pc;
+	pcs->action.op_code = vm->ram[circular(pcs->pc)];
 	if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
 	{
-		pcs->PC++;
+		pcs->pc++;
 		pcs->action.op_code = 0;
 		pcs->cycles_wait = 1;
 		return ;
 	}
-	pcs->cycles_wait = op_tab[pcs->action.op_code - 1].cycle;
+	pcs->cycles_wait = g_op_tab[pcs->action.op_code - 1].cycle;
 	pcs->action.size_read++;
-	args_action(vm->ram, pcs->PC, &pcs->action);
-	pcs->PC = pcs->PC + pcs->action.size_read;
+	args_action(vm->ram, pcs->pc, &pcs->action);
+	pcs->pc = pcs->pc + pcs->action.size_read;
 }
 
 static int	size_argument(int type, int direct_octet)
@@ -43,23 +69,23 @@ static int	size_argument(int type, int direct_octet)
 		return (0);
 }
 
-void		args_action(unsigned char *ram, int PC, t_action *action)
+void		args_action(unsigned char *ram, int pc, t_action *action)
 {
 	int		i;
 	int		i_ram;
 	int		size;
 	int		enc_byte;
 
-	if ((enc_byte = op_tab[action->op_code - 1].encoding_byte))
+	if ((enc_byte = g_op_tab[action->op_code - 1].encoding_byte))
 		action->size_read++;
 	size = 0;
-	trad_encoding_byte(action, enc_byte, ram[circular(PC + 1)]);
+	trad_encoding_byte(action, enc_byte, ram[circular(pc + 1)]);
 	i = 0;
-	i_ram = circular(PC + enc_byte + 1);
+	i_ram = circular(pc + enc_byte + 1);
 	while (i < action->nb_arg)
 	{
 		size = size_argument(action->type[i],
-				op_tab[action->op_code - 1].direct_octet);
+				g_op_tab[action->op_code - 1].direct_octet);
 		action->args[i] = size == 1 ? ram[i_ram] : ft_octet_to_int2(ram, size,
 				i_ram);
 		i_ram += size;
@@ -94,19 +120,19 @@ void		trad_encoding_byte(t_action *action, int enc_byte, int value)
 	}
 }
 
-int		instruction_check(t_processus *processus)
+int			instruction_check(t_processus *processus)
 {
-	int 		i;
+	int			i;
 	t_action	action;
 	int			param;
 
 	action = processus->action;
-	if (op_tab[action.op_code - 1].param_number != action.nb_arg)
+	if (g_op_tab[action.op_code - 1].param_number != action.nb_arg)
 		return (0);
 	i = 0;
 	while (i < action.nb_arg)
 	{
-		param = op_tab[action.op_code - 1].param_type[i];
+		param = g_op_tab[action.op_code - 1].param_type[i];
 		if (action.type[i] == REG && (param == 2 || param == 6 || param == 4
 		|| action.args[i] < 1 || action.args[i] > 16))
 			return (0);

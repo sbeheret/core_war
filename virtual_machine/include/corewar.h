@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 14:51:47 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:19:34 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct			s_action
 typedef struct			s_processus
 {
 	int					processus_number;
-	int					PC;
+	int					pc;
 	int					last_pc;
 	int					color;
 	int					carry;

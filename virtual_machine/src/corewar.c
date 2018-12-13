@@ -6,11 +6,12 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:33:51 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 15:10:21 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:19:09 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
 /*
 ** Initilization of VM
 ** -Check if arguments are valable
@@ -33,11 +34,7 @@ int	main(int argc, char **argv)
 		getch();
 		nodelay(stdscr, 1);
 	}
-//	print_ram((vm).ram);
 	run_vm(&vm);
-	// print_optab();
-	// print_struct_vm(vm);
-//	print_ram(vm.ram);
 	if (vm.visu)
 	{
 		getch();

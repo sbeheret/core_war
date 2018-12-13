@@ -6,11 +6,33 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:47:24 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/06 14:43:49 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 13:50:33 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+void	check_binary(t_champion *champion)
+{
+	int				magic_number;
+	unsigned char	*binary;
+
+	binary = champion->binary;
+	if (champion->binary_len < BEGIN_BINARY)
+		ft_exit_toosmall(champion->file);
+	if ((magic_number = ft_octet_to_int(&binary, 4)) != COREWAR_EXEC_MAGIC)
+		ft_exit_magicnumber(champion->file);
+	champion->name = ft_octet_to_char(&binary, PROG_NAME_LENGTH);
+	check_padding(&binary, champion->file);
+	champion->weight = ft_octet_to_int(&binary, 4);
+	champion->comment = ft_octet_to_char(&binary, COMMENT_LENGTH);
+	check_padding(&binary, champion->file);
+	if (champion->weight != champion->binary_len - BEGIN_BINARY)
+		ft_exit_header(champion->file);
+	if (champion->weight > CHAMP_MAX_SIZE)
+		ft_exit_toobig(champion->file);
+	binary = NULL;
+}
 
 void	check_padding(unsigned char **binary, char *file)
 {
@@ -37,11 +59,11 @@ int		check_number(unsigned int number, t_champion *champion)
 	return (0);
 }
 
-void			create_process(t_champion **champions, t_processus **pcs)
+void	create_process(t_champion **champions, t_processus **pcs)
 {
 	t_champion		*champ;
 	t_processus		*new;
-	int			i;
+	int				i;
 
 	i = 1;
 	champ = (*champions);
