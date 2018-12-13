@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/12 15:27:01 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 11:28:21 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int		kill_processus(t_vm *vm)
 			if (previous == NULL)
 			{
 				tmp = tmp->next;
+				remove_dead_pcs(vm->ram, vm->processus);
 				ft_memdel((void**)&((*vm).processus)->reg);
 				ft_memdel((void**)&(*vm).processus);
 				(*vm).processus = tmp;
@@ -100,6 +101,7 @@ int		kill_processus(t_vm *vm)
 			else
 			{
 				previous->next = tmp->next;
+				remove_dead_pcs(vm->ram, tmp);
 				ft_memdel((void**)&tmp->reg);
 				ft_memdel((void**)&tmp);
 				tmp = previous->next;
