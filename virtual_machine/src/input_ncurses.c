@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_ncurses.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeheret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 11:26:19 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/11 16:32:34 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 14:21:46 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	speed_define(unsigned int *speed, int c)
 	return ;
 }
 
-void	ncurses_input(t_vm *vm)
+void		ncurses_input(t_vm *vm)
 {
 	int		c;
 

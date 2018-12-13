@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 13:58:44 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 14:21:13 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,16 @@ void	initialize_vm(t_vm *vm)
 		ft_exit_malloc();
 }
 
-void	initialize_processus(t_processus **processus, int nb_player, int start, int color)
+void	initialize_processus(t_processus **processus, int nb_player
+	, int start, int color)
 {
-	int	i;
-	static int processus_number = 1;
+	int			i;
+	static int	processus_number = 1;
 
 	i = -1;
 	(*processus)->processus_number = processus_number;
 	processus_number++;
-	(*processus)->PC = start;
+	(*processus)->pc = start;
 	(*processus)->last_pc = start;
 	(*processus)->carry = 0;
 	(*processus)->color = color;

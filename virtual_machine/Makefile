@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/12/13 11:29:20 by sbeheret         ###   ########.fr        #
+#    Updated: 2018/12/13 14:07:24 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -34,6 +34,7 @@ LIB_PATH =	../lib
 #/******************* COMPILATION *******************/
 CC =			gcc
 CFLAGS =		-Wall -Werror -Wextra
+OPFLAGS =		-Wno-missing-field-initializers
 
 #/********************** BINARY *********************/
 NAME_PATH = ../
@@ -41,6 +42,7 @@ NAME = 		our_coreware
 
 #/********************** SOURCE *********************/
 SRC =		corewar.c			\
+			op.c				\
 			check_parameters.c	\
 			check_parameters2.c	\
 			convert.c			\
@@ -90,7 +92,7 @@ $(NAME_PATH)$(NAME) : $(OBJ)
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@echo "$(GREEN) --Compiling--\t\t$(NAME)"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
+	$(CC) $(CFLAGS) $(OPFLAGS) -o $@ -c $^ $(INCP)
 
 clean :
 	@echo "$(RED) --Cleaning--\t\tobject folder"

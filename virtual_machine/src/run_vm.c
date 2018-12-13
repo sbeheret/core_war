@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 13:08:21 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 13:46:37 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	execute_instruction(t_vm *vm)
 	int		op_code;
 
 	t_processus *processus;
-	proc
+	processus = (*vm).processus;
 	if (vm->visu)
 		update_cycles(vm, 0);
 	while (processus)

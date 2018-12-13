@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 10:47:51 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 13:49:07 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 	}
 }
 
-void	ft_option(char ***argv, t_vm *vm)
+void			ft_option(char ***argv, t_vm *vm)
 {
 	if (!(ft_strcmp(**argv, "-dump")))
 	{
@@ -131,26 +131,4 @@ unsigned char	*ft_read_champion(char *file, size_t *binary_len)
 			ft_exit_malloc();
 	}
 	return (binary);
-}
-
-void			check_binary(t_champion *champion)
-{
-	int				magic_number;
-	unsigned char	*binary;
-
-	binary = champion->binary;
-	if (champion->binary_len < BEGIN_BINARY)
-		ft_exit_toosmall(champion->file);
-	if ((magic_number = ft_octet_to_int(&binary, 4)) != COREWAR_EXEC_MAGIC)
-		ft_exit_magicnumber(champion->file);
-	champion->name = ft_octet_to_char(&binary, PROG_NAME_LENGTH);
-	check_padding(&binary, champion->file);
-	champion->weight = ft_octet_to_int(&binary, 4);
-	champion->comment = ft_octet_to_char(&binary, COMMENT_LENGTH);
-	check_padding(&binary, champion->file);
-	if (champion->weight != champion->binary_len - BEGIN_BINARY)
-		ft_exit_header(champion->file);
-	if (champion->weight > CHAMP_MAX_SIZE)
-		ft_exit_toobig(champion->file);
-	binary = NULL;
 }
