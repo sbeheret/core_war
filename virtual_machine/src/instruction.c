@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/12 16:02:05 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 10:44:51 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 		address = circular((*processus).action.pc + ((short)arg1 % IDX_MOD));
 		arg1 = ft_octet_to_int2((*vm).ram, REG_SIZE, address);
 	}
-	processus->reg[arg2] = arg1;
-	processus->carry = 1;
+	if ((processus->reg[arg2] = arg1) == 0)
+		processus->carry = 1;
+	else
+		processus->carry = 0;
 	if ((*vm).verbose)
 		ft_print_ld(processus, arg1, arg2);
 }
@@ -77,9 +79,13 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	{
 		address = circular(action.pc + ((short)action.args[1] % IDX_MOD));
 		ft_int_to_octet((*vm).ram, processus->reg[action.args[0]], address);
-	}
 	if (vm->visu)
 		write_in_ram(vm->ram, processus, address);
+	}
+	if (processus->reg[action.args[0]] == 0)
+		processus->carry = 1;
+	else
+		processus->carry = 0;
 	if ((*vm).verbose)
 		ft_print_st(processus, action.args[0], action.args[1]);
 	processus->carry = 1;
@@ -88,23 +94,18 @@ void	ft_st(t_vm *vm, t_processus *processus)
 void	ft_add(t_vm *vm, t_processus *processus)
 {
 	(void)vm;
-	t_action		action;
 	int				arg1;
 	int				arg2;
 	int				arg3;
 
-	// ft_printf("~~~ADD~~~\n");
-	action = processus->action;
-	arg1 = action.args[ARG1];
-	arg2 = action.args[ARG2];
-	arg3 = action.args[ARG3];
-	if (action.nb_arg != 3 || action.type[ARG1] != REG ||
-		action.type[ARG2] != REG ||	action.type[ARG3] != REG)
-		return;
-	if (arg1 < 1 || arg2 < 1 || arg3 < 1 || arg1 > 16 || arg2 > 16 || arg3 > 16)
-		return;
+	arg1 = processus->action.args[0];
+	arg2 = processus->action.args[1];
+	arg3 = processus->action.args[2];
 	processus->reg[arg3] = processus->reg[arg1] + processus->reg[arg2];
-	processus->carry = 1;
+	if (!processus->reg[arg3])
+		processus->carry = 1;
+	else
+		processus->carry = 0;
 	if ((*vm).verbose)
 		ft_print_add(processus, arg1, arg2, arg3);
 }
@@ -112,23 +113,18 @@ void	ft_add(t_vm *vm, t_processus *processus)
 void	ft_sub(t_vm *vm, t_processus *processus)
 {
 	(void)vm;
-	t_action		action;
 	int				arg1;
 	int				arg2;
 	int				arg3;
 
-	// ft_printf("~~~SUB~~~\n");
-	action = processus->action;
-	arg1 = action.args[ARG1];
-	arg2 = action.args[ARG2];
-	arg3 = action.args[ARG3];
-	if (action.nb_arg != 3 || action.type[ARG1] != REG ||
-		action.type[ARG2] != REG ||	action.type[ARG3] != REG)
-		return;
-	if (arg1 < 1 || arg2 < 1 || arg3 < 1 || arg1 > 16 || arg2 > 16 || arg3 > 16)
-		return;
-	processus->reg[arg3] = processus->reg[arg1] + processus->reg[arg2];
-	processus->carry = 1;
+	arg1 = processus->action.args[0];
+	arg2 = processus->action.args[1];
+	arg3 = processus->action.args[2];
+	processus->reg[arg3] = processus->reg[arg1] - processus->reg[arg2];
+	if (!processus->reg[arg3])
+		processus->carry = 1;
+	else
+		processus->carry = 0;
 	if ((*vm).verbose)
 		ft_print_sub(processus, arg1, arg2, arg3);
 }
