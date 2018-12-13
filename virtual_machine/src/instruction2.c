@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 10:38:43 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 10:58:27 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	ft_zjump(t_vm *vm, t_processus *processus)
 		a = (short)processus->action.args[0];
 		a = (a % IDX_MOD);
 		processus->PC = circular(processus->action.pc + a);
-		if ((*vm).verbose)
-			ft_print_zjump(processus, a);
 	}
+	if ((*vm).verbose)
+		ft_print_zjump(processus, a);
 }
 
 

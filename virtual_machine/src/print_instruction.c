@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 10:28:45 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 10:59:48 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_print_live(int processus, unsigned int champion)
 
 void	ft_print_ld(t_processus *processus, int arg1, int arg2)
 {
-	ft_printf("P\t%d | ld %d r%d\n", processus->processus_number, arg1, arg2);
+	ft_printf("P\t%d | ld %d r%d\tcarry = %d\n", processus->processus_number, arg1, arg2, processus->carry);
 }
 
 void	ft_print_st(t_processus *processus, int arg1, int arg2)
@@ -28,7 +28,7 @@ void	ft_print_st(t_processus *processus, int arg1, int arg2)
 	processus->reg[arg1]);
 	if ((*processus).action.type[ARG2] == REG)
 		ft_printf("r");
-	ft_printf("%hd\n",arg2);
+	ft_printf("%hd\tcarry = %d\n",arg2, processus->carry);
 }
 
 void	ft_print_add(t_processus *processus, int arg1, int arg2, int arg3)
