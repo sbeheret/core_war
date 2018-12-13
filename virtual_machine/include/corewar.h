@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 14:16:53 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 15:09:56 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,11 +185,12 @@ void				print_action(t_action action);
 */
 void				run_vm(t_vm *vm);
 void				run_instruction(t_vm *vm, t_processus *processus, int op_code);
-//void				execute_processus(t_vm *vm);
 int					kill_processus(t_vm *vm);
+void				delete_element(t_processus **previous, t_processus **tmp, t_vm *vm);
 void				declare_winner(t_vm *vm);
 void				execute_instruction(t_vm *vm);
 void				execute_get_action(t_vm *vm);
+void				execute_cycle(t_vm *vm);
 
 /*
 ** --------- GET_ACTION

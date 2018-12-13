@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 11:07:06 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/13 11:32:26 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:22:10 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 void	write_in_ram(unsigned char *ram, t_processus *pcs, int id)
 {
 	int	i;
-//	static int z = 0;
 
 	i = 0;
 	attron(COLOR_PAIR(pcs->color));
-//	usleep(50000000);
-//	mvprintw(70+z,50,"%d %d %d %d", ram[id], ram[id+1], ram[id+2], ram[id+3]);
-//	z++;
 	while (i < 4)
 	{
 		id = circular(id);
@@ -29,9 +25,6 @@ void	write_in_ram(unsigned char *ram, t_processus *pcs, int id)
 		printw("%hhx", ram[id] / 16);
 		printw("%hhx", ram[id] % 16);
 		printw(" ");
-//		ft_printf("%hhx", ram[id] / 16);
-//		ft_printf("%hhx", ram[id] % 16);
-//		ft_printf("\n");
 		id++;
 		i++;
 	}
@@ -64,7 +57,7 @@ void	update_cycles(t_vm *vm, int a)
 void	update_lives(unsigned int nb, t_vm *vm, t_champion *chmps)
 {
 	t_champion	*tmp;
-	int		i;
+	int			i;
 
 	i = 0;
 	tmp = chmps;
@@ -76,20 +69,21 @@ void	update_lives(unsigned int nb, t_vm *vm, t_champion *chmps)
 	if (!tmp)
 		return ;
 	(*vm).last_alive = nb;
-//	tmp->lives++;
 	if (vm->visu)
 	{
 		mvprintw(10 + (i * 3), 213, "%d", vm->cycles_ttx);
 		refresh();
 	}
-		//	mvprintw(11 + (i * 4), 222, "%d", tmp->lives);
+	else
+		ft_printf("un processus dit que le joueur %d(%s) est en vie", nb,
+		tmp->name);
 }
 
 void	init_data_visu(t_vm *vm)
 {
 	t_champion	*tmp;
-	int		i;
-	int		color;
+	int			i;
+	int			color;
 
 	color = 1;
 	i = 9;

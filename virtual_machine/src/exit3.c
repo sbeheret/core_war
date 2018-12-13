@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 17:21:32 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/11 12:08:10 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:24:35 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_exit_visu(t_vm *vm)
 {
 	ft_free_vm(vm);
-	exit (0);
+	exit(0);
 }
 
 void	ft_exit_dump(t_vm *vm)

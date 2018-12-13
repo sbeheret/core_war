@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:14:57 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 15:34:04 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 15:24:20 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,13 @@ void	ft_exit_header(char *file)
 void	ft_exit_parameter(char *argument, char *file)
 {
 	if (file == NULL)
-		ft_printf("Error : Argument %s must be followed by a valid number", argument);
+		ft_printf("Error : Argument %s must be followed by a valid number"
+		, argument);
 	else
-		ft_printf("Error : Argument %s in file \"%s\" must be followed by a valid number", argument, file);
+	{
+		ft_printf("Error : Argument %s in file \"%s\" ", argument, file);
+		ft_printf("must be followed by a valid number\n");
+	}
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 14:25:26 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/12 12:23:17 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 14:58:21 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_ram_nocolor(unsigned char *ram, int i)
 	printw(" ");
 }
 
-int	print_ram_color(unsigned char *ram, int i, int color, int size)
+int		print_ram_color(unsigned char *ram, int i, int color, int size)
 {
 	int	j;
 
@@ -51,8 +51,8 @@ int	print_ram_color(unsigned char *ram, int i, int color, int size)
 void	print_ram_curses(t_vm *vm)
 {
 	t_champion	*tmp;
-	int		i;
-	int		c;
+	int			i;
+	int			c;
 
 	i = 0;
 	c = 0;

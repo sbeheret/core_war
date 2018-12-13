@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:52:03 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/13 10:59:26 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:24:47 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_processus(t_processus *pcs)
 		breaker = 0;
 		ft_printf("---------Processus-----------\n");
 		ft_printf("Number = %d\n", tmp->processus_number);
-		ft_printf("PC = %d\n", tmp->PC);
+		ft_printf("PC = %d\n", tmp->pc);
 		ft_printf("Carry = %d\n", tmp->carry);
 		ft_printf("Registres 1 to 8: %#d-%d-%d-%d-%d-%d-%d-%d\n",
 				tmp->reg[1], tmp->reg[2], tmp->reg[3], tmp->reg[4],
@@ -36,7 +36,7 @@ void	print_processus(t_processus *pcs)
 		ft_printf("Lives = %d\n", tmp->lives);
 		print_action(tmp->action);
 		tmp = tmp->next;
-	ft_printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+		ft_printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
 	}
 }
 

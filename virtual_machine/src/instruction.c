@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 14:31:54 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:47:14 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ void	ft_live(t_vm *vm, t_processus *processus)
 	processus->lives++;
 }
 
-/*
-** LD - 2arg
-** arg1 = T_DIR | T_IND
-** arg2 = T_REG
-*/
 void	ft_ld(t_vm *vm, t_processus *processus)
 {
 	int				arg1;
@@ -55,39 +50,27 @@ void	ft_ld(t_vm *vm, t_processus *processus)
 		ft_print_ld(processus, arg1, arg2);
 }
 
-/*
-** ST - 2arg
-** arg1 = T_REG
-** arg2 = T_IND | T_REG
-st r4,34 store la valeur de r4 à l’adresse ( PC + (34 % IDX_MOD))
-st r3,r8 copie r3 dans r8*/
 void	ft_st(t_vm *vm, t_processus *processus)
 {
 	int				address;
 	t_action		action;
 
 	action = processus->action;
-	// print_action(action);
 	if (action.type[1] == REG)
 		processus->reg[action.args[1]] = processus->reg[action.args[0]];
 	else
 	{
 		address = circular(action.pc + ((short)action.args[1] % IDX_MOD));
 		ft_int_to_octet((*vm).ram, processus->reg[action.args[0]], address);
-	if (vm->visu)
-		write_in_ram(vm->ram, processus, address);
+		if (vm->visu)
+			write_in_ram(vm->ram, processus, address);
 	}
-	// if (processus->reg[action.args[0]] == 0)
-	// 	processus->carry = 1;
-	// else
-	// 	processus->carry = 0;
 	if ((*vm).verbose)
 		ft_print_st(processus, action.args[0], action.args[1]);
 }
 
 void	ft_add(t_vm *vm, t_processus *processus)
 {
-	(void)vm;
 	int				arg1;
 	int				arg2;
 	int				arg3;
@@ -106,7 +89,6 @@ void	ft_add(t_vm *vm, t_processus *processus)
 
 void	ft_sub(t_vm *vm, t_processus *processus)
 {
-	(void)vm;
 	int				arg1;
 	int				arg2;
 	int				arg3;
