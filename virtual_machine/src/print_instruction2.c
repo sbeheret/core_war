@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 11:04:30 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 11:10:55 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ft_print_xor(t_processus *processus, int arg1, int arg2, int arg3)
 
 void	ft_print_zjump(t_processus *processus, int jump)
 {
-	print_processus(processus);
 	if (processus->carry == 1)
 		ft_printf("P\t%d | zjump %d %s (%d)\n", processus->processus_number
 		,jump, "OK\0", processus->action.pc + jump);

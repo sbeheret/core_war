@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 10:44:51 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 11:24:41 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,12 @@ void	ft_st(t_vm *vm, t_processus *processus)
 	if (vm->visu)
 		write_in_ram(vm->ram, processus, address);
 	}
-	if (processus->reg[action.args[0]] == 0)
-		processus->carry = 1;
-	else
-		processus->carry = 0;
+	// if (processus->reg[action.args[0]] == 0)
+	// 	processus->carry = 1;
+	// else
+	// 	processus->carry = 0;
 	if ((*vm).verbose)
 		ft_print_st(processus, action.args[0], action.args[1]);
-	processus->carry = 1;
 }
 
 void	ft_add(t_vm *vm, t_processus *processus)
