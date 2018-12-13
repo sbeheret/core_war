@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:52:03 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/12 16:47:28 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 10:51:06 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		get_content_value(unsigned char *ram, t_processus *pcs, int type,
 		return (pcs->reg[address]);
 	else if (type == 3)
 	{
-		address = circular(pcs->action.pc + (address % IDX_MOD));
+		address = (short)circular(pcs->action.pc + (address % IDX_MOD));
 		return (ft_octet_to_int2(ram, REG_SIZE, address));
 	}
 	else
@@ -67,7 +67,7 @@ int		get_long_content_value(unsigned char *ram, t_processus *pcs, int type,
 		return (pcs->reg[address]);
 	else if (type == 3)
 	{
-		address = circular(pcs->action.pc + address);
+		address = (short)circular(pcs->action.pc + address);
 		return (ft_octet_to_int2(ram, REG_SIZE, address));
 	}
 	else

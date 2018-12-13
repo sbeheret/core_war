@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/12 18:40:19 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 10:52:33 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,17 @@ void	ft_lld(t_vm *vm, t_processus *processus)
 	int				arg2;
 	int				address;
 
-	if ((*processus).action.nb_arg != 2 || (*processus).action.type[ARG1] == REG
-		|| (*processus).action.type[ARG2] != REG)
-		return ;
-	arg2 = (*processus).action.args[ARG2];
-	if (arg2 < 1 || arg2 > 16)
-		return ;
-	arg1 = (*processus).action.args[ARG1];
+	arg2 = (*processus).action.args[1];
+	arg1 = (*processus).action.args[0];
 	if ((*processus).action.type[ARG1] == IND)
 	{
 		address = circular((*processus).action.pc + (short)arg1);
 		arg1 = ft_octet_to_int2((*vm).ram, REG_SIZE, address);
 	}
-	processus->reg[arg2] = arg1;
-	processus->carry = 1;
+	if ((processus->reg[arg2] = arg1) == 0)
+		processus->carry = 1;
+	else
+		processus->carry = 0;
 	if ((*vm).verbose)
 		ft_print_lld(processus, arg1, arg2);
 }
