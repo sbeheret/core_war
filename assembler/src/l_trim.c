@@ -47,8 +47,8 @@ int				check_commas(char *s)
 			i++;
 			if (!find_args(s, i))
 			{
-				ft_printf("\033[31mLine [%s] has a bad placement of ", s);
-				ft_printf("separator char [%c]\033[0;m\n", SEPARATOR_CHAR);
+				ft_printf("Line "S" has a bad placement of ", s);
+				ft_printf("separator char "C"\n", SEPARATOR_CHAR);
 				return (0);
 			}
 		}

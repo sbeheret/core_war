@@ -1,14 +1,17 @@
 #include "../includes/asm.h"
 
-void		print_tab(t_data *d, int i)
+void		print_tab(t_data *d)
 {
-	//printf("{%s}\n", d->tab[i]);
+	int	i;
+
 	i = 0;
+	ft_putstr("--------------------------------\n");
 	while (d->tab[i])
 	{
 		printf("%s\n", d->tab[i]);
 		i++;
 	}
+	ft_putstr("--------------------------------\n");
 }
 
 void	show_op_param_types(t_op *op) //tmp
@@ -39,7 +42,7 @@ void	show_bytes_till_label(t_data *d)
 
 	while (line--)
 		current = current->next;
-	printf("bytes from [%s] till label [%s] in hex : %x\n\n",\
+	printf("bytes from "S" till label "S" in hex : %x\n\n",\
 			current->op_code, current->args[label],\
 			bytes_till_label(d->first_label, current, label));
 }
@@ -84,6 +87,5 @@ void    show_labels(t_data *d) //tmp
 		tmp = tmp->next;
 	}
 	printf("total number of bytes : %zu\n\n", d->total_bytes);
-//	show_bytes_till_label(d);
-//	show_op_param_types(d->op);
+	print_tab(d);
 }

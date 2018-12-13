@@ -6,7 +6,7 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:41:23 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/09 14:38:45 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/13 15:43:38 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	is_label(t_data *d, int len, int skip)
 	if (d->tab[d->y][len + 1]
 		&& d->tab[d->y][len + 1] != ' ' && d->tab[d->y][len + 1] != '\t')
 	{
-		ft_printf("\033[31mLine [%s] has a bad char [%c]\033[0;m\n",\
+		ft_printf("Line "S" has a bad char "C"\n",\
 			d->tab[d->y], d->tab[d->y][len + 1]);
 		return (0);
 	}
@@ -63,9 +63,9 @@ static int	get_all(t_data *d, int len, int skip, int ret)
 		else
 		{
 			if (!d->tab[d->y][len])
-				ft_printf("\033[31mInvalide line [%s]\033[0;m\n", d->tab[d->y]);
+				ft_printf("Invalide line "S"\n", d->tab[d->y]);
 			else
-				ft_printf("\033[31mLine [%s] has a bad char [%c]\033[0;m\n",\
+				ft_printf("Line "S" has a bad char "C"\n",\
 					d->tab[d->y], d->tab[d->y][len]);
 			ret = 0;
 		}

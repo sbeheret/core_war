@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/12 12:19:58 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/13 15:44:02 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void		read_fd(int fd, char **data)
 	while (get_next_line(fd, &line))
 	{
 		trim = ft_str_trim((char const *)line);
-		if (trim[0] != COMMENT_CHAR)
+		if (trim[0] != COMMENT_CHAR && trim[0] != ';')
 			*data = strjoinappend(*data, trim);
 		free_trim(line, trim);
 	}
@@ -65,28 +65,26 @@ static void		bad_file_format(t_data *d, char *data, t_header *header)
 
 void			get_data(char **argv, int fd, int fd2)
 {
-	t_data		*d;
+	t_data		d;
 	char		*data;
 	char		name[PROG_NAME_LENGTH];
-	int			position;
 	t_header	*header;
 
-	if (!(header = (t_header *)malloc(sizeof(t_header)))
-			|| !(d = (t_data *)ft_memalloc(sizeof(t_data))))
+	if (!(header = (t_header *)malloc(sizeof(t_header))))
 		exit(EXIT_FAILURE);
+	ft_bzero(&d, sizeof(t_data));
 	data = ft_strnew(0);
 	read_fd(fd, &data);
-	d->tab = ft_strsplit(data, '$');
-	position = set_header(d->tab, header);
-	name_comment_length(d, data, header, fd);
-	d->y = position + 1;
-	if (!get_labels(d))
-		bad_file_format(d, data, header);
-	header->prog_size = swap_uint32(d->total_bytes);
+	d.tab = ft_strsplit(data, '\n');
+	d.y = set_header(d.tab, header) + 1;
+	name_comment_length(&d, data, header, fd);
+	if (!get_labels(&d))
+		bad_file_format(&d, data, header);
+	header->prog_size = swap_uint32(d.total_bytes);
 	stocor(name, argv);
 	fd2 = open(name, O_RDWR | O_CREAT, RIGHTS);
 	write(fd2, header, sizeof(t_header));
-	create_file_body(d, fd2);
+	create_file_body(&d, fd2);
 	ft_printf("Writing output program to %s\n", name);
-	free_data(d, data, header);
+	free_data(&d, data, header);
 }
