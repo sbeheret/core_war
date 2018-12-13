@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 14:28:33 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:31:54 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,9 @@ void	ft_live(t_vm *vm, t_processus *processus)
 
 	action = processus->action;
 	champion = ft_octet_to_int2((*vm).ram, 4, circular(action.pc + 1));
-	//"un processus dit que le joueur x(nom_champion) est en vie"
+	update_lives(champion, vm, vm->champion);
 	if ((*vm).verbose)
 		ft_print_live(processus->processus_number, champion);
-	if (vm->visu)
-		update_lives(champion, vm, vm->champion);
-	else
-		
-
 	processus->lives++;
 }
 

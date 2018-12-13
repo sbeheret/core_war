@@ -6,7 +6,7 @@
 /*   By: sbeheret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:14:45 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/13 11:23:35 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 14:28:31 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,22 @@ void	remove_dead_pcs(unsigned char *ram, t_processus *pcs)
 			attroff(COLOR_PAIR(pcs->color));
 		refresh();
 	}
+}
+
+void	winner_ncurses(t_champion *champ, int i)
+{
+	int		row;
+	int		col;
+
+	erase();
+	getmaxyx(stdscr, row, col);
+	move(row / 2, col / 2);
+	attron(A_BOLD);
+	printw("PLAYER ");
+	attron(COLOR_PAIR(i));
+	printw("%d ", champ->p_number);
+	attroff(COLOR_PAIR(i));
+	printw("- ");
+	attron(COLOR_PAIR(i) | A_BLINK);
+	printw("%s", champ->name);
 }

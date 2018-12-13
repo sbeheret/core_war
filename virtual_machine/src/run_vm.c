@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 13:46:37 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:29:53 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,11 +183,14 @@ void	declare_winner(t_vm *vm)
 {
 	char		*name;
 	t_champion	*champion;
+	int			i;
 
+	i = 0;
 	name = NULL;
 	champion = (*vm).champion;
 	while(champion)
 	{
+		i++;
 		if (champion->p_number == (*vm).last_alive)
 		{
 			name = champion->name;
@@ -195,8 +198,8 @@ void	declare_winner(t_vm *vm)
 		}
 		champion = champion->next;
 	}
-//	if (name == NULL)
-	// sauvegarder le dernier champion au cas ou le numeor change
-//		ft_printf("Aucun live avec un nom de champion valide n'a ete lance.\n");
-	// ft_printf("le joueur %#X(%s)a gagne\n",(*vm).last_alive, name);
+	if (name == NULL)
+		ft_printf("Only loosers... Do better next time.\n");
+	else
+		ft_printf("le joueur %#X(%s)a gagne\n", (*vm).last_alive, name);
 }
