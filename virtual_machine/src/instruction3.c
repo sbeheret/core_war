@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 10:48:48 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 10:52:33 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 	if (processus->action.type[ARG1] != 2)
 		return;
 	copy = new_processus(0,(circular(processus->action.pc +
-	(short)processus->action.args[ARG1]) % IDX_MOD), processus->color);
+	((short)processus->action.args[ARG1] % IDX_MOD))), processus->color);
 	i = 0;
 	while (++i <= 16)
 		copy->reg[i] = processus->reg[i];
