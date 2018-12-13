@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 11:28:21 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 13:08:21 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	run_vm(t_vm *vm)
 		while ((*vm).cycles_now < (*vm).CTD)
 		{
 			ncurses_input(vm);
-			execute_processus(vm);
+			execute_instruction(vm);
+			execute_get_action(vm);
+			// execute_processus(vm);
 			(*vm).cycles_ttx++;
 			(*vm).cycles_now++;
 			if ((*vm).flag_dump == 1 && (*vm).dump_cycle == (*vm).cycles_ttx)
@@ -52,24 +54,55 @@ void	run_vm(t_vm *vm)
 	declare_winner(vm);
 }
 
-void	execute_processus(t_vm *vm)
+// void	execute_processus(t_vm *vm)
+// {
+// 	int		op_code;
+//
+// 	t_processus *processus;
+// 	processus = (*vm).processus;
+// 	if (vm->visu)
+// 		update_cycles(vm, 0);
+// 	while (processus)
+// 	{
+// 		op_code = processus->action.op_code;
+// 		if (processus->cycles_wait == 0)
+// 		{
+// 			if (op_code > 0 && op_code < 17)
+// 				run_instruction(vm, processus, op_code);
+// 			get_action(vm, processus);
+// 		}
+// 		if (vm->visu)
+// 			update_pc_visu(vm->ram, processus);
+// 		if (processus->cycles_wait != 0)
+// 			processus->cycles_wait--;
+// 		processus = processus->next;
+// 	}
+// }
+void	execute_instruction(t_vm *vm)
 {
 	int		op_code;
 
 	t_processus *processus;
-	processus = (*vm).processus;
+	proc
 	if (vm->visu)
 		update_cycles(vm, 0);
 	while (processus)
 	{
 		op_code = processus->action.op_code;
+		if (processus->cycles_wait == 0 && op_code > 0 && op_code < 17)
+			run_instruction(vm, processus, op_code);
+		processus = processus->next;
+	}
+}
+
+void	execute_get_action(t_vm *vm)
+{
+	t_processus *processus;
+	processus = (*vm).processus;
+	while (processus)
+	{
 		if (processus->cycles_wait == 0)
-		{
-			// ft_printf("cycle_ttx = %d | Execute op_code %d\n", (*vm).cycles_ttx, op_code);
-			if (op_code > 0 && op_code < 17)
-				run_instruction(vm, processus, op_code);
 			get_action(vm, processus);
-		}
 		if (vm->visu)
 			update_pc_visu(vm->ram, processus);
 		processus->cycles_wait--;

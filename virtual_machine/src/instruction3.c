@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 10:52:33 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 12:31:49 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 		copy->reg[i] = processus->reg[i];
 	copy->carry = processus->carry;
 	get_action(vm, copy);
-	copy->cycles_wait--;
+	// copy->cycles_wait--;
 	// if (processus->next)
 	// 	tmp = processus->next;
 	// processus->next = copy;
