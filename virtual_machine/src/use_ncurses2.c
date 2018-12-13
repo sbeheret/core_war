@@ -6,7 +6,7 @@
 /*   By: sbeheret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:14:45 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/13 14:28:31 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:17:07 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,31 @@ void	remove_dead_pcs(unsigned char *ram, t_processus *pcs)
 	}
 }
 
-void	winner_ncurses(t_champion *champ, int i)
+void	winner_ncurses(char *name, int nb, int i)
 {
 	int		row;
 	int		col;
 
 	erase();
+	nodelay(stdscr, 0);
 	getmaxyx(stdscr, row, col);
 	move(row / 2, col / 2);
 	attron(A_BOLD);
+	if (name == NULL)
+	{
+		printw("Only ");
+		printw("LOOSERS");
+		attroff(A_BOLD);
+		return ;
+	}
 	printw("PLAYER ");
 	attron(COLOR_PAIR(i));
-	printw("%d ", champ->p_number);
+	printw("%#X ", nb);
 	attroff(COLOR_PAIR(i));
 	printw("- ");
-	attron(COLOR_PAIR(i) | A_BLINK);
-	printw("%s", champ->name);
+	attron(COLOR_PAIR(i));
+	printw("%s", name);
+	attroff(COLOR_PAIR(i));
+	printw(" IS A WINNER");
+	attroff(A_BOLD);
 }

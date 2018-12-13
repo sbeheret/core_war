@@ -6,7 +6,7 @@
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/12/04 15:13:39 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:59:58 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@
 
 #define REG_NUMBER				16
 
-#define CYCLE_TO_DIE			1536
+#define CYCLE_TO_DIE			236
 #define CYCLE_DELTA				50
 #define NBR_LIVE				21
-#define MAX_CHECKS				10
+#define MAX_CHECKS				5
 
 /*
 **

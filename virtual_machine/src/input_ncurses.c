@@ -6,7 +6,7 @@
 /*   By: sbeheret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 11:26:19 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/11 16:32:34 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:07:42 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	ncurses_input(t_vm *vm)
 {
 	int		c;
 
-	timeout(1);
 	if (!vm->visu)
 		return ;
 	c = 0;

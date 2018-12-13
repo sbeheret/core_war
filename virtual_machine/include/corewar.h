@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 12:05:21 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/13 14:51:47 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,5 +301,6 @@ void				write_in_ram(unsigned char *ram, t_processus *pcs, int id);
 void				init_data_visu(t_vm *vm);
 void				ncurses_input(t_vm *vm);
 void				remove_dead_pcs(unsigned char *ram, t_processus *pcs);
+void				winner_ncurses(char *name, int nb, int i);
 
 #endif

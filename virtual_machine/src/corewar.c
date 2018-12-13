@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:33:51 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/12 16:42:58 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:10:21 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv)
 		print_ram_curses(&vm);
 		refresh();
 		getch();
+		nodelay(stdscr, 1);
 	}
 //	print_ram((vm).ram);
 	run_vm(&vm);
