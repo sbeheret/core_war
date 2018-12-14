@@ -6,7 +6,7 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/12/11 14:34:11 by esouza           ###   ########.fr        #
+#    Updated: 2018/12/14 14:59:23 by dshults          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ SRCS =	main.c \
 		l_op_find_code.c \
 		l_op_l.c \
 		l_trim.c \
-		op.c \
 		set_header.c \
 		strjoinappend.c \
 		create_file_body.c \

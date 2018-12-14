@@ -6,11 +6,11 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:41:23 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/13 15:43:38 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/14 15:02:02 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "op.c"
 
 static int	is_op_code(t_data *d, t_labels *lb, int label, int skip)
 {
@@ -78,7 +78,7 @@ static int	get_all(t_data *d, int len, int skip, int ret)
 
 int			get_labels(t_data *d)
 {
-	d->op = get_op_tab();
+	d->op = g_op_tab;
 	if (!get_all(d, 0, d->y, 0)
 		|| !general_check(d)
 		|| !compliance_check(d, d->first_label))
