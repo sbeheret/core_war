@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:38:06 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/08 11:35:05 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/14 15:20:48 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ int			third_arg(t_data *d, t_labels *head, int fd2, int arnb)
 			&& d->op[head->op_nb - 1].dir_as_ind)
 		write_two_octet(d, head, TWO, fd2);
 	else if ((head->args[TWO][ZERO] == LABEL_CHAR)
-			|| (head->args[TWO][ZERO] >= 0 && head->args[TWO][ZERO] <= 9))
+			|| (head->args[TWO][ZERO] >= '0' && head->args[TWO][ZERO] <= '9'))
+		write_two_octet(d, head, TWO, fd2);
+	else if ((head->args[TWO][ZERO] == '-')
+			&& (head->args[TWO][ONE] >= '0' && head->args[TWO][ONE] <= '9'))
 		write_two_octet(d, head, TWO, fd2);
 	return (0);
 }
@@ -61,7 +64,10 @@ int			second_arg(t_data *d, t_labels *head, int fd2, int arnb)
 			&& d->op[head->op_nb - 1].dir_as_ind)
 		write_two_octet(d, head, ONE, fd2);
 	else if ((head->args[ONE][ZERO] == LABEL_CHAR)
-			|| (head->args[ONE][ZERO] >= 0 && head->args[ONE][ZERO] <= 9))
+			|| (head->args[ONE][ZERO] >= '0' && head->args[ONE][ZERO] <= '9'))
+		write_two_octet(d, head, ONE, fd2);
+	else if ((head->args[ONE][ZERO] == '-')
+			&& (head->args[ONE][ONE] >= '0' && head->args[ONE][ONE] <= '9'))
 		write_two_octet(d, head, ONE, fd2);
 	return (0);
 }
@@ -79,7 +85,10 @@ int			first_arg(t_data *d, t_labels *head, int fd2, int arnb)
 			&& d->op[head->op_nb - 1].dir_as_ind)
 		write_two_octet(d, head, ZERO, fd2);
 	else if ((head->args[ZERO][ZERO] == LABEL_CHAR)
-			|| (head->args[ZERO][ZERO] >= 0 && head->args[ZERO][ZERO] <= 9))
+			|| (head->args[ZERO][ZERO] >= '0' && head->args[ZERO][ZERO] <= '9'))
+		write_two_octet(d, head, ZERO, fd2);
+	else if ((head->args[ZERO][ZERO] == '-')
+			&& (head->args[ZERO][ONE] >= '0' && head->args[ZERO][ONE] <= '9'))
 		write_two_octet(d, head, ZERO, fd2);
 	return (0);
 }
