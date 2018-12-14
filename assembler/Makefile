@@ -6,7 +6,7 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/12/05 13:32:49 by dshults          ###   ########.fr        #
+#    Updated: 2018/12/11 14:34:11 by esouza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,30 +31,36 @@ SRCS =	main.c \
 		ft_strndup.c \
 		get_data.c \
 		hexatob.c \
-		l_args.c \
-		l_calc.c \
-		l_check.c \
+		l_bytes.c \
+		l_check_compliance.c \
+		l_check_general.c \
 		l_errors.c \
-		l_labels.c \
-		l_op.c \
-		l_size.c \
+		l_labels_get.c \
+		l_labels_make_add.c \
+		l_op_find_code.c \
+		l_op_l.c \
 		l_trim.c \
 		op.c \
 		set_header.c \
 		strjoinappend.c \
 		create_file_body.c \
-
+		get_octet_codage.c \
+		first_arg.c \
+		write_direct_four.c \
+		name_comment_length.c \
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
+HDRS = $(addprefix $(INC_PATH)/,asm.h ft_printf.h get_next_line.h libft.h op.h)
+
 all : $(NAME_PATH)$(NAME)
 
-$(NAME_PATH)$(NAME) : $(OBJS)
+$(NAME_PATH)$(NAME) : $(OBJS) $(HDRS) Makefile
 	@make -C $(LIBFT)
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME)
 	@echo "\033[32;4m	   ***Executable $(NAME) created***   \033[0;m"
 
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
+$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HDRS) Makefile
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(FLAGS) -c $< -o $@ -I$(INC_PATH)
 
@@ -65,6 +71,11 @@ clean :
 fclean : clean
 	@make fclean -C $(LIBFT)
 	@rm -f $(NAME_PATH)$(NAME)
+
+debug : $(OBJS)
+	@make -C $(LIBFT)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME) -fsanitize=address -O1 -fno-omit-frame-pointer
+	@echo "\033[32;4m	   ***Executable DEBUG $(NAME) created***   \033[0;m"
 
 re : fclean all
 

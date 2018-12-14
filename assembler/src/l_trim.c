@@ -6,16 +6,16 @@
 /*   By: dshults <dshults@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 15:43:05 by dshults           #+#    #+#             */
-/*   Updated: 2018/12/02 17:59:30 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/08 12:38:15 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
-static void    skip_spaces(char const *s, int *i)
+static void		skip_spaces(char const *s, int *i)
 {
-    while (s[*i] == ' ' || s[*i] == '\t')
-        (*i)++;
+	while (s[*i] == ' ' || s[*i] == '\t')
+		(*i)++;
 }
 
 static int		find_args(char *s, int i)
@@ -47,8 +47,8 @@ int				check_commas(char *s)
 			i++;
 			if (!find_args(s, i))
 			{
-				ft_printf("\033[31mLine [%s] has a bad placement of ", s);
-				ft_printf("separator char [%c]\033[0;m\n", SEPARATOR_CHAR);
+				ft_printf("Line "S" has a bad placement of ", s);
+				ft_printf("separator char "C"\n", SEPARATOR_CHAR);
 				return (0);
 			}
 		}
@@ -58,7 +58,7 @@ int				check_commas(char *s)
 	return (1);
 }
 
-void		trim_spaces(char **tab)
+void			trim_spaces(char **tab)
 {
 	int		y;
 	char	*tmp;
@@ -67,9 +67,32 @@ void		trim_spaces(char **tab)
 	while (tab[y])
 	{
 		tmp = tab[y];
-		tab[y] = ft_strtrim(tab[y]);
+		tab[y] = str_trim(tab[y]);
 		free(tmp);
-        tmp = NULL;
+		tmp = NULL;
 		y++;
 	}
+}
+
+char			*str_trim(char const *s)
+{
+	int		i;
+	int		len;
+	char	*str;
+
+	i = 0;
+	while (*s == ' ' || *s == '\t' || *s == '\n')
+		s++;
+	if (*s == '\0')
+		return (ft_strnew(0));
+	len = (int)ft_strlen(s);
+	while (s[len - 1] == ' ' || s[len - 1] == '\t' || s[len - 1] == '\n')
+		len--;
+	i = 0;
+	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
+		return (0);
+	while (i < len)
+		str[i++] = *s++;
+	str[i] = '\0';
+	return (str);
 }

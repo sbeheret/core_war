@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 16:59:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/11/30 16:59:48 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/08 12:40:55 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
-t_op    op_tab[17] =
+t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
@@ -41,19 +41,5 @@ t_op    op_tab[17] =
 
 t_op	*get_op_tab(void)
 {
-	return (op_tab);
-}
-
-int		find_op_nb(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (i < 16)
-	{
-		if (ft_strequ(op_tab[i].name, s))
-			return (op_tab[i].id);
-		i++;
-	}
-	return (0);
+	return (g_op_tab);
 }
