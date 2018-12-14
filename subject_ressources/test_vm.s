@@ -2,6 +2,7 @@
 .comment "I'M ALIIIIVE"
 
 ld %0, r2
+zjmp %400
 ld %10, r3
 ld 0, r4
 ld 10, r5

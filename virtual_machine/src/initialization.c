@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 14:21:13 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/14 11:03:27 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	initialize_processus(t_processus **processus, int nb_player
 	(*processus)->reg[1] = nb_player;
 	(*processus)->cycles_wait = 0;
 	(*processus)->lives = 0;
+	(*processus)->flag_execute = 0;
 	(*processus)->next = NULL;
 	initialize_action(*processus);
 }

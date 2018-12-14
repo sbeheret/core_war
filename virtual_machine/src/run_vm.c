@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 15:27:27 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/14 12:07:45 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	run_vm(t_vm *vm)
 		(*vm).cycles_now = 0;
 		total_live = 0;
 		while ((*vm).cycles_now < (*vm).CTD)
+		{
 			execute_cycle(vm);
+		}
 		total_live = kill_processus(vm);
 		update_cycles(vm, 1);
 		if (total_live > NBR_LIVE || nb_decrement > MAX_CHECKS)
@@ -56,7 +58,9 @@ int		kill_processus(t_vm *vm)
 	while (tmp)
 	{
 		if (tmp->lives == 0)
+		{
 			delete_element(&previous, &tmp, vm);
+		}
 		else
 		{
 			total_live += tmp->lives;

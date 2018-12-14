@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 15:14:17 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 15:19:11 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/14 17:16:18 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 void	execute_cycle(t_vm *vm)
 {
+	if ((*vm).verbose == 1 && (*vm).cycles_ttx != 0)
+		ft_printf("It is now cycle %d\n", (*vm).cycles_ttx);
 	ncurses_input(vm);
+	get_instruction(vm);
 	execute_instruction(vm);
-	execute_get_action(vm);
-	(*vm).cycles_ttx++;
-	(*vm).cycles_now++;
 	if ((*vm).flag_dump == 1 && (*vm).dump_cycle == (*vm).cycles_ttx)
 		ft_exit_dump(vm);
+	(*vm).cycles_ttx++;
+	(*vm).cycles_now++;
 }
 
 void	execute_instruction(t_vm *vm)
@@ -34,21 +36,34 @@ void	execute_instruction(t_vm *vm)
 	while (processus)
 	{
 		op_code = processus->action.op_code;
-		if (processus->cycles_wait == 0 && op_code > 0 && op_code < 17)
-			run_instruction(vm, processus, op_code);
+		if (processus->cycles_wait == 0)
+		{
+			if (vm->ram[processus->action.pc] != processus->action.op_code)
+			{
+				get_op_code(vm, processus);
+				return ;
+			}
+			get_action(vm, processus);
+			if (op_code < 1 || op_code > 17)
+				processus->pc++;
+			else if (instruction_check(processus))
+				run_instruction(vm, processus, op_code);
+			initialize_action(processus);
+		}
 		processus = processus->next;
 	}
 }
 
-void	execute_get_action(t_vm *vm)
+void	get_instruction(t_vm *vm)
 {
 	t_processus	*processus;
 
 	processus = (*vm).processus;
+	//print_processus(processus);
 	while (processus)
 	{
 		if (processus->cycles_wait == 0)
-			get_action(vm, processus);
+			get_op_code(vm, processus);
 		if (vm->visu)
 			update_pc_visu(vm->ram, processus);
 		processus->cycles_wait--;
@@ -76,6 +91,5 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 		&ft_lfork,
 		&ft_aff};
 
-	if (instruction_check(processus))
 		instruction[op_code - 1](vm, processus);
-}
+	}

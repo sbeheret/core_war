@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/12/13 15:16:38 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/12/13 17:09:06 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -42,7 +42,6 @@ NAME = 		our_coreware
 
 #/********************** SOURCE *********************/
 SRC =		corewar.c			\
-			op.c				\
 			check_parameters.c	\
 			check_parameters2.c	\
 			convert.c			\

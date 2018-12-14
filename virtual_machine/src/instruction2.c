@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 14:48:30 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/14 15:37:47 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_and(t_vm *vm, t_processus *pcs)
 	else
 		pcs->carry = 0;
 	if ((*vm).verbose)
-		ft_print_add(pcs, action->args[0], action->args[1], action->args[2]);
+		ft_print_and(pcs, action->args[0], action->args[1], action->args[2]);
 }
 
 void	ft_or(t_vm *vm, t_processus *pcs)
@@ -60,7 +60,7 @@ void	ft_xor(t_vm *vm, t_processus *pcs)
 	else
 		pcs->carry = 0;
 	if ((*vm).verbose)
-		ft_print_xor(pcs, action->args[0], action->args[1], action->args[2]);
+		ft_print_xor(pcs, value1, value2, action->args[2]);
 }
 
 void	ft_zjump(t_vm *vm, t_processus *processus)
@@ -87,6 +87,10 @@ void	ft_ldi(t_vm *vm, t_processus *pcs)
 	action = &(pcs->action);
 	value1 = get_content_value(vm->ram, pcs, action->type[0], action->args[0]);
 	value2 = get_content_value(vm->ram, pcs, action->type[1], action->args[1]);
+	if (action->type[0] != 1)
+		value1 = (short)value1;
+	if (action->type[1] != 1)
+		value2 = (short)value2;
 	addrs = circular(pcs->action.pc + ((value1 + value2) % IDX_MOD));
 	pcs->reg[pcs->action.args[2]] = ft_octet_to_int2(vm->ram, REG_SIZE, addrs);
 	if (pcs->reg[pcs->action.args[2]] == 0)

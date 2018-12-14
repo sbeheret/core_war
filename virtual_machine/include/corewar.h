@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 15:28:14 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/14 16:45:21 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct			s_processus
 	int					*reg;
 	int					cycles_wait;
 	int					lives;
+	int					flag_execute;
 	t_action			action;
 	struct s_processus	*next;
 }						t_processus;
@@ -122,6 +123,7 @@ typedef	void		(*t_instruction)(t_vm *, t_processus *);
 ** --------- COREWAR
 */
 
+void				introduce_contestant(t_champion *champion);
 /*
 ** --------- LOAD_IN_RAM
 */
@@ -189,12 +191,13 @@ int					kill_processus(t_vm *vm);
 void				delete_element(t_processus **previous, t_processus **tmp, t_vm *vm);
 void				declare_winner(t_vm *vm);
 void				execute_instruction(t_vm *vm);
-void				execute_get_action(t_vm *vm);
+void				get_instruction(t_vm *vm);
 void				execute_cycle(t_vm *vm);
 
 /*
 ** --------- GET_ACTION
 */
+void				get_op_code(t_vm *vm, t_processus *pcs);
 void				get_action(t_vm *vm, t_processus *pcs);
 void				args_action(unsigned char *ram, int PC, t_action *n);
 void				trad_encoding_byte(t_action *n, int enc_byte, int value);

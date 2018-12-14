@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/13 14:28:37 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/14 17:10:36 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,23 @@ t_op	g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-void		get_action(t_vm *vm, t_processus *pcs)
+void		get_op_code(t_vm *vm, t_processus *pcs)
 {
 	initialize_action(pcs);
 	pcs->action.pc = pcs->pc;
 	pcs->action.op_code = vm->ram[circular(pcs->pc)];
 	if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
 	{
-		pcs->pc++;
-		pcs->action.op_code = 0;
 		pcs->cycles_wait = 1;
 		return ;
 	}
 	pcs->cycles_wait = g_op_tab[pcs->action.op_code - 1].cycle;
+}
+
+void		get_action(t_vm *vm, t_processus *pcs)
+{
+	if (pcs->action.op_code == 0)
+		return;
 	pcs->action.size_read++;
 	args_action(vm->ram, pcs->pc, &pcs->action);
 	pcs->pc = pcs->pc + pcs->action.size_read;
@@ -125,6 +129,7 @@ int			instruction_check(t_processus *processus)
 	int			i;
 	t_action	action;
 	int			param;
+
 
 	action = processus->action;
 	if (g_op_tab[action.op_code - 1].param_number != action.nb_arg)
