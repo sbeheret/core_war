@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:39:03 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/12 11:51:27 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/13 15:00:44 by dshults          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,15 @@
 # define FILE_NAME_LENGTH 255
 
 /*
-** dshults defines
+**	output highlighting defines
 */
 
-# define LIVE 1
-# define LD 2
-# define ST 3
-# define ADD 4
-# define SUB 5
-# define AND 6
-# define OR 7
-# define XOR 8
-# define ZJMP 9
-# define LDI 10
-# define STI 11
-# define FORK 12
-# define LLD 13
-# define LLDI 14
-# define LFORK 15
-# define AFF 16
+# define SET "\e[7m"
+# define RESET "\e[0m"
+# define S "\e[7m%s\e[0m"
+# define C "\e[7m%c\e[0m"
+# define I "\e[7m%i\e[0m"
+
 # define ZERO 0
 # define ONE 1
 # define TWO 2
@@ -161,6 +151,6 @@ char					*ft_strndup(const char *s, size_t n);
 char					*str_trim(char const *s);
 void					trim_spaces(char **tab);
 
-void					print_tab(t_data *d, int i);
+void					print_tab(t_data *d);
 void					show_labels(t_data *d);
 #endif
