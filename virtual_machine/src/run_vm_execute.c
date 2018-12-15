@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 15:14:17 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/15 20:28:21 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/15 22:16:34 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,16 @@ void	execute_instruction(t_vm *vm)
 	while (processus)
 	{
 		op_code = processus->action.op_code;
+		if (vm->ram[processus->action.pc] != processus->action.op_code)
+		{
+			get_op_code(vm, processus);
+			if (vm->cycles_ttx != 0)
+				processus->cycles_wait--;
+			// print_processus(processus);
+			return ;
+		}
 		if (processus->cycles_wait == 0)
 		{
-			if (vm->ram[processus->action.pc] != processus->action.op_code
-			&& (vm->ram[processus->action.pc] < 1 || vm->ram[processus->action.pc] > 16))
-			{
-				processus->pc++;
-				return ;
-			}
-			if (vm->ram[processus->action.pc] != processus->action.op_code)
-			{
-				get_op_code(vm, processus);
-				return ;
-			}
 			get_action(vm, processus);
 			if (op_code < 1 || op_code > 17)
 				processus->pc++;
@@ -64,7 +61,7 @@ void	get_instruction(t_vm *vm)
 	t_processus	*processus;
 
 	processus = (*vm).processus;
-	//print_processus(processus);
+	// print_processus(processus);
 	while (processus)
 	{
 		if (processus->cycles_wait == 0)

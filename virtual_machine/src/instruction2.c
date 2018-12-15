@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/15 20:04:37 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/15 21:16:44 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	ft_zjump(t_vm *vm, t_processus *processus)
 	if (processus->carry == 1)
 		processus->pc = circular(processus->action.pc + a);
 	if ((*vm).verbose)
-		ft_print_zjump(processus, a);
+		// ft_print_zjump(processus, a);
+		ft_print_zjump(processus, (short)processus->action.args[0]);
 }
 
 void	ft_ldi(t_vm *vm, t_processus *pcs)

@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/15 12:42:15 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/15 21:05:25 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		get_op_code(t_vm *vm, t_processus *pcs)
 		pcs->cycles_wait = 1;
 		return ;
 	}
+	pcs->cycles_wait--;
 	pcs->cycles_wait = g_op_tab[pcs->action.op_code - 1].cycle;
 }
 
