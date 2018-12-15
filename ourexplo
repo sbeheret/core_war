@@ -29895,6 +29895,7 @@ It is now cycle 18806
 It is now cycle 18807
 It is now cycle 18808
 It is now cycle 18809
+P   10 | live 190055429
 It is now cycle 18810
 It is now cycle 18811
 It is now cycle 18812
@@ -29904,8 +29905,8 @@ It is now cycle 18815
 It is now cycle 18816
 It is now cycle 18817
 It is now cycle 18818
-P   10 | live 190055429
 It is now cycle 18819
+P   10 | live 190055939
 P    9 | sti r4 0 0
        | -> store to 0 + 0 = 0 (with pc and mod 4025)
 It is now cycle 18820
@@ -29917,8 +29918,8 @@ It is now cycle 18825
 It is now cycle 18826
 It is now cycle 18827
 It is now cycle 18828
-P   10 | live 190055939
 It is now cycle 18829
+P   10 | live 33554431
 It is now cycle 18830
 P    8 | sti r6 13 0
        | -> store to 13 + 0 = 13 (with pc and mod 4063)
@@ -29936,7 +29937,6 @@ It is now cycle 18835
 It is now cycle 18836
 It is now cycle 18837
 It is now cycle 18838
-P   10 | live 33554431
 It is now cycle 18839
 It is now cycle 18840
 P    8 | live -1
@@ -29961,6 +29961,8 @@ It is now cycle 18853
 It is now cycle 18854
 P    9 | live -1
 It is now cycle 18855
+P   10 | sti r2 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4040)
 It is now cycle 18856
 It is now cycle 18857
 It is now cycle 18858
@@ -29970,8 +29972,6 @@ It is now cycle 18861
 It is now cycle 18862
 It is now cycle 18863
 It is now cycle 18864
-P   10 | sti r2 0 0
-       | -> store to 0 + 0 = 0 (with pc and mod 4040)
 It is now cycle 18865
 P    8 | sti r2 13 0
        | -> store to 13 + 0 = 13 (with pc and mod 4073)
@@ -29985,6 +29985,7 @@ It is now cycle 18866
 It is now cycle 18867
 It is now cycle 18868
 It is now cycle 18869
+P    9 | live 190055429
 It is now cycle 18870
 It is now cycle 18871
 It is now cycle 18872
@@ -29995,7 +29996,10 @@ It is now cycle 18876
 It is now cycle 18877
 It is now cycle 18878
 It is now cycle 18879
+P    9 | live 190055939
 It is now cycle 18880
+P   10 | sti r4 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4045)
 It is now cycle 18881
 It is now cycle 18882
 It is now cycle 18883
@@ -30005,8 +30009,7 @@ It is now cycle 18886
 It is now cycle 18887
 It is now cycle 18888
 It is now cycle 18889
-P   10 | sti r4 0 0
-       | -> store to 0 + 0 = 0 (with pc and mod 4045)
+P    9 | live 33554431
 It is now cycle 18890
 P    8 | sti r4 501 0
        | -> store to 501 + 0 = 501 (with pc and mod 4566)
@@ -30019,7 +30022,6 @@ P    4 | sti r4 511 0
 It is now cycle 18891
 It is now cycle 18892
 It is now cycle 18893
-P    9 | live 252645135
 It is now cycle 18894
 It is now cycle 18895
 It is now cycle 18896
@@ -30030,9 +30032,10 @@ It is now cycle 18900
 It is now cycle 18901
 It is now cycle 18902
 It is now cycle 18903
-P    9 | live 190055939
 It is now cycle 18904
 It is now cycle 18905
+P   10 | sti r6 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4050)
 It is now cycle 18906
 It is now cycle 18907
 It is now cycle 18908
@@ -30041,11 +30044,11 @@ It is now cycle 18910
 It is now cycle 18911
 It is now cycle 18912
 It is now cycle 18913
-P    9 | live 33554431
 It is now cycle 18914
-P   10 | sti r6 0 0
-       | -> store to 0 + 0 = 0 (with pc and mod 4050)
 It is now cycle 18915
+P   10 | live -1
+P    9 | sti r2 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4060)
 P    8 | sti r6 13 0
        | -> store to 13 + 0 = 13 (with pc and mod 4083)
 P    7 | sti r6 511 0
@@ -30063,7 +30066,6 @@ It is now cycle 18921
 It is now cycle 18922
 It is now cycle 18923
 It is now cycle 18924
-P   10 | live -1
 It is now cycle 18925
 P    8 | live -1
 P    7 | live -1
@@ -30073,6 +30075,7 @@ It is now cycle 18926
 It is now cycle 18927
 It is now cycle 18928
 It is now cycle 18929
+P   10 | live 190055429
 It is now cycle 18930
 It is now cycle 18931
 It is now cycle 18932
@@ -30083,9 +30086,10 @@ It is now cycle 18936
 It is now cycle 18937
 It is now cycle 18938
 It is now cycle 18939
-P    9 | sti r2 0 0
-       | -> store to 0 + 0 = 0 (with pc and mod 4060)
+P   10 | live 190055939
 It is now cycle 18940
+P    9 | sti r4 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4065)
 It is now cycle 18941
 It is now cycle 18942
 It is now cycle 18943
@@ -30095,6 +30099,7 @@ It is now cycle 18946
 It is now cycle 18947
 It is now cycle 18948
 It is now cycle 18949
+P   10 | live 33554431
 It is now cycle 18950
 P    8 | sti r2 13 0
        | -> store to 13 + 0 = 13 (with pc and mod 4093)
@@ -30117,11 +30122,10 @@ It is now cycle 18960
 It is now cycle 18961
 It is now cycle 18962
 It is now cycle 18963
-P   10 | live 190055429
 It is now cycle 18964
-P    9 | sti r4 0 0
-       | -> store to 0 + 0 = 0 (with pc and mod 4065)
 It is now cycle 18965
+P    9 | sti r6 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4070)
 It is now cycle 18966
 It is now cycle 18967
 It is now cycle 18968
@@ -30130,9 +30134,11 @@ It is now cycle 18970
 It is now cycle 18971
 It is now cycle 18972
 It is now cycle 18973
-P   10 | live 190055939
 It is now cycle 18974
 It is now cycle 18975
+P   10 | sti r2 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4080)
+P    9 | live -1
 P    8 | sti r4 501 0
        | -> store to 501 + 0 = 501 (with pc and mod 4586)
 P    7 | sti r4 496 0
@@ -30149,15 +30155,13 @@ It is now cycle 18980
 It is now cycle 18981
 It is now cycle 18982
 It is now cycle 18983
-P   10 | live 33554431
 It is now cycle 18984
 It is now cycle 18985
 It is now cycle 18986
 It is now cycle 18987
 It is now cycle 18988
 It is now cycle 18989
-P    9 | sti r6 0 0
-       | -> store to 0 + 0 = 0 (with pc and mod 4070)
+P    9 | live 190055429
 It is now cycle 18990
 It is now cycle 18991
 It is now cycle 18992
@@ -30168,8 +30172,10 @@ It is now cycle 18996
 It is now cycle 18997
 It is now cycle 18998
 It is now cycle 18999
-P    9 | live -1
+P    9 | live 190055939
 It is now cycle 19000
+P   10 | sti r4 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4085)
 P    8 | sti r6 13 0
        | -> store to 13 + 0 = 13 (with pc and mod 4103)
 P    7 | sti r6 511 0
@@ -30187,13 +30193,12 @@ It is now cycle 19006
 It is now cycle 19007
 It is now cycle 19008
 It is now cycle 19009
-P   10 | sti r2 0 0
-       | -> store to 0 + 0 = 0 (with pc and mod 4080)
+P    9 | live 33554431
 It is now cycle 19010
-P    8 | live 252645375
-P    7 | live 252645375
-P    6 | live 252645375
-P    4 | live 252645375
+P    8 | live -1
+P    7 | live -1
+P    6 | live -1
+P    4 | live -1
 It is now cycle 19011
 It is now cycle 19012
 It is now cycle 19013
@@ -30209,6 +30214,8 @@ It is now cycle 19022
 It is now cycle 19023
 It is now cycle 19024
 It is now cycle 19025
+P   10 | sti r6 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4090)
 It is now cycle 19026
 It is now cycle 19027
 It is now cycle 19028
@@ -30218,13 +30225,13 @@ It is now cycle 19031
 It is now cycle 19032
 It is now cycle 19033
 It is now cycle 19034
-P   10 | sti r4 0 0
-       | -> store to 0 + 0 = 0 (with pc and mod 4085)
 It is now cycle 19035
+P   10 | live -1
+P    9 | sti r2 0 0
+       | -> store to 0 + 0 = 0 (with pc and mod 4)
 It is now cycle 19036
 It is now cycle 19037
 It is now cycle 19038
-P    9 | live 252645135
 It is now cycle 19039
 It is now cycle 19040
 It is now cycle 19041
@@ -30235,8 +30242,12 @@ It is now cycle 19045
 It is now cycle 19046
 It is now cycle 19047
 It is now cycle 19048
-P    9 | live 190055939
 It is now cycle 19049
+P   10 | live 252645135
+P    8 | live 252645135
+P    7 | live 252645135
+P    6 | live 252645135
+P    4 | live 252645135
 It is now cycle 19050
 It is now cycle 19051
 It is now cycle 19052
@@ -30246,10 +30257,7 @@ It is now cycle 19055
 It is now cycle 19056
 It is now cycle 19057
 It is now cycle 19058
-P    9 | live 17764111
 It is now cycle 19059
-P   10 | sti r6 0 0
-       | -> store to 0 + 0 = 0 (with pc and mod 4090)
 It is now cycle 19060
 It is now cycle 19061
 It is now cycle 19062
@@ -30260,7 +30268,6 @@ It is now cycle 19066
 It is now cycle 19067
 It is now cycle 19068
 It is now cycle 19069
-P   10 | live 252645375
 It is now cycle 19070
 It is now cycle 19071
 It is now cycle 19072

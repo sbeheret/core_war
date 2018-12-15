@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/15 21:05:25 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 00:05:35 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void		get_op_code(t_vm *vm, t_processus *pcs)
 		pcs->cycles_wait = 1;
 		return ;
 	}
-	pcs->cycles_wait--;
 	pcs->cycles_wait = g_op_tab[pcs->action.op_code - 1].cycle;
 }
 
@@ -59,7 +58,7 @@ void		get_action(t_vm *vm, t_processus *pcs)
 		return;
 	pcs->action.size_read++;
 	args_action(vm->ram, pcs->pc, &pcs->action);
-	pcs->pc = pcs->pc + pcs->action.size_read;
+	pcs->pc = circular(pcs->pc + pcs->action.size_read);
 }
 
 static int	size_argument(int type, int direct_octet)

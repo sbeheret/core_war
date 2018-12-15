@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/15 20:05:01 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 00:02:51 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_print_sti(t_processus *processus, int arg1, int arg2, int arg3)
 	ft_printf("%d\n", arg3);
 	ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", arg2, arg3
 // , arg3 + arg2, circular (processus->action.pc + (arg3 + arg2) % IDX_MOD));
-, arg3 + arg2, processus->action.pc + (arg3 + arg2) % IDX_MOD);
+, arg3 + arg2, processus->action.pc + (arg3 + arg2));
 }
 
 void	ft_print_fork(t_processus *processus, int arg)
