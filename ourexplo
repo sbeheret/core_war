@@ -29832,6 +29832,112 @@ It is now cycle 18763
 It is now cycle 18764
 It is now cycle 18765
 P    2 | lfork 3855 (4016)
+---------Processus-----------
+Number = 9
+PC = 4016
+Carry = 1
+Registres 1 to 8: 00-0-0-252645135-0-0-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 1
+Lives = 0
+----------ACTION-----------
+op_code = 255
+PC = 4016
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 8
+PC = 4040
+Carry = 1
+Registres 1 to 8: 00-50401039-13-252645135-501-50401039-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 15
+Lives = 7
+----------ACTION-----------
+op_code = 11
+PC = 4040
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 7
+PC = 4040
+Carry = 0
+Registres 1 to 8: 00-252645135-511-252645135-496-252645135-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 15
+Lives = 7
+----------ACTION-----------
+op_code = 11
+PC = 4040
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 6
+PC = 4040
+Carry = 1
+Registres 1 to 8: 00-17519622-9-252645135-506--16034814-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 15
+Lives = 7
+----------ACTION-----------
+op_code = 11
+PC = 4040
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 5
+PC = 161
+Carry = 1
+Registres 1 to 8: 00-0-0-252645135-0-0-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 10
+Lives = 0
+----------ACTION-----------
+op_code = 15
+PC = 161
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 4
+PC = 4040
+Carry = 1
+Registres 1 to 8: 00-190055429-5-252645135-511-33554431-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 15
+Lives = 7
+----------ACTION-----------
+op_code = 11
+PC = 4040
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 2
+PC = 164
+Carry = 1
+Registres 1 to 8: 00-0-0-252645135-0-0-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 0
+Lives = 0
+----------ACTION-----------
+op_code = 15
+PC = 161
+nb_args = 1
+argument 0 = 3855
+4 types 2 / 0 / 0 / 0
+size read = 3
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 It is now cycle 18766
 It is now cycle 18767
 It is now cycle 18768
@@ -29843,6 +29949,127 @@ It is now cycle 18773
 It is now cycle 18774
 It is now cycle 18775
 P    5 | lfork 3855 (4016)
+---------Processus-----------
+Number = 10
+PC = 4016
+Carry = 1
+Registres 1 to 8: 00-0-0-252645135-0-0-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 1
+Lives = 0
+----------ACTION-----------
+op_code = 255
+PC = 4016
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 9
+PC = 4020
+Carry = 1
+Registres 1 to 8: 00-0-0-252645135-0-0-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 19
+Lives = 0
+----------ACTION-----------
+op_code = 11
+PC = 4020
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 8
+PC = 4040
+Carry = 1
+Registres 1 to 8: 00-50401039-13-252645135-501-50401039-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 5
+Lives = 7
+----------ACTION-----------
+op_code = 11
+PC = 4040
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 7
+PC = 4040
+Carry = 0
+Registres 1 to 8: 00-252645135-511-252645135-496-252645135-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 5
+Lives = 7
+----------ACTION-----------
+op_code = 11
+PC = 4040
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 6
+PC = 4040
+Carry = 1
+Registres 1 to 8: 00-17519622-9-252645135-506--16034814-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 5
+Lives = 7
+----------ACTION-----------
+op_code = 11
+PC = 4040
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 5
+PC = 164
+Carry = 1
+Registres 1 to 8: 00-0-0-252645135-0-0-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 0
+Lives = 0
+----------ACTION-----------
+op_code = 15
+PC = 161
+nb_args = 1
+argument 0 = 3855
+4 types 2 / 0 / 0 / 0
+size read = 3
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 4
+PC = 4040
+Carry = 1
+Registres 1 to 8: 00-190055429-5-252645135-511-33554431-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 5
+Lives = 7
+----------ACTION-----------
+op_code = 11
+PC = 4040
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+---------Processus-----------
+Number = 2
+PC = 166
+Carry = 1
+Registres 1 to 8: 00-0-0-252645135-0-0-0-55575553
+Registres 9 to 16: 00-0-0-0-0-0--1-0
+Cycles to wait = 995
+Lives = 0
+----------ACTION-----------
+op_code = 15
+PC = 166
+nb_args = 0
+4 types 0 / 0 / 0 / 0
+size read = 0
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 It is now cycle 18776
 It is now cycle 18777
 It is now cycle 18778
