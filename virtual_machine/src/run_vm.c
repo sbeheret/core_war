@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/14 12:07:45 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/15 19:47:06 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,25 @@ void	run_vm(t_vm *vm)
 	int	total_live;
 
 	nb_decrement = 0;
+	total_live = 0;
 	while ((*vm).processus)
 	{
-		(*vm).cycles_now = 0;
-		total_live = 0;
-		while ((*vm).cycles_now < (*vm).CTD)
+		execute_cycle(vm);
+		if (vm->cycles_now >= vm->CTD)
 		{
-			execute_cycle(vm);
+			total_live = kill_processus(vm);
+			update_cycles(vm, 1);
+			if (total_live >= NBR_LIVE || nb_decrement >= MAX_CHECKS)
+			{
+				(*vm).CTD -= CYCLE_DELTA;
+				if ((*vm).verbose == 1)
+					ft_printf("Cycle to die is now %d\n", (*vm).CTD);
+				nb_decrement = 0;
+			}
+			nb_decrement++;
+			vm->cycles_now = 0;
 		}
-		total_live = kill_processus(vm);
-		update_cycles(vm, 1);
-		if (total_live > NBR_LIVE || nb_decrement > MAX_CHECKS)
-		{
-			(*vm).CTD -= CYCLE_DELTA;
-			nb_decrement = 0;
-		}
-		nb_decrement++;
+		(*vm).cycles_now++;
 	}
 	declare_winner(vm);
 }

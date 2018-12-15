@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 11:07:06 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/14 15:41:25 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/15 10:51:37 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	update_pc_visu(unsigned char *ram, t_processus *pcs)
 	if (i == pcs->action.pc)
 		return ;
 	b = mvinch(i / 64 + 1, 8 + 3 * (i % 64)) & A_COLOR;
-	if (b == COLOR_PAIR(pcs->color + 5))
+	if ((unsigned int)b == COLOR_PAIR(pcs->color + 5))
 	{
 		if (ram[i] != 0)
 			attron(COLOR_PAIR(pcs->color));

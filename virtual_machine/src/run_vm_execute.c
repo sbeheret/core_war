@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 15:14:17 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/14 17:16:18 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/15 20:28:21 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ void	execute_cycle(t_vm *vm)
 	if ((*vm).verbose == 1 && (*vm).cycles_ttx != 0)
 		ft_printf("It is now cycle %d\n", (*vm).cycles_ttx);
 	ncurses_input(vm);
-	get_instruction(vm);
 	execute_instruction(vm);
+	get_instruction(vm);
 	if ((*vm).flag_dump == 1 && (*vm).dump_cycle == (*vm).cycles_ttx)
 		ft_exit_dump(vm);
 	(*vm).cycles_ttx++;
-	(*vm).cycles_now++;
 }
 
 void	execute_instruction(t_vm *vm)
@@ -38,6 +37,12 @@ void	execute_instruction(t_vm *vm)
 		op_code = processus->action.op_code;
 		if (processus->cycles_wait == 0)
 		{
+			if (vm->ram[processus->action.pc] != processus->action.op_code
+			&& (vm->ram[processus->action.pc] < 1 || vm->ram[processus->action.pc] > 16))
+			{
+				processus->pc++;
+				return ;
+			}
 			if (vm->ram[processus->action.pc] != processus->action.op_code)
 			{
 				get_op_code(vm, processus);
