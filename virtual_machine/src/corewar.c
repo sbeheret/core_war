@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:33:51 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 14:20:03 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 15:34:51 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int argc, char **argv)
 	check_parameters(argc, argv, &vm);
 	load_champs(&vm);
 	create_process(&(vm).champion, &(vm).processus);
-	introduce_contestant(vm.champion);
+	introduce_contestant(vm.champion, vm.flag_hex);
 	if (vm.visu)
 	{
 		init_ncurses();
@@ -43,19 +43,4 @@ int		main(int argc, char **argv)
 	}
 	ft_free_vm(&vm);
 	return (1);
-}
-
-void	introduce_contestant(t_champion *champion)
-{
-	int i;
-
-	i = 1;
-	ft_printf("Introducing contestants...\n");
-	while (champion)
-	{
-		ft_printf("* Player %d, weighing %zd bytes, \"%s\" (\"%s\") !\n"
-		, i, champion->weight, champion->name, champion->comment);
-		champion = champion->next;
-		i++;
-	}
 }

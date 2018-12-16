@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 14:41:57 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 15:38:47 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@
 */
 
 # define BEGIN_BINARY (4 + PROG_NAME_LENGTH + 8 + COMMENT_LENGTH + 4)
-# define REG 1 //coder sur 4 bytes
-# define DIR 2 //coder sur 2 bytes ou 4
-# define IND 3 //coder sur 2 bytes
+# define REG 1
+# define DIR 2
+# define IND 3
 # define ARG1 0
 # define ARG2 1
 # define ARG3 2
-
 
 /*
 ** -----------------------------------------------------------------------------
@@ -98,6 +97,7 @@ typedef	struct			s_vm
 	int					visu;
 	int					verbose;
 	int					flag_live;
+	int					flag_hex;
 }						t_vm;
 
 typedef	struct			s_op
@@ -121,11 +121,6 @@ typedef	void		(*t_instruction)(t_vm *, t_processus *);
 */
 
 /*
-** --------- COREWAR
-*/
-
-void				introduce_contestant(t_champion *champion);
-/*
 ** --------- LOAD_IN_RAM
 */
 void				load_champs(t_vm *vm);
@@ -135,7 +130,6 @@ void				load_champs(t_vm *vm);
 */
 void				make_list_process(t_champion **cham, t_processus **pcs);
 void				push_front_pcs(t_processus **pcs, t_processus *nw);
-
 
 /*
 ** --------- WHERE_START
@@ -172,16 +166,6 @@ t_processus			*new_processus(int p_number, int start, int color);
 void				ft_push_back_chmp(t_champion **begin, t_champion *to_add);
 void				push_front_pcs(t_processus **pcs, t_processus *nw);
 int					ft_atoi_exit(char *s, char *parameter, char *file);
-
-/*
-** --------- TOOLS
-*/
-void				print_ram(unsigned char *ram);
-void				print_memory(unsigned char *str, size_t size);
-void				print_struct_vm(t_vm vm);
-void				print_optab(void);
-void				print_processus(t_processus *pcs);
-void				print_action(t_action action);
 
 /*
 ** --------- RUN VM
@@ -237,6 +221,23 @@ void				ft_lfork(t_vm *vm, t_processus *processus);
 void				ft_aff(t_vm *vm, t_processus *processus);
 
 /*
+** --------- CHECK INSTRUCTION ARG
+*/
+int					instruction_check(t_processus *processus);
+int					ft_get_ind(t_vm *vm, t_processus *processus, int arg);
+int					ft_get_lind(t_vm *vm, t_processus *processus, int arg);
+
+
+/*
+** --------- PRINT FUNCTION / MEMORY
+*/
+void				introduce_contestant(t_champion *champion, int flag_hex);
+void				print_ram(unsigned char *ram);
+void				print_memory(unsigned char *str, size_t size);
+void				print_processus(t_processus *pcs);
+void				print_action(t_action action);
+
+/*
 ** ---------PRINT INSTRUCTION
 */
 void				ft_print_live(int processus, unsigned int champion);
@@ -254,19 +255,6 @@ void				ft_print_fork(t_processus *processus, int arg);
 void				ft_print_lld(t_processus *processus, int arg1, int arg2);
 void				ft_print_lldi(t_processus *processus, int arg1, int arg2, int arg3);
 void				ft_print_lfork(t_processus *processus, int arg);
-
-/*
-** --------- CHECK INSTRUCTION ARG
-*/
-int					instruction_check(t_processus *processus);
-int					ft_get_ind(t_vm *vm, t_processus *processus, int arg);
-int					ft_get_lind(t_vm *vm, t_processus *processus, int arg);
-
-/*
-** --------- VERBOSE
-*/
-void				print_verbose(t_processus *processus);
-
 
 /*
 ** --------- EXIT

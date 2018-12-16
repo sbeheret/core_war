@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 13:49:07 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 15:28:37 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void			ft_option(char ***argv, t_vm *vm)
 		(*vm).visu = 1;
 	else if (!(ft_strcmp(**argv, "-verbose")))
 		(*vm).verbose = 1;
+	else if (!(ft_strcmp(**argv, "-hex")))
+		(*vm).flag_hex = 1;
 	*argv += 1;
 }
 

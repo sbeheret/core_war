@@ -1,16 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   print_function.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 14:48:41 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 15:36:06 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+void	introduce_contestant(t_champion *champion, int flag_hex)
+{
+	int i;
+
+	i = 1;
+	ft_printf("Introducing contestants...\n");
+	while (champion)
+	{
+		ft_printf("* Player %d, weighing %zd bytes, \"%s\" (\"%s\") !\n"
+		, i, champion->weight, champion->name, champion->comment);
+		if (flag_hex == 1)
+		{
+			ft_printf("============   %50s   ===========\n", champion->name);
+			print_memory(champion->binary, champion->binary_len);
+			ft_printf("============   %50s   ============\n", " ");
+		}
+		champion = champion->next;
+		i++;
+	}
+}
 
 void	print_ram(unsigned char *ram)
 {
@@ -31,44 +52,6 @@ void	print_ram(unsigned char *ram)
 		i++;
 	}
 	ft_printf("\n");
-}
-
-void	print_memory(unsigned char *str, size_t size)
-{
-	size_t start;
-	size_t i;
-
-	start = 0;
-	while (start < size)
-	{
-		ft_printf("%.10x :", start);
-		i = start;
-		while (i < start + 16 && i < size)
-		{
-			ft_printf("%hhx", str[i] / 16);
-			ft_printf("%hhx", str[i] % 16);
-			ft_putchar(' ');
-			i++;
-		}
-		while (i < start + 16)
-		{
-			ft_putstr("   ");
-			i++;
-		}
-		ft_putchar('|');
-		i = start;
-		while (i < start + 16 && i < size)
-		{
-			if (str[i] > 31 && str[i] < 127)
-				ft_putchar(str[i]);
-			else
-				ft_putchar('.');
-			i++;
-		}
-		ft_putchar('|');
-		ft_putchar('\n');
-		start += 16;
-	}
 }
 
 void	print_action(t_action act)
