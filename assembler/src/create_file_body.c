@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 12:49:39 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/11 11:36:34 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/14 15:16:08 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,14 @@ int						create_file_body(t_data *d, int fd2)
 	{
 		arnb = arg_len(head);
 		if (head->op_code != NULL)
+		{
 			ft_putchar_fd((unsigned char)head->op_nb, fd2);
-		if (d->op[head->op_nb - 1].encoded_byte)
-			get_octet_codage(head, fd2);
-		first_arg(d, head, fd2, arnb);
-		second_arg(d, head, fd2, arnb);
-		third_arg(d, head, fd2, arnb);
+			if (d->op[head->op_nb - 1].encoded_byte)
+				get_octet_codage(head, fd2);
+			first_arg(d, head, fd2, arnb);
+			second_arg(d, head, fd2, arnb);
+			third_arg(d, head, fd2, arnb);
+		}
 		head = head->next;
 	}
 	return (fd2);

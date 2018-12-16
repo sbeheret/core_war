@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 12:18:52 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/13 15:44:02 by dshults          ###   ########.fr       */
+/*   Updated: 2018/12/14 10:55:14 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			get_data(char **argv, int fd, int fd2)
 		bad_file_format(&d, data, header);
 	header->prog_size = swap_uint32(d.total_bytes);
 	stocor(name, argv);
-	fd2 = open(name, O_RDWR | O_CREAT, RIGHTS);
+	fd2 = open(name, O_RDWR | O_CREAT | O_TRUNC, RIGHTS);
 	write(fd2, header, sizeof(t_header));
 	create_file_body(&d, fd2);
 	ft_printf("Writing output program to %s\n", name);
