@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/16 00:05:35 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 14:24:11 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,6 @@ void		get_op_code(t_vm *vm, t_processus *pcs)
 	pcs->cycles_wait = g_op_tab[pcs->action.op_code - 1].cycle;
 }
 
-void		get_action(t_vm *vm, t_processus *pcs)
-{
-	if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
-		return;
-	pcs->action.size_read++;
-	args_action(vm->ram, pcs->pc, &pcs->action);
-	pcs->pc = circular(pcs->pc + pcs->action.size_read);
-}
-
 static int	size_argument(int type, int direct_octet)
 {
 	if (type == 3 || (type == 2 && direct_octet))
@@ -73,30 +64,70 @@ static int	size_argument(int type, int direct_octet)
 		return (0);
 }
 
-void		args_action(unsigned char *ram, int pc, t_action *action)
+void		get_action(t_vm *vm, t_processus *pcs)
 {
 	int		i;
 	int		i_ram;
 	int		size;
 	int		enc_byte;
 
-	if ((enc_byte = g_op_tab[action->op_code - 1].encoding_byte))
-		action->size_read++;
+	if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
+		return ;
+	pcs->action.size_read++;
+	if ((enc_byte = g_op_tab[pcs->action.op_code - 1].encoding_byte))
+		pcs->action.size_read++;
 	size = 0;
-	trad_encoding_byte(action, enc_byte, ram[circular(pc + 1)]);
+	trad_encoding_byte(&pcs->action, enc_byte, vm->ram[circular(pcs->pc + 1)]);
 	i = 0;
-	i_ram = circular(pc + enc_byte + 1);
-	while (i < action->nb_arg)
+	i_ram = circular(pcs->pc + enc_byte + 1);
+	while (i < pcs->action.nb_arg)
 	{
-		size = size_argument(action->type[i],
-				g_op_tab[action->op_code - 1].direct_octet);
-		action->args[i] = size == 1 ? ram[i_ram] : ft_octet_to_int2(ram, size,
-				i_ram);
+		size = size_argument(pcs->action.type[i],
+				g_op_tab[pcs->action.op_code - 1].direct_octet);
+		pcs->action.args[i] = size == 1 ?
+						vm->ram[i_ram] : ft_octet_to_int2(vm->ram, size, i_ram);
 		i_ram = circular(i_ram + size);
-		action->size_read += size;
+		pcs->action.size_read += size;
 		i++;
 	}
+	pcs->pc = circular(pcs->pc + pcs->action.size_read);
 }
+
+/*
+**void		get_action(t_vm *vm, t_processus *pcs)
+**{
+**	if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
+**		return ;
+**	pcs->action.size_read++;
+**	args_action(vm->ram, pcs->pc, &pcs->action);
+**	pcs->pc = circular(pcs->pc + pcs->action.size_read);
+**}
+**
+**void		args_action(unsigned char *ram, int pc, t_action *action)
+**{
+**	int		i;
+**	int		i_ram;
+**	int		size;
+**	int		enc_byte;
+**
+**	if ((enc_byte = g_op_tab[action->op_code - 1].encoding_byte))
+**		action->size_read++;
+**	size = 0;
+**	trad_encoding_byte(action, enc_byte, ram[circular(pc + 1)]);
+**	i = 0;
+**	i_ram = circular(pc + enc_byte + 1);
+**	while (i < action->nb_arg)
+**	{
+**		size = size_argument(action->type[i],
+**				g_op_tab[action->op_code - 1].direct_octet);
+**		action->args[i] = size == 1 ? ram[i_ram] : ft_octet_to_int2(ram, size,
+**				i_ram);
+**		i_ram = circular(i_ram + size);
+**		action->size_read += size;
+**		i++;
+**	}
+**}
+*/
 
 void		trad_encoding_byte(t_action *action, int enc_byte, int value)
 {
@@ -129,7 +160,6 @@ int			instruction_check(t_processus *processus)
 	int			i;
 	t_action	action;
 	int			param;
-
 
 	action = processus->action;
 	if (g_op_tab[action.op_code - 1].param_number != action.nb_arg)

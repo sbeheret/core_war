@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/14 16:45:21 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 14:41:57 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,6 @@ typedef struct			s_processus
 typedef	struct			s_vm
 {
 	int					nb_champs;
-	int					flag_dump;
-	int					dump_cycle;
-	int					visu;
-	int					verbose;
 	unsigned int		last_alive;
 	unsigned int		sleep;
 	int					CTD;
@@ -97,6 +93,11 @@ typedef	struct			s_vm
 	unsigned char		*ram;
 	t_champion			*champion;
 	t_processus			*processus;
+	int					flag_dump;
+	int					dump_cycle;
+	int					visu;
+	int					verbose;
+	int					flag_live;
 }						t_vm;
 
 typedef	struct			s_op

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:33:51 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/15 10:50:08 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 14:20:03 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** -Create ram and initialize all element
 */
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_vm	vm;
 
@@ -53,9 +53,9 @@ void	introduce_contestant(t_champion *champion)
 	ft_printf("Introducing contestants...\n");
 	while (champion)
 	{
-		ft_printf("* Player %d, weighing %zd bytes, \"%s\" (\"%s\") !\n", i, champion->weight, champion->name, champion->comment);
+		ft_printf("* Player %d, weighing %zd bytes, \"%s\" (\"%s\") !\n"
+		, i, champion->weight, champion->name, champion->comment);
 		champion = champion->next;
 		i++;
 	}
-
 }

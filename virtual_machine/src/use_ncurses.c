@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 11:07:06 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/16 14:43:42 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/16 15:18:21 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	update_lives(unsigned int nb, t_vm *vm, t_champion *chmps)
 		mvprintw(10 + (i * 3), 213, "%d", vm->cycles_ttx);
 		refresh();
 	}
-	// else
-		// ft_printf("un processus dit que le joueur %d(%s) est en vie\n", nb,
-		// tmp->name);
+	else if (vm->flag_live == 0)
+		ft_printf("un processus dit que le joueur %d (%s) est en vie\n", nb,
+		tmp->name);
 }
 
 void	init_data_visu(t_vm *vm)

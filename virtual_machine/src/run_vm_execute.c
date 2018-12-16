@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 15:14:17 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 12:58:40 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 14:34:40 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,29 @@ void	execute_cycle(t_vm *vm)
 
 void	execute_instruction(t_vm *vm)
 {
-	int			op_code;
-	t_processus	*processus;
+	t_processus	*pcs;
 
-	processus = (*vm).processus;
-	if (vm->visu)
-		update_cycles(vm, 0);
-	while (processus)
+	pcs = (*vm).processus;
+	vm->visu ? update_cycles(vm, 0) : 1;
+	while (pcs)
 	{
-		op_code = processus->action.op_code;
-		if (vm->ram[circular(processus->action.pc)] >= 1
-		&& vm->ram[circular(processus->action.pc)] <= 16
-		&& vm->ram[circular(processus->action.pc)]!= processus->action.op_code)
+		if (vm->ram[circular(pcs->action.pc)] >= 1
+		&& vm->ram[circular(pcs->action.pc)] <= 16
+		&& vm->ram[circular(pcs->action.pc)] != pcs->action.op_code)
 		{
-			get_op_code(vm, processus);
-			if (vm->cycles_ttx != 0)
-				processus->cycles_wait--;
+			get_op_code(vm, pcs);
+			vm->cycles_ttx != 0 ? pcs->cycles_wait-- : 1;
 		}
-		else if (processus->cycles_wait == 0)
+		else if (pcs->cycles_wait == 0)
 		{
-			get_action(vm, processus);
-			if (op_code < 1 || op_code > 17)
-				processus->pc++;
-			else if (instruction_check(processus))
-				run_instruction(vm, processus, op_code);
-			initialize_action(processus);
+			get_action(vm, pcs);
+			if (pcs->action.op_code < 1 || pcs->action.op_code > 17)
+				pcs->pc++;
+			else if (instruction_check(pcs))
+				run_instruction(vm, pcs, pcs->action.op_code);
+			initialize_action(pcs);
 		}
-		processus = processus->next;
+		pcs = pcs->next;
 	}
 }
 
@@ -92,5 +88,5 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 		&ft_lfork,
 		&ft_aff};
 
-		instruction[op_code - 1](vm, processus);
-	}
+	instruction[op_code - 1](vm, processus);
+}

@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/12/13 17:09:06 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/12/16 15:16:32 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -50,13 +50,13 @@ SRC =		corewar.c			\
 			exit3.c				\
 			free.c				\
 			get_action.c		\
+			get_value.c			\
 			initialization.c 	\
 			print_ram_curses.c 	\
 			use_ncurses.c	 	\
 			use_ncurses2.c	 	\
 			input_ncurses.c 	\
 			tools.c				\
-			tools2.c			\
 			instruction.c		\
 			instruction2.c		\
 			instruction3.c		\

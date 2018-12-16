@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/14 11:03:27 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 14:42:24 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	initialize_vm(t_vm *vm)
 	(*vm).champion = NULL;
 	if (!((*vm).ram = (unsigned char *)ft_memalloc(MEM_SIZE)))
 		ft_exit_malloc();
+	(*vm).flag_live = 0;
 }
 
 void	initialize_processus(t_processus **processus, int nb_player

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/15 19:58:15 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 14:25:59 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_print_ldi(t_processus *processus, int arg1, int arg2, int arg3)
 	ft_printf("%d ", arg1);
 	ft_printf("%d ", arg2);
 	ft_printf("r%d\n", arg3);
-	ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", arg1
-	, arg2, arg1 + arg2, circular(processus->action.pc + ((arg1 + arg2) % IDX_MOD)));
+	ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", arg1,
+	arg2, arg1 + arg2,
+	circular(processus->action.pc + ((arg1 + arg2) % IDX_MOD)));
 }

@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools2.c                                           :+:      :+:    :+:   */
+/*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:52:03 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/15 12:26:31 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 14:38:49 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
 
 int		get_content_value(unsigned char *ram, t_processus *pcs, int type,
 		int address)
