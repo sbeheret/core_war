@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/12/16 17:38:40 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/12/16 17:50:36 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -38,7 +38,7 @@ OPFLAGS =		-Wno-missing-field-initializers
 
 #/********************** BINARY *********************/
 NAME_PATH = ../
-NAME = 		coreware
+NAME = 		corewar
 
 #/********************** SOURCE *********************/
 SRC =		corewar.c			\
