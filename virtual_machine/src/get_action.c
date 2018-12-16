@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/14 17:10:36 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 00:05:35 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void		get_op_code(t_vm *vm, t_processus *pcs)
 
 void		get_action(t_vm *vm, t_processus *pcs)
 {
-	if (pcs->action.op_code == 0)
+	if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
 		return;
 	pcs->action.size_read++;
 	args_action(vm->ram, pcs->pc, &pcs->action);
-	pcs->pc = pcs->pc + pcs->action.size_read;
+	pcs->pc = circular(pcs->pc + pcs->action.size_read);
 }
 
 static int	size_argument(int type, int direct_octet)
@@ -92,7 +92,7 @@ void		args_action(unsigned char *ram, int pc, t_action *action)
 				g_op_tab[action->op_code - 1].direct_octet);
 		action->args[i] = size == 1 ? ram[i_ram] : ft_octet_to_int2(ram, size,
 				i_ram);
-		i_ram += size;
+		i_ram = circular(i_ram + size);
 		action->size_read += size;
 		i++;
 	}

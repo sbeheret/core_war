@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 14:52:03 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/14 15:02:57 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/15 12:26:31 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 int		get_content_value(unsigned char *ram, t_processus *pcs, int type,
 		int address)
 {
-	int		value;
-
-	value = 0;
 	if (type == 1)
 		return (pcs->reg[address]);
 	else if (type == 3)
@@ -33,9 +30,6 @@ int		get_content_value(unsigned char *ram, t_processus *pcs, int type,
 int		get_long_content_value(unsigned char *ram, t_processus *pcs, int type,
 		int address)
 {
-	int		value;
-
-	value = 0;
 	if (type == 1)
 		return (pcs->reg[address]);
 	else if (type == 3)

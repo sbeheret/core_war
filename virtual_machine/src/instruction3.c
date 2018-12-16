@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/14 17:01:52 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 10:36:45 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ void	ft_sti(t_vm *vm, t_processus *pcs)
 void	ft_fork(t_vm *vm, t_processus *processus)
 {
 	t_processus	*copy;
-	t_processus	*tmp;
 	int			i;
 
-	tmp = NULL;
 	copy = new_processus(0, (circular(processus->action.pc +
 	((short)processus->action.args[ARG1] % IDX_MOD))), processus->color);
 	i = 0;
@@ -109,10 +107,8 @@ void	ft_lldi(t_vm *vm, t_processus *pcs)
 void	ft_lfork(t_vm *vm, t_processus *processus)
 {
 	t_processus	*copy;
-	t_processus	*tmp;
 	int			i;
 
-	tmp = NULL;
 	copy = new_processus(0, (circular(processus->action.pc +
 	((short)processus->action.args[ARG1]))), processus->color);
 	i = 0;
@@ -125,5 +121,5 @@ void	ft_lfork(t_vm *vm, t_processus *processus)
 	push_front_pcs(&(*vm).processus, copy);
 	processus->pc = circular(processus->action.pc + 3);
 	if ((*vm).verbose)
-		ft_print_fork(processus, (short)processus->action.args[ARG1]);
+		ft_print_lfork(processus, (short)processus->action.args[ARG1]);
 }
