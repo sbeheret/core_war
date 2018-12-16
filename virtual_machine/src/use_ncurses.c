@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 11:07:06 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/16 15:18:21 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/16 15:32:46 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	update_pc_visu(unsigned char *ram, t_processus *pcs)
 
 	i = circular(pcs->last_pc);
 	b = mvinch(i / 64 + 1, 8 + 3 * (i % 64)) & A_COLOR;
-	if (i == pcs->action.pc && b != COLOR_PAIR(pcs->color + 5))
+	if (i == pcs->action.pc && b == COLOR_PAIR(pcs->color + 5))
 		return ;
 	if (b == COLOR_PAIR(pcs->color + 5))
 	{
