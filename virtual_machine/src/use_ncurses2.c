@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:14:45 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/15 10:52:11 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 10:14:26 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	remove_dead_pcs(unsigned char *ram, t_processus *pcs)
 
 	i = circular(pcs->action.pc);
 	b = mvinch(i / 64 + 1, 8 + 3 * (i % 64)) & A_COLOR;
-	if ((unsigned int)b == COLOR_PAIR(pcs->color + 5))
+	if (b == COLOR_PAIR(pcs->color + 5))
 	{
 		if (ram[i] != 0)
 			attron(COLOR_PAIR(pcs->color));

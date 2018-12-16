@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 00:32:20 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 10:36:45 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,4 @@ void	ft_lfork(t_vm *vm, t_processus *processus)
 	processus->pc = circular(processus->action.pc + 3);
 	if ((*vm).verbose)
 		ft_print_lfork(processus, (short)processus->action.args[ARG1]);
-	print_processus(vm->processus);
 }
