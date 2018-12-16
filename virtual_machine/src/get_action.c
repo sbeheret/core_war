@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/16 14:24:11 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 15:20:26 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void		get_op_code(t_vm *vm, t_processus *pcs)
 	initialize_action(pcs);
 	pcs->action.pc = pcs->pc;
 	pcs->action.op_code = vm->ram[circular(pcs->pc)];
+	if (vm->visu)
+		update_pc_visu(vm->ram, pcs);
 	if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
 	{
 		pcs->cycles_wait = 1;

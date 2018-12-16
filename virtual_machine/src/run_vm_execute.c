@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 15:14:17 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 14:34:40 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 15:19:58 by sbeheret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	get_instruction(t_vm *vm)
 	{
 		if (processus->cycles_wait == 0)
 			get_op_code(vm, processus);
-		if (vm->visu)
-			update_pc_visu(vm->ram, processus);
 		processus->cycles_wait--;
 		processus = processus->next;
 	}
