@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 15:28:37 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 16:44:56 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 	argv += 1;
 	while (*argv)
 	{
-		if (*argv[0] == '-')
+		if (*argv[0] == '-' && ft_strcmp(*argv, "-n"))
 			ft_option(&argv, vm);
 		else
 		{
@@ -40,6 +40,7 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 				ft_exit_toomanychamp();
 		}
 	}
+	check_multi_flag(vm);
 }
 
 void			ft_option(char ***argv, t_vm *vm)
@@ -58,6 +59,8 @@ void			ft_option(char ***argv, t_vm *vm)
 		(*vm).verbose = 1;
 	else if (!(ft_strcmp(**argv, "-hex")))
 		(*vm).flag_hex = 1;
+	else
+		ft_exit_usage();
 	*argv += 1;
 }
 

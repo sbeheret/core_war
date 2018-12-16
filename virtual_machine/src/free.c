@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 16:32:56 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/27 17:44:32 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 15:40:30 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,11 @@
 void	ft_free_vm(t_vm *vm)
 {
 	if ((*vm).ram)
-	{
-		ft_printf("free ram\n");
 		ft_memdel((void**)&(*vm).ram);
-	}
 	if ((*vm).champion)
-	{
-		ft_printf("free champion\n");
 		ft_free_champion(&(*vm).champion);
-	}
 	if ((*vm).processus)
-	{
-		ft_printf("free processus\n");
 		ft_free_processus(&(*vm).processus);
-	}
-	ft_printf("exit free\n");
 }
 
 void	ft_free_champion(t_champion **champion)

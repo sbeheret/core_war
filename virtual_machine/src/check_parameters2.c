@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:47:24 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 13:50:33 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 16:44:33 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,16 @@ void	create_process(t_champion **champions, t_processus **pcs)
 		push_front_pcs(pcs, new);
 		champ = champ->next;
 		i++;
+	}
+}
+
+void	check_multi_flag(t_vm *vm)
+{
+	if (vm->visu == 1)
+	{
+		vm->verbose = 0;
+		vm->flag_hex = 0;
+		vm->flag_dump = 0;
+		vm->flag_live = 1;
 	}
 }

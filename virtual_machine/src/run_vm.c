@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/15 19:47:06 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 16:09:18 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,5 @@ void	declare_winner(t_vm *vm)
 	else if (name == NULL)
 		ft_printf("Only loosers... Do better next time.\n");
 	else
-		ft_printf("le joueur %#X(%s)a gagne\n", (*vm).last_alive, name);
+		ft_printf("le joueur %d (%s)a gagne\n", champion->display_name, name);
 }

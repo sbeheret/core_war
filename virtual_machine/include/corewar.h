@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 15:38:47 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 16:45:31 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 typedef	struct			s_champion
 {
 	char				*name;
+	int					display_name;
 	char				*comment;
 	char				*file;
 	unsigned int		p_number;
@@ -149,6 +150,7 @@ void				check_binary(t_champion *champion);
 void				check_padding(unsigned char **binary, char *file);
 int					check_number(unsigned int	number, t_champion *champion);
 void				ft_option(char ***argv, t_vm *vm);
+void				check_multi_flag(t_vm *vm);
 
 /*
 ** --------- INITIALIZATION

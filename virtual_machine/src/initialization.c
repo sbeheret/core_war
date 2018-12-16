@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 15:28:32 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 16:05:53 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ void	initialize_action(t_processus *processus)
 
 void	initialize_champion(t_champion **champion)
 {
+	static int	display = 1;
+
+	(*champion)->display_name = display;
+	display++;
 	(*champion)->name = NULL;
 	(*champion)->comment = NULL;
 	(*champion)->file = NULL;

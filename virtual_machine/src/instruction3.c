@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 14:21:47 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 16:02:42 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 	t_processus	*copy;
 	int			i;
 
-	copy = new_processus(0, (circular(processus->action.pc +
-	((short)processus->action.args[ARG1] % IDX_MOD))), processus->color);
+	if (!(copy = new_processus(0, (circular(processus->action.pc +
+	((short)processus->action.args[ARG1] % IDX_MOD))), processus->color)))
+		ft_exit_malloc();
 	i = 0;
 	while (++i <= 16)
 		copy->reg[i] = processus->reg[i];
@@ -107,8 +108,9 @@ void	ft_lfork(t_vm *vm, t_processus *processus)
 	t_processus	*copy;
 	int			i;
 
-	copy = new_processus(0, (circular(processus->action.pc +
-	((short)processus->action.args[ARG1]))), processus->color);
+	if (!(copy = new_processus(0, (circular(processus->action.pc +
+	((short)processus->action.args[ARG1]))), processus->color)))
+		ft_exit_malloc();
 	i = 0;
 	while (++i <= 16)
 		copy->reg[i] = processus->reg[i];
