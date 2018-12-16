@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/15 23:47:02 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 18:16:47 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ char	*ft_octet_to_char(unsigned char **binary, size_t lenght_max)
 		str[i] = **binary;
 		i++;
 		*binary = *binary + 1;
+	}
+	if (str[0] == 0)
+	{
+		if (lenght_max == PROG_NAME_LENGTH)
+			ft_strcpy(str, "No name");
+		if (lenght_max == COMMENT_LENGTH)
+			ft_strcpy(str, "No comment");
 	}
 	return (str);
 }

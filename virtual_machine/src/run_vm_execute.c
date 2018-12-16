@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 15:14:17 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 15:19:58 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/16 18:50:48 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	execute_instruction(t_vm *vm)
 		else if (pcs->cycles_wait == 0)
 		{
 			get_action(vm, pcs);
-			if (pcs->action.op_code < 1 || pcs->action.op_code > 17)
+			if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
 				pcs->pc++;
 			else if (instruction_check(pcs))
 				run_instruction(vm, pcs, pcs->action.op_code);

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:47:24 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 16:44:33 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 18:47:58 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	check_binary(t_champion *champion)
 		ft_exit_header(champion->file);
 	if (champion->weight > CHAMP_MAX_SIZE)
 		ft_exit_toobig(champion->file);
+	if (champion->weight == 0)
+		ft_exit_nochamp(champion->file);
 	binary = NULL;
 }
 

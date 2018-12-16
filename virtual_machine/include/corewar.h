@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 17:10:03 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/16 18:22:55 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ void					ft_exit_parameter(char *argument, char *file);
 void					ft_exit_playernumber(char *file);
 void					ft_exit_dump(t_vm *vm);
 void					ft_exit_visu(t_vm *vm);
+void					ft_exit_nochamp(char *file);
 
 /*
 ** --------- FREE
