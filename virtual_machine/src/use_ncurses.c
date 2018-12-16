@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 11:07:06 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/16 16:07:03 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 17:32:06 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	update_cycles(t_vm *vm, int a)
 		mvprintw(5, 215, "      ");
 		mvprintw(3, 212, "0     ");
 		refresh();
-		mvprintw(5, 215, "%d", vm->CTD);
+		mvprintw(5, 215, "%d", vm->ctd);
 	}
 	mvprintw(22, 200, "                             ");
 	mvprintw(22, 200, "%d Cycles / secondes", 1000000 / vm->sleep);

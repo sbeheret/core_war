@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 16:09:18 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 17:27:28 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	run_vm(t_vm *vm)
 	while ((*vm).processus)
 	{
 		execute_cycle(vm);
-		if (vm->cycles_now >= vm->CTD)
+		if (vm->cycles_now >= vm->ctd)
 		{
 			total_live = kill_processus(vm);
 			update_cycles(vm, 1);
 			if (total_live >= NBR_LIVE || nb_decrement >= MAX_CHECKS)
 			{
-				(*vm).CTD -= CYCLE_DELTA;
+				(*vm).ctd -= CYCLE_DELTA;
 				if ((*vm).verbose == 1)
-					ft_printf("Cycle to die is now %d\n", (*vm).CTD);
+					ft_printf("Cycle to die is now %d\n", (*vm).ctd);
 				nb_decrement = 0;
 			}
 			nb_decrement++;
