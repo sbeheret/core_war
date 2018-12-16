@@ -6,11 +6,17 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 17:21:32 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 17:21:49 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 15:52:42 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+void	ft_exit_visu(t_vm *vm)
+{
+	ft_free_vm(vm);
+	exit(0);
+}
 
 void	ft_exit_dump(t_vm *vm)
 {
