@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 10:36:45 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 14:21:47 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_sti(t_vm *vm, t_processus *pcs)
 	int			value1;
 	int			value2;
 
-	// print_processus(pcs);
 	action = pcs->action;
 	value1 = get_content_value(vm->ram, pcs, pcs->action.type[1],
 			pcs->action.args[1]);
@@ -49,7 +48,6 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 		copy->reg[i] = processus->reg[i];
 	copy->carry = processus->carry;
 	copy->lives = processus->lives;
-	// get_action(vm, copy);
 	get_op_code(vm, copy);
 	push_front_pcs(&(*vm).processus, copy);
 	processus->pc = circular(processus->action.pc + 3);
@@ -116,7 +114,6 @@ void	ft_lfork(t_vm *vm, t_processus *processus)
 		copy->reg[i] = processus->reg[i];
 	copy->carry = processus->carry;
 	copy->lives = processus->lives;
-	// get_action(vm, copy);
 	get_op_code(vm, copy);
 	push_front_pcs(&(*vm).processus, copy);
 	processus->pc = circular(processus->action.pc + 3);

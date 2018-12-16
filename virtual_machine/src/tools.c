@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 16:11:37 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 14:48:41 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@ void	print_ram(unsigned char *ram)
 	}
 	ft_printf("\n");
 }
-//
-// void	print_optab(void)
-// {
-// 	int i = 0;
-// 	while (i<17)
-// 	{
-// 		ft_printf("tab[%d]= {\"%s\", %d, {%d,%d,%d}, %d, %d, %s, %d, %d}\n",i, op_tab[i].name,op_tab[i].param_number, op_tab[i].param_type[0], op_tab[i].param_type[1], op_tab[i].param_type[2], op_tab[i].op_code, op_tab[i].cycle, op_tab[i].comment, op_tab[i].encoding_byte, op_tab[i].direct_octect);
-// 		i++;
-// 	}
-// }
 
 void	print_memory(unsigned char *str, size_t size)
 {
@@ -49,7 +39,6 @@ void	print_memory(unsigned char *str, size_t size)
 	size_t i;
 
 	start = 0;
-	ft_printf("\n================ FT_PRINT_MEMORY =============\n");
 	while (start < size)
 	{
 		ft_printf("%.10x :", start);
@@ -80,35 +69,6 @@ void	print_memory(unsigned char *str, size_t size)
 		ft_putchar('\n');
 		start += 16;
 	}
-	ft_printf("\n============= END FT_PRINT_MEMORY =============\n");
-}
-
-void	print_struct_vm(t_vm vm)
-{
-	// t_champion *tmp;
-	// tmp = vm.champion;
-	ft_printf("\n=============== STRUCT VM ===============\n");
-	ft_printf("flag_dump = %d\n", vm.flag_dump);
-	ft_printf("dump_cycle = %d\n", vm.dump_cycle);
-	ft_printf("last_alive = %#.6X\n", vm.last_alive);
-	ft_printf("cycle to die CTD = %d\n", vm.CTD);
-	ft_printf("cycle ttx = %d\n", vm.cycles_ttx);
-	ft_printf("cycle now = %d\n", vm.cycles_now);
-	// ft_printf("----------CHAMPION LIST-----------\n");
-	// while (tmp)
-	// {
-	// 	ft_printf("-----------\n");
-	// 	ft_printf("name = %s\n",tmp->name);
-	// 	ft_printf("comment = %s\n",tmp->comment);
-	// 	ft_printf("file = %s\n",tmp->file);
-	// 	ft_printf("p_number = %#X\n",tmp->p_number);
-	// 	ft_printf("weight = %d\n",tmp->weight);
-	// 	ft_printf("-----------\n");
-	// 	tmp = tmp->next;
-	// }
-	// ft_printf("------END CHAMPION LIST-----------\n");
-	// print_processus(vm.processus);
-	ft_printf("============= END STRUC VM  =============\n");
 }
 
 void	print_action(t_action act)
