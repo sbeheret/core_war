@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 15:14:17 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 10:21:12 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 12:58:40 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,13 @@ void	execute_instruction(t_vm *vm)
 	while (processus)
 	{
 		op_code = processus->action.op_code;
-		// ft_printf("P%d| ram = %d | op_code = %d\n",processus->processus_number, vm->ram[processus->action.pc], processus->action.op_code);
 		if (vm->ram[circular(processus->action.pc)] >= 1
 		&& vm->ram[circular(processus->action.pc)] <= 16
 		&& vm->ram[circular(processus->action.pc)]!= processus->action.op_code)
 		{
 			get_op_code(vm, processus);
-			// ft_printf("P%d| AFTER | op_code = %d\n",processus->processus_number, processus->action.op_code);
 			if (vm->cycles_ttx != 0)
 				processus->cycles_wait--;
-			// print_processus(processus);
-			// return ;
 		}
 		else if (processus->cycles_wait == 0)
 		{
@@ -65,7 +61,6 @@ void	get_instruction(t_vm *vm)
 	t_processus	*processus;
 
 	processus = (*vm).processus;
-	// print_processus(processus);
 	while (processus)
 	{
 		if (processus->cycles_wait == 0)
