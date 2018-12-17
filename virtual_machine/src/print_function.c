@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:06:58 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 15:36:06 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 14:11:33 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,42 +59,58 @@ void	print_action(t_action act)
 	int			i;
 
 	i = -1;
-	ft_printf("----------ACTION-----------\n");
-	ft_printf("op_code = %d\n", act.op_code);
-	ft_printf("PC = %d\n", act.pc);
-	ft_printf("nb_args = %d\n", act.nb_arg);
+	ft_printf("| ----------ACTION-----------\n");
+	ft_printf("| | op_code = %d\n", act.op_code);
+	ft_printf("| | nb_args = %d\n", act.nb_arg);
 	while (++i < act.nb_arg)
-		ft_printf("argument %d = %d\n", i, act.args[i]);
-	ft_printf("4 types %d / %d / %d / %d\n", act.type[0], act.type[1],
+		ft_printf("| | argument %d = %d\n", i, act.args[i]);
+	ft_printf("| | 4 types %d / %d / %d / %d\n", act.type[0], act.type[1],
 			act.type[2], act.type[3]);
-	ft_printf("size read = %d\n", act.size_read);
+	ft_printf("| | size read = %d\n", act.size_read);
+	ft_printf("| --------------------------\n");
 	return ;
 }
 
 void	print_processus(t_processus *pcs)
 {
 	t_processus		*tmp;
-	int				breaker;
 
-	breaker = 1;
 	tmp = pcs;
-	while ((tmp != pcs || breaker) && tmp)
+	while (tmp)
 	{
-		breaker = 0;
-		ft_printf("---------Processus-----------\n");
-		ft_printf("Number = %d\n", tmp->processus_number);
-		ft_printf("PC = %d\n", tmp->pc);
-		ft_printf("Carry = %d\n", tmp->carry);
-		ft_printf("Registres 1 to 8: %#d-%d-%d-%d-%d-%d-%d-%d\n",
-				tmp->reg[1], tmp->reg[2], tmp->reg[3], tmp->reg[4],
+		ft_printf("\n========================================");
+		ft_printf(" Processus % 4d ", tmp->processus_number);
+		ft_printf("========================================\n");
+		ft_printf("| PC = %d\n", tmp->pc);
+		ft_printf("| Carry = %d\n", tmp->carry);
+		ft_printf("| Registres  1 to  4: |%# 11d|-|% 11d|-|% 11d|-|% 11d|\n",
+				tmp->reg[1], tmp->reg[2], tmp->reg[3], tmp->reg[4]);
+		ft_printf("| Registres  5 to  8: |%# 11d|-|% 11d|-|% 11d|-|% 11d|\n",
 				tmp->reg[5], tmp->reg[6], tmp->reg[7], tmp->reg[8]);
-		ft_printf("Registres 9 to 16: %#d-%d-%d-%d-%d-%d-%d-%d\n", tmp->reg[9],
-				tmp->reg[10], tmp->reg[11], tmp->reg[12], tmp->reg[13],
-				tmp->reg[14], tmp->reg[15], tmp->reg[16]);
-		ft_printf("Cycles to wait = %d\n", tmp->cycles_wait);
-		ft_printf("Lives = %d\n", tmp->lives);
+		ft_printf("| Registres  9 to 12: |%# 11d|-|% 11d|-|% 11d|-|% 11d|\n",
+				tmp->reg[9], tmp->reg[10], tmp->reg[11], tmp->reg[12]);
+		ft_printf("| Registres 13 to 16: |%# 11d|-|% 11d|-|% 11d|-|% 11d|\n",
+				tmp->reg[13], tmp->reg[14], tmp->reg[15], tmp->reg[16]);
+		ft_printf("| Cycles to wait = %d\n", tmp->cycles_wait);
+		ft_printf("| Lives = %d\n", tmp->lives);
 		print_action(tmp->action);
+		ft_printf("================================================");
+		ft_printf("================================================\n");
 		tmp = tmp->next;
-		ft_printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
 	}
+}
+
+void	print_mouvement(t_vm *vm, t_processus *processus)
+{
+	int i;
+
+	i = 0;
+	ft_printf("ADV %d (0x%04x -> 0x%04x)",
+	processus->action.size_read, processus->action.pc, processus->pc);
+	while (i < processus->action.size_read)
+	{
+		ft_printf(" %02x", vm->ram[circular(processus->action.pc + i)]);
+		i++;
+	}
+	ft_printf(" \n");
 }

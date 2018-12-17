@@ -3,109 +3,285 @@ RED='\033[0;4;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m'
+YELLOW='\033[0;4;33m'
+
+function cmpcor() {
+	if diff -q "$1" "$2"
+	then
+		printf "${GREEN}Your "$1" equal to ZAZ "$2"${NC}\n"
+	else
+		printf "${RED}Your "$1" is not equal to ZAZ "$2" or inaccessible${NC}\n"
+	fi
+}
 
 for i in {1..3}
 do
 	echo $i
-	./asm zork.s
+	../asm zork.s
 	sleep .1
-	rm -f zork.corprintf "${RED}21.s${NC}\n"
+	rm -f zork.corprintf "${YELLOW}21.s${NC}\n"
 done
 printf "\n${GREEN}*****************************************************************************************${NC}\n"
-printf "${RED}21.s${NC}\n"
+<<<<<<< HEAD
+printf "${YELLOW}21.s${NC}\n"
 ./asm ./tests/21.s
-printf "${RED}42.s${NC}\n"
+cmpcor "./tests/21.s" "./tests/21.s"
+printf "${YELLOW}42.s${NC}\n"
 ./asm ./tests/42.s
-printf "${RED}one.s${NC}\n"
+printf "${YELLOW}one.s${NC}\n"
 ./asm ./tests/one.s
-printf "${RED}tirb.s${NC}\n"
+printf "${YELLOW}tirb.s${NC}\n"
 ./asm ./tests/tirb.s
-printf "${RED}zork.s${NC}\n"
+printf "${YELLOW}zork.s${NC}\n"
 ./asm ./tests/zork.s
-printf "${RED}Explosive_Kitty.s${NC}\n"
+printf "${YELLOW}Explosive_Kitty.s${NC}\n"
 ./asm ./tests/Explosive_Kitty.s
-printf "${RED}Backwards.s${NC}\n"
+printf "${YELLOW}Backwards.s${NC}\n"
 ./asm ./tests/Backward.s
-printf "${RED}Car.s${NC}\n"
+printf "${YELLOW}Car.s${NC}\n"
 ./asm ./tests/Car.s
-printf "${RED}Death.s${NC}\n"
+printf "${YELLOW}Death.s${NC}\n"
 ./asm ./tests/Death.s
-printf "${RED}Gagnant.s${NC}\n"
+printf "${YELLOW}Gagnant.s${NC}\n"
 ./asm ./tests/Gagnant.s
-printf "${RED}Octobre_Rouge_v4.2.s${NC}\n"
+printf "${YELLOW}Octobre_Rouge_v4.2.s${NC}\n"
 ./asm ./tests/Octobre_Rouge_V4.2.s
-printf "${RED}Survivor.s${NC}\n"
+printf "${YELLOW}Survivor.s${NC}\n"
 ./asm ./tests/Survivor.s
-printf "${RED}Torpille.s${NC}\n"
+printf "${YELLOW}Torpille.s${NC}\n"
 ./asm ./tests/Torpille.s
-printf "${RED}barriere.s${NC}\n"
+printf "${YELLOW}barriere.s${NC}\n"
 ./asm ./tests/barriere.s
-printf "${RED}ex.s${NC}\n"
+printf "${YELLOW}ex.s${NC}\n"
 ./asm ./tests/ex.s
-printf "${RED}jumper.s${NC}\n"
+printf "${YELLOW}jumper.s${NC}\n"
 ./asm ./tests/jumper.s
-printf "${RED}lde.s${NC}\n"
+printf "${YELLOW}lde.s${NC}\n"
 ./asm ./tests/lde.s
-printf "${RED}leeloo.s${NC}\n"
+printf "${YELLOW}leeloo.s${NC}\n"
 ./asm ./tests/leeloo.s
-printf "${RED}mat.s${NC}\n"
+printf "${YELLOW}mat.s${NC}\n"
 ./asm ./tests/mat.s
-printf "${RED}maxidef.s${NC}\n"
+printf "${YELLOW}maxidef.s${NC}\n"
 ./asm ./tests//maxidef.s
-printf "${RED}mortel.s${NC}\n"
+printf "${YELLOW}mortel.s${NC}\n"
 ./asm ./tests/mortel.s
-printf "${RED}new.s${NC}\n"
+printf "${YELLOW}new.s${NC}\n"
 ./asm ./tests/new.s
-printf "${RED}sebc.s${NC}\n"
+printf "${YELLOW}sebc.s${NC}\n"
 ./asm ./tests/sebc.s
-printf "${RED}slider2.s${NC}\n"
+printf "${YELLOW}slider2.s${NC}\n"
 ./asm ./tests/slider2.s
-printf "${RED}tdc2.s${NC}\n"
+printf "${YELLOW}tdc2.s${NC}\n"
 ./asm ./tests/tdc2.s
-printf "${RED}tdc3.s${NC}\n"
+printf "${YELLOW}tdc3.s${NC}\n"
 ./asm ./tests/tdc3.s
-printf "${RED}tdc4.s${NC}\n"
+printf "${YELLOW}tdc4.s${NC}\n"
 ./asm ./tests/tdc4.s
-printf "${RED}toto.s${NC}\n"
+printf "${YELLOW}toto.s${NC}\n"
 ./asm ./tests/toto.s
-printf "${RED}bee_gees.s${NC}\n"
+printf "${YELLOW}bee_gees.s${NC}\n"
 ./asm ./tests/bee_gees.s
-printf "${RED}bigzork.s${NC}\n"
+printf "${YELLOW}bigzork.s${NC}\n"
 ./asm ./tests/bigzork.s
-printf "${RED}fluttershy.s${NC}\n"
+printf "${YELLOW}fluttershy.s${NC}\n"
 ./asm ./tests/fluttershy.s
-printf "${RED}helltrain.s${NC}\n"
+printf "${YELLOW}helltrain.s${NC}\n"
 ./asm ./tests/helltrain.s
-printf "${RED}turtle.s${NC}\n"
+printf "${YELLOW}turtle.s${NC}\n"
 ./asm ./tests/turtle.s
 printf "\n${GREEN}*****************************************************************************************${NC}\n"
 printf "${CYAN}                                   Championships 2014${NC}\n"
 printf "${GREEN}*****************************************************************************************${NC}\n"
-printf "${RED}sam_2.0.s${NC}\n"
+printf "${YELLOW}sam_2.0.s${NC}\n"
 ./asm ./tests/2014/sam_2.0.s
-printf "${RED}doge.s${NC}\n"
+cmpcor "./tests/2014/sam_2.0.cor" "./tests/2014/zaz/zaz_sam_2.0.cor"
+printf "${YELLOW}doge.s${NC}\n"
 ./asm ./tests/2014/doge.s
-printf "${RED}Rainbow_dash.s${NC}\n"
+cmpcor "./tests/2014/doge.cor" "./tests/2014/zaz/zaz_doge.cor"
+printf "${YELLOW}Rainbow_dash.s${NC}\n"
 ./asm ./tests/2014/Rainbow_dash.s
-printf "${RED}youforkmytralala.s${NC}\n"
+cmpcor "./tests/2014/Rainbow_dash.cor" "./tests/2014/zaz/zaz_Rainbow_dash.cor"
+printf "${YELLOW}youforkmytralala.s${NC}\n"
 ./asm ./tests/2014/youforkmytralala.s
-printf "${RED}big_feet.s${NC}\n"
+cmpcor "./tests/2014/youforkmytralala.cor" "./tests/2014/zaz/zaz_youforkmytralala.cor"
+printf "${YELLOW}big_feet.s${NC}\n"
 ./asm ./tests/2014/big_feet.s
-printf "${RED}loose.s${NC}\n"
+cmpcor "./tests/2014/big_feet.cor" "./tests/2014/zaz/zaz_big_feet.cor"
+printf "${YELLOW}loose.s${NC}\n"
 ./asm ./tests/2014/loose.s
-printf "${RED}mandrogore.s${NC}\n"
+cmpcor "./tests/2014/loose.cor" "./tests/2014/zaz/zaz_loose.cor"
+printf "${YELLOW}mandrogore.s${NC}\n"
 ./asm ./tests/2014/mandragore.s
-printf "${RED}gedeon.s${NC}\n"
+cmpcor "./tests/2014/mandragore.cor" "./tests/2014/zaz/zaz_mandragore.cor"
+printf "${YELLOW}gedeon.s${NC}\n"
 ./asm ./tests/2014/gedeon.s
-printf "${RED}terminator.s${NC}\n"
+cmpcor "./tests/2014/gedeon.cor" "./tests/2014/zaz/zaz_gedeon.cor"
+printf "${YELLOW}terminator.s${NC}\n"
 ./asm ./tests/2014/terminator.s
-printf "${RED}ultimate-surrender.s${NC}\n"
+cmpcor "./tests/2014/terminator.cor" "./tests/2014/zaz/zaz_terminator.cor"
+printf "${YELLOW}ultimate-surrender.s${NC}\n"
 ./asm ./tests/2014/ultimate-surrender.s
-printf "${RED}_.s${NC}\n"
+cmpcor "./tests/2014/ultimate-surrender.cor" "./tests/2014/zaz/zaz_ultimate-surrender.cor"
+printf "${YELLOW}_.s${NC}\n"
 ./asm ./tests/2014/_.s
-printf "${RED}salamahenagalabadoun.s${NC}\n"
+cmpcor "./tests/2014/_.cor" "./tests/2014/zaz/zaz_.cor"
+printf "${YELLOW}salamahenagalabadoun.s${NC}\n"
 ./asm ./tests/2014/salamahenagalabadoun.s
-printf "${RED}Machine-gun.s${NC}\n"
+cmpcor "./tests/2014/salamahenagalabadoun.cor" "./tests/2014/zaz/zaz_salamahenagalabadoun.cor"
+printf "${YELLOW}Machine-gun.s${NC}\n"
 ./asm ./tests/2014/Machine-gun.s
-printf "${RED}corelol.s${NC}\n"
+cmpcor "./tests/2014/Machine-gun.cor" "./tests/2014/zaz/zaz_Machine-gun.cor"
+printf "${YELLOW}corelol.s${NC}\n"
 ./asm ./tests//2014/corelol.s
+cmpcor "./tests/2014/corelol.cor" "./tests/2014/zaz/zaz_corelol.cor"
+printf "${YELLOW}Asombra.s${NC}\n"
+./asm ./tests//2014/Asombra.s
+cmpcor "./tests/2014/Asombra.cor" "./tests/2014/zaz/zaz_Asombra.cor"
+printf "${YELLOW}Kappa.s${NC}\n"
+./asm ./tests//2014/Kappa.s
+cmpcor "./tests/2014/Kappa.cor" "./tests/2014/zaz/zaz_Kappa.cor"
+printf "${YELLOW}MarineKing.s${NC}\n"
+./asm ./tests//2014/MarineKing.s
+cmpcor "./tests/2014/Marineking.cor" "./tests/2014/zaz/zaz_Marineking.cor"
+printf "${YELLOW}Misaka_Mikoto.s${NC}\n"
+./asm ./tests//2014/Misaka_Mikoto.s
+cmpcor "./tests/2014/Misaka_Mikoto" "./tests/2014/zaz/zaz_Misaka_Mikoto.cor"
+printf "${YELLOW}THUNDER.s${NC}\n"
+./asm ./tests//2014/THUNDER.s
+cmpcor "./tests/2014/THUNDER.cor" "./tests/2014/zaz/zaz_THUNDER.cor"
+printf "${YELLOW}Varimathras.s${NC}\n"
+./asm ./tests//2014/Varimathras.s
+cmpcor "./tests/2014/Varimathras.cor" "./tests/2014/zaz/zaz_Varimathras.cor"
+printf "${YELLOW}_honeybadger.s${NC}\n"
+./asm ./tests//2014/_honeybadger.s
+cmpcor "./tests/2014/_honeybadger.cor" "./tests/2014/zaz/zaz_honeybadger.cor"
+printf "${YELLOW}casimir.s${NC}\n"
+./asm ./tests//2014/casimir.s
+cmpcor "./tests/2014/casimir.cor" "./tests/2014/zaz/zaz_casimir.cor"
+printf "${YELLOW}champ.s${NC}\n"
+./asm ./tests//2014/champ.s
+cmpcor "./tests/2014/champ.cor" "./tests/2014/zaz/zaz_champ.cor"
+printf "${YELLOW}darksasuke.s${NC}\n"
+./asm ./tests//2014/darksasuke.s
+cmpcor "./tests/2014/darksasuke.cor" "./tests/2014/zaz/zaz_darksasuke.cor"
+printf "${YELLOW}dubo.s${NC}\n"
+./asm ./tests//2014/dubo.s
+cmpcor "./tests/2014/dubo.cor" "./tests/2014/zaz/zaz_dubo.cor"
+printf "${YELLOW}jinx.s${NC}\n"
+./asm ./tests//2014/jinx.s
+cmpcor "./tests/2014/jinx.cor" "./tests/2014/zaz/zaz_jinx.cor"
+printf "${YELLOW}justin_bee.s${NC}\n"
+./asm ./tests//2014/justin_bee.s
+cmpcor "./tests/2014/justin_bee.cor" "./tests/2014/zaz/zaz_justin_bee.cor"
+printf "${YELLOW}littlepuppy.s${NC}\n"
+./asm ./tests//2014/littlepuppy.s
+cmpcor "./tests/2014/littlepuppy.cor" "./tests/2014/zaz/zaz_littlepuppy.cor"
+printf "${YELLOW}live.s${NC}\n"
+./asm ./tests//2014/live.s
+cmpcor "./tests/2014/live.cor" "./tests/2014/zaz/zaz_live.cor"
+printf "${YELLOW}meowluigi.s${NC}\n"
+./asm ./tests//2014/meowluigi.s
+cmpcor "./tests/2014/meowluigi.cor" "./tests/2014/zaz/zaz_meowluigi.cor"
+printf "${YELLOW}skynet.s${NC}\n"
+./asm ./tests//2014/skynet.s
+cmpcor "./tests/2014/skynet.cor" "./tests/2014/zaz/zaz_skynet.cor"
+=======
+printf "${RED}21.s${NC}\n"
+../asm ./tests/21.s
+printf "${RED}42.s${NC}\n"
+../asm ./tests/42.s
+printf "${RED}one.s${NC}\n"
+../asm ./tests/one.s
+printf "${RED}tirb.s${NC}\n"
+../asm ./tests/tirb.s
+printf "${RED}zork.s${NC}\n"
+../asm ./tests/zork.s
+printf "${RED}Explosive_Kitty.s${NC}\n"
+../asm ./tests/Explosive_Kitty.s
+printf "${RED}Backwards.s${NC}\n"
+../asm ./tests/Backward.s
+printf "${RED}Car.s${NC}\n"
+../asm ./tests/Car.s
+printf "${RED}Death.s${NC}\n"
+../asm ./tests/Death.s
+printf "${RED}Gagnant.s${NC}\n"
+../asm ./tests/Gagnant.s
+printf "${RED}Octobre_Rouge_v4.2.s${NC}\n"
+../asm ./tests/Octobre_Rouge_V4.2.s
+printf "${RED}Survivor.s${NC}\n"
+../asm ./tests/Survivor.s
+printf "${RED}Torpille.s${NC}\n"
+../asm ./tests/Torpille.s
+printf "${RED}barriere.s${NC}\n"
+../asm ./tests/barriere.s
+printf "${RED}ex.s${NC}\n"
+../asm ./tests/ex.s
+printf "${RED}jumper.s${NC}\n"
+../asm ./tests/jumper.s
+printf "${RED}lde.s${NC}\n"
+../asm ./tests/lde.s
+printf "${RED}leeloo.s${NC}\n"
+../asm ./tests/leeloo.s
+printf "${RED}mat.s${NC}\n"
+../asm ./tests/mat.s
+printf "${RED}maxidef.s${NC}\n"
+../asm ./tests//maxidef.s
+printf "${RED}mortel.s${NC}\n"
+../asm ./tests/mortel.s
+printf "${RED}new.s${NC}\n"
+../asm ./tests/new.s
+printf "${RED}sebc.s${NC}\n"
+../asm ./tests/sebc.s
+printf "${RED}slider2.s${NC}\n"
+../asm ./tests/slider2.s
+printf "${RED}tdc2.s${NC}\n"
+../asm ./tests/tdc2.s
+printf "${RED}tdc3.s${NC}\n"
+../asm ./tests/tdc3.s
+printf "${RED}tdc4.s${NC}\n"
+../asm ./tests/tdc4.s
+printf "${RED}toto.s${NC}\n"
+../asm ./tests/toto.s
+printf "${RED}bee_gees.s${NC}\n"
+../asm ./tests/bee_gees.s
+printf "${RED}bigzork.s${NC}\n"
+../asm ./tests/bigzork.s
+printf "${RED}fluttershy.s${NC}\n"
+../asm ./tests/fluttershy.s
+printf "${RED}helltrain.s${NC}\n"
+../asm ./tests/helltrain.s
+printf "${RED}turtle.s${NC}\n"
+../asm ./tests/turtle.s
+printf "\n${GREEN}*****************************************************************************************${NC}\n"
+printf "${CYAN}                                   Championships 2014${NC}\n"
+printf "${GREEN}*****************************************************************************************${NC}\n"
+printf "${RED}sam_2.0.s${NC}\n"
+../asm ./tests/2014/sam_2.0.s
+printf "${RED}doge.s${NC}\n"
+../asm ./tests/2014/doge.s
+printf "${RED}Rainbow_dash.s${NC}\n"
+../asm ./tests/2014/Rainbow_dash.s
+printf "${RED}youforkmytralala.s${NC}\n"
+../asm ./tests/2014/youforkmytralala.s
+printf "${RED}big_feet.s${NC}\n"
+../asm ./tests/2014/big_feet.s
+printf "${RED}loose.s${NC}\n"
+../asm ./tests/2014/loose.s
+printf "${RED}mandrogore.s${NC}\n"
+../asm ./tests/2014/mandragore.s
+printf "${RED}gedeon.s${NC}\n"
+../asm ./tests/2014/gedeon.s
+printf "${RED}terminator.s${NC}\n"
+../asm ./tests/2014/terminator.s
+printf "${RED}ultimate-surrender.s${NC}\n"
+../asm ./tests/2014/ultimate-surrender.s
+printf "${RED}_.s${NC}\n"
+../asm ./tests/2014/_.s
+printf "${RED}salamahenagalabadoun.s${NC}\n"
+../asm ./tests/2014/salamahenagalabadoun.s
+printf "${RED}Machine-gun.s${NC}\n"
+../asm ./tests/2014/Machine-gun.s
+printf "${RED}corelol.s${NC}\n"
+../asm ./tests//2014/corelol.s
+>>>>>>> b1d824473739810b2cc05ad9fad14b16e63de054

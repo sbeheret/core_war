@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:47:24 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 18:47:58 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 13:43:06 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,18 @@ void	check_multi_flag(t_vm *vm)
 		vm->verbose = 0;
 		vm->flag_hex = 0;
 		vm->flag_dump = 0;
-		vm->flag_live = 1;
+		vm->flag_live = 0;
 	}
+	if ((vm->verbose & 0b00000001) == 1)
+		vm->flag_live = 1;
+	if (((vm->verbose & 0b00000010) >> 1) == 1)
+		vm->flag_cycle = 1;
+	if (((vm->verbose & 0b00000100) >> 2) == 1)
+		vm->flag_operand = 1;
+	if (((vm->verbose & 0b00001000) >> 3) == 1)
+		vm->flag_death = 1;
+	if (((vm->verbose & 0b00010000) >> 4) == 1)
+		vm->flag_mouvement = 1;
+	if ((vm->verbose > 31))
+		ft_exit_usage();
 }
