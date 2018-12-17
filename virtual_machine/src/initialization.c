@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/17 13:53:24 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 14:34:56 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	initialize_vm(t_vm *vm)
 	(*vm).flag_death = 0;
 	(*vm).flag_mouvement = 0;
 	(*vm).flag_hex = 0;
-	(*vm).flag_processus = 1;
+	(*vm).flag_processus = 0;
 }
 
 void	initialize_processus(t_processus **processus, int nb_player
