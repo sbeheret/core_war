@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 18:22:55 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 13:52:18 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,12 @@ typedef	struct			s_vm
 	int					visu;
 	int					verbose;
 	int					flag_live;
+	int					flag_cycle;
+	int					flag_operand;
+	int					flag_death;
+	int					flag_mouvement;
 	int					flag_hex;
+	int					flag_processus;
 }						t_vm;
 
 typedef	struct			s_op
@@ -238,6 +243,7 @@ void					print_ram(unsigned char *ram);
 void					print_memory(unsigned char *str, size_t size);
 void					print_processus(t_processus *pcs);
 void					print_action(t_action action);
+void					print_mouvement(t_vm *vm, t_processus *processus);
 
 /*
 ** ---------PRINT INSTRUCTION

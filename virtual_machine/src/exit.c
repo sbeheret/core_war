@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:14:57 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/13 13:57:09 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 13:55:07 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,52 @@
 
 void	ft_exit_malloc(void)
 {
-	ft_printf("malloc fail\n");
+	ft_putendl_fd("malloc fail", 2);
 	exit(1);
 }
 
 void	ft_exit_nofile(char *file)
 {
-	ft_printf("Error : Couldn't open file \"%s\"\n", file);
+	ft_putstr_fd("Error : Couldn't open file \"", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd("\"\n", 2);
 	exit(1);
 }
 
 void	ft_exit_toosmall(char *file)
 {
-	ft_printf("Error : File \"%s\" is too small to be a champion\n", file);
+	ft_putstr_fd("Error : File \"", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd("\" is too small to be a champion\n", 2);
 	exit(1);
 }
 
 void	ft_exit_toobig(char *file)
 {
-	ft_printf("Error : File \"%s\" is too big to be a champion\n", file);
+	ft_putstr_fd("Error : File \"", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd("\" is too big to be a champion\n", 2);
 	exit(1);
 }
 
 void	ft_exit_usage(void)
 {
-	ft_printf("Usage : ./corewar [-dump nbr_cycles] [-verbose] [-v]");
-	ft_printf("[[-n number] champion1.cor]\n");
+	ft_putstr_fd("Usage: ./corewar [-dump N | -v N | -visu | -hex ]]", 2);
+	ft_putstr_fd("[[-n N]] <champion1.cor>] <...>\n\n", 2);
+	ft_putstr_fd("    -n N      : Change player number in ram\n", 2);
+	ft_putstr_fd("#### TEXT OUTPUT MODE#################################\n", 2);
+	ft_putstr_fd("    -dump N   : Dumps memory after N cycles then exits\n", 2);
+	ft_putstr_fd("    -p        : Print processus state (use with -dump)\n", 2);
+	ft_putstr_fd("    -v N      : Can be add together to enable multiple\n", 2);
+	ft_putstr_fd("          	 - 1 : Show lives\n", 2);
+	ft_putstr_fd("          	 - 2 : Show cycles\n", 2);
+	ft_putstr_fd("          	 - 4 : Show operations\n", 2);
+	ft_putstr_fd("          	 - 8 : Show deaths\n", 2);
+	ft_putstr_fd("          	 -16 : Show PC movements\n", 2);
+	ft_putstr_fd("#### CHAMPION OUTPUT MODE ############################\n", 2);
+	ft_putstr_fd("    -hex      : Hexdump champion before starting\n", 2);
+	ft_putstr_fd("#### NCURSES OUTPUT MODE #############################\n", 2);
+	ft_putstr_fd("    -visu     : Ncurses output mode\n", 2);
+	ft_putstr_fd("######################################################\n", 2);
 	exit(0);
 }
