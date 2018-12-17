@@ -150,6 +150,4 @@ char					*ft_strndup(const char *s, size_t n);
 char					*str_trim(char const *s);
 void					trim_spaces(char **tab);
 
-void					print_tab(t_data *d);
-void					show_labels(t_data *d);
 #endif

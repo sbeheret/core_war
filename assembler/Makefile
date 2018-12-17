@@ -20,12 +20,11 @@ SRC_PATH =	src
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
 SRCS =	main.c \
 		check_words.c \
 		error.c \
-		extras.c \
 		free_data.c \
 		ft_strchr_no_zero.c \
 		ft_strndup.c \
