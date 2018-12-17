@@ -31,7 +31,7 @@ char		*ft_str_trim(char const *s)
 	return (ft_strsub(s, 0, n));
 }
 
-int						ft_strmcmp(char *s1, char *s2, size_t len)
+int			ft_strmcmp(char *s1, char *s2, size_t len)
 {
 	while (--len && *s1 == *s2)
 	{
@@ -41,7 +41,7 @@ int						ft_strmcmp(char *s1, char *s2, size_t len)
 	return (*s1 - *s2);
 }
 
-int						create_file_body(t_data *d, int fd2)
+int			create_file_body(t_data *d, int fd2)
 {
 	t_labels		*head;
 	int				arnb;

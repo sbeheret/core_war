@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 16:02:42 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 12:01:25 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_sti(t_vm *vm, t_processus *pcs)
 	ft_int_to_octet((*vm).ram, pcs->reg[action.args[0]], address);
 	if (vm->visu)
 		write_in_ram(vm->ram, pcs, address);
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_sti(pcs, action.args[0], value1, value2);
 }
 
@@ -52,7 +52,7 @@ void	ft_fork(t_vm *vm, t_processus *processus)
 	get_op_code(vm, copy);
 	push_front_pcs(&(*vm).processus, copy);
 	processus->pc = circular(processus->action.pc + 3);
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_fork(processus, (short)processus->action.args[ARG1] % IDX_MOD);
 }
 
@@ -73,7 +73,7 @@ void	ft_lld(t_vm *vm, t_processus *processus)
 		processus->carry = 1;
 	else
 		processus->carry = 0;
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_lld(processus, arg1, arg2);
 }
 
@@ -99,7 +99,7 @@ void	ft_lldi(t_vm *vm, t_processus *pcs)
 		pcs->carry = 1;
 	else
 		pcs->carry = 0;
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_lldi(pcs, action->args[0], action->args[1], action->args[2]);
 }
 
@@ -119,6 +119,6 @@ void	ft_lfork(t_vm *vm, t_processus *processus)
 	get_op_code(vm, copy);
 	push_front_pcs(&(*vm).processus, copy);
 	processus->pc = circular(processus->action.pc + 3);
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_lfork(processus, (short)processus->action.args[ARG1]);
 }
