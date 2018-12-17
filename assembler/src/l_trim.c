@@ -24,8 +24,8 @@ static int		find_args(char *s, int i)
 	{
 		if (s[i] == SEPARATOR_CHAR)
 			return (0);
-		else if (s[i] == LABEL_CHAR || s[i] == DIRECT_CHAR ||
-			ft_strchr_no_zero(LABEL_CHARS, s[i]))
+		else if (s[i] == LABEL_CHAR || s[i] == DIRECT_CHAR
+			|| ft_strchr_no_zero(LABEL_CHARS, s[i]))
 			return (1);
 		i++;
 	}

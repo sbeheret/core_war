@@ -124,7 +124,7 @@ static int			parse_name_comment(t_header *h, char **tab)
 int					set_header(char **tab, t_header *header)
 {
 	int			position;
-	
+
 	position = 0;
 	ft_bzero(header->prog_name, PROG_NAME_LENGTH + T_IND);
 	ft_bzero(header->comment, COMMENT_LENGTH + T_IND);
