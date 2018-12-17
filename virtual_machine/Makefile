@@ -77,22 +77,23 @@ LIBNAME =	libft/libft.a \
 INCP =		$(foreach dir, $(INC_PATH), -I$(dir))
 LIBP = 		$(addprefix $(LIB_PATH)/,$(LIBNAME))
 OBJ	 =		$(addprefix $(OBJ_PATH)/,$(SRC:.c=.o))
+HDRS =		$(addprefix $(INC_PATH)/,corewar.h ft_printf.h get_next_line.h libft.h op.h)
 
 ###################################################
 #/********************** RULES *********************/
 
 all : $(NAME_PATH)$(NAME)
 
-$(NAME_PATH)$(NAME) : $(OBJ)
+$(NAME_PATH)$(NAME) : $(OBJ) $(HDRS) Makefile
 	@echo "$(LOW_GREEN) --Compiling lib--\tlibft"
 	@make -C $(LIB_PATH)/libft
 	@echo "$(PURPLE) --Linking--\t\t$(NAME)"
-	$(CC) -lncurses -o $@ $^ $(LIBP)
+	@$(CC) $(CFLAGS) -lncurses $(OBJ) $(LIBP) -o $(NAME_PATH)$(NAME)
 
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
+$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HDRS) Makefile
 	@echo "$(GREEN) --Compiling--\t\t$(NAME)"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(OPFLAGS) -o $@ -c $^ $(INCP)
+	@$(CC) $(CFLAGS) $(OPFLAGS) -c $< -o $@ $(INCP)
 
 clean :
 	@echo "$(RED) --Cleaning--\t\tobject folder"
