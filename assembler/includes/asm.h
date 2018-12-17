@@ -104,6 +104,7 @@ int						write_two_octet(t_data *d, t_labels *head, int idx,
 int						name_comment_length(t_data *d, char *data,
 		t_header *header, int fd);
 char					*ft_str_trim(char const *s);
+long long					long_atoi(const char *str);
 
 /*
 **	FREE

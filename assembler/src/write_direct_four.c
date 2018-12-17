@@ -38,7 +38,7 @@ void		short_to_octet(int fd2, int value)
 
 int			write_two_octet(t_data *d, t_labels *head, int idx, int fd2)
 {
-	int		nb;
+	long long		nb;
 	int		i;
 
 	i = 0;
@@ -52,7 +52,7 @@ int			write_two_octet(t_data *d, t_labels *head, int idx, int fd2)
 		i++;
 	if (head->args[idx][i] == LABEL_CHAR)
 		i++;
-	nb = ft_atoi(&head->args[idx][i]);
+	nb = long_atoi(&head->args[idx][i]);
 	short_to_octet(fd2, nb);
 	return (0);
 }

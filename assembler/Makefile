@@ -48,6 +48,7 @@ SRCS =	main.c \
 		first_arg.c \
 		write_direct_four.c \
 		name_comment_length.c \
+		long_atoi.c \
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
