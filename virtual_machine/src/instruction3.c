@@ -6,92 +6,119 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/04 11:52:57 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 16:02:42 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	ft_sti(t_vm *vm, t_processus *processus)
+void	ft_sti(t_vm *vm, t_processus *pcs)
 {
-	int		value1;
-	int		value2;
-	int		i;
+	t_action	action;
+	int			address;
+	int			value1;
+	int			value2;
 
-	i = -1;
-	ft_printf("~~~STI~~~\n");
-	if (processus->action.args[0] < 1 || processus->action.args[0] > 16)
-		return ;
-	if (processus->action.type[1] == 1)
-		value1 = processus->reg[processus->action.args[1] - 1];
-	else
-		value1 = processus->action.args[1];
-	if (processus->action.type[2] == 1)
-		value2 = processus->reg[processus->action.args[2] - 1];
-	else
-		value2 = processus->action.args[2];
-	ft_int_to_octet(vm->ram, processus->reg[processus->action.args[0] - 1],
-			circular(value1 + value2));
+	action = pcs->action;
+	value1 = get_content_value(vm->ram, pcs, pcs->action.type[1],
+			pcs->action.args[1]);
+	value2 = get_content_value(vm->ram, pcs, pcs->action.type[2],
+			pcs->action.args[2]);
+	if (action.type[1] != 1)
+		value1 = (short)value1;
+	if (action.type[2] != 1)
+		value2 = (short)value2;
+	address = circular(action.pc + ((value1 + value2) % IDX_MOD));
+	ft_int_to_octet((*vm).ram, pcs->reg[action.args[0]], address);
+	if (vm->visu)
+		write_in_ram(vm->ram, pcs, address);
+	if ((*vm).verbose)
+		ft_print_sti(pcs, action.args[0], value1, value2);
 }
 
 void	ft_fork(t_vm *vm, t_processus *processus)
 {
-	t_processus *copy;
-	int	i;
+	t_processus	*copy;
+	int			i;
 
-	if (processus->action.type[0] != 2)
-		return;
-	copy = new_processus(0, (processus->PC + processus->action.args[0]) % IDX_MOD);
-	i = -1;
-	while (++i <= 15)
+	if (!(copy = new_processus(0, (circular(processus->action.pc +
+	((short)processus->action.args[ARG1] % IDX_MOD))), processus->color)))
+		ft_exit_malloc();
+	i = 0;
+	while (++i <= 16)
 		copy->reg[i] = processus->reg[i];
 	copy->carry = processus->carry;
+	copy->lives = processus->lives;
+	get_op_code(vm, copy);
 	push_front_pcs(&(*vm).processus, copy);
-	processus->PC = circular(processus->action.pc + 3);
+	processus->pc = circular(processus->action.pc + 3);
+	if ((*vm).verbose)
+		ft_print_fork(processus, (short)processus->action.args[ARG1] % IDX_MOD);
 }
 
 void	ft_lld(t_vm *vm, t_processus *processus)
 {
-	(void)vm;
-	int		registre;
+	int				arg1;
+	int				arg2;
+	int				address;
 
-	ft_printf("~~~LLD~~~\n");
-	registre = processus->action.args[1];
-	if (registre < 1 || registre > 16)
-		return ;
-	processus->reg[registre - 1] = processus->action.args[0];
-	//load value first arg in register (2nd arg)
+	arg2 = (*processus).action.args[1];
+	arg1 = (*processus).action.args[0];
+	if ((*processus).action.type[ARG1] == IND)
+	{
+		address = circular((*processus).action.pc + (short)arg1);
+		arg1 = ft_octet_to_int2((*vm).ram, REG_SIZE, address);
+	}
+	if ((processus->reg[arg2] = arg1) == 0)
+		processus->carry = 1;
+	else
+		processus->carry = 0;
+	if ((*vm).verbose)
+		ft_print_lld(processus, arg1, arg2);
 }
 
-void	ft_lldi(t_vm *vm, t_processus *processus)
+void	ft_lldi(t_vm *vm, t_processus *pcs)
 {
-	int		value1;
-	int		value2;
+	t_action	*action;
+	int			value1;
+	int			value2;
+	int			addrs;
 
-	ft_printf("~~~LLDI~~~\n");
-	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
-		return ;
-	if (processus->action.type[0] == 1)
-		value1 = processus->reg[processus->action.args[0] - 1];
+	action = &(pcs->action);
+	value1 = get_long_content_value(vm->ram, pcs, action->type[0],
+			action->args[0]);
+	value2 = get_long_content_value(vm->ram, pcs, action->type[1],
+			action->args[1]);
+	if (action->type[0] != 1)
+		value1 = (short)value1;
+	if (action->type[1] != 1)
+		value2 = (short)value2;
+	addrs = circular(pcs->action.pc + (value1 + value2));
+	pcs->reg[pcs->action.args[2]] = ft_octet_to_int2(vm->ram, REG_SIZE, addrs);
+	if (pcs->reg[pcs->action.args[2]] == 0)
+		pcs->carry = 1;
 	else
-		value1 = processus->action.args[0];
-	if (processus->action.type[1] == 1)
-		value2 = processus->reg[processus->action.args[1] - 1];
-	else
-		value2 = processus->action.args[1];
-	processus->reg[processus->action.args[2] - 1] = ft_octet_to_int2(vm->ram,
-			4, circular(value1 + value2));
+		pcs->carry = 0;
+	if ((*vm).verbose)
+		ft_print_lldi(pcs, action->args[0], action->args[1], action->args[2]);
 }
 
 void	ft_lfork(t_vm *vm, t_processus *processus)
 {
-	t_processus *copy;
-	int	i;
+	t_processus	*copy;
+	int			i;
 
-	copy = new_processus(0, processus->PC);
-	i = -1;
-	while (++i <= 15)
+	if (!(copy = new_processus(0, (circular(processus->action.pc +
+	((short)processus->action.args[ARG1]))), processus->color)))
+		ft_exit_malloc();
+	i = 0;
+	while (++i <= 16)
 		copy->reg[i] = processus->reg[i];
 	copy->carry = processus->carry;
+	copy->lives = processus->lives;
+	get_op_code(vm, copy);
 	push_front_pcs(&(*vm).processus, copy);
+	processus->pc = circular(processus->action.pc + 3);
+	if ((*vm).verbose)
+		ft_print_lfork(processus, (short)processus->action.args[ARG1]);
 }
