@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 15:14:17 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/17 13:47:06 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 18:48:10 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,25 @@ void	execute_cycle(t_vm *vm)
 	if ((*vm).flag_cycle == 1 && (*vm).cycles_ttx != 0)
 		ft_printf("It is now cycle %d\n", (*vm).cycles_ttx);
 	ncurses_input(vm);
-	execute_instruction(vm);
 	get_instruction(vm);
+	execute_instruction(vm);
 	if ((*vm).flag_dump == 1 && (*vm).dump_cycle == (*vm).cycles_ttx)
 		ft_exit_dump(vm);
 	(*vm).cycles_ttx++;
+}
+
+void	get_instruction(t_vm *vm)
+{
+	t_processus	*processus;
+
+	processus = (*vm).processus;
+	while (processus)
+	{
+		if (processus->action.op_code == 0 ||
+		processus->action.op_code != vm->ram[circular(processus->action.pc)])
+			get_op_code(vm, processus);
+		processus = processus->next;
+	}
 }
 
 void	execute_instruction(t_vm *vm)
@@ -32,37 +46,23 @@ void	execute_instruction(t_vm *vm)
 	vm->visu ? update_cycles(vm, 0) : 1;
 	while (pcs)
 	{
-		if (vm->ram[circular(pcs->action.pc)] >= 1
-		&& vm->ram[circular(pcs->action.pc)] <= 16
-		&& vm->ram[circular(pcs->action.pc)] != pcs->action.op_code)
+		if (pcs->cycles_wait == 0)
 		{
-			get_op_code(vm, pcs);
-			vm->cycles_ttx != 0 ? pcs->cycles_wait-- : 1;
-		}
-		else if (pcs->cycles_wait == 0)
-		{
-			get_action(vm, pcs);
 			if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
-				pcs->pc++;
-			else if (instruction_check(pcs))
-				run_instruction(vm, pcs, pcs->action.op_code);
-			initialize_action(pcs);
+			{
+				pcs->pc = circular ((pcs->pc + 1));
+				pcs->cycles_wait = 1;
+			}
+			else
+			{
+				get_action(vm, pcs);
+				if (instruction_check(pcs))
+					run_instruction(vm, pcs, pcs->action.op_code);
+			}
+			get_op_code(vm, pcs);
 		}
+		pcs->cycles_wait--;
 		pcs = pcs->next;
-	}
-}
-
-void	get_instruction(t_vm *vm)
-{
-	t_processus	*processus;
-
-	processus = (*vm).processus;
-	while (processus)
-	{
-		if (processus->cycles_wait == 0)
-			get_op_code(vm, processus);
-		processus->cycles_wait--;
-		processus = processus->next;
 	}
 }
 

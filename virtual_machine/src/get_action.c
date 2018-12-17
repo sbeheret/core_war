@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:30 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/17 13:31:16 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 18:08:48 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		get_op_code(t_vm *vm, t_processus *pcs)
 		update_pc_visu(vm->ram, pcs);
 	if (pcs->action.op_code < 1 || pcs->action.op_code > 16)
 	{
-		pcs->cycles_wait = 1;
+		pcs->cycles_wait = 0;
 		return ;
 	}
 	pcs->cycles_wait = g_op_tab[pcs->action.op_code - 1].cycle;
