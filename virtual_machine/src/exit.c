@@ -6,13 +6,13 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:14:57 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/18 14:16:07 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:25:04 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	ft_exit_malloc()
+void	ft_exit_malloc(void)
 {
 	ft_putendl_fd("malloc fail", 2);
 	exit(1);
