@@ -14,22 +14,33 @@
 
 ASM_PATH = assembler
 COREWAR_PATH = virtual_machine
+LIB_PATH =	lib/libft
+
+NC = \033[0m
+RED = \033[1;31m
 
 all:
-	make -C $(ASM_PATH)
-	make -C $(COREWAR_PATH)
+	@echo "\n\tLIBFT"
+	@make -C $(LIB_PATH)
+	@echo "\n\tASSEMBLER"
+	@make -C $(ASM_PATH)
+	@echo "\n\tVIRTUAL MACHINE"
+	@make -C $(COREWAR_PATH)
 
 clean:
-	make clean -C $(ASM_PATH)
-	make clean -C $(COREWAR_PATH)
+	@echo "$(RED) --Cleaning--\t\tobject folders$(NC)"
+	@make clean -C $(ASM_PATH)
+	@make clean -C $(LIB_PATH)
+	@make clean -C $(COREWAR_PATH)
 
 fclean:
-	make fclean -C $(ASM_PATH)
-	make fclean -C $(COREWAR_PATH)
+	@echo "$(RED) --Cleaning--\t\tobject folders"
+	@echo " --Cleaning--\t\texecutables$(NC)"
+	@make fclean -C $(ASM_PATH)
+	@make fclean -C $(LIB_PATH)
+	@make fclean -C $(COREWAR_PATH)
 
-re:
-	make fclean all -C $(ASM_PATH)
-	make fclean all -C $(COREWAR_PATH)
+re: fclean all
 
 debug:
 	make debug -C $(COREWAR_PATH)

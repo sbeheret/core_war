@@ -10,6 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
+NC = \033[0m
+GREEN = \033[0;32m
+PURPLE = \033[0;35m
+
 NAME_PATH = ../
 NAME = asm
 
@@ -54,22 +58,20 @@ HDRS = $(addprefix $(INC_PATH)/,asm.h ft_printf.h get_next_line.h libft.h op.h)
 
 all : $(NAME_PATH)$(NAME)
 
-$(NAME_PATH)$(NAME) : $(OBJS) $(HDRS) Makefile
-	@make -C $(LIBFT)
+$(NAME_PATH)$(NAME) : $(OBJS) $(HDRS) Makefile $(LIBFT)/libft.a
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT)/libft.a -o $(NAME_PATH)$(NAME)
-	@echo "\033[32;4m	   ***Executable $(NAME) created***   \033[0;m"
+	@echo "\n$(PURPLE)Executable $(NAME)\t\tdone$(NC)"
 
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HDRS) Makefile
+$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HDRS) Makefile $(LIBFT)/libft.a
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(FLAGS) -c $< -o $@ -I$(INC_PATH)
 
 clean :
-	@make clean -C $(LIBFT)
 	@rm -rf $(OBJ_PATH) 2> /dev/null || true
 
 fclean : clean
-	@make fclean -C $(LIBFT)
-	@rm -f $(NAME_PATH)$(NAME)
+	@rm -rf $(NAME_PATH)$(NAME)
 
 debug : $(OBJS)
 	@make -C $(LIBFT)

@@ -33,6 +33,9 @@ static int		label_error(t_labels *l, char *to_check)
 /*
 **  arguments are digits-only
 **  register is between 1 and REG_NUMBER(16)
+**		if it starts with 0
+**			next digit can't be 0
+**			it should not be greater than 9
 */
 
 static int		args_error(char **s, int *y)
@@ -42,8 +45,10 @@ static int		args_error(char **s, int *y)
 	while (s[*y])
 	{
 		x = 0;
-		if (s[*y][x] == 'r' && (ft_atoi(s[*y] + 1) > REG_NUMBER
-					|| s[*y][1] == '0'))
+		if (s[*y][x] == 'r'
+			&& (ft_atoi(s[*y] + 1) < 1 || ft_atoi(s[*y] + 1) > REG_NUMBER
+			|| (s[*y][1] == '0' && s[*y][2] == '0')
+			|| (s[*y][1] == '0' && ft_atoi(s[*y] + 1) > 9)))
 			return (error_args(s[*y]) - 2);
 		if (s[*y][x] == DIRECT_CHAR || s[*y][x] == 'r')
 			x++;
