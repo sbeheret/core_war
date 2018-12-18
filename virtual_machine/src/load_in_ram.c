@@ -6,7 +6,7 @@
 /*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:45 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/12/17 16:33:11 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:19:45 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	load_champs(t_vm *vm)
 
 	champ = vm->champion;
 	if (!(champ))
-		ft_exit_usage();
+		ft_exit_usage(vm);
 	start_champions(&(*vm).champion, (*vm).nb_champs);
 	while (champ != NULL)
 	{

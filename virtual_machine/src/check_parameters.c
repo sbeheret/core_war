@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/17 16:32:34 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:19:19 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 void			check_parameters(int argc, char **argv, t_vm *vm)
 {
 	if (argc < 2)
-		ft_exit_usage();
+		ft_exit_usage(vm);
 	argv += 1;
 	while (*argv)
 	{
@@ -34,10 +34,10 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 			ft_option(&argv, vm);
 		else
 		{
-			create_champion(&argv, &(*vm).champion);
+			create_champion(&argv, &(*vm).champion, vm);
 			(*vm).nb_champs++;
 			if ((*vm).nb_champs > 4)
-				ft_exit_toomanychamp();
+				ft_exit_toomanychamp(vm);
 		}
 	}
 	check_multi_flag(vm);
@@ -50,15 +50,15 @@ void			ft_option(char ***argv, t_vm *vm)
 		*argv += 1;
 		(*vm).flag_dump = 1;
 		if (!(**argv))
-			ft_exit_usage();
-		(*vm).dump_cycle = ft_atoi_exit(**argv, "dump", NULL);
+			ft_exit_usage(vm);
+		(*vm).dump_cycle = ft_atoi_exit(**argv, "dump", NULL, vm);
 	}
 	else if (!(ft_strcmp(**argv, "-v")))
 	{
 		*argv += 1;
 		if (!(**argv))
-			ft_exit_usage();
-		(*vm).verbose = ft_atoi_exit(**argv, "verbose", NULL);
+			ft_exit_usage(vm);
+		(*vm).verbose = ft_atoi_exit(**argv, "verbose", NULL, vm);
 	}
 	else if (!(ft_strcmp(**argv, "-visu")))
 		(*vm).visu = 1;
@@ -67,7 +67,7 @@ void			ft_option(char ***argv, t_vm *vm)
 	else if (!(ft_strcmp(**argv, "-p")))
 		(*vm).flag_processus = 1;
 	else
-		ft_exit_usage();
+		ft_exit_usage(vm);
 	*argv += 1;
 }
 
@@ -82,25 +82,26 @@ void			ft_option(char ***argv, t_vm *vm)
 ** Si fichier valide, ecire les informations Name / Commentaires
 */
 
-void			create_champion(char ***argv, t_champion **champion)
+void			create_champion(char ***argv, t_champion **champion, t_vm *vm)
 {
 	t_champion	*new_elem;
 
 	new_elem = new_champion();
 	if (!(**argv))
-		ft_exit_usage();
-	ft_assign_pnumber(argv, champion, &new_elem);
+		ft_exit_usage(vm);
+	ft_assign_pnumber(argv, champion, &new_elem, vm);
 	if (!(**argv))
-		ft_exit_usage();
+		ft_exit_usage(vm);
 	new_elem->file = **argv;
 	*argv += 1;
-	new_elem->binary = ft_read_champion(new_elem->file, &new_elem->binary_len);
-	check_binary(new_elem);
+	new_elem->binary = ft_read_champion(new_elem->file, &new_elem->binary_len,
+						vm);
+	check_binary(new_elem, vm);
 	ft_push_back_chmp(champion, new_elem);
 }
 
 void			ft_assign_pnumber(char ***argv, t_champion **champion,
-	t_champion **new_elem)
+	t_champion **new_elem, t_vm *vm)
 {
 	static int player_number = 0xFFFFFFFF;
 
@@ -108,10 +109,10 @@ void			ft_assign_pnumber(char ***argv, t_champion **champion,
 	{
 		*argv += 1;
 		if (!(**argv))
-			ft_exit_usage();
-		if (check_number(ft_atoi_exit(**argv, "-n", (*new_elem)->file),
+			ft_exit_usage(vm);
+		if (check_number(ft_atoi_exit(**argv, "-n", (*new_elem)->file, vm),
 		*champion))
-			ft_exit_playernumber((*champion)->file);
+			ft_exit_playernumber(vm, (*champion)->file);
 		(*new_elem)->p_number = (ft_atoi(**argv));
 		*argv += 1;
 	}
@@ -124,23 +125,23 @@ void			ft_assign_pnumber(char ***argv, t_champion **champion,
 	}
 }
 
-unsigned char	*ft_read_champion(char *file, size_t *binary_len)
+unsigned char	*ft_read_champion(char *file, size_t *binary_len, t_vm *vm)
 {
 	int				fd;
 	int				rd;
 	unsigned char	*binary;
 
 	if (!(binary = (unsigned char *)malloc(BUFF_SIZE)))
-		ft_exit_malloc();
+		ft_exit_malloc(vm);
 	if (((fd = open(file, O_RDONLY)) == -1))
-		ft_exit_nofile(file);
+		ft_exit_nofile(vm, file);
 	while ((rd = read(fd, binary, BUFF_SIZE)) > 0)
 	{
 		if (rd == -1)
-			ft_exit_nofile(file);
+			ft_exit_nofile(vm, file);
 		*binary_len += rd;
 		if (!(binary = realloc(binary, *binary_len)))
-			ft_exit_malloc();
+			ft_exit_malloc(vm);
 	}
 	return (binary);
 }

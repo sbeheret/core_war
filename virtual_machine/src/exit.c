@@ -6,43 +6,46 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:14:57 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/17 13:55:07 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:16:07 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	ft_exit_malloc(void)
+void	ft_exit_malloc()
 {
 	ft_putendl_fd("malloc fail", 2);
 	exit(1);
 }
 
-void	ft_exit_nofile(char *file)
+void	ft_exit_nofile(t_vm *vm, char *file)
 {
 	ft_putstr_fd("Error : Couldn't open file \"", 2);
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd("\"\n", 2);
+	ft_free_vm(vm);
 	exit(1);
 }
 
-void	ft_exit_toosmall(char *file)
+void	ft_exit_toosmall(t_vm *vm, char *file)
 {
 	ft_putstr_fd("Error : File \"", 2);
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd("\" is too small to be a champion\n", 2);
+	ft_free_vm(vm);
 	exit(1);
 }
 
-void	ft_exit_toobig(char *file)
+void	ft_exit_toobig(t_vm *vm, char *file)
 {
 	ft_putstr_fd("Error : File \"", 2);
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd("\" is too big to be a champion\n", 2);
+	ft_free_vm(vm);
 	exit(1);
 }
 
-void	ft_exit_usage(void)
+void	ft_exit_usage(t_vm *vm)
 {
 	ft_putstr_fd("Usage: ./corewar [-dump N | -v N | -visu | -hex ]]", 2);
 	ft_putstr_fd("[[-n N]] <champion1.cor>] <...>\n\n", 2);
@@ -61,5 +64,6 @@ void	ft_exit_usage(void)
 	ft_putstr_fd("#### NCURSES OUTPUT MODE #############################\n", 2);
 	ft_putstr_fd("    -visu     : Ncurses output mode\n", 2);
 	ft_putstr_fd("######################################################\n", 2);
+	ft_free_vm(vm);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 17:21:32 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/17 13:53:59 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:06:56 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void	ft_exit_dump(t_vm *vm)
 	exit(0);
 }
 
-void	ft_exit_nochamp(char *file)
+void	ft_exit_nochamp(t_vm *vm, char *file)
 {
 	ft_putstr_fd("Error : File \"", 2);
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd("\" is has a champion without instruction\n", 2);
+	ft_free_vm(vm);
 	exit(1);
 }

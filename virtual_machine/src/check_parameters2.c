@@ -6,37 +6,37 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:47:24 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/17 13:43:06 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:15:00 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	check_binary(t_champion *champion)
+void	check_binary(t_champion *champion, t_vm *vm)
 {
 	int				magic_number;
 	unsigned char	*binary;
 
 	binary = champion->binary;
 	if (champion->binary_len < BEGIN_BINARY)
-		ft_exit_toosmall(champion->file);
+		ft_exit_toosmall(vm, champion->file);
 	if ((magic_number = ft_octet_to_int(&binary, 4)) != COREWAR_EXEC_MAGIC)
-		ft_exit_magicnumber(champion->file);
+		ft_exit_magicnumber(vm, champion->file);
 	champion->name = ft_octet_to_char(&binary, PROG_NAME_LENGTH);
-	check_padding(&binary, champion->file);
+	check_padding(&binary, champion->file, vm);
 	champion->weight = ft_octet_to_int(&binary, 4);
 	champion->comment = ft_octet_to_char(&binary, COMMENT_LENGTH);
-	check_padding(&binary, champion->file);
+	check_padding(&binary, champion->file, vm);
 	if (champion->weight != champion->binary_len - BEGIN_BINARY)
-		ft_exit_header(champion->file);
+		ft_exit_header(vm, champion->file);
 	if (champion->weight > CHAMP_MAX_SIZE)
-		ft_exit_toobig(champion->file);
+		ft_exit_toobig(vm, champion->file);
 	if (champion->weight == 0)
-		ft_exit_nochamp(champion->file);
+		ft_exit_nochamp(vm, champion->file);
 	binary = NULL;
 }
 
-void	check_padding(unsigned char **binary, char *file)
+void	check_padding(unsigned char **binary, char *file, t_vm *vm)
 {
 	int i;
 
@@ -44,7 +44,7 @@ void	check_padding(unsigned char **binary, char *file)
 	while (i < 4)
 	{
 		if (**binary != 0)
-			ft_exit_header(file);
+			ft_exit_header(vm, file);
 		*binary = *binary + 1;
 		i++;
 	}
@@ -99,5 +99,5 @@ void	check_multi_flag(t_vm *vm)
 	if (((vm->verbose & 0b00010000) >> 4) == 1)
 		vm->flag_mouvement = 1;
 	if ((vm->verbose > 31))
-		ft_exit_usage();
+		ft_exit_usage(vm);
 }
