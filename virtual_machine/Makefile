@@ -84,27 +84,20 @@ HDRS =		$(addprefix $(INC_PATH)/,corewar.h ft_printf.h get_next_line.h libft.h o
 
 all : $(NAME_PATH)$(NAME)
 
-$(NAME_PATH)$(NAME) : $(OBJ) $(HDRS) Makefile
-	@echo "$(LOW_GREEN) --Compiling lib--\tlibft"
-	@make -C $(LIB_PATH)/libft
-	@echo "$(PURPLE) --Linking--\t\t$(NAME)"
+$(NAME_PATH)$(NAME) : $(OBJ) $(HDRS) Makefile $(LIBP)
 	@$(CC) $(CFLAGS) -lncurses $(OBJ) $(LIBP) -o $(NAME_PATH)$(NAME)
+	@echo "\n$(PURPLE)Executable $(NAME)\tdone$(NC)"
 
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HDRS) Makefile
-	@echo "$(GREEN) --Compiling--\t\t$(NAME)"
+$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HDRS) Makefile $(LIBP)
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(CFLAGS) $(OPFLAGS) -c $< -o $@ $(INCP)
 
 clean :
-	@echo "$(RED) --Cleaning--\t\tobject folder"
 	@rm -rf $(OBJ_PATH) 2> /dev/null || true
-	@echo "$(RED) --Cleaning--\t\tlibrary libft"
-	@make clean -C $(LIB_PATH)/libft
 
 fclean : clean
-	@echo "$(RED) --Cleaning--\t\texecutable"
 	@rm -rf $(NAME_PATH)$(NAME)
-	@make fclean -C $(LIB_PATH)/libft
 
 re: fclean all
 

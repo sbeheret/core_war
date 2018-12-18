@@ -155,42 +155,55 @@ OBJ_TEST_IS =		$(addprefix $(OBJ_PATH_TEST_IS)/,$(SRC_TEST_IS:.c=.o))
 ###################################################
 #/********************** RULES *********************/
 
+NC = \033[0m
+GREEN = \033[0;32m
+PURPLE = \033[0;35m
+
 all : $(NAME)
 
 $(NAME) : $(OBJ_FT_PRINTF) $(OBJ_LIST) $(OBJ_MEMORY) $(OBJ_NUMBER) $(OBJ_PRINT) $(OBJ_READ) $(OBJ_STRING) $(OBJ_TEST_IS)
 	@ar rc $(NAME) $(OBJ_FT_PRINTF) $(OBJ_LIST) $(OBJ_MEMORY) $(OBJ_NUMBER) $(OBJ_PRINT) $(OBJ_READ) $(OBJ_STRING) $(OBJ_TEST_IS)
 	@ranlib $(NAME)
+	@echo "\n$(PURPLE)Library $(NAME)\t\tdone$(NC)"
 
 $(OBJ_PATH_FT_PRINTF)/%.o: $(SRC_PATH_FT_PRINTF)/%.c
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@mkdir $(OBJ_PATH_FT_PRINTF) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
 
 $(OBJ_PATH_LIST)/%.o: $(SRC_PATH_LIST)/%.c
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH_LIST) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
 
 $(OBJ_PATH_MEMORY)/%.o: $(SRC_PATH_MEMORY)/%.c
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH_MEMORY) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
 
 $(OBJ_PATH_NUMBER)/%.o: $(SRC_PATH_NUMBER)/%.c
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH_NUMBER) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
 
 $(OBJ_PATH_PRINT)/%.o: $(SRC_PATH_PRINT)/%.c
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH_PRINT) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
 
 $(OBJ_PATH_READ)/%.o: $(SRC_PATH_READ)/%.c
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH_READ) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
 
 $(OBJ_PATH_STRING)/%.o: $(SRC_PATH_STRING)/%.c
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH_STRING) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
 
 $(OBJ_PATH_TEST_IS)/%.o: $(SRC_PATH_TEST_IS)/%.c
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH_TEST_IS) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
 
