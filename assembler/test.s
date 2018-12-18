@@ -2,5 +2,5 @@
 .comment "Jan-ken-pon"
 
 label:	zjmp %2		;hey #there hey
-		ld 4, r2 	#hey ;he
+		ld 4, r02 	#hey ;he
 ;ha
