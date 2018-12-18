@@ -6,7 +6,7 @@
 /*   By: esouza <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 12:23:42 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/08 12:47:07 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/18 10:56:34 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void		short_to_octet(int fd2, int value)
 
 int			write_two_octet(t_data *d, t_labels *head, int idx, int fd2)
 {
-	int		nb;
-	int		i;
+	long long		nb;
+	int				i;
 
 	i = 0;
-	if (head->args[idx][1] == LABEL_CHAR)
+	if (head->args[idx][1] == LABEL_CHAR || head->args[idx][ZERO] == LABEL_CHAR)
 	{
 		nb = bytes_till_label(d->first_label, head, idx);
 		short_to_octet(fd2, nb);
@@ -52,7 +52,7 @@ int			write_two_octet(t_data *d, t_labels *head, int idx, int fd2)
 		i++;
 	if (head->args[idx][i] == LABEL_CHAR)
 		i++;
-	nb = ft_atoi(&head->args[idx][i]);
+	nb = long_atoi(&head->args[idx][i]);
 	short_to_octet(fd2, nb);
 	return (0);
 }
@@ -63,7 +63,7 @@ int			write_direct_four(t_data *d, t_labels *head, int idx, int fd2)
 	int			i;
 
 	i = 1;
-	if (head->args[idx][1] == LABEL_CHAR)
+	if (head->args[idx][1] == LABEL_CHAR || head->args[idx][ZERO] == LABEL_CHAR)
 	{
 		nb = bytes_till_label(d->first_label, head, idx);
 		int_to_octet(fd2, nb);
@@ -71,7 +71,7 @@ int			write_direct_four(t_data *d, t_labels *head, int idx, int fd2)
 	}
 	if (head->args[idx][i] == LABEL_CHAR)
 		i++;
-	nb = ft_atoi(&head->args[idx][i]);
+	nb = long_atoi(&head->args[idx][i]);
 	int_to_octet(fd2, nb);
 	return (0);
 }

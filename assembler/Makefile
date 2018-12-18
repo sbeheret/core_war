@@ -6,7 +6,7 @@
 #    By: esouza <esouza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/10 10:51:14 by esouza            #+#    #+#              #
-#    Updated: 2018/12/11 14:34:11 by esouza           ###   ########.fr        #
+#    Updated: 2018/12/18 09:25:33 by esouza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS =	main.c \
 		first_arg.c \
 		write_direct_four.c \
 		name_comment_length.c \
+		long_atoi.c \
 
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
