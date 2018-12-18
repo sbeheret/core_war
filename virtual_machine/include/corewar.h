@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:34:22 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/17 13:52:18 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:18:09 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,16 @@ void					give_start(t_champion *champ, int nb_champs);
 ** --------- CHECK_PARAMETER
 */
 void					check_parameters(int argc, char **argv, t_vm *vm);
-void					create_champion(char ***argv, t_champion **champion);
+void					create_champion(char ***argv, t_champion **champion,
+		t_vm *vm);
 void					create_process(t_champion **champ, t_processus **pcs);
 void					ft_assign_pnumber(char ***argv, t_champion **champion,
-		t_champion **new_elem);
-unsigned char			*ft_read_champion(char *file, size_t *binary_len);
-void					check_binary(t_champion *champion);
-void					check_padding(unsigned char **binary, char *file);
+		t_champion **new_elem, t_vm *vm);
+unsigned char			*ft_read_champion(char *file, size_t *binary_len,
+		t_vm *vm);
+void					check_binary(t_champion *champion, t_vm *vm);
+void					check_padding(unsigned char **binary, char *file,
+		t_vm *vm);
 int						check_number(unsigned int	num, t_champion *champion);
 void					ft_option(char ***argv, t_vm *vm);
 void					check_multi_flag(t_vm *vm);
@@ -170,7 +173,8 @@ t_champion				*new_champion(void);
 t_processus				*new_processus(int p_number, int start, int color);
 void					ft_push_back_chmp(t_champion **bg, t_champion *to_add);
 void					push_front_pcs(t_processus **pcs, t_processus *nw);
-int						ft_atoi_exit(char *s, char *parameter, char *file);
+int						ft_atoi_exit(char *s, char *parameter, char *file,
+		t_vm *vm);
 
 /*
 ** --------- RUN VM
@@ -278,19 +282,19 @@ void					ft_print_lfork(t_processus *processus, int arg);
 /*
 ** --------- EXIT
 */
-void					ft_exit_malloc(void);
-void					ft_exit_nofile(char *file);
-void					ft_exit_toosmall(char *file);
-void					ft_exit_toobig(char *file);
-void					ft_exit_usage(void);
-void					ft_exit_toomanychamp(void);
-void					ft_exit_magicnumber(char *file);
-void					ft_exit_header(char *file);
-void					ft_exit_parameter(char *argument, char *file);
-void					ft_exit_playernumber(char *file);
+void					ft_exit_malloc();
+void					ft_exit_nofile(t_vm *vm, char *file);
+void					ft_exit_toosmall(t_vm *vm, char *file);
+void					ft_exit_toobig(t_vm *vm, char *file);
+void					ft_exit_usage(t_vm *vm);
+void					ft_exit_toomanychamp(t_vm *vm);
+void					ft_exit_magicnumber(t_vm *vm, char *file);
+void					ft_exit_header(t_vm *vm, char *file);
+void					ft_exit_parameter(t_vm *vm, char *argument, char *file);
+void					ft_exit_playernumber(t_vm *vm, char *file);
 void					ft_exit_dump(t_vm *vm);
 void					ft_exit_visu(t_vm *vm);
-void					ft_exit_nochamp(char *file);
+void					ft_exit_nochamp(t_vm *vm, char *file);
 
 /*
 ** --------- FREE

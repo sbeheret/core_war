@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 13:19:03 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 16:21:27 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:17:52 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		push_front_pcs(t_processus **pcs, t_processus *new)
 	}
 }
 
-int			ft_atoi_exit(char *s, char *parameter, char *file)
+int			ft_atoi_exit(char *s, char *parameter, char *file, t_vm *vm)
 {
 	unsigned long long	nbr;
 	int					i;
@@ -75,19 +75,19 @@ int			ft_atoi_exit(char *s, char *parameter, char *file)
 			s[i] == '\r' || s[i] == '\f')
 		i++;
 	if (!(s[i] >= '0' && s[i] <= '9'))
-		ft_exit_parameter(parameter, file);
+		ft_exit_parameter(vm, parameter, file);
 	while (s[i] >= '0' && s[i] <= '9')
 	{
 		nbr = nbr * 10;
 		nbr = nbr + s[i] - '0';
 		if (nbr > 0xFFFFFFFF)
-			ft_exit_parameter(parameter, file);
+			ft_exit_parameter(vm, parameter, file);
 		i++;
 	}
 	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n' || s[i] == '\v' ||
 			s[i] == '\r' || s[i] == '\f')
 		i++;
 	if (s[i] != '\0')
-		ft_exit_parameter(parameter, file);
+		ft_exit_parameter(vm, parameter, file);
 	return (nbr);
 }
