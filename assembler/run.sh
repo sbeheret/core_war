@@ -8,7 +8,7 @@ YELLOW='\033[0;4;33m'
 function cmpcor() {
 if diff -q "$1" "$2"
 then
-	printf "${GREEN}Your "$1" equal to ZAZ "$2"${NC}\n"
+	printf "${GREEN}Your "$1" is equal to ZAZ "$2"${NC}\n"
 else
 	printf "${RED}Your "$1" is not equal to ZAZ "$2" or inaccessible${NC}\n"
 fi
@@ -187,3 +187,27 @@ fi
 										printf "${YELLOW}skynet.s${NC}\n"
 										./asm ./tests//2014/skynet.s
 										cmpcor "./tests/2014/skynet.cor" "./tests/2014/zaz/zaz_skynet.cor"
+										printf "${YELLOW}Douceur_power.s${NC}\n"
+										./asm ./tests/2017/Douceur_power.s
+										cmpcor "./tests/2017/Douceur_power.cor" "./tests/2017/zaz/zaz_Douceur_power.cor"
+										printf "${YELLOW}Explosive_Kitty.s${NC}\n"
+										./asm ./tests/2017/Explosive_Kitty.s
+										cmpcor "./tests/2017/Explosive_Kitty.cor" "./tests/2017/zaz/zaz_Explosive_Kitty.cor"
+										printf "${YELLOW}Kittystrophic.s${NC}\n"
+										./asm ./tests/2017/Kittystrophic.s
+										cmpcor "./tests/2017/Kittystrophic.cor" "./tests/2017/zaz/zaz_Kittystrophic.cor"
+										printf "${YELLOW}gateau.s${NC}\n"
+										./asm ./tests/2017/gateau.s
+										cmpcor "./tests/2017/gateau.cor" "./tests/2017/zaz/zaz_gateau.cor"
+										printf "${YELLOW}mise_a_jour_windows95.s${NC}\n"
+										./asm ./tests//2017/mise_a_jour_windows95.s
+										cmpcor "./tests/2017/mise_a_jour_windows95.cor" "./tests/2017/zaz/zaz_mise_a_jour_windows95.cor"
+										printf "${YELLOW}overwatch.s${NC}\n"
+										./asm ./tests/2017/overwatch.s
+										cmpcor "./tests/2017/overwatch.cor" "./tests/2017/zaz/zaz_overwatch.cor"
+										printf "${YELLOW}run_Kitty_RUN.s${NC}\n"
+										./asm ./tests/2017/run_Kitty_RUN.s
+										cmpcor "./tests/2017/run_Kitty_RUN.cor" "./tests/2017/zaz/zaz_run_Kitty_RUN.cor"
+										printf "${YELLOW}ultima.s${NC}\n"
+										./asm ./tests/2017/ultima.s
+										cmpcor "./tests/2017/ultima.cor" "./tests/2017/zaz/zaz_ultima.cor"
