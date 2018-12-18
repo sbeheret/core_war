@@ -6,13 +6,13 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 12:49:39 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/18 14:12:56 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/18 15:02:24 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int				ft_iswhitespace(char c)
+static int	ft_iswhitespace(char c)
 {
 	return ((c == ' ' || c == '\n' || c == '\t') ? 1 : 0);
 }
