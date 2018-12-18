@@ -14,11 +14,11 @@
 
 static char		*file_build(int fd)
 {
-	int	ret;
-	int	len;
-	int	i;
-	char	line[128];
-	char	*file;
+	int			ret;
+	int			len;
+	int			i;
+	char		line[128];
+	char		*file;
 
 	len = 0;
 	i = 0;
@@ -36,6 +36,7 @@ static char		*file_build(int fd)
 	lseek(fd, 0, SEEK_SET);
 	return (file);
 }
+
 static int		name_length(t_data *d, char *data, t_header *h, size_t i)
 {
 	size_t		len;
@@ -52,7 +53,7 @@ static int		name_length(t_data *d, char *data, t_header *h, size_t i)
 		d->file = NULL;
 		free_data(d, data, h);
 		exit(EXIT_FAILURE);
-	}	
+	}
 	return (i);
 }
 
@@ -87,18 +88,17 @@ static int		check_start(t_data *d, char *data, t_header *h)
 	cm = ft_strlen(COMMENT_CMD_STRING);
 	while (d->file[i])
 	{
-		if (d->file[i] == '.' && (ft_strmcmp(&d->file[i],
-						NAME_CMD_STRING , nm) == 0))
+		if (d->file[i] == '.' && !ft_strmcmp(&d->file[i], NAME_CMD_STRING, nm))
 		{
 			i = name_length(d, data, h, i);
 			i = comment_length(d, data, h, i + 1);
 			break ;
 		}
-		else if (d->file[i] == '.' && (ft_strmcmp(&d->file[i],
-						COMMENT_CMD_STRING , cm) == 0))
+		else if (d->file[i] == '.'
+				&& !ft_strmcmp(&d->file[i], COMMENT_CMD_STRING, cm))
 		{
 			i = comment_length(d, data, h, i);
-			i = name_length(d, data, h,  i + 1);
+			i = name_length(d, data, h, i + 1);
 			break ;
 		}
 		i++;
@@ -111,6 +111,6 @@ int				name_comment_length(t_data *d, char *data, t_header *h, int fd)
 	d->file = file_build(fd);
 	check_start(d, data, h);
 	free(d->file);
-	d->file =  NULL;
+	d->file = NULL;
 	return (0);
 }

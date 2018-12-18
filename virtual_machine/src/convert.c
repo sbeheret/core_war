@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:07:21 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 12:28:22 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/16 18:16:47 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,27 @@ char	*ft_octet_to_char(unsigned char **binary, size_t lenght_max)
 		i++;
 		*binary = *binary + 1;
 	}
+	if (str[0] == 0)
+	{
+		if (lenght_max == PROG_NAME_LENGTH)
+			ft_strcpy(str, "No name");
+		if (lenght_max == COMMENT_LENGTH)
+			ft_strcpy(str, "No comment");
+	}
 	return (str);
 }
 
 void	ft_int_to_octet(unsigned char *binary, int value, int id)
 {
-	binary[id] = value >> 24;
-	binary[id + 1] = (value & 0x00FF0000) >> 16;
-	binary[id + 2] = (value & 0x0000FF00) >> 8;
-	binary[id + 3] = value & 0x000000FF;
+	binary[circular(id)] = value >> 24;
+	binary[circular(id + 1)] = (value & 0x00FF0000) >> 16;
+	binary[circular(id + 2)] = (value & 0x0000FF00) >> 8;
+	binary[circular(id + 3)] = value & 0x000000FF;
 }
 
 int		circular(int i)
 {
+	if (i < 0)
+		return (MEM_SIZE + i % MEM_SIZE);
 	return (i % MEM_SIZE);
 }

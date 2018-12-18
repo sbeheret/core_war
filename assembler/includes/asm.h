@@ -122,7 +122,6 @@ int						get_labels(t_data *d);
 t_labels				*make_label(char **line, int len, int p);
 void					add_to_label_list_end(t_data *d, t_labels *label);
 
-t_op					*get_op_tab(void);
 int						find_op_code(t_labels *l, char *s, t_op *op);
 int						op_l(t_labels *lb, char *str, int i, t_op *op);
 
@@ -153,6 +152,4 @@ char					*ft_strndup(const char *s, size_t n);
 char					*str_trim(char const *s);
 void					trim_spaces(char **tab);
 
-void					print_tab(t_data *d);
-void					show_labels(t_data *d);
 #endif

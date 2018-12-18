@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbeheret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sbeheret <sbeheret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 11:59:46 by sbeheret          #+#    #+#             */
-/*   Updated: 2018/11/30 10:40:06 by sbeheret         ###   ########.fr       */
+/*   Updated: 2018/12/16 17:33:48 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		len_nb(char *base, int *b)
 	return (29);
 }
 
-static int		ABS(int x)
+static int		ft_absolute(int x)
 {
 	if (x < 0)
 		return (-x);
@@ -57,7 +57,7 @@ char			*ft_itoa_base(long long int nb, char *base)
 	{
 		mod = nb % b;
 		nb = nb / b;
-		str[i] = base[ABS(mod)];
+		str[i] = base[ft_absolute(mod)];
 		i--;
 	}
 	i++;

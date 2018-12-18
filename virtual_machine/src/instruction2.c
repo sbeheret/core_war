@@ -6,107 +6,95 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 16:03:38 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 13:11:26 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	ft_and(t_vm *vm, t_processus *processus)
+void	ft_and(t_vm *vm, t_processus *pcs)
 {
-	(void)vm;
-	int		value1;
-	int		value2;
+	int			value1;
+	int			value2;
+	t_action	*action;
 
-	ft_printf("~~~AND~~~\n");
-	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
-		return ;
-	if (processus->action.type[0] == 1)
-		value1 = processus->reg[processus->action.args[0] - 1];
+	action = &(pcs->action);
+	value1 = get_content_value(vm->ram, pcs, action->type[0], action->args[0]);
+	value2 = get_content_value(vm->ram, pcs, action->type[1], action->args[1]);
+	if ((pcs->reg[action->args[2]] = value1 & value2) == 0)
+		pcs->carry = 1;
 	else
-		value1 = processus->action.args[0];
-	if (processus->action.type[1] == 1)
-		value2 = processus->reg[processus->action.args[1] - 1];
-	else
-		value2 = processus->action.args[1];
-	processus->reg[processus->action.args[2] - 1] = value1 & value2;
-	processus->carry = 1;
+		pcs->carry = 0;
+	if ((*vm).flag_operand)
+		ft_print_and(pcs, action->args[0], action->args[1], action->args[2]);
 }
 
-void	ft_or(t_vm *vm, t_processus *processus)
+void	ft_or(t_vm *vm, t_processus *pcs)
 {
-	(void)vm;
-	int		value1;
-	int		value2;
+	int			value1;
+	int			value2;
+	t_action	*action;
 
-	ft_printf("~~~OR~~~\n");
-	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
-		return ;
-	if (processus->action.type[0] == 1)
-		value1 = processus->reg[processus->action.args[0] - 1];
+	action = &(pcs->action);
+	value1 = get_content_value(vm->ram, pcs, action->type[0], action->args[0]);
+	value2 = get_content_value(vm->ram, pcs, action->type[1], action->args[1]);
+	if ((pcs->reg[action->args[2]] = value1 | value2) == 0)
+		pcs->carry = 1;
 	else
-		value1 = processus->action.args[0];
-	if (processus->action.type[1] == 1)
-		value2 = processus->reg[processus->action.args[1] - 1];
-	else
-		value2 = processus->action.args[1];
-	processus->reg[processus->action.args[2] - 1] = value1 | value2;
-	processus->carry = 1;
+		pcs->carry = 0;
+	if ((*vm).flag_operand)
+		ft_print_or(pcs, action->args[0], action->args[1], action->args[2]);
 }
 
-void	ft_xor(t_vm *vm, t_processus *processus)
+void	ft_xor(t_vm *vm, t_processus *pcs)
 {
-	(void)vm;
-	int		value1;
-	int		value2;
+	int			value1;
+	int			value2;
+	t_action	*action;
 
-	ft_printf("~~~XOR~~~\n");
-	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
-		return ;
-	if (processus->action.type[0] == 1)
-		value1 = processus->reg[processus->action.args[0] - 1];
+	action = &(pcs->action);
+	value1 = get_content_value(vm->ram, pcs, action->type[0], action->args[0]);
+	value2 = get_content_value(vm->ram, pcs, action->type[1], action->args[1]);
+	if ((pcs->reg[action->args[2]] = value1 ^ value2) == 0)
+		pcs->carry = 1;
 	else
-		value1 = processus->action.args[0];
-	if (processus->action.type[1] == 1)
-		value2 = processus->reg[processus->action.args[1] - 1];
-	else
-		value2 = processus->action.args[1];
-	processus->reg[processus->action.args[2] - 1] = value1 ^ value2;
-	processus->carry = 1;
+		pcs->carry = 0;
+	if ((*vm).flag_operand)
+		ft_print_xor(pcs, value1, value2, action->args[2]);
 }
 
 void	ft_zjump(t_vm *vm, t_processus *processus)
 {
 	short	a;
 
-	(void)vm;
-	ft_printf("~~~JUMP~~~\n");
+	a = (short)processus->action.args[0];
+	a = (a % IDX_MOD);
 	if (processus->carry == 1)
-	{
-		a = (short)processus->action.args[0] % IDX_MOD;
-		if (a < 0)
-			a++;
-		processus->PC = circular(processus->action.pc + a);
-	}
+		processus->pc = circular(processus->action.pc + a);
+	if ((*vm).flag_operand)
+		ft_print_zjump(processus, (short)processus->action.args[0]);
 }
 
-void	ft_ldi(t_vm *vm, t_processus *processus)
+void	ft_ldi(t_vm *vm, t_processus *pcs)
 {
-	(void)processus;
-	int		value1;
-	int		value2;
+	t_action	*action;
+	int			value1;
+	int			value2;
+	int			addrs;
 
-	ft_printf("~~~LDI~~~\n");
-	if (processus->action.args[2] < 1 || processus->action.args[2] > 16)
-		return ;
-	if (processus->action.type[0] == 1)
-		value1 = processus->reg[processus->action.args[0] - 1];
+	action = &(pcs->action);
+	value1 = get_content_value(vm->ram, pcs, action->type[0], action->args[0]);
+	value2 = get_content_value(vm->ram, pcs, action->type[1], action->args[1]);
+	if (action->type[0] != 1)
+		value1 = (short)value1;
+	if (action->type[1] != 1)
+		value2 = (short)value2;
+	addrs = circular(pcs->action.pc + ((value1 + value2) % IDX_MOD));
+	pcs->reg[pcs->action.args[2]] = ft_octet_to_int2(vm->ram, REG_SIZE, addrs);
+	if (pcs->reg[pcs->action.args[2]] == 0)
+		pcs->carry = 1;
 	else
-		value1 = processus->action.args[0];
-	if (processus->action.type[1] == 1)
-		value2 = processus->reg[processus->action.args[1] - 1];
-	else
-		value2 = processus->action.args[1];
-	processus->reg[processus->action.args[2] - 1] = ft_octet_to_int2(vm->ram,
-			4, circular(value1 + value2));
+		pcs->carry = 0;
+	if ((*vm).flag_operand)
+		ft_print_ldi(pcs, value1, value2, action->args[2]);
 }

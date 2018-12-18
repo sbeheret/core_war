@@ -6,7 +6,7 @@
 #    By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/01 16:20:20 by rfibigr           #+#    #+#              #
-#    Updated: 2018/12/03 17:36:18 by rfibigr          ###   ########.fr        #
+#    Updated: 2018/12/16 17:50:36 by rfibigr          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
@@ -34,10 +34,11 @@ LIB_PATH =	../lib
 #/******************* COMPILATION *******************/
 CC =			gcc
 CFLAGS =		-Wall -Werror -Wextra
+OPFLAGS =		-Wno-missing-field-initializers
 
 #/********************** BINARY *********************/
 NAME_PATH = ../
-NAME = 		our_coreware
+NAME = 		corewar
 
 #/********************** SOURCE *********************/
 SRC =		corewar.c			\
@@ -49,16 +50,25 @@ SRC =		corewar.c			\
 			exit3.c				\
 			free.c				\
 			get_action.c		\
+			get_value.c			\
 			initialization.c 	\
-			tools.c				\
-			tools2.c			\
+			print_ram_curses.c 	\
+			use_ncurses.c	 	\
+			use_ncurses2.c	 	\
+			input_ncurses.c 	\
 			instruction.c		\
 			instruction2.c		\
 			instruction3.c		\
 			instruction4.c		\
+			print_instruction.c	\
+			print_instruction2.c\
+			print_instruction3.c\
+			print_function.c	\
+			print_memory.c		\
 			lib_list.c			\
 			load_in_ram.c		\
 			run_vm.c			\
+			run_vm_execute.c			\
 
 
 LIBNAME =	libft/libft.a \
@@ -67,36 +77,30 @@ LIBNAME =	libft/libft.a \
 INCP =		$(foreach dir, $(INC_PATH), -I$(dir))
 LIBP = 		$(addprefix $(LIB_PATH)/,$(LIBNAME))
 OBJ	 =		$(addprefix $(OBJ_PATH)/,$(SRC:.c=.o))
+HDRS =		$(addprefix $(INC_PATH)/,corewar.h ft_printf.h get_next_line.h libft.h op.h)
 
 ###################################################
 #/********************** RULES *********************/
 
 all : $(NAME_PATH)$(NAME)
 
-$(NAME_PATH)$(NAME) : $(OBJ)
-	@echo "$(LOW_GREEN) --Compiling lib--\tlibft"
-	@make -C $(LIB_PATH)/libft
-	@echo "$(PURPLE) --Linking--\t\t$(NAME)"
-	$(CC) -o $@ $^ $(LIBP)
+$(NAME_PATH)$(NAME) : $(OBJ) $(HDRS) Makefile $(LIBP)
+	@$(CC) $(CFLAGS) -lncurses $(OBJ) $(LIBP) -o $(NAME_PATH)$(NAME)
+	@echo "\n$(PURPLE)Executable $(NAME)\tdone$(NC)"
 
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
-	@echo "$(GREEN) --Compiling--\t\t$(NAME)"
+$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(HDRS) Makefile $(LIBP)
+	@echo "$(GREEN)o\c"
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) -o $@ -c $^ $(INCP)
+	@$(CC) $(CFLAGS) $(OPFLAGS) -c $< -o $@ $(INCP)
 
 clean :
-	@echo "$(RED) --Cleaning--\t\tobject folder"
 	@rm -rf $(OBJ_PATH) 2> /dev/null || true
-	@echo "$(RED) --Cleaning--\t\tlibrary libft"
-	@make clean -C $(LIB_PATH)/libft
 
 fclean : clean
-	@echo "$(RED) --Cleaning--\t\texecutable"
 	@rm -rf $(NAME_PATH)$(NAME)
-	@make fclean -C $(LIB_PATH)/libft
 
 re: fclean all
 
 debug : $(OBJ)
 	@echo "$(PURPLE) --Linking--\t\t"
-	$(CC) -o $(NAME_PATH)$(NAME) $^ $(LIBP) -fsanitize=address -O1 -fno-omit-frame-pointer
+	$(CC) -lncurses -o $(NAME_PATH)$(NAME) $^ $(LIBP) -fsanitize=address -O1 -fno-omit-frame-pointer

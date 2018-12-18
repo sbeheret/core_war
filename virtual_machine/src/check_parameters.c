@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/11/30 11:27:55 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 16:32:34 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,45 @@ void			check_parameters(int argc, char **argv, t_vm *vm)
 	argv += 1;
 	while (*argv)
 	{
-		if (!(ft_strcmp(*argv, "-dump")))
+		if (*argv[0] == '-' && ft_strcmp(*argv, "-n"))
+			ft_option(&argv, vm);
+		else
 		{
-			argv += 1;
-			(*vm).flag_dump = 1;
-			if (!(*argv))
-				ft_exit_usage();
-			(*vm).dump_cycle = ft_atoi_exit(*argv, "dump", NULL);
-			argv += 1;
+			create_champion(&argv, &(*vm).champion);
+			(*vm).nb_champs++;
+			if ((*vm).nb_champs > 4)
+				ft_exit_toomanychamp();
 		}
-		create_champion(&argv, &(*vm).champion);
-		(*vm).nb_champs++;
-		if ((*vm).nb_champs > 4)
-			ft_exit_toomanychamp();
 	}
+	check_multi_flag(vm);
+}
+
+void			ft_option(char ***argv, t_vm *vm)
+{
+	if (!(ft_strcmp(**argv, "-dump")))
+	{
+		*argv += 1;
+		(*vm).flag_dump = 1;
+		if (!(**argv))
+			ft_exit_usage();
+		(*vm).dump_cycle = ft_atoi_exit(**argv, "dump", NULL);
+	}
+	else if (!(ft_strcmp(**argv, "-v")))
+	{
+		*argv += 1;
+		if (!(**argv))
+			ft_exit_usage();
+		(*vm).verbose = ft_atoi_exit(**argv, "verbose", NULL);
+	}
+	else if (!(ft_strcmp(**argv, "-visu")))
+		(*vm).visu = 1;
+	else if (!(ft_strcmp(**argv, "-hex")))
+		(*vm).flag_hex = 1;
+	else if (!(ft_strcmp(**argv, "-p")))
+		(*vm).flag_processus = 1;
+	else
+		ft_exit_usage();
+	*argv += 1;
 }
 
 /*
@@ -62,6 +87,8 @@ void			create_champion(char ***argv, t_champion **champion)
 	t_champion	*new_elem;
 
 	new_elem = new_champion();
+	if (!(**argv))
+		ft_exit_usage();
 	ft_assign_pnumber(argv, champion, &new_elem);
 	if (!(**argv))
 		ft_exit_usage();
@@ -101,14 +128,12 @@ unsigned char	*ft_read_champion(char *file, size_t *binary_len)
 {
 	int				fd;
 	int				rd;
-	int				i;
 	unsigned char	*binary;
 
 	if (!(binary = (unsigned char *)malloc(BUFF_SIZE)))
 		ft_exit_malloc();
 	if (((fd = open(file, O_RDONLY)) == -1))
 		ft_exit_nofile(file);
-	i = 0;
 	while ((rd = read(fd, binary, BUFF_SIZE)) > 0)
 	{
 		if (rd == -1)
@@ -118,26 +143,4 @@ unsigned char	*ft_read_champion(char *file, size_t *binary_len)
 			ft_exit_malloc();
 	}
 	return (binary);
-}
-
-void			check_binary(t_champion *champion)
-{
-	int				magic_number;
-	unsigned char	*binary;
-
-	binary = champion->binary;
-	if (champion->binary_len < BEGIN_BINARY)
-		ft_exit_toosmall(champion->file);
-	if ((magic_number = ft_octet_to_int(&binary, 4)) != COREWAR_EXEC_MAGIC)
-		ft_exit_magicnumber(champion->file);
-	champion->name = ft_octet_to_char(&binary, PROG_NAME_LENGTH);
-	check_padding(&binary, champion->file);
-	champion->weight = ft_octet_to_int(&binary, 4);
-	champion->comment = ft_octet_to_char(&binary, COMMENT_LENGTH);
-	check_padding(&binary, champion->file);
-	if (champion->weight != champion->binary_len - BEGIN_BINARY)
-		ft_exit_header(champion->file);
-	if (champion->weight > CHAMP_MAX_SIZE)
-		ft_exit_toobig(champion->file);
-	binary = NULL;
 }

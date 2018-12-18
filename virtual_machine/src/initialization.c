@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/03 12:46:29 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 14:34:56 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,49 @@
 void	initialize_vm(t_vm *vm)
 {
 	(*vm).nb_champs = 0;
-	(*vm).flag_dump = 0;
-	(*vm).dump_cycle = 0;
 	(*vm).last_alive = 0;
-	(*vm).CTD = CYCLE_TO_DIE;
+	(*vm).sleep = 50000;
+	(*vm).ctd = CYCLE_TO_DIE;
 	(*vm).cycles_ttx = 0;
 	(*vm).cycles_now = 0;
 	(*vm).processus = NULL;
 	(*vm).champion = NULL;
 	if (!((*vm).ram = (unsigned char *)ft_memalloc(MEM_SIZE)))
 		ft_exit_malloc();
+	(*vm).flag_dump = 0;
+	(*vm).dump_cycle = 0;
+	(*vm).visu = 0;
+	(*vm).verbose = 0;
+	(*vm).flag_live = 0;
+	(*vm).flag_cycle = 0;
+	(*vm).flag_operand = 0;
+	(*vm).flag_death = 0;
+	(*vm).flag_mouvement = 0;
+	(*vm).flag_hex = 0;
+	(*vm).flag_processus = 0;
 }
 
-void	initialize_processus(t_processus **processus, int nb_player, int start)
+void	initialize_processus(t_processus **processus, int nb_player
+	, int start, int color)
 {
-	int	i;
+	int			i;
+	static int	processus_number = 1;
 
 	i = -1;
-	(*processus)->PC = start;
+	(*processus)->processus_number = processus_number;
+	processus_number++;
+	(*processus)->pc = start;
+	(*processus)->last_pc = start;
 	(*processus)->carry = 0;
-	if (!((*processus)->reg = malloc(sizeof(int) * 16)))
+	(*processus)->color = color;
+	if (!((*processus)->reg = malloc(sizeof(int) * 17)))
 		ft_exit_malloc();
-	while (++i <= 15)
+	while (++i <= 16)
 		(*processus)->reg[i] = 0;
-	(*processus)->reg[0] = nb_player;
+	(*processus)->reg[1] = nb_player;
 	(*processus)->cycles_wait = 0;
 	(*processus)->lives = 0;
+	(*processus)->flag_execute = 0;
 	(*processus)->next = NULL;
 	initialize_action(*processus);
 }
@@ -63,6 +80,10 @@ void	initialize_action(t_processus *processus)
 
 void	initialize_champion(t_champion **champion)
 {
+	static int	display = 1;
+
+	(*champion)->display_name = display;
+	display++;
 	(*champion)->name = NULL;
 	(*champion)->comment = NULL;
 	(*champion)->file = NULL;
