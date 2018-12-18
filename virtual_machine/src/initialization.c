@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:05:37 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 17:31:47 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 14:34:56 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,8 @@
 void	initialize_vm(t_vm *vm)
 {
 	(*vm).nb_champs = 0;
-	(*vm).flag_dump = 0;
-	(*vm).dump_cycle = 0;
-	(*vm).visu = 0;
-	(*vm).verbose = 0;
-	(*vm).sleep = 50000;
 	(*vm).last_alive = 0;
+	(*vm).sleep = 50000;
 	(*vm).ctd = CYCLE_TO_DIE;
 	(*vm).cycles_ttx = 0;
 	(*vm).cycles_now = 0;
@@ -28,8 +24,17 @@ void	initialize_vm(t_vm *vm)
 	(*vm).champion = NULL;
 	if (!((*vm).ram = (unsigned char *)ft_memalloc(MEM_SIZE)))
 		ft_exit_malloc();
+	(*vm).flag_dump = 0;
+	(*vm).dump_cycle = 0;
+	(*vm).visu = 0;
+	(*vm).verbose = 0;
 	(*vm).flag_live = 0;
+	(*vm).flag_cycle = 0;
+	(*vm).flag_operand = 0;
+	(*vm).flag_death = 0;
+	(*vm).flag_mouvement = 0;
 	(*vm).flag_hex = 0;
+	(*vm).flag_processus = 0;
 }
 
 void	initialize_processus(t_processus **processus, int nb_player

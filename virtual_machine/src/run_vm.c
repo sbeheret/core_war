@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 13:01:54 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 17:27:28 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 12:05:06 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	run_vm(t_vm *vm)
 			if (total_live >= NBR_LIVE || nb_decrement >= MAX_CHECKS)
 			{
 				(*vm).ctd -= CYCLE_DELTA;
-				if ((*vm).verbose == 1)
+				if ((*vm).flag_cycle == 1)
 					ft_printf("Cycle to die is now %d\n", (*vm).ctd);
 				nb_decrement = 0;
 			}
@@ -62,6 +62,9 @@ int		kill_processus(t_vm *vm)
 	{
 		if (tmp->lives == 0)
 		{
+			if (vm->flag_death)
+				ft_printf("Process %d didn't survive (CTD %d)\n",
+				tmp->processus_number, vm->ctd);
 			delete_element(&previous, &tmp, vm);
 		}
 		else

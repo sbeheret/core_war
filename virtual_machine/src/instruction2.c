@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:43:38 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 14:20:30 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 13:11:26 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_and(t_vm *vm, t_processus *pcs)
 		pcs->carry = 1;
 	else
 		pcs->carry = 0;
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_and(pcs, action->args[0], action->args[1], action->args[2]);
 }
 
@@ -42,7 +42,7 @@ void	ft_or(t_vm *vm, t_processus *pcs)
 		pcs->carry = 1;
 	else
 		pcs->carry = 0;
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_or(pcs, action->args[0], action->args[1], action->args[2]);
 }
 
@@ -59,7 +59,7 @@ void	ft_xor(t_vm *vm, t_processus *pcs)
 		pcs->carry = 1;
 	else
 		pcs->carry = 0;
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_xor(pcs, value1, value2, action->args[2]);
 }
 
@@ -71,7 +71,7 @@ void	ft_zjump(t_vm *vm, t_processus *processus)
 	a = (a % IDX_MOD);
 	if (processus->carry == 1)
 		processus->pc = circular(processus->action.pc + a);
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_zjump(processus, (short)processus->action.args[0]);
 }
 
@@ -95,6 +95,6 @@ void	ft_ldi(t_vm *vm, t_processus *pcs)
 		pcs->carry = 1;
 	else
 		pcs->carry = 0;
-	if ((*vm).verbose)
+	if ((*vm).flag_operand)
 		ft_print_ldi(pcs, value1, value2, action->args[2]);
 }

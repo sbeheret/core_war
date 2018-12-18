@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:12:42 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 18:47:23 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 16:32:34 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,18 @@ void			ft_option(char ***argv, t_vm *vm)
 		(*vm).dump_cycle = ft_atoi_exit(**argv, "dump", NULL);
 	}
 	else if (!(ft_strcmp(**argv, "-v")))
+	{
+		*argv += 1;
+		if (!(**argv))
+			ft_exit_usage();
+		(*vm).verbose = ft_atoi_exit(**argv, "verbose", NULL);
+	}
+	else if (!(ft_strcmp(**argv, "-visu")))
 		(*vm).visu = 1;
-	else if (!(ft_strcmp(**argv, "-verbose")))
-		(*vm).verbose = 1;
 	else if (!(ft_strcmp(**argv, "-hex")))
 		(*vm).flag_hex = 1;
-	else if (!(ft_strcmp(**argv, "-live")))
-		(*vm).flag_live = 1;
+	else if (!(ft_strcmp(**argv, "-p")))
+		(*vm).flag_processus = 1;
 	else
 		ft_exit_usage();
 	*argv += 1;

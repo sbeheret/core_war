@@ -6,7 +6,7 @@
 /*   By: rfibigr <rfibigr@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 15:14:17 by rfibigr           #+#    #+#             */
-/*   Updated: 2018/12/16 18:50:48 by rfibigr          ###   ########.fr       */
+/*   Updated: 2018/12/17 16:37:26 by rfibigr          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	execute_cycle(t_vm *vm)
 {
-	if ((*vm).verbose == 1 && (*vm).cycles_ttx != 0)
+	if ((*vm).flag_cycle == 1 && (*vm).cycles_ttx != 0)
 		ft_printf("It is now cycle %d\n", (*vm).cycles_ttx);
 	ncurses_input(vm);
 	execute_instruction(vm);
@@ -87,4 +87,6 @@ void	run_instruction(t_vm *vm, t_processus *processus, int op_code)
 		&ft_aff};
 
 	instruction[op_code - 1](vm, processus);
+	if (vm->flag_mouvement && op_code != 9)
+		print_mouvement(vm, processus);
 }
