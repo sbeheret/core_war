@@ -6,7 +6,7 @@
 /*   By: esouza <esouza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:31:29 by esouza            #+#    #+#             */
-/*   Updated: 2018/12/11 16:39:33 by esouza           ###   ########.fr       */
+/*   Updated: 2018/12/18 14:04:59 by esouza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int			parse_name(t_header *h, char **tab, int frst)
 		(tab[frst][var.i] == '\"') ? var.quotes++ : var.quotes;
 		if (var.quotes == 2)
 			break ;
-		h->prog_name[var.j++] = tab[frst][var.i++];
+		if (tab[frst][var.i])
+			h->prog_name[var.j++] = tab[frst][var.i++];
 		if (tab[frst][var.i] == '\0')
 		{
 			frst++;
@@ -49,12 +50,13 @@ static int			parse_comment(t_header *h, char **tab, int sec)
 		var.i++;
 	(tab[sec][var.i] != '\"') ? err_dots(sec, var.i, tab, h) : var.i++;
 	var.quotes = 1;
-	while (tab[sec] && tab[sec][var.i] && var.j <= COMMENT_LENGTH)
+	while (tab[sec] && var.j <= COMMENT_LENGTH)
 	{
 		(tab[sec][var.i] == '\"') ? var.quotes++ : var.quotes;
 		if (var.quotes == 2)
 			break ;
-		h->comment[var.j++] = tab[sec][var.i++];
+		if (tab[sec][var.i])
+			h->comment[var.j++] = tab[sec][var.i++];
 		if (tab[sec] && tab[sec][var.i] == '\0')
 		{
 			sec++;
@@ -124,7 +126,7 @@ static int			parse_name_comment(t_header *h, char **tab)
 int					set_header(char **tab, t_header *header)
 {
 	int			position;
-	
+
 	position = 0;
 	ft_bzero(header->prog_name, PROG_NAME_LENGTH + T_IND);
 	ft_bzero(header->comment, COMMENT_LENGTH + T_IND);
