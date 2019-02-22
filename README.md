@@ -19,8 +19,8 @@ Champion are processus that will be load in the arena represented by a virtual R
 More detail in the following paragraph.
 
 ## Details of the project
-
-#### Specifications of the vm
+---
+### Specifications of the vm
 
 + The virtual machine has a total of MEM_SIZE (4096) bytes of memory and the memory is circular.
 + The arena is the representation of the memory. Value of each byte is display in Hexadecimale in a 64*64 grid.
@@ -36,7 +36,7 @@ Every CYCLE_TO_DIE (1536), the VM check all the processus running. Every process
 
 The game take end when no champion are call alive during a CYCLE_TO_DIE cycles or if CYCLE_TO_DIE is decrement to 0.
 
-#### Specification of the Champion and Assembler
+### Specification of the Champion and Assembler
 
 Champion is write in Redcode and comporte 3 sections :
 + The name : start with .name and size_max : 128 bytes
@@ -98,7 +98,7 @@ on the precedent exemple
 
 
 
-#### Champion's instructions
+### Champion's instructions
 
 
 | instruction  | Description |
@@ -134,7 +134,13 @@ In this project I developp the Virtual Machine.
 
 ## How to run the game
 
-command line
+To install :
+
+```bash
+git clone https://github.com/rfibigr/core_war.git
+cd core_war
+make
+```
 
 Usage to generate Byte-code Champion
 ```bash
@@ -179,5 +185,7 @@ Fight exemple :
 ## Project partner
 
 ejsouza : https://github.com/ejsouza
+
 dishults : https://github.com/dishults
+
 sbeheret : https://github.com/sbeheret
