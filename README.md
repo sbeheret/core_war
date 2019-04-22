@@ -9,7 +9,7 @@ Our game in action
 
 The project is divied in 2 parts :
 + [The assembler](#specification-of-the-champion-and-assembler) (asm) : It takes in parameter a champion written in Redcode and generate a binary program that can be interpreted by the virtual machine. Made by [ejsouza](https://github.com/ejsouza) and [dishults](https://github.com/dishults).
-+ [The virtual machine](#specifications-of-the-vm) (corewar) : Loads the binary programs (champions) and provide them with a standard execution environment. It offers a lot of features useful to the fight. Made by [me](https://github.com/rfibigr) and [sbeheret](https://github.com/sbeheret).
++ [The virtual machine](#details-of-the-project) (corewar) : Loads the binary programs (champions) and provide them with a standard execution environment. It offers a lot of features useful to the fight. Made by [me](https://github.com/rfibigr) and [sbeheret](https://github.com/sbeheret).
 
 Champions are processes that will be loaded in the arena, represented by a virtual Ram, where they fight by executing a list of instructions in the VM.
 
